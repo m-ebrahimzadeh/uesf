@@ -1,7 +1,7 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.1.0
+* **Version**: 0.2.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-16
@@ -13,21 +13,21 @@ Define the phased, dependency-ordered engineering roadmap for evolving UESF from
 Covers Phases 1 through 4 of UESF development in alignment with `DEC-007` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
-### Milestone M1: Foundational Architecture & Governance (`v0.1.0`) — *CURRENT*
+### Milestone M1: Foundational Architecture & Governance (`v0.1.0`) — *COMPLETED*
 * **Objective**: Establish platform-independent operating model, policies, protocols, knowledge governance, and project management baseline.
 * **Status**:
   * `TASK-000` (Strategic Workspace Specification & Validation): `VERIFIED` (2026-11-16).
-  * `TASK-001` (Git Repository Materialization in Engineering Workspace): `IN_PROGRESS` / `IN_REVIEW`.
+  * `TASK-001` (Git Repository Materialization in Engineering Workspace): `VERIFIED / ACCEPTED` (Committed on `main` @ `288d6dc62a154cf41b0dff40f9e421f22e48f56e`).
 * **Exit Criteria**: All 25 foundational documents committed to `main` in the canonical Git repository and verified via `EV-TASK-001-01`.
 
-### Milestone M2: Universal Agent Role Skills (`v0.2.0`) — *NEXT*
+### Milestone M2: Universal Agent Role Skills (`v0.2.0`) — *IN_REVIEW (Ready for CTO Tier 2 Merge Acceptance)*
 * **Objective**: Author, review, and verify the eight platform-independent Agent Role Skills (`roles/<role>/SKILL.md`) and reusable Markdown artifact templates (`templates/`).
 * **Planned Tasks**:
-  * `TASK-002`: Define Universal Role Skill Standard Schema & Reusable Protocol Templates (`templates/`).
-  * `TASK-003`: Author Governance, Architecture & Knowledge Role Skills (`CTO`, `Architect`, `Documentation`).
-  * `TASK-004`: Author Implementation & Quality Role Skills (`Developer`, `QA`).
-  * `TASK-005`: Author Infrastructure, Security & Reliability Role Skills (`DevOps`, `Security`, `SRE`).
-  * `TASK-006`: Cross-Role Interaction Dry-Run & Consistency Audit (`v0.2.0` Release Sign-Off).
+  * `TASK-002`: Define Universal Role Skill Standard Schema & Reusable Protocol Templates (`templates/`) — `IN_REVIEW` (on `feat/TASK-002-universal-role-skills`).
+  * `TASK-003`: Author Governance, Architecture & Knowledge Role Skills (`CTO`, `Architect`, `Documentation`) — `IN_REVIEW`.
+  * `TASK-004`: Author Implementation & Quality Role Skills (`Developer`, `QA`) — `IN_REVIEW`.
+  * `TASK-005`: Author Infrastructure, Security & Reliability Role Skills (`DevOps`, `Security`, `SRE`) — `IN_REVIEW`.
+  * `TASK-006`: Cross-Role Interaction Dry-Run & Consistency Audit (`v0.2.0` Release Sign-Off) — `IN_REVIEW` (`management/validation/VALIDATION_REPORT_002.md`).
 * **Exit Criteria**: All 8 universal Role Skills pass structural, boundary, and non-overlap verification without platform coupling.
 
 ### Milestone M3: Platform Adapters (`v0.3.0`) — *FUTURE*

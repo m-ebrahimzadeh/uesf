@@ -1,7 +1,7 @@
 # Knowledge Map & Source-of-Truth Registry
 * **Document ID**: UESF-MGMT-004
 * **Canonical Path**: management/KNOWLEDGE_MAP.md
-* **Version**: 0.1.0
+* **Version**: 0.2.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-16
@@ -10,7 +10,7 @@
 Serve as the master index mapping every UESF document and knowledge category to its Document ID, Canonical Repository Path, Strategic Workspace Mirror, Owner Role, Version, and Lifecycle State.
 
 ## 2. Scope
-Covers all 25 foundational documents created in Mission 001 and establishes the registry for future role Skills, adapters, and extensions.
+Covers all 40 canonical documents across Milestone M1 (`v0.1.0`) and Milestone M2 (`v0.2.0`) and establishes the registry for future platform adapters and extensions.
 
 ## 3. Rules and Requirements
 1. Every normative or management document in UESF MUST be registered in Section 4 of this document.
@@ -18,7 +18,7 @@ Covers all 25 foundational documents created in Mission 001 and establishes the 
    * **Target Canonical Home**: Project Git Repository (`uesf/`).
    * **Strategic Workspace Mirror**: `UNIVERSAL ENGINEERING SKILLS` Gemini Notebook.
 
-## 4. Master Source-of-Truth Matrix (v0.1.0 Baseline)
+## 4. Master Source-of-Truth Matrix (v0.2.0 Baseline)
 | Doc ID | Canonical Repository Path | Strategic Workspace Source Name | Layer / Category | Owner Role | Version | Lifecycle Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `UESF-CORE-001` | `README.md` | `README.md` | Core Index | CTO | `0.1.0` | `Verified` |
@@ -39,13 +39,28 @@ Covers all 25 foundational documents created in Mission 001 and establishes the 
 | `UESF-PROT-005` | `protocols/KNOWLEDGE_SYNCHRONIZATION.md` | `protocols/KNOWLEDGE_SYNCHRONIZATION.md` | Layer 3: Protocol | CTO | `0.1.0` | `Verified` |
 | `UESF-PROT-006` | `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` | `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | `Verified` |
 | `UESF-PROT-007` | `protocols/ESCALATION_PROTOCOL.md` | `protocols/ESCALATION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | `Verified` |
-| `UESF-MGMT-001` | `management/PROJECT_PROFILE.md` | `management/PROJECT_PROFILE.md` | Management | CTO | `0.1.0` | `Verified` |
-| `UESF-MGMT-002` | `management/ACTIVE_TASKS.md` | `management/ACTIVE_TASKS.md` | Management | CTO | `0.1.0` | `Verified` |
+| `UESF-MGMT-001` | `management/PROJECT_PROFILE.md` | `management/PROJECT_PROFILE.md` | Management | CTO | `0.2.0` | `Verified` |
+| `UESF-MGMT-002` | `management/ACTIVE_TASKS.md` | `management/ACTIVE_TASKS.md` | Management | CTO | `0.2.0` | `Verified` |
 | `UESF-MGMT-003` | `management/DECISION_LOG.md` | `management/DECISION_LOG.md` | Management | CTO | `0.1.0` | `Verified` |
-| `UESF-MGMT-004` | `management/KNOWLEDGE_MAP.md` | `management/KNOWLEDGE_MAP.md` | Management | CTO | `0.1.0` | `Verified` |
-| `UESF-MGMT-005` | `management/RELEASE_HISTORY.md` | `management/RELEASE_HISTORY.md` | Management | CTO | `0.1.0` | `Verified` |
-| `UESF-MGMT-006` | `management/IMPLEMENTATION_ROADMAP.md` | `management/IMPLEMENTATION_ROADMAP.md` | Management | CTO | `0.1.0` | `Verified` |
+| `UESF-MGMT-004` | `management/KNOWLEDGE_MAP.md` | `management/KNOWLEDGE_MAP.md` | Management | CTO | `0.2.0` | `Verified` |
+| `UESF-MGMT-005` | `management/RELEASE_HISTORY.md` | `management/RELEASE_HISTORY.md` | Management | CTO | `0.2.0` | `Verified` |
+| `UESF-MGMT-006` | `management/IMPLEMENTATION_ROADMAP.md` | `management/IMPLEMENTATION_ROADMAP.md` | Management | CTO | `0.2.0` | `Verified` |
 | `UESF-VAL-001` | `management/validation/VALIDATION_REPORT_001.md` | `management/validation/VALIDATION_REPORT_001.md` | Validation Evidence | CTO | `0.1.0` | `Verified` |
+| `UESF-TMPL-001` | `templates/ROLE_SKILL_TEMPLATE.md` | `templates/ROLE_SKILL_TEMPLATE.md` | Templates | CTO / Architect | `0.2.0` | `Verified` |
+| `UESF-TMPL-002` | `templates/TASK_CONTRACT_TEMPLATE.md` | `templates/TASK_CONTRACT_TEMPLATE.md` | Templates | CTO | `0.2.0` | `Verified` |
+| `UESF-TMPL-003` | `templates/HANDOFF_PACKAGE_TEMPLATE.md` | `templates/HANDOFF_PACKAGE_TEMPLATE.md` | Templates | CTO | `0.2.0` | `Verified` |
+| `UESF-TMPL-004` | `templates/EVIDENCE_PACKAGE_TEMPLATE.md` | `templates/EVIDENCE_PACKAGE_TEMPLATE.md` | Templates | CTO | `0.2.0` | `Verified` |
+| `UESF-TMPL-005` | `templates/KDP_TEMPLATE.md` | `templates/KDP_TEMPLATE.md` | Templates | CTO | `0.2.0` | `Verified` |
+| `UESF-TMPL-006` | `templates/ESCALATION_RECORD_TEMPLATE.md` | `templates/ESCALATION_RECORD_TEMPLATE.md` | Templates | CTO | `0.2.0` | `Verified` |
+| `UESF-ROLE-001` | `roles/cto/SKILL.md` | `roles/cto/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | `Verified` |
+| `UESF-ROLE-002` | `roles/architect/SKILL.md` | `roles/architect/SKILL.md` | Layer 4: Role Skill | CTO / Architect | `0.2.0` | `Verified` |
+| `UESF-ROLE-003` | `roles/developer/SKILL.md` | `roles/developer/SKILL.md` | Layer 4: Role Skill | CTO / Architect | `0.2.0` | `Verified` |
+| `UESF-ROLE-004` | `roles/qa/SKILL.md` | `roles/qa/SKILL.md` | Layer 4: Role Skill | CTO / QA | `0.2.0` | `Verified` |
+| `UESF-ROLE-005` | `roles/devops/SKILL.md` | `roles/devops/SKILL.md` | Layer 4: Role Skill | CTO / DevOps | `0.2.0` | `Verified` |
+| `UESF-ROLE-006` | `roles/security/SKILL.md` | `roles/security/SKILL.md` | Layer 4: Role Skill | CTO / Security | `0.2.0` | `Verified` |
+| `UESF-ROLE-007` | `roles/sre/SKILL.md` | `roles/sre/SKILL.md` | Layer 4: Role Skill | CTO / SRE | `0.2.0` | `Verified` |
+| `UESF-ROLE-008` | `roles/documentation/SKILL.md` | `roles/documentation/SKILL.md` | Layer 4: Role Skill | CTO / Documentation | `0.2.0` | `Verified` |
+| `UESF-VAL-002` | `management/validation/VALIDATION_REPORT_002.md` | `management/validation/VALIDATION_REPORT_002.md` | Validation Evidence | CTO / QA | `0.2.0` | `Verified` |
 
 ## 5. Information Category Ownership Matrix
 | Information Category | Canonical Source of Truth | Secondary Mirror / Summary | Approver Role | Maintainer Role |
