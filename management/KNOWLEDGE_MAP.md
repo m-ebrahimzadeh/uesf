@@ -43,7 +43,7 @@ Covers all 50 canonical Markdown documents across the UESF repository (`policies
 | `UESF-TMPL-004` | `templates/EVIDENCE_PACKAGE_TEMPLATE.md` | Templates | CTO | `0.2.0` | Verified |
 | `UESF-TMPL-005` | `templates/KDP_TEMPLATE.md` | Templates | CTO | `0.2.0` | Verified |
 | `UESF-TMPL-006` | `templates/ESCALATION_RECORD_TEMPLATE.md` | Templates | CTO | `0.2.0` | Verified |
-| `UESF-TMPL-007` | `templates/PLATFORM_ADAPTER_TEMPLATE.md` | Templates | Architect | `0.3.0` | Verified |
+| `UESF-TMPL-007` | `templates/PLATFORM_ADAPTER_TEMPLATE.md` | Templates | Architect | `0.3.1` | Verified |
 | `UESF-TMPL-008` | `templates/PROJECT_EXTENSION_TEMPLATE.md` | Templates | Architect | `1.0.0` | Verified |
 | `UESF-ROLE-001` | `roles/cto/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
 | `UESF-ROLE-002` | `roles/architect/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |

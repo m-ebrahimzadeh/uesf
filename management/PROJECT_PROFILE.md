@@ -15,8 +15,8 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `1.0.0` (Milestone M4 — Complete 6-Layer Architecture & Project Extension Blueprint)
-   * **Current Phase**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), & M3 (`v0.3.0`) Accepted on `main`; Milestone M4 (`v1.0.0`) Implemented on `feat/TASK-011-project-extensions-v1`
+   * **Current Version**: `1.0.0` (Full-Stack 6-Layer Release)
+   * **Current Phase**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), and M4 (`v1.0.0`) Completed, Verified, and Accepted
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)

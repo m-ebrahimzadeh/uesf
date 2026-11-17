@@ -24,15 +24,11 @@ Covers Milestones M1 through M4 of UESF development in alignment with `DEC-007` 
 
 ### Milestone M3: Platform Adapters (`v0.3.0`) — *COMPLETED & ACCEPTED*
 * **Objective**: Create thin, modular Layer 5 platform adapters in `adapters/` mapping universal capabilities (`CAP-*`) and protocols to concrete environments, and resolve cross-platform repository hygiene (`KDP-001`, `KDP-002`).
-* **Status**: `ACCEPTED` (`TASK-007`–`TASK-010`, commit `f548df7` merged to `main`, verified via `EV-TASK-007-01` and `management/validation/VALIDATION_REPORT_003.md`).
+* **Status**: `ACCEPTED` (`TASK-007`–`TASK-010`, commit `f548df7` merged to `main` @ `0fa8bbe`, verified via `EV-TASK-007-01` and `management/validation/VALIDATION_REPORT_003.md`).
 
-### Milestone M4: Project-Specific Extensions & Full-Stack `v1.0.0` Release (`v1.0.0`) — *CURRENT (In Review on `feat/TASK-011-project-extensions-v1`)*
-* **Objective**: Complete Layer 6 (`extensions/`) with `templates/PROJECT_EXTENSION_TEMPLATE.md`, `extensions/README.md`, and the reference blueprint `extensions/example-web-service/EXTENSION.md`, harmonize `KDP-003` (`CAP-WEB`) and `KDP-004` (`* **Owner**: CTO`), and execute the full-stack 50-document release audit (`management/validation/VALIDATION_REPORT_004.md`).
-* **Tasks**:
-  * `TASK-011`: Author `templates/PROJECT_EXTENSION_TEMPLATE.md`, `extensions/README.md`, `extensions/example-web-service/EXTENSION.md`, and remove `extensions/.gitkeep`.
-  * `TASK-012`: Apply `KDP-003` (`CAP-WEB` token alignment in `adapters/`) and `KDP-004` (`* **Owner**: CTO` header field in `VALIDATION_REPORT_001.md` and `VALIDATION_REPORT_002.md`).
-  * `TASK-013`: Author `management/validation/VALIDATION_REPORT_004.md` and synchronize `README.md` + all 6 `management/` registries to `1.0.0`.
-* **Exit Criteria**: All 50 canonical `.md` documents verified on `feat/TASK-011-project-extensions-v1` with `GITKEEP_COUNT=0`, `HEADER_ISSUES_STRICT_OWNER=0`, `UPWARD_DEPENDENCY_HITS=0`, and `BROKEN_PATH_REFS=0` (`EV-TASK-011-01`), ready for CTO final `v1.0.0` merge and tag acceptance.
+### Milestone M4: Project-Specific Extensions & Full-Stack `v1.0.0` Release (`v1.0.0`) — *COMPLETED & ACCEPTED*
+* **Objective**: Complete Layer 6 (`extensions/`) with `templates/PROJECT_EXTENSION_TEMPLATE.md`, `extensions/README.md`, and the reference blueprint `extensions/example-web-service/EXTENSION.md`, harmonize `KDP-003`–`KDP-007`, and execute the full-stack 50-document release audit (`management/validation/VALIDATION_REPORT_004.md`).
+* **Status**: `ACCEPTED` (`TASK-011`–`TASK-014`, merged and tagged `v1.0.0` on `main`, verified via `EV-TASK-011-01`, `EV-TASK-014-01`, and `management/validation/VALIDATION_REPORT_004.md`).
 
 ## 4. Responsibilities
 * **CTO**: Governs phase transitions and ensures no milestone work is marked complete before its exit criteria are verified.
