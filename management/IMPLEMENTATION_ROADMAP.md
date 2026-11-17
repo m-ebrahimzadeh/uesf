@@ -30,10 +30,9 @@ Covers Milestones M1 through M6 of UESF development in alignment with `DEC-007` 
 * **Objective**: Complete Layer 6 (`extensions/`) with `templates/PROJECT_EXTENSION_TEMPLATE.md`, `extensions/README.md`, and the reference blueprint `extensions/example-web-service/EXTENSION.md`, and harmonize `KDP-003`–`KDP-007`.
 * **Status**: `ACCEPTED` (`TASK-011`–`TASK-014`, merged on `main` @ `e9f4e02` and re-versioned to `v0.4.0` per `DEC-017`).
 
-### Milestone M5: Feature Discovery Role (`Discovery`), Template Target-Layer Architecture & Cumulative Audit (`v0.5.0`) — *CURRENT (In Review on `feat/TASK-015-discovery-role-v0.5.0`)*
+### Milestone M5: Feature Discovery Role (`Discovery`), Template Target-Layer Architecture & Cumulative Audit (`v0.5.0`) — *COMPLETED & ACCEPTED*
 * **Objective**: Roll back the premature `v1.0.0` tag (`DEC-017`), implement the Template Target-Layer Rule (`DEC-018`), introduce the 9th Universal Agent Role `Discovery` (`roles/discovery/SKILL.md`), `protocols/FEATURE_DISCOVERY_PROTOCOL.md`, and `templates/FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` (`DEC-019`), and commit the versioned cumulative verification script (`management/validation/audit.ps1`).
-* **Tasks**: `TASK-015`, `TASK-016`, `TASK-017`, `TASK-018` (originating from approved Feature Discovery Brief `DSC-001`).
-* **Exit Criteria**: All 54 canonical `.md` documents and `management/validation/audit.ps1` pass cumulative verification with zero errors (`EV-TASK-015-01`) and receive CTO Tier 2 acceptance.
+* **Status**: `ACCEPTED` (`TASK-015`–`TASK-019`, originating from approved Feature Discovery Brief `DSC-001`, merged to `main` per `DEC-020` and verified via `EV-TASK-015-01`, `EV-TASK-019-01`, and `management/validation/VALIDATION_REPORT_005.md`).
 
 ### Milestone M6: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).
