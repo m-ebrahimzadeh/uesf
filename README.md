@@ -1,7 +1,7 @@
 # Universal Engineering Skills Framework (UESF)
 * **Document ID**: UESF-CORE-001
 * **Canonical Path**: README.md
-* **Version**: 0.6.2
+* **Version**: 0.6.3
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -34,9 +34,9 @@ Run the cross-platform Node.js CLI installer (requires **Node.js >= 18**). It au
 
 * **Option B — Install a Specific UESF Version or Tag:**
   ```sh
-  npx --yes github:m-ebrahimzadeh/uesf#v0.6.2 install
+  npx --yes github:m-ebrahimzadeh/uesf#v0.6.3 install
   # Or from a local clone:
-  node bin/uesf.mjs install --version 0.6.2
+  node bin/uesf.mjs install --version 0.6.3
   ```
 
 * **Option C — Local Clone & Contributor CLI:**
@@ -161,8 +161,10 @@ your-project/
     ├── ACTIVE_TASKS.md              # Active task contracts (TASK-001, TASK-002...) & states
     ├── DECISION_LOG.md              # Architectural decisions (DEC-001...) & open questions (OQ-001...)
     ├── CONTEXT_SNAPSHOT.md          # 100% machine-generated snapshot (auto-updated on every git commit)
+    ├── bin/
+    │   └── uesf.mjs                 # Standalone zero-dependency snapshot engine installed by init-project
     └── scripts/
-        └── sync-snapshot.ps1        # Local snapshot generator invoked by .git/hooks/pre-commit
+        └── sync-snapshot.ps1        # Thin local wrapper invoking .uesf/bin/uesf.mjs via .git/hooks/pre-commit
 ```
 *(Meanwhile, **Domain 1 — Universal UESF Knowledge** lives cleanly in your central UESF clone and compiled `dist/` skill bundles.)*
 
