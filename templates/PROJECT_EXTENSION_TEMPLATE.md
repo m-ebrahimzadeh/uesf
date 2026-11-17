@@ -1,7 +1,7 @@
 # Project-Specific Extension Template
 * **Document ID**: UESF-TMPL-008
 * **Canonical Path**: templates/PROJECT_EXTENSION_TEMPLATE.md
-* **Version**: 0.4.0
+* **Version**: 0.6.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Target Layer**: Layer 6
@@ -25,6 +25,7 @@ Mandatory template for all Layer 6 project extension specifications (`core/FRAME
    * `## 7. Relationships with Other Documents`
 2. **Unidirectional Dependency Invariant (`DEC-009`, `DEC-018`)**: Because this template targets Layer 6 (`Target Layer: Layer 6`), both this template and concrete extensions in `extensions/` MAY depend downward on Layers 1–6 (`core/`, `policies/`, `protocols/`, `roles/`, `adapters/`, `extensions/`), while Layers 1–5 MUST NEVER reference or depend on any file inside `extensions/`.
 3. **Additive-Only Constraint**: A project extension MAY tighten verification gates or add domain-specific checklists, but MUST NOT weaken universal autonomy thresholds (`policies/AUTONOMY_POLICY.md`), Git protections (`policies/GIT_POLICY.md`), security rules (`policies/SECURITY_POLICY.md`), or epistemic verification requirements (`policies/VERIFICATION_POLICY.md`).
+4. **Three-Domain Project Capsule (`.uesf/` + `docs/`)**: Every project extension MUST specify its Canonical Remote Repository URL and Default Branch (enabling cloud `/uesf:status` context retrieval), keep permanent documentation in native project paths (such as `docs/`) indexed by `.uesf/KNOWLEDGE_MAP.md`, and maintain operational state in `.uesf/` (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, and the machine-generated `CONTEXT_SNAPSHOT.md`).
 
 ## 4. Responsibilities
 * **Architect / CTO**: Author and approve project extension overlays prior to downstream project execution.

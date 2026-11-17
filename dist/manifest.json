@@ -1,0 +1,117 @@
+{
+    "framework":  "Universal Engineering Skills Framework (UESF)",
+    "version":  "0.6.0",
+    "source_sha256":  "716fb5b7623c7564545ce5d86bb77b38a32f1bac490d5a3f95fb801032e1f282",
+    "source_sha256_short":  "716fb5b7623c",
+    "bundle_count":  12,
+    "bundles":  [
+                    {
+                        "id":  "uesf-discovery",
+                        "command":  "/uesf:discovery",
+                        "kind":  "role",
+                        "canonical_source":  "roles/discovery/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-discovery/SKILL.md",
+                        "command_path":  "dist/commands/uesf/discovery.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/discovery.toml"
+                    },
+                    {
+                        "id":  "uesf-cto",
+                        "command":  "/uesf:cto",
+                        "kind":  "role",
+                        "canonical_source":  "roles/cto/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-cto/SKILL.md",
+                        "command_path":  "dist/commands/uesf/cto.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/cto.toml"
+                    },
+                    {
+                        "id":  "uesf-architect",
+                        "command":  "/uesf:architect",
+                        "kind":  "role",
+                        "canonical_source":  "roles/architect/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-architect/SKILL.md",
+                        "command_path":  "dist/commands/uesf/architect.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/architect.toml"
+                    },
+                    {
+                        "id":  "uesf-developer",
+                        "command":  "/uesf:developer",
+                        "kind":  "role",
+                        "canonical_source":  "roles/developer/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-developer/SKILL.md",
+                        "command_path":  "dist/commands/uesf/developer.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/developer.toml"
+                    },
+                    {
+                        "id":  "uesf-qa",
+                        "command":  "/uesf:qa",
+                        "kind":  "role",
+                        "canonical_source":  "roles/qa/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-qa/SKILL.md",
+                        "command_path":  "dist/commands/uesf/qa.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/qa.toml"
+                    },
+                    {
+                        "id":  "uesf-devops",
+                        "command":  "/uesf:devops",
+                        "kind":  "role",
+                        "canonical_source":  "roles/devops/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-devops/SKILL.md",
+                        "command_path":  "dist/commands/uesf/devops.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/devops.toml"
+                    },
+                    {
+                        "id":  "uesf-security",
+                        "command":  "/uesf:security",
+                        "kind":  "role",
+                        "canonical_source":  "roles/security/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-security/SKILL.md",
+                        "command_path":  "dist/commands/uesf/security.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/security.toml"
+                    },
+                    {
+                        "id":  "uesf-sre",
+                        "command":  "/uesf:sre",
+                        "kind":  "role",
+                        "canonical_source":  "roles/sre/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-sre/SKILL.md",
+                        "command_path":  "dist/commands/uesf/sre.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/sre.toml"
+                    },
+                    {
+                        "id":  "uesf-documentation",
+                        "command":  "/uesf:documentation",
+                        "kind":  "role",
+                        "canonical_source":  "roles/documentation/SKILL.md",
+                        "skill_path":  "dist/skills/uesf-documentation/SKILL.md",
+                        "command_path":  "dist/commands/uesf/documentation.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/documentation.toml"
+                    },
+                    {
+                        "id":  "uesf-init",
+                        "command":  "/uesf:init",
+                        "kind":  "workflow",
+                        "canonical_source":  "workflows/INIT_WORKFLOW.md",
+                        "skill_path":  "dist/skills/uesf-init/SKILL.md",
+                        "command_path":  "dist/commands/uesf/init.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/init.toml"
+                    },
+                    {
+                        "id":  "uesf-handoff",
+                        "command":  "/uesf:handoff",
+                        "kind":  "workflow",
+                        "canonical_source":  "workflows/HANDOFF_WORKFLOW.md",
+                        "skill_path":  "dist/skills/uesf-handoff/SKILL.md",
+                        "command_path":  "dist/commands/uesf/handoff.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/handoff.toml"
+                    },
+                    {
+                        "id":  "uesf-status",
+                        "command":  "/uesf:status",
+                        "kind":  "workflow",
+                        "canonical_source":  "workflows/STATUS_WORKFLOW.md",
+                        "skill_path":  "dist/skills/uesf-status/SKILL.md",
+                        "command_path":  "dist/commands/uesf/status.md",
+                        "gemini_toml_path":  "dist/gemini-cli/uesf/status.toml"
+                    }
+                ]
+}

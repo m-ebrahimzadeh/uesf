@@ -1,10 +1,10 @@
 # Handoff Protocol
 * **Document ID**: UESF-PROT-002
 * **Canonical Path**: protocols/HANDOFF_PROTOCOL.md
-* **Version**: 0.1.0
+* **Version**: 0.2.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Define the self-contained communication package required when transferring tasks, context, or deliverables between agents or across disconnected environments (e.g., Strategic Workspace <-> Engineering Workspace).
@@ -28,6 +28,9 @@ Applies to all inter-environment transfers and inter-role transitions where shar
    * `Deliverables Summary`: Exact files created/modified, commit hashes, or artifacts generated.
    * `Attached Evidence Package`: Structured verification output per `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`.
    * `Discoveries / Escalations`: Any implementation discoveries (`protocols/KNOWLEDGE_SYNCHRONIZATION.md`) or blockers (`protocols/ESCALATION_PROTOCOL.md`).
+4. **Lifecycle Command Integration (`/uesf:handoff` & `/uesf:status`)**:
+   * Executing `/uesf:handoff` (`workflows/HANDOFF_WORKFLOW.md`) at session exit packages the Outbound or Inbound Handoff and refreshes `CONTEXT_SNAPSHOT.md` when `CAP-FS` is available.
+   * Executing `/uesf:status` (`workflows/STATUS_WORKFLOW.md`) at session entry reconstructs context from `CONTEXT_SNAPSHOT.md` and live Git probes without duplicating handoff packaging duties.
 
 ## 4. Responsibilities
 * **Sending Agent**: Packages complete context, verifies zero secret leakage (`policies/SECURITY_POLICY.md`), and emits the structured handoff block.

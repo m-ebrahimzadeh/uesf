@@ -1,7 +1,7 @@
 # Active Tasks Registry
 * **Document ID**: UESF-MGMT-002
 * **Canonical Path**: management/ACTIVE_TASKS.md
-* **Version**: 0.5.0
+* **Version**: 0.6.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -39,9 +39,14 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-017` | Author 9th Role `Discovery` (`roles/discovery/SKILL.md`), `FEATURE_DISCOVERY_PROTOCOL.md` & `FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` (`DEC-019`) | Architect / CTO | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-015-01` (`HO-TASK-015-02`, commit `e7d8b2b`). Accepted via `DEC-020`. |
 | `TASK-018` | Commit Versioned Cumulative Audit Script (`management/validation/audit.ps1`), Author `VALIDATION_REPORT_005.md` & Sync Registries to `0.5.0` | QA / DevOps | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-015-01` (`management/validation/VALIDATION_REPORT_005.md`). Accepted via `DEC-020`. |
 | `TASK-019` | Close Out Accepted Milestone M5 (`v0.5.0`) Registries & Merge `feat/TASK-015-discovery-role-v0.5.0` to `main` | DevOps / Documentation | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-019-01` (`HO-TASK-019-02`, merged to `main` per `DEC-020`). |
+| `TASK-020` | Author Lifecycle Workflows (`workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md`) & Update Architecture/Policies for 3-Domain Model (`DEC-021`, `DEC-022`) | Architect / CTO | CTO | Strategic & Engineering | `A1` | `IN_REVIEW` | Dispatched via `HO-TASK-020-01` (`DSC-002`) on `feat/TASK-020-skill-distribution-v0.6.0`. |
+| `TASK-021` | Implement Automatic Snapshot Generator (`scripts/sync-snapshot.*`, `scripts/hooks/pre-commit`) & Generate `management/CONTEXT_SNAPSHOT.md` (`DEC-023`) | DevOps / Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Dispatched via `HO-TASK-020-01` (`DSC-002`) on `feat/TASK-020-skill-distribution-v0.6.0`. |
+| `TASK-022` | Implement Deterministic Bundle Compiler (`scripts/build-dist.*`) & Multi-Agent Installer (`scripts/install.*`), Compiling 12 Bundles into `dist/` | DevOps / Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Dispatched via `HO-TASK-020-01` (`DSC-002`) on `feat/TASK-020-skill-distribution-v0.6.0`. |
+| `TASK-023` | Upgrade `management/validation/audit.ps1` (`SNAPSHOT_DRIFT`, `DIST_DRIFT`), Author `VALIDATION_REPORT_006.md` & Sync Registries to `0.6.0` | QA / DevOps | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | `EV-TASK-020-01` (`management/validation/VALIDATION_REPORT_006.md`, `HO-TASK-020-02`). |
 
 ## 5. Active Outbound Task Contract Queue
-* All planned tasks for Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), and M5 (`v0.5.0`) are **COMPLETED, VERIFIED, AND ACCEPTED**.
+* **Active Handoff (`HO-TASK-020-01`)**: `TASK-020`–`TASK-023` (Originating Discovery Brief: `DSC-002` — Milestone M6 `v0.6.0`: Lifecycle Workflows `init`/`handoff`/`status`, Three-Domain Knowledge Model, Automatic `CONTEXT_SNAPSHOT.md`, 12 Compiled Skill/Command Bundles in `dist/`, Multi-Agent Installer, and Upgraded Cumulative Audit) — **Executed on `feat/TASK-020-skill-distribution-v0.6.0` and pending CTO Tier 2 Review (`HO-TASK-020-02` / `EV-TASK-020-01`)**.
+* **Accepted Baseline**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), and M5 (`v0.5.0`) (`TASK-000`–`TASK-019`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main`.
 * Any future feature proposal or architectural enhancement enters through Track 1 Iterative Discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `roles/discovery/SKILL.md`) locked at `A0` until explicit human confirmation.
 
 ## 6. Relationships with Other Documents

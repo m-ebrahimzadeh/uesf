@@ -1,7 +1,7 @@
 # Architectural & Governance Decision Log
 * **Document ID**: UESF-MGMT-003
 * **Canonical Path**: management/DECISION_LOG.md
-* **Version**: 0.5.0
+* **Version**: 0.6.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -35,6 +35,9 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 | `DEC-018` | Template Target-Layer Rule & Versioned Cumulative Audit Script | Define `* **Target Layer**: Layer N` metadata for all `templates/*.md` in `core/FRAMEWORK_ARCHITECTURE.md` (`0.2.0`) so templates targeting Layer `N` may link to canonical specs in Layers `<= N` (restoring `adapters/README.md` and `extensions/README.md` in `UESF-TMPL-007` and `UESF-TMPL-008`), and commit a cumulative verification script at `management/validation/audit.ps1` (`DSC-001` Q2). | Approved | CTO (`A2`) / Human Stakeholder | 2026-11-17 |
 | `DEC-019` | Addition of 9th Universal Agent Role (`Discovery`) & Iterative Discovery Protocol | Expand `DEC-001` from 8 to 9 canonical roles by introducing `Discovery` (`roles/discovery/SKILL.md`), `protocols/FEATURE_DISCOVERY_PROTOCOL.md`, and `templates/FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` with a hard `A0` zero-mutation gate requiring iterative refinement until explicit human confirmation (`DSC-001` Q3 — Option A). | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
 | `DEC-020` | Milestone M5 (`v0.5.0`) Acceptance & Merge to `main` | Formally accept `TASK-015`–`TASK-018` (`e7d8b2b`) based on verified Evidence Package `EV-TASK-015-01` (`MD_COUNT=54`, `ROLE_COUNT=9`, `V1_TAG_COUNT=0`, 0 audit failures across all 19 checks) and authorize merge of `feat/TASK-015-discovery-role-v0.5.0` into `main`. | Approved | CTO (`A2`) | 2026-11-17 |
+| `DEC-021` | 12-Command Compiled Skill Distribution & Multi-Agent Installer (`DSC-002`) | Compile the 9 Universal Role Skills (`roles/*/SKILL.md`) and 3 Lifecycle Workflows (`workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md`) via `scripts/build-dist.ps1` into self-contained `dist/` packages (`skills/`, `commands/`, `gemini-cli/`, `manifest.json`) installed via `scripts/install.ps1` (atomic copy default, `-Check`, `-Link`), without an always-on Micro-Kernel and keeping MCP optional. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
+| `DEC-022` | Three-Domain Knowledge Partitioning & Unified `/uesf:status` (`DSC-002`) | Separate Universal UESF Knowledge (`uesf/` & `dist/`), Permanent Project Documentation (native project `docs/` indexed by `.uesf/KNOWLEDGE_MAP.md`), and Operational Project State (`.uesf/{EXTENSION,KNOWLEDGE_MAP,ACTIVE_TASKS,DECISION_LOG,CONTEXT_SNAPSHOT}.md` using standard `TASK-XXX`/`DEC-XXX` IDs), with `/uesf:status` serving as the unified session-entry and context-reconstruction workflow and `/uesf:handoff` serving as the session-exit packaging workflow. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
+| `DEC-023` | Automatic Machine-Generated `CONTEXT_SNAPSHOT.md` (`DSC-002` Refinement A) | Maintain `CONTEXT_SNAPSHOT.md` automatically via `scripts/sync-snapshot.*`, `.git/hooks/pre-commit`, and on-read refresh in `/uesf:status` (verified by `SNAPSHOT_DRIFT_ISSUES=0` in `management/validation/audit.ps1`), strictly separating `[VERIFIED_BY_GIT_AND_FS_PROBE]` facts from `[RECORDED_IN_LEDGER]` tables and `[DRIFT_CHECK]` alerts. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
 
 ## 4. Open Questions & Pending Human Decisions (`A3` / Clarification Items)
 | Question ID | Topic | Resolution Summary | Status |

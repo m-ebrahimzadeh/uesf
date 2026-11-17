@@ -1,13 +1,15 @@
 # Reference Project Extension — Modular Web Service Blueprint
 * **Document ID**: UESF-EXT-002
 * **Canonical Path**: extensions/example-web-service/EXTENSION.md
-* **Version**: 0.4.0
+* **Version**: 0.6.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose & Target Project Profile
 Provide a canonical, vendor-neutral Layer 6 reference extension demonstrating how a downstream software engineering project overlays concrete build, test, security, and reliability conventions onto UESF Layers 1–5 (`templates/PROJECT_EXTENSION_TEMPLATE.md`).
+* **Canonical Remote Repository**: `https://github.com/example-org/example-web-service` (Default Branch: `main`)
+* **Operational Control Plane**: `.uesf/{EXTENSION.md, KNOWLEDGE_MAP.md, ACTIVE_TASKS.md, DECISION_LOG.md, CONTEXT_SNAPSHOT.md}` (initialized via `workflows/INIT_WORKFLOW.md`); permanent specs in `docs/`.
 
 ## 2. Scope & Domain Architecture Overlay
 Applies only when explicitly activated for the reference modular web service target project. Defines a three-tier application boundary (`api/`, `domain/`, `infrastructure/`) where `domain/` has zero outward dependency on `api/` or `infrastructure/`.
