@@ -1,13 +1,13 @@
 # Antigravity / VS Code Engineering Workspace Adapter
 * **Document ID**: UESF-ADPT-002
 * **Canonical Path**: adapters/antigravity-vscode/ADAPTER.md
-* **Version**: 0.4.0
+* **Version**: 0.5.0
 * **Status**: Verified
 * **Owner**: DevOps
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose & Target Runtime Profile
-Bind UESF roles, policies, and protocols to the **Engineering Workspace** running **Antigravity inside Visual Studio Code** (powered by coding and orchestration models such as Gemini 4 Hydrogen, Gemini 4 Argon Orchestrator, or Gemini 3.8 Flash on Windows, macOS, or Linux).
+Bind UESF roles, policies, and protocols to the **Engineering Workspace** running **Antigravity inside Visual Studio Code** (powered by coding and orchestration models such as Gemini 4 Hydrogen, Gemini 4 Argon Orchestrator, or Gemini 3.8 Flash on Windows, macOS, or Linux), discovering native skills in `~/.gemini/config/skills/uesf-<name>/SKILL.md` (`DEC-028`).
 
 ## 2. Scope & Supported Roles
 Primarily supports execution-oriented and verification-oriented roles (`Developer`, `DevOps`, `QA`, `Security`, `SRE`, `Documentation`, and `Architect` during repository inspection) operating on the local Git repository (`c:/Users/user/Project/uesf` or equivalent local clone).
@@ -15,7 +15,7 @@ Primarily supports execution-oriented and verification-oriented roles (`Develope
 ## 3. Capability Mapping Matrix (CAP-* to Runtime Bindings)
 | Abstract Capability (`core/CAPABILITY_MODEL.md`) | Typical Runtime State in Antigravity | Concrete Binding & Verification Probe |
 | :--- | :--- | :--- |
-| `CAP-FS` (Filesystem Read/Write) | `VERIFIED_AVAILABLE` | Bound to VS Code workspace file read/create/edit tools and local disk paths. Probe via directory listing and file existence check. |
+| `CAP-FS` (Filesystem Read/Write) | `VERIFIED_AVAILABLE` | Bound to VS Code workspace file read/create/edit tools and local disk paths; native skills load from `~/.gemini/config/skills/` (tracked via `~/.uesf/install-state.json`, cleaning legacy `~/.gemini/antigravity/skills/uesf-*`). |
 | `CAP-TERM` (Terminal / Shell Execution) | `VERIFIED_AVAILABLE` | Bound to integrated VS Code terminal (PowerShell / Bash / Zsh). Probe via non-destructive command (`git --version`, `pwd`). |
 | `CAP-GIT` (Local & Remote Git) | `VERIFIED_AVAILABLE` (Local) / `RESTRICTED` or `VERIFIED_AVAILABLE` (Remote) | Bound to local `git` CLI (`git status`, `git branch`, `git diff`, `git commit`, `git log`). Remote push (`git push origin ...`) requires configured credentials. |
 | `CAP-WS` (Connected Strategic Workspace / Cloud Notebook) | `UNAVAILABLE` | Antigravity does not share implicit memory or direct cloud notebook state with Gemini Strategic Workspace. |
@@ -27,7 +27,7 @@ Primarily supports execution-oriented and verification-oriented roles (`Develope
 3. **Remote Push Fallback**: If `git push` to `origin` fails due to credential or sandbox network restrictions, preserve the verified local commit, record the exact terminal output under Epistemic Status `Observed`, and report the pending push in the Inbound Handoff (`HO-TASK-XXX-02`).
 
 ## 5. Session Initialization & Handoff Execution Workflow
-0. **Fast Session Entry via `/uesf:status`**: When opening a workspace, invoke `@uesf-status` (`/uesf:status`) to automatically refresh `CONTEXT_SNAPSHOT.md`, probe live `git status`/`git log`, and reconstruct active tasks and blockers.
+0. **Fast Session Entry via `/uesf-status`**: When opening a workspace, invoke `/uesf-status` (or automatic skill matching for `uesf-status`) to refresh `CONTEXT_SNAPSHOT.md`, probe live `git status`/`git log`, and reconstruct active tasks and blockers.
 1. **Receive Outbound Handoff (`HO-TASK-XXX-01`)**: Parse Task Contract fields (`Task ID`, `Responsible Role`, `Autonomy Level`, `Git Strategy`, `Scope`, `Acceptance Criteria`).
 2. **Verify Capabilities & Prerequisite State**: Run `git status`, `git branch -a`, and `git rev-parse HEAD` to confirm clean working tree and expected parent commit.
 3. **Branch Management (`policies/GIT_POLICY.md`)**: Create or switch to the designated feature branch (`<type>/TASK-XXX-<slug>`) unless direct-to-`main` is explicitly authorized in the Task Contract.

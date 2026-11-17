@@ -1,13 +1,13 @@
 # Gemini Strategic Workspace Adapter
 * **Document ID**: UESF-ADPT-003
 * **Canonical Path**: adapters/gemini-strategic-workspace/ADAPTER.md
-* **Version**: 0.4.0
+* **Version**: 0.5.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose & Target Runtime Profile
-Bind UESF governance, architecture, planning, review, and knowledge curation workflows to the **Strategic Workspace** (Gemini 4 Argon operating with connected Google Workspace / Notebook sources).
+Bind UESF governance, architecture, planning, review, and knowledge curation workflows to the **Strategic Workspace** (Gemini 4 Argon operating with connected Google Workspace / Notebook sources). Because this workspace operates remotely without local filesystem access, `bin/uesf.mjs` reports it as an informational remote target rather than installing local `skills/` files (`DEC-028`).
 
 ## 2. Scope & Supported Roles
 Primarily supports strategic, architectural, governance, and review roles (`CTO`, `Architect`, `Documentation`, and Tier 2/Tier 3 `QA`/`Security` design review) where reasoning, specification authoring, task contracting, and evidence auditing occur.
@@ -29,7 +29,7 @@ Primarily supports strategic, architectural, governance, and review roles (`CTO`
 3. **Evidence-Based Acceptance Gate (`protocols/TASK_ACCEPTANCE_PROTOCOL.md`)**: The Strategic Workspace `CTO` role promotes tasks to `VERIFIED` / `ACCEPTED` and specifications to `Verified` only after receiving and auditing a concrete Inbound Handoff (`HO-TASK-XXX-02`) containing empirical terminal and Git proofs (`EV-TASK-XXX-01`).
 
 ## 5. Session Initialization & Handoff Execution Workflow
-1. **Context & Source-of-Truth Synchronization**: Inspect connected Notebook sources and latest Inbound Handoff (`HO-TASK-XXX-02`) to determine the current repository commit baseline and active milestone state (`management/ACTIVE_TASKS.md`). Fresh cloud sessions can invoke `/uesf:status [owner/repo] [branch]` to retrieve `CONTEXT_SNAPSHOT.md` remotely (for public/connected repos, labeling state `[REPORTED — Remote @ <SHA>]` and local uncommitted state `[UNKNOWN]`) or via single-file snapshot paste (for private unconnected repos).
+1. **Context & Source-of-Truth Synchronization**: Inspect connected Notebook sources and latest Inbound Handoff (`HO-TASK-XXX-02`) to determine the current repository commit baseline and active milestone state (`management/ACTIVE_TASKS.md`). Fresh cloud sessions can invoke `/uesf:status [owner/repo] [branch]` (or `/uesf-status [owner/repo] [branch]`) to retrieve `CONTEXT_SNAPSHOT.md` remotely (for public/connected repos, labeling state `[REPORTED — Remote @ <SHA>]` and local uncommitted state `[UNKNOWN]`) or via single-file snapshot paste (for private unconnected repos).
 2. **Inbound Evidence Audit**: When reviewing Engineering Workspace deliverables, verify 1-to-1 acceptance criteria coverage, commit SHAs, and epistemic classifications (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`), and adjudicate any Knowledge Discovery Proposals (`KDP-XXX`).
 3. **Specification & Task Contract Authoring**: Draft or update framework specifications, record architectural rulings in `management/DECISION_LOG.md`, and emit a standalone Outbound Handoff (`HO-TASK-YYY-01`) for the next engineering execution cycle.
 

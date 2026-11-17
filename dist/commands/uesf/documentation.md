@@ -1,10 +1,10 @@
-> **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
-> * **Bundle ID**: `uesf-documentation` (`/uesf:documentation`)
-> * **Canonical Source**: `roles/documentation/SKILL.md` (`uesf@v0.6.3`)
-> * **Source-SHA256**: `c0c2b3d64227d2d92e1af55d2810723a8012c3ec035792b276ec43bbc546ed86` (`c0c2b3d64227`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.3 | Active: uesf-documentation | Autonomy: A1]**`
+---
+description: "UESF Documentation Role (Specification Formatting, Link Integrity & Mirrors)"
+---
 
-## UESF Embedded Core & Policy Invariants (`v0.6.3`)
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-documentation | Autonomy: A1]**`
+
+## UESF Embedded Core & Policy Invariants (`v0.7.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -102,3 +102,5 @@ Provide the standardized template for submitting implementation discoveries or p
 
 ## 3. Relationships with Other Documents
 * **Governing Specs**: `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `policies/KNOWLEDGE_GOVERNANCE_POLICY.md`, `management/KNOWLEDGE_MAP.md`
+
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-documentation command=/uesf-documentation source=roles/documentation/SKILL.md version=0.7.0 sha256=06309527c7039e3687d36c9c0b012281b176277662b81fdbbfec5a603882ca55 short_sha256=06309527c703 -->
