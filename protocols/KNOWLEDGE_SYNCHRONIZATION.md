@@ -1,42 +1,40 @@
 # Knowledge Synchronization Protocol
 * **Document ID**: UESF-PROT-005
 * **Canonical Path**: protocols/KNOWLEDGE_SYNCHRONIZATION.md
-* **Version**: 0.1.0
+* **Version**: 0.2.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
-Define the structured workflow for submitting implementation discoveries, proposing specification updates, and synchronizing authoritative knowledge between the Project Git Repository and the Connected Shared Workspace.
+Define the protocol for submitting implementation discoveries (`KDP-XXX`), keeping the canonical repository and connected shared workspace synchronized, and automatically maintaining `CONTEXT_SNAPSHOT.md` and `dist/` bundles across local and cloud environments.
 
 ## 2. Scope
-Applies to all knowledge updates, architectural discoveries, specification revisions, and cross-backend synchronization actions across UESF.
+Applies to all knowledge updates, implementation discoveries, cross-workspace synchronizations, and automatic snapshot refreshes across UESF and UESF-governed projects.
 
 ## 3. Rules and Requirements
-1. **Implementation Discovery Submission**:
-   * When an executing agent in the Engineering Workspace discovers an environmental constraint, edge case, or architectural discrepancy, it MUST NOT silently diverge from specifications.
-   * It MUST submit a **Knowledge Discovery Proposal (`KDP`)** containing:
-     * `Discovery ID`: `KDP-XXX`
-     * `Source Task & Role`: Originating task and role.
-     * `Epistemic Status`: `Verified` or `Observed` with supporting evidence.
-     * `Affected Canonical Document(s)`: Paths in `management/KNOWLEDGE_MAP.md`.
-     * `Proposed Change`: Exact section and diff/update recommendation.
-2. **CTO Evaluation & Publication**:
-   * The CTO evaluates each `KDP` against `policies/KNOWLEDGE_GOVERNANCE_POLICY.md`.
-   * Upon approval, the CTO records significant decisions in `management/DECISION_LOG.md`, increments the target specification's semantic version, and authorizes update of the canonical source and workspace mirror.
-3. **Bi-Directional Synchronization Hygiene**:
-   * **Strategic-to-Engineering Sync**: When specifications are drafted or updated in the Strategic Workspace during governance sessions, a synchronization Task Contract is issued to commit the exact versioned Markdown files to the canonical Git Repository.
-   * **Engineering-to-Strategic Sync**: When canonical files are updated via approved Git commits in the Engineering Workspace, the corresponding reference sources in the Connected Shared Workspace (`UNIVERSAL ENGINEERING SKILLS` Notebook) MUST be refreshed (`refresh_source_content` or batch update) to match the committed version.
-4. **Drift Detection**: During milestone reviews, the CTO or Documentation role verifies that document versions in `management/KNOWLEDGE_MAP.md` match across the Git Repository and Connected Shared Workspace.
+1. **Knowledge Discovery Proposal (`KDP-XXX`) Submission**:
+   * When an engineering or review agent encounters an undocumented constraint, environment limitation, or specification gap, it MUST NOT silently rewrite normative policies.
+   * It MUST submit a structured `KDP-XXX` record (conforming to `templates/KDP_TEMPLATE.md`) in its Handoff or Evidence Package.
+2. **CTO Curation & Publication Gate (`DEC-006`)**:
+   * The CTO evaluates `KDP-XXX` proposals, logs approved decisions in `management/DECISION_LOG.md`, and authorizes updates to canonical specifications and `management/KNOWLEDGE_MAP.md`.
+3. **Automatic `CONTEXT_SNAPSHOT.md` Maintenance (`DEC-023`)**:
+   * To ensure `/uesf:status` (`workflows/STATUS_WORKFLOW.md`) never depends on agents remembering to run `/uesf:handoff` or manually editing snapshot files, `CONTEXT_SNAPSHOT.md` (`management/CONTEXT_SNAPSHOT.md` in UESF; `.uesf/CONTEXT_SNAPSHOT.md` in downstream projects) is maintained automatically via three mechanisms:
+     1. **Git `pre-commit` Hook (`scripts/hooks/pre-commit`)**: Runs `scripts/sync-snapshot` on every `git commit` and stages the updated `CONTEXT_SNAPSHOT.md` automatically.
+     2. **Live On-Read Refresh in `/uesf:status`**: When local `CAP-FS` and `CAP-GIT` are available, `/uesf:status` refreshes `CONTEXT_SNAPSHOT.md` and probes live Git state before presenting status.
+     3. **Audit Gate Verification (`management/validation/audit.ps1`)**: Verifies `SNAPSHOT_DRIFT_ISSUES=0` and `DIST_DRIFT_ISSUES=0` by comparing live source SHA-256 hashes against embedded snapshot and `dist/manifest.json` hashes.
+4. **Epistemic Separation inside `CONTEXT_SNAPSHOT.md`**:
+   * Every generated snapshot MUST separate **Section 1 (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)** from **Section 2 (`[RECORDED_IN_LEDGER]`)** and **Section 3 (`[DRIFT_CHECK]`)** per `policies/VERIFICATION_POLICY.md`.
 
 ## 4. Responsibilities
-* **All Roles**: Submit `KDP` reports whenever implementation realities impact documented specifications.
-* **CTO**: Reviews, approves/rejects `KDP` submissions, and governs synchronization tasks.
-* **Documentation Role**: Executes approved workspace mirror refreshes and version index updates.
+* **All Roles**: Submit `KDP-XXX` proposals when discovering specification vs. implementation discrepancies; never manually edit `CONTEXT_SNAPSHOT.md` or `dist/`.
+* **CTO**: Adjudicates `KDP-XXX` proposals and approves canonical updates.
+* **DevOps & Documentation Roles**: Maintain `scripts/sync-snapshot.*`, `scripts/build-dist.*`, and workspace mirrors.
 
 ## 5. Relevant Workflows
-1. **Discovery-to-Publication Flow**: Agent emits `KDP-XXX` in Handoff -> CTO evaluates -> CTO updates `management/DECISION_LOG.md` & approves revision -> Canonical Git file updated -> Shared Workspace mirror refreshed -> `management/KNOWLEDGE_MAP.md` version incremented.
+1. **Automatic Commit Sync**: Modify canonical `.md` file -> run `git commit` -> `pre-commit` hook runs `sync-snapshot` and stages `CONTEXT_SNAPSHOT.md` -> push to remote so cloud sessions immediately see updated snapshot.
 
 ## 6. Relationships with Other Documents
-* **Policies**: `policies/KNOWLEDGE_GOVERNANCE_POLICY.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`
-* **Management**: `management/KNOWLEDGE_MAP.md`, `management/DECISION_LOG.md`
+* **Policies**: `policies/KNOWLEDGE_GOVERNANCE_POLICY.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`, `policies/VERIFICATION_POLICY.md`
+* **Protocols & Templates**: `protocols/HANDOFF_PROTOCOL.md`, `templates/KDP_TEMPLATE.md`
+* **Registry**: `management/KNOWLEDGE_MAP.md`, `management/DECISION_LOG.md`

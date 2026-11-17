@@ -1,7 +1,7 @@
 # Antigravity / VS Code Engineering Workspace Adapter
 * **Document ID**: UESF-ADPT-002
 * **Canonical Path**: adapters/antigravity-vscode/ADAPTER.md
-* **Version**: 0.3.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: DevOps
 * **Last Updated**: 2026-11-17
@@ -27,6 +27,7 @@ Primarily supports execution-oriented and verification-oriented roles (`Develope
 3. **Remote Push Fallback**: If `git push` to `origin` fails due to credential or sandbox network restrictions, preserve the verified local commit, record the exact terminal output under Epistemic Status `Observed`, and report the pending push in the Inbound Handoff (`HO-TASK-XXX-02`).
 
 ## 5. Session Initialization & Handoff Execution Workflow
+0. **Fast Session Entry via `/uesf:status`**: When opening a workspace, invoke `@uesf-status` (`/uesf:status`) to automatically refresh `CONTEXT_SNAPSHOT.md`, probe live `git status`/`git log`, and reconstruct active tasks and blockers.
 1. **Receive Outbound Handoff (`HO-TASK-XXX-01`)**: Parse Task Contract fields (`Task ID`, `Responsible Role`, `Autonomy Level`, `Git Strategy`, `Scope`, `Acceptance Criteria`).
 2. **Verify Capabilities & Prerequisite State**: Run `git status`, `git branch -a`, and `git rev-parse HEAD` to confirm clean working tree and expected parent commit.
 3. **Branch Management (`policies/GIT_POLICY.md`)**: Create or switch to the designated feature branch (`<type>/TASK-XXX-<slug>`) unless direct-to-`main` is explicitly authorized in the Task Contract.

@@ -1,7 +1,7 @@
 # Layer 6: Project-Specific Extensions Architecture & Registry
 * **Document ID**: UESF-EXT-001
 * **Canonical Path**: extensions/README.md
-* **Version**: 0.4.0
+* **Version**: 0.6.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -20,7 +20,7 @@ Applies to all project-specific overlays, domain rules, and reference implementa
 2. **Additive Governance Inheritance**:
    * Every Layer 6 extension inherits all normative policies (`policies/*.md`) and interaction protocols (`protocols/*.md`).
    * Extensions MAY add stricter domain verification commands (e.g., language-specific compilers, SAST scanners, SLO thresholds) under `policies/VERIFICATION_POLICY.md`, but MUST NEVER bypass Separation of Duties or `A3` Human Approval triggers.
-3. **Canonical Extension Registry (`v0.4.0`)**:
+3. **Canonical Extension Registry (`v0.6.0`)**:
    | Extension ID | Canonical Path | Target Project / Purpose | Status |
    | :--- | :--- | :--- | :--- |
    | `UESF-EXT-002` | `extensions/example-web-service/EXTENSION.md` | Canonical reference blueprint demonstrating a clean Layer 6 overlay for a modular web service project | Verified |
@@ -31,7 +31,7 @@ Applies to all project-specific overlays, domain rules, and reference implementa
 * **QA & Security**: Audit extensions to confirm zero policy dilution and zero upward dependency leaks.
 
 ## 5. Relevant Workflows
-1. **Downstream Project Initialization**: Activate UESF core (`README.md`) -> select runtime adapter (`adapters/README.md`) -> load target project overlay (`extensions/<project-slug>/EXTENSION.md`) -> execute tasks via `protocols/TASK_CONTRACT_PROTOCOL.md`.
+1. **Downstream Project Initialization & Lifecycle**: Run `/uesf:init` (`workflows/INIT_WORKFLOW.md`) to audit the repository in `A0` mode and scaffold `.uesf/` -> resume context at any session start via `/uesf:status` (`workflows/STATUS_WORKFLOW.md`) -> load target project overlay (`extensions/<project-slug>/EXTENSION.md`) -> execute tasks via `protocols/TASK_CONTRACT_PROTOCOL.md` -> package session deliverables via `/uesf:handoff` (`workflows/HANDOFF_WORKFLOW.md`).
 
 ## 6. Relationships with Other Documents
 * **Core & Architecture**: `README.md`, `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`

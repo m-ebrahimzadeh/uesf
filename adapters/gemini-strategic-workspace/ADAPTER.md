@@ -1,7 +1,7 @@
 # Gemini Strategic Workspace Adapter
 * **Document ID**: UESF-ADPT-003
 * **Canonical Path**: adapters/gemini-strategic-workspace/ADAPTER.md
-* **Version**: 0.3.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -29,7 +29,7 @@ Primarily supports strategic, architectural, governance, and review roles (`CTO`
 3. **Evidence-Based Acceptance Gate (`protocols/TASK_ACCEPTANCE_PROTOCOL.md`)**: The Strategic Workspace `CTO` role promotes tasks to `VERIFIED` / `ACCEPTED` and specifications to `Verified` only after receiving and auditing a concrete Inbound Handoff (`HO-TASK-XXX-02`) containing empirical terminal and Git proofs (`EV-TASK-XXX-01`).
 
 ## 5. Session Initialization & Handoff Execution Workflow
-1. **Context & Source-of-Truth Synchronization**: Inspect connected Notebook sources and latest Inbound Handoff (`HO-TASK-XXX-02`) to determine the current repository commit baseline and active milestone state (`management/ACTIVE_TASKS.md`).
+1. **Context & Source-of-Truth Synchronization**: Inspect connected Notebook sources and latest Inbound Handoff (`HO-TASK-XXX-02`) to determine the current repository commit baseline and active milestone state (`management/ACTIVE_TASKS.md`). Fresh cloud sessions can invoke `/uesf:status [owner/repo] [branch]` to retrieve `CONTEXT_SNAPSHOT.md` remotely (for public/connected repos, labeling state `[REPORTED — Remote @ <SHA>]` and local uncommitted state `[UNKNOWN]`) or via single-file snapshot paste (for private unconnected repos).
 2. **Inbound Evidence Audit**: When reviewing Engineering Workspace deliverables, verify 1-to-1 acceptance criteria coverage, commit SHAs, and epistemic classifications (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`), and adjudicate any Knowledge Discovery Proposals (`KDP-XXX`).
 3. **Specification & Task Contract Authoring**: Draft or update framework specifications, record architectural rulings in `management/DECISION_LOG.md`, and emit a standalone Outbound Handoff (`HO-TASK-YYY-01`) for the next engineering execution cycle.
 

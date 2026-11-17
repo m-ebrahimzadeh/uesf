@@ -1,36 +1,40 @@
-# Layer 5: Platform Adapters Architecture & Registry
+# Layer 5: Platform Adapters & Multi-Agent Skill Distribution
 * **Document ID**: UESF-ADPT-001
 * **Canonical Path**: adapters/README.md
-* **Version**: 0.3.1
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose
-Define the Layer 5 Platform Adapters architecture and index all canonical runtime bindings that connect UESF's platform-independent specifications (`core/`, `policies/`, `protocols/`, `roles/`) to concrete execution environments.
+Define the Layer 5 Platform Adapters architecture, the compiled 12-bundle Skill/Command distribution pipeline (`dist/`), and the multi-agent installation model (`scripts/install.ps1` / `scripts/install.sh`).
 
 ## 2. Scope
-Applies to all runtime environment bindings in `adapters/` (`core/FRAMEWORK_ARCHITECTURE.md`).
+Applies to all runtime environment bindings in `adapters/`, compiled bundles in `dist/`, and installer scripts in `scripts/` (`core/FRAMEWORK_ARCHITECTURE.md`).
 
 ## 3. Rules and Requirements
 1. **Strict Layer 5 Isolation**:
    * Universal layers (`core/`, `policies/`, `protocols/`, `roles/`, `templates/`) remain 100% platform-agnostic.
-   * All host-specific tool names, shell syntax, IDE integrations, workspace connectors, and MCP bindings MUST be encapsulated inside `adapters/<adapter-id>/ADAPTER.md`.
-2. **Canonical Adapter Registry (`v0.3.1`)**:
+   * Host-specific tool names, IDE paths, slash-command formats, and workspace connectors are encapsulated in `adapters/`, `scripts/`, and `dist/`.
+2. **Canonical Adapter Registry (`v0.4.0`)**:
    | Adapter ID | Canonical Path | Target Runtime Environment | Primary Capabilities Bound |
    | :--- | :--- | :--- | :--- |
    | `UESF-ADPT-002` | `adapters/antigravity-vscode/ADAPTER.md` | Antigravity in VS Code (Engineering Workspace) | `CAP-FS`, `CAP-TERM`, `CAP-GIT` |
-   | `UESF-ADPT-003` | `adapters/gemini-strategic-workspace/ADAPTER.md` | Gemini Desktop / Connected Workspace & Notebook (Strategic Workspace) | `CAP-WS` (with handoff fallback for `CAP-FS`/`CAP-GIT`) |
-   | `UESF-ADPT-004` | `adapters/generic-cli-mcp/ADAPTER.md` | Generic CLI & Model Context Protocol (MCP) Agent Runtimes | Configurable `CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-MCP`, `CAP-WEB` |
-3. **Runtime Capability Verification**: Presence of an adapter specification does NOT imply automatic tool availability. Every agent MUST still execute a runtime capability probe per `core/CAPABILITY_MODEL.md` at session start.
+   | `UESF-ADPT-003` | `adapters/gemini-strategic-workspace/ADAPTER.md` | Gemini Desktop / Cloud Chat & Notebook (Strategic Workspace) | `CAP-WS`, `CAP-WEB` (with `CONTEXT_SNAPSHOT.md` remote/paste bridge) |
+   | `UESF-ADPT-004` | `adapters/generic-cli-mcp/ADAPTER.md` | Claude Code, Gemini CLI, Codex, Cline, Kilo Code & Optional MCP Hosts | `CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-MCP`, `CAP-WEB` |
+3. **12 Self-Contained Compiled Bundles (`DEC-021`)**:
+   * `scripts/build-dist.ps1` compiles the **9 Universal Agent Roles** (`uesf-discovery`, `uesf-cto`, `uesf-architect`, `uesf-developer`, `uesf-qa`, `uesf-devops`, `uesf-security`, `uesf-sre`, `uesf-documentation`) and **3 Lifecycle Workflows** (`uesf-init`, `uesf-handoff`, `uesf-status`) into:
+     * `dist/skills/uesf-<name>/SKILL.md` (Standard Agent Skill format for Antigravity, Claude Code, Codex, Cline, Kilo Code).
+     * `dist/commands/uesf/<name>.md` (Slash-command Markdown format `/uesf:<name>` for Claude Code, Cline, Kilo Code).
+     * `dist/gemini-cli/uesf/<name>.toml` (TOML slash-command format `/uesf:<name>` for Gemini CLI).
+   * `scripts/install.ps1` (and `scripts/install.sh`) performs atomic clean-and-copy installation (with `-Check` and `-Link` options) and wires `.git/hooks/pre-commit`.
 
 ## 4. Responsibilities
-* **Architect**: Maintains adapter interface consistency across environments.
-* **DevOps**: Validates local CLI, IDE, and Git execution bindings.
+* **Architect & DevOps**: Maintain adapter profiles, `scripts/build-dist.*`, and `scripts/install.*`.
 * **CTO**: Governs cross-workspace topology and approves adapter additions (`management/DECISION_LOG.md`).
 
 ## 5. Relevant Workflows
-1. **Runtime Binding Selection**: Identify host environment at session start -> load corresponding `adapters/<adapter-id>/ADAPTER.md` -> probe `CAP-*` domains -> activate assigned Role Skill (`roles/<role>/SKILL.md`).
+1. **Build & Install Pipeline**: Run `scripts/build-dist.ps1` -> verify via `management/validation/audit.ps1` -> run `scripts/install.ps1` -> invoke `/uesf:status` or `/uesf:<role>` in target agent.
 
 ## 6. Relationships with Other Documents
 * **Core Models**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`
