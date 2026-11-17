@@ -1,7 +1,7 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.6.0
+* **Version**: 0.6.1
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -10,7 +10,7 @@
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, feature discovery workflows, and project integrations.
 
 ## 2. Scope
-Covers Milestones M1 through M7 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-023` (`management/DECISION_LOG.md`).
+Covers Milestones M1 through M7 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-025` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
 
@@ -34,9 +34,9 @@ Covers Milestones M1 through M7 of UESF development in alignment with `DEC-007` 
 * **Objective**: Roll back the premature `v1.0.0` tag (`DEC-017`), implement the Template Target-Layer Rule (`DEC-018`), introduce the 9th Universal Agent Role `Discovery` (`roles/discovery/SKILL.md`), `protocols/FEATURE_DISCOVERY_PROTOCOL.md`, and `templates/FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` (`DEC-019`), and commit the versioned cumulative verification script (`management/validation/audit.ps1`).
 * **Status**: `ACCEPTED` (`TASK-015`–`TASK-019`, originating from approved Feature Discovery Brief `DSC-001`, merged to `main` per `DEC-020` and verified via `EV-TASK-015-01`, `EV-TASK-019-01`, and `management/validation/VALIDATION_REPORT_005.md`).
 
-### Milestone M6: Compiled Skill Distribution, Lifecycle Workflows & Automatic Context Snapshot (`v0.6.0`) — *COMPLETED & ACCEPTED*
-* **Objective**: Compile the 9 Universal Role Skills and 3 Lifecycle Workflows (`init`, `handoff`, `status`) into self-contained `dist/` packages with a multi-agent installer (`DEC-021`), establish the Three-Domain Knowledge Model (`DEC-022`), and implement automatic machine-generated `CONTEXT_SNAPSHOT.md` synchronization (`DEC-023`).
-* **Status**: `ACCEPTED` (`TASK-020`–`TASK-024`, originating from approved Feature Discovery Brief `DSC-002`, merged to `main` per `DEC-024` and verified via `EV-TASK-020-01`, `EV-TASK-024-01`, and `management/validation/VALIDATION_REPORT_006.md`).
+### Milestone M6: Compiled Skill Distribution, Lifecycle Workflows & Automatic Context Snapshot (`v0.6.0` / `v0.6.1`) — *COMPLETED & ACCEPTED*
+* **Objective**: Compile the 9 Universal Role Skills and 3 Lifecycle Workflows (`init`, `handoff`, `status`) into self-contained `dist/` packages with a multi-agent installer (`DEC-021`), establish the Three-Domain Knowledge Model (`DEC-022`), implement automatic machine-generated `CONTEXT_SNAPSHOT.md` synchronization (`DEC-023`), and deliver the newcomer-friendly `README.md`, self-contained `/uesf:init` bundle, and installer quickstart (`DEC-025`).
+* **Status**: `ACCEPTED` (`TASK-020`–`TASK-025`, originating from approved Feature Discovery Brief `DSC-002` and `DEC-025`, completed and accepted on `main` via `EV-TASK-020-01`, `EV-TASK-024-01`, `EV-TASK-025-01`, and `management/validation/VALIDATION_REPORT_006.md`).
 
 ### Milestone M7: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).

@@ -94,6 +94,25 @@ foreach ($t in $agentTargets) {
         }
     }
 
-    Copy-Item -Path $manifestPath -Destination $installedManifestPath -Force
+    $installedManifestObj = [ordered]@{
+        framework = $distManifest.framework
+        version = $distManifest.version
+        source_sha256 = $distManifest.source_sha256
+        source_sha256_short = $distManifest.source_sha256_short
+        uesf_repo_path = $repoRoot.Replace('\', '/')
+        bundle_count = $distManifest.bundle_count
+        bundles = $distManifest.bundles
+    }
+    $installedManifestJson = ($installedManifestObj | ConvertTo-Json -Depth 6).Replace("`r`n", "`n") + "`n"
+    [System.IO.File]::WriteAllText($installedManifestPath, $installedManifestJson, (New-Object System.Text.UTF8Encoding($false)))
     "INSTALLED_TARGET=$($t.Name) (v$($distManifest.version), SHA256=$($distManifest.source_sha256_short))"
+}
+
+if ((-not $Check) -and [string]::IsNullOrWhiteSpace($InitProject)) {
+    ""
+    "--- UESF v$($distManifest.version) QUICKSTART ---"
+    "1. Onboard any project:  Open project in your agent and run /uesf:init (or @uesf-init)"
+    "2. Resume any session:   Run /uesf:status (or @uesf-status)"
+    "3. Brainstorm a feature: Run /uesf:discovery (or @uesf-discovery) [A0 Read-Only]"
+    "4. Check update status:  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install.ps1 -Check"
 }
