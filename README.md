@@ -1,18 +1,18 @@
 # Universal Engineering Skills Framework (UESF)
 * **Document ID**: UESF-CORE-001
 * **Canonical Path**: README.md
-* **Version**: 0.3.0
+* **Version**: 1.0.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose
-Serve as the canonical root entry point, architectural map, and master navigation index for the Universal Engineering Skills Framework (UESF)—a reusable, platform-independent collection of AI agent Skills, policies, and protocols that establish a disciplined software engineering organization composed of specialized AI agents.
+Serve as the canonical root entry point, architectural map, and master navigation index for the Universal Engineering Skills Framework (UESF)—a reusable, platform-independent collection of AI agent Skills, policies, protocols, adapters, and extension blueprints that establish a disciplined software engineering organization composed of specialized AI agents.
 
 ## 2. Scope
-Applies to all human stakeholders and AI agents operating within or integrating with UESF across any runtime environment (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`).
+Applies to all human stakeholders and AI agents operating within or integrating with UESF across any runtime environment or downstream software project (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`).
 
-## 3. Framework Architecture & Directory Index
+## 3. Framework Architecture & Directory Index (Layers 1–6)
 1. **Layer 1 — Core Operating Model (`core/`)**:
    * `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` (`UESF-CORE-002`)
    * `core/FRAMEWORK_ARCHITECTURE.md` (`UESF-CORE-003`)
@@ -40,12 +40,14 @@ Applies to all human stakeholders and AI agents operating within or integrating 
    * `adapters/antigravity-vscode/ADAPTER.md` (`UESF-ADPT-002`)
    * `adapters/gemini-strategic-workspace/ADAPTER.md` (`UESF-ADPT-003`)
    * `adapters/generic-cli-mcp/ADAPTER.md` (`UESF-ADPT-004`)
-6. **Reusable Artifact Templates (`templates/`)**:
-   * `templates/ROLE_SKILL_TEMPLATE.md` (`UESF-TMPL-001`), `templates/TASK_CONTRACT_TEMPLATE.md` (`UESF-TMPL-002`), `templates/HANDOFF_PACKAGE_TEMPLATE.md` (`UESF-TMPL-003`), `templates/EVIDENCE_PACKAGE_TEMPLATE.md` (`UESF-TMPL-004`), `templates/KDP_TEMPLATE.md` (`UESF-TMPL-005`), `templates/ESCALATION_RECORD_TEMPLATE.md` (`UESF-TMPL-006`), `templates/PLATFORM_ADAPTER_TEMPLATE.md` (`UESF-TMPL-007`)
-7. **Project Governance, State & Validation (`management/`)**:
+6. **Layer 6 — Project-Specific Extensions (`extensions/`)**:
+   * `extensions/README.md` (`UESF-EXT-001`)
+   * `extensions/example-web-service/EXTENSION.md` (`UESF-EXT-002`)
+7. **Reusable Artifact Templates (`templates/`)**:
+   * `templates/ROLE_SKILL_TEMPLATE.md` (`UESF-TMPL-001`), `templates/TASK_CONTRACT_TEMPLATE.md` (`UESF-TMPL-002`), `templates/HANDOFF_PACKAGE_TEMPLATE.md` (`UESF-TMPL-003`), `templates/EVIDENCE_PACKAGE_TEMPLATE.md` (`UESF-TMPL-004`), `templates/KDP_TEMPLATE.md` (`UESF-TMPL-005`), `templates/ESCALATION_RECORD_TEMPLATE.md` (`UESF-TMPL-006`), `templates/PLATFORM_ADAPTER_TEMPLATE.md` (`UESF-TMPL-007`), `templates/PROJECT_EXTENSION_TEMPLATE.md` (`UESF-TMPL-008`)
+8. **Project Governance, State & Validation (`management/`)**:
    * `management/PROJECT_PROFILE.md` (`UESF-MGMT-001`), `management/ACTIVE_TASKS.md` (`UESF-MGMT-002`), `management/DECISION_LOG.md` (`UESF-MGMT-003`), `management/KNOWLEDGE_MAP.md` (`UESF-MGMT-004`), `management/RELEASE_HISTORY.md` (`UESF-MGMT-005`), `management/IMPLEMENTATION_ROADMAP.md` (`UESF-MGMT-006`)
-   * Validation Reports: `management/validation/VALIDATION_REPORT_001.md` (`UESF-VAL-001`), `management/validation/VALIDATION_REPORT_002.md` (`UESF-VAL-002`), `management/validation/VALIDATION_REPORT_003.md` (`UESF-VAL-003`)
-8. **Layer 6 — Project-Specific Extensions (`extensions/`)**: Reserved for Milestone M4 (`v1.0.0`).
+   * Validation Reports: `management/validation/VALIDATION_REPORT_001.md` (`UESF-VAL-001`), `management/validation/VALIDATION_REPORT_002.md` (`UESF-VAL-002`), `management/validation/VALIDATION_REPORT_003.md` (`UESF-VAL-003`), `management/validation/VALIDATION_REPORT_004.md` (`UESF-VAL-004`)
 
 ## 4. Responsibilities
 * **CTO**: Curates and approves canonical framework specifications, governs the roadmap, and resolves cross-functional or architectural conflicts.
@@ -54,10 +56,9 @@ Applies to all human stakeholders and AI agents operating within or integrating 
 
 ## 5. Relevant Workflows
 1. **Environment & Capability Discovery**: Assess active runtime environment (`core/CAPABILITY_MODEL.md`) and bind via the appropriate platform adapter (`adapters/README.md`).
-2. **Task Initialization**: Receive or propose a Task Contract (`protocols/TASK_CONTRACT_PROTOCOL.md`).
-3. **Bounded Execution & Collaboration**: Execute work within assigned Autonomy Level (`policies/AUTONOMY_POLICY.md`) and delegate subtasks if authorized (`protocols/AGENT_COLLABORATION.md`).
-4. **Verification & Evidence Submission**: Validate deliverables (`policies/VERIFICATION_POLICY.md`) and submit structured evidence (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`).
-5. **Acceptance & Synchronization**: Complete formal task acceptance (`protocols/TASK_ACCEPTANCE_PROTOCOL.md`) and synchronize authoritative knowledge (`protocols/KNOWLEDGE_SYNCHRONIZATION.md`).
+2. **Project Overlay Loading (Optional)**: Load target project extension from `extensions/README.md` if operating on a downstream codebase.
+3. **Task Initialization & Execution**: Receive or propose a Task Contract (`protocols/TASK_CONTRACT_PROTOCOL.md`), execute within assigned Autonomy Level (`policies/AUTONOMY_POLICY.md`), and delegate subtasks if authorized (`protocols/AGENT_COLLABORATION.md`).
+4. **Verification, Evidence & Acceptance**: Validate deliverables (`policies/VERIFICATION_POLICY.md`), submit structured evidence (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`), complete formal task acceptance (`protocols/TASK_ACCEPTANCE_PROTOCOL.md`), and synchronize knowledge (`protocols/KNOWLEDGE_SYNCHRONIZATION.md`).
 
 ## 6. Relationships with Other Documents
 * **Master Registry**: `management/KNOWLEDGE_MAP.md`

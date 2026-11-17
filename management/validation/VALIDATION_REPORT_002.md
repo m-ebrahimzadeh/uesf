@@ -2,10 +2,11 @@
 * **Document ID**: UESF-VAL-002
 * **Canonical Path**: management/validation/VALIDATION_REPORT_002.md
 * **Evidence ID**: EV-TASK-006-01
-* **Version**: 0.2.0
+* **Version**: 0.2.1
 * **Status**: Verified
+* **Owner**: CTO
 * **Auditor Role**: CTO & QA
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Document the Milestone M2 (`TASK-002` through `TASK-006`) verification and cross-role consistency audit for the 6 reusable templates (`templates/`) and 8 universal Agent Role Skills (`roles/<role>/SKILL.md`).
