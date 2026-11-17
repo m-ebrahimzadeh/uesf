@@ -1,0 +1,28 @@
+{
+  "name": "uesf",
+  "version": "0.6.2",
+  "description": "Universal Engineering Skills Framework (UESF) — Reusable Multi-Agent Engineering Roles, Workflows, and Context Control Plane",
+  "type": "module",
+  "bin": {
+    "uesf": "./bin/uesf.mjs"
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "scripts/"
+  ],
+  "scripts": {
+    "install-skills": "node ./bin/uesf.mjs install",
+    "check": "node ./bin/uesf.mjs check",
+    "build": "node ./bin/uesf.mjs build",
+    "sync-snapshot": "node ./bin/uesf.mjs sync-snapshot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-ebrahimzadeh/uesf.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

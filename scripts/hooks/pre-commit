@@ -1,25 +1,16 @@
 #!/usr/bin/env sh
-# UESF Automatic Context Snapshot Pre-Commit Hook (DEC-023)
+# UESF Automatic Context Snapshot Pre-Commit Hook (DEC-023 / DEC-026)
 set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
-if [ -f "scripts/sync-snapshot.ps1" ]; then
-    SYNC_PS1="scripts/sync-snapshot.ps1"
-    SNAP_OUT="management/CONTEXT_SNAPSHOT.md"
-elif [ -f ".uesf/scripts/sync-snapshot.ps1" ]; then
-    SYNC_PS1=".uesf/scripts/sync-snapshot.ps1"
-    SNAP_OUT=".uesf/CONTEXT_SNAPSHOT.md"
-else
-    exit 0
-fi
-
-if command -v pwsh >/dev/null 2>&1; then
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "$SYNC_PS1" >/dev/null
-elif command -v powershell.exe >/dev/null 2>&1; then
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$SYNC_PS1" >/dev/null
-fi
-
-if [ -f "$SNAP_OUT" ]; then
-    git add "$SNAP_OUT"
+if [ -f "bin/uesf.mjs" ]; then
+    node "bin/uesf.mjs" sync-snapshot >/dev/null
+    git add "management/CONTEXT_SNAPSHOT.md"
+elif [ -f ".uesf/bin/uesf.mjs" ]; then
+    node ".uesf/bin/uesf.mjs" sync-snapshot --target-root "$REPO_ROOT" >/dev/null
+    git add ".uesf/CONTEXT_SNAPSHOT.md"
+elif [ -f ".uesf/scripts/sync-snapshot.ps1" ] && command -v powershell.exe >/dev/null 2>&1; then
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".uesf/scripts/sync-snapshot.ps1" >/dev/null
+    git add ".uesf/CONTEXT_SNAPSHOT.md"
 fi

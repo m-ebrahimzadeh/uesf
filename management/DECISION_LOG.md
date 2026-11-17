@@ -1,7 +1,7 @@
 # Architectural & Governance Decision Log
 * **Document ID**: UESF-MGMT-003
 * **Canonical Path**: management/DECISION_LOG.md
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -40,6 +40,7 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 | `DEC-023` | Automatic Machine-Generated `CONTEXT_SNAPSHOT.md` (`DSC-002` Refinement A) | Maintain `CONTEXT_SNAPSHOT.md` automatically via `scripts/sync-snapshot.*`, `.git/hooks/pre-commit`, and on-read refresh in `/uesf:status` (verified by `SNAPSHOT_DRIFT_ISSUES=0` in `management/validation/audit.ps1`), strictly separating `[VERIFIED_BY_GIT_AND_FS_PROBE]` facts from `[RECORDED_IN_LEDGER]` tables and `[DRIFT_CHECK]` alerts. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
 | `DEC-024` | Milestone M6 (`v0.6.0`) Acceptance, `KDP-008` Approval & Merge to `main` | Formally accept `TASK-020`–`TASK-023` (`c6d894e`) based on verified Evidence Package `EV-TASK-020-01` (`MD_COUNT=58`, `WORKFLOW_COUNT=3`, `DIST_BUNDLE_ISSUES=0`, `SNAPSHOT_DRIFT_ISSUES=0`, 5 host agent targets `UP_TO_DATE`), approve `KDP-008` (PowerShell 5.1 ASCII/UTF-8 safety, `.uesf/scripts/` root resolution, and `100755` POSIX script modes), and authorize merge of `feat/TASK-020-skill-distribution-v0.6.0` into `main`. | Approved | CTO (`A2`) | 2026-11-17 |
 | `DEC-025` | Newcomer Onboarding Guide (`README.md`), Self-Contained `/uesf:init` Bundle & Installer Quickstart (`v0.6.1`) | Redesign `README.md` (`0.6.1`) around the 5-stage newcomer journey (Discover, Install, Configure, Get Started, Maintain) while preserving the 58-document master specification index; embed `sync-snapshot.*` and `pre-commit` directly inside the compiled `uesf-init` bundle (`workflows/INIT_WORKFLOW.md` `0.6.1`) so `/uesf:init` scaffolds `.uesf/` self-containedly in any repository; and add a post-install quickstart summary to `scripts/install.ps1`. | Confirmed | Human Stakeholder / CTO (`A2`) | 2026-11-17 |
+| `DEC-026` | Zero-Dependency Node.js CLI (`package.json` + `bin/uesf.mjs`) & Script Consolidation (`v0.6.2`) | Adopt `package.json` + `bin/uesf.mjs` (`dependencies: {}`) inside the UESF repository as the primary cross-platform CLI for `install` (`npx github:m-ebrahimzadeh/uesf install`), `check`, `sync-snapshot`, and `build` with `--version <ref>` support; refactor `scripts/*.ps1`, `scripts/*.sh`, and `scripts/hooks/pre-commit` into thin pass-through wrappers calling `bin/uesf.mjs` so zero duplicate logic is maintained; and defer `npmjs.com` registry publishing until a mature release. | Confirmed | Human Stakeholder / CTO (`A2`) | 2026-11-17 |
 
 ## 4. Open Questions & Pending Human Decisions (`A3` / Clarification Items)
 | Question ID | Topic | Resolution Summary | Status |

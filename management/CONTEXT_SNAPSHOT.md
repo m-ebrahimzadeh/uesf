@@ -1,9 +1,9 @@
 # UESF Context Snapshot (Machine-Generated)
 > **NON-AUTHORITATIVE DERIVED ARTIFACT — DO NOT EDIT MANUALLY**
-> Generated deterministically by `scripts/sync-snapshot.ps1` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`).
+> Generated deterministically by `bin/uesf.mjs sync-snapshot` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`, `DEC-026`).
 > * **Canonical Control Plane**: `management/`
-> * **Snapshot Version**: `0.6.1`
-> * **Source-Ledger-SHA256**: `8b5c1ec4202396defec7ad5effd3384bb677fe638fe3615f5c7f5c2914f86ed7` (`8b5c1ec42023`)
+> * **Snapshot Version**: `0.6.2`
+> * **Source-Ledger-SHA256**: `2ce9bec1840919f2787c02edc66bdeff0397bb410eaae974e3daca45becc1e9a` (`2ce9bec18409`)
 > * **Last Ledger Update**: `2026-11-17`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
@@ -12,8 +12,8 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `26 / 26`
-* **Total Recorded Decisions (`DEC-*`)**: `25`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `27 / 27`
+* **Total Recorded Decisions (`DEC-*`)**: `26`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
 ## 2. Recorded Project & Governance State (`[RECORDED_IN_LEDGER]`)
@@ -21,7 +21,7 @@
 # Project Profile
 * **Document ID**: UESF-MGMT-001
 * **Canonical Path**: management/PROJECT_PROFILE.md
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -35,8 +35,8 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `0.6.1` (Milestone M6.1 — Newcomer Onboarding Guide, Self-Contained `/uesf:init` Wizard & Multi-Agent Quickstart)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M6.1 (`v0.6.1`) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Version**: `0.6.2` (Milestone M6.2 — Zero-Dependency Node.js CLI `bin/uesf.mjs`, Consolidated Build/Install/Snapshot Engine & Version Selection)
+   * **Current Phase**: Milestones M1 (`v0.1.0`) through M6.2 (`v0.6.2`) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
@@ -67,7 +67,7 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 # Active Tasks Registry
 * **Document ID**: UESF-MGMT-002
 * **Canonical Path**: management/ACTIVE_TASKS.md
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -111,9 +111,10 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-023` | Upgrade `management/validation/audit.ps1` (`SNAPSHOT_DRIFT`, `DIST_DRIFT`), Author `VALIDATION_REPORT_006.md` & Sync Registries to `0.6.0` | QA / DevOps | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-020-01` (`management/validation/VALIDATION_REPORT_006.md`). Accepted via `DEC-024`. |
 | `TASK-024` | Close Out Accepted Milestone M6 (`v0.6.0`) Registries, Refresh `CONTEXT_SNAPSHOT.md` & Merge `feat/TASK-020-skill-distribution-v0.6.0` to `main` | DevOps / Documentation | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-024-01` (`HO-TASK-024-02`, merged to `main` per `DEC-024`). |
 | `TASK-025` | Redesign `README.md` for Newcomer Onboarding, Make `/uesf:init` Bundle Self-Contained & Release `v0.6.1` (`DEC-025`) | Documentation / DevOps | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-025-01` (`HO-TASK-025-02`, merged to `main` per `DEC-025`). |
+| `TASK-026` | Implement Zero-Dependency Node.js CLI (`package.json` + `bin/uesf.mjs`), Consolidate Scripts & Release `v0.6.2` (`DEC-026`) | DevOps / Developer | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-026-01` (`HO-TASK-026-02`, merged to `main` and tagged `v0.6.2` per `DEC-026`). |
 
 ## 5. Active Outbound Task Contract Queue
-* All planned tasks for Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), M5 (`v0.5.0`), M6 (`v0.6.0`), and M6.1 (`v0.6.1`) are **COMPLETED, VERIFIED, AND ACCEPTED**.
+* All planned tasks for Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), M5 (`v0.5.0`), M6 (`v0.6.0`), M6.1 (`v0.6.1`), and M6.2 (`v0.6.2`) are **COMPLETED, VERIFIED, AND ACCEPTED**.
 * All 12 UESF skills and commands (`/uesf:discovery`, `/uesf:cto`, `/uesf:architect`, `/uesf:developer`, `/uesf:qa`, `/uesf:devops`, `/uesf:security`, `/uesf:sre`, `/uesf:documentation`, `/uesf:init`, `/uesf:handoff`, `/uesf:status`) are compiled in `dist/` and installed across local coding agents.
 * Any future feature proposal or architectural enhancement enters through Track 1 Iterative Discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `roles/discovery/SKILL.md`) locked at `A0` until explicit human confirmation.
 
@@ -125,7 +126,7 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 # Architectural & Governance Decision Log
 * **Document ID**: UESF-MGMT-003
 * **Canonical Path**: management/DECISION_LOG.md
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -164,6 +165,7 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 | `DEC-023` | Automatic Machine-Generated `CONTEXT_SNAPSHOT.md` (`DSC-002` Refinement A) | Maintain `CONTEXT_SNAPSHOT.md` automatically via `scripts/sync-snapshot.*`, `.git/hooks/pre-commit`, and on-read refresh in `/uesf:status` (verified by `SNAPSHOT_DRIFT_ISSUES=0` in `management/validation/audit.ps1`), strictly separating `[VERIFIED_BY_GIT_AND_FS_PROBE]` facts from `[RECORDED_IN_LEDGER]` tables and `[DRIFT_CHECK]` alerts. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
 | `DEC-024` | Milestone M6 (`v0.6.0`) Acceptance, `KDP-008` Approval & Merge to `main` | Formally accept `TASK-020`–`TASK-023` (`c6d894e`) based on verified Evidence Package `EV-TASK-020-01` (`MD_COUNT=58`, `WORKFLOW_COUNT=3`, `DIST_BUNDLE_ISSUES=0`, `SNAPSHOT_DRIFT_ISSUES=0`, 5 host agent targets `UP_TO_DATE`), approve `KDP-008` (PowerShell 5.1 ASCII/UTF-8 safety, `.uesf/scripts/` root resolution, and `100755` POSIX script modes), and authorize merge of `feat/TASK-020-skill-distribution-v0.6.0` into `main`. | Approved | CTO (`A2`) | 2026-11-17 |
 | `DEC-025` | Newcomer Onboarding Guide (`README.md`), Self-Contained `/uesf:init` Bundle & Installer Quickstart (`v0.6.1`) | Redesign `README.md` (`0.6.1`) around the 5-stage newcomer journey (Discover, Install, Configure, Get Started, Maintain) while preserving the 58-document master specification index; embed `sync-snapshot.*` and `pre-commit` directly inside the compiled `uesf-init` bundle (`workflows/INIT_WORKFLOW.md` `0.6.1`) so `/uesf:init` scaffolds `.uesf/` self-containedly in any repository; and add a post-install quickstart summary to `scripts/install.ps1`. | Confirmed | Human Stakeholder / CTO (`A2`) | 2026-11-17 |
+| `DEC-026` | Zero-Dependency Node.js CLI (`package.json` + `bin/uesf.mjs`) & Script Consolidation (`v0.6.2`) | Adopt `package.json` + `bin/uesf.mjs` (`dependencies: {}`) inside the UESF repository as the primary cross-platform CLI for `install` (`npx github:m-ebrahimzadeh/uesf install`), `check`, `sync-snapshot`, and `build` with `--version <ref>` support; refactor `scripts/*.ps1`, `scripts/*.sh`, and `scripts/hooks/pre-commit` into thin pass-through wrappers calling `bin/uesf.mjs` so zero duplicate logic is maintained; and defer `npmjs.com` registry publishing until a mature release. | Confirmed | Human Stakeholder / CTO (`A2`) | 2026-11-17 |
 
 ## 4. Open Questions & Pending Human Decisions (`A3` / Clarification Items)
 | Question ID | Topic | Resolution Summary | Status |
@@ -182,7 +184,7 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 # Master Knowledge Map & Source-of-Truth Registry
 * **Document ID**: UESF-MGMT-004
 * **Canonical Path**: management/KNOWLEDGE_MAP.md
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -197,12 +199,12 @@ Covers all 58 canonical Markdown documents across the UESF repository (`policies
 1. **Single Canonical Home**: The Git repository (`c:/Users/user/Project/uesf` synced with `https://github.com/m-ebrahimzadeh/uesf`) is the canonical source of truth for all registered specifications.
 2. **1-to-1 Inventory Parity**: Every canonical `.md` specification file in the repository MUST have an exact corresponding row in Section 4 of this registry.
 
-## 4. Master Source-of-Truth Matrix (`v0.6.1` — 58 Canonical Documents)
+## 4. Master Source-of-Truth Matrix (`v0.6.2` — 58 Canonical Documents)
 | Doc ID | Canonical Repository Path | Layer / Category | Owner Role | Version | Lifecycle Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `UESF-CORE-001` | `README.md` | Core Index | CTO | `0.6.1` | Verified |
+| `UESF-CORE-001` | `README.md` | Core Index | CTO | `0.6.2` | Verified |
 | `UESF-CORE-002` | `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` | Layer 1: Core | CTO | `0.2.0` | Verified |
-| `UESF-CORE-003` | `core/FRAMEWORK_ARCHITECTURE.md` | Layer 1: Core | CTO | `0.3.0` | Verified |
+| `UESF-CORE-003` | `core/FRAMEWORK_ARCHITECTURE.md` | Layer 1: Core | CTO | `0.3.1` | Verified |
 | `UESF-CORE-004` | `core/CAPABILITY_MODEL.md` | Layer 1: Core | CTO | `0.1.0` | Verified |
 | `UESF-POL-001` | `policies/AUTONOMY_POLICY.md` | Layer 2: Policy | CTO | `0.2.0` | Verified |
 | `UESF-POL-002` | `policies/GOVERNANCE_POLICY.md` | Layer 2: Policy | CTO | `0.1.0` | Verified |
@@ -219,7 +221,7 @@ Covers all 58 canonical Markdown documents across the UESF repository (`policies
 | `UESF-PROT-006` | `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-007` | `protocols/ESCALATION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-008` | `protocols/FEATURE_DISCOVERY_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.5.0` | Verified |
-| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.6.1` | Verified |
+| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.6.2` | Verified |
 | `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.6.0` | Verified |
 | `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.6.0` | Verified |
 | `UESF-TMPL-001` | `templates/ROLE_SKILL_TEMPLATE.md` | Templates (L4) | CTO | `0.2.1` | Verified |
@@ -240,18 +242,18 @@ Covers all 58 canonical Markdown documents across the UESF repository (`policies
 | `UESF-ROLE-007` | `roles/sre/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
 | `UESF-ROLE-008` | `roles/documentation/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
 | `UESF-ROLE-009` | `roles/discovery/SKILL.md` | Layer 4: Role Skill | CTO | `0.5.0` | Verified |
-| `UESF-ADPT-001` | `adapters/README.md` | Layer 5: Adapter | Architect | `0.4.0` | Verified |
+| `UESF-ADPT-001` | `adapters/README.md` | Layer 5: Adapter | Architect | `0.4.1` | Verified |
 | `UESF-ADPT-002` | `adapters/antigravity-vscode/ADAPTER.md` | Layer 5: Adapter | DevOps | `0.4.0` | Verified |
 | `UESF-ADPT-003` | `adapters/gemini-strategic-workspace/ADAPTER.md` | Layer 5: Adapter | Architect | `0.4.0` | Verified |
-| `UESF-ADPT-004` | `adapters/generic-cli-mcp/ADAPTER.md` | Layer 5: Adapter | Architect | `0.4.0` | Verified |
+| `UESF-ADPT-004` | `adapters/generic-cli-mcp/ADAPTER.md` | Layer 5: Adapter | Architect | `0.4.1` | Verified |
 | `UESF-EXT-001` | `extensions/README.md` | Layer 6: Extension | Architect | `0.6.0` | Verified |
 | `UESF-EXT-002` | `extensions/example-web-service/EXTENSION.md` | Layer 6: Extension | Architect | `0.6.0` | Verified |
-| `UESF-MGMT-001` | `management/PROJECT_PROFILE.md` | Management | CTO | `0.6.1` | Verified |
-| `UESF-MGMT-002` | `management/ACTIVE_TASKS.md` | Management | CTO | `0.6.1` | Verified |
-| `UESF-MGMT-003` | `management/DECISION_LOG.md` | Management | CTO | `0.6.1` | Verified |
-| `UESF-MGMT-004` | `management/KNOWLEDGE_MAP.md` | Management | CTO | `0.6.1` | Verified |
-| `UESF-MGMT-005` | `management/RELEASE_HISTORY.md` | Management | CTO | `0.6.1` | Verified |
-| `UESF-MGMT-006` | `management/IMPLEMENTATION_ROADMAP.md` | Management | CTO | `0.6.1` | Verified |
+| `UESF-MGMT-001` | `management/PROJECT_PROFILE.md` | Management | CTO | `0.6.2` | Verified |
+| `UESF-MGMT-002` | `management/ACTIVE_TASKS.md` | Management | CTO | `0.6.2` | Verified |
+| `UESF-MGMT-003` | `management/DECISION_LOG.md` | Management | CTO | `0.6.2` | Verified |
+| `UESF-MGMT-004` | `management/KNOWLEDGE_MAP.md` | Management | CTO | `0.6.2` | Verified |
+| `UESF-MGMT-005` | `management/RELEASE_HISTORY.md` | Management | CTO | `0.6.2` | Verified |
+| `UESF-MGMT-006` | `management/IMPLEMENTATION_ROADMAP.md` | Management | CTO | `0.6.2` | Verified |
 | `UESF-VAL-001` | `management/validation/VALIDATION_REPORT_001.md` | Validation Evidence | CTO | `0.1.1` | Verified |
 | `UESF-VAL-002` | `management/validation/VALIDATION_REPORT_002.md` | Validation Evidence | CTO | `0.2.1` | Verified |
 | `UESF-VAL-003` | `management/validation/VALIDATION_REPORT_003.md` | Validation Evidence | CTO | `0.3.0` | Verified |
@@ -269,4 +271,4 @@ Covers all 58 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 8b5c1ec42023`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 2ce9bec18409`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.

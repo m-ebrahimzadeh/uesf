@@ -1,7 +1,7 @@
 # Universal Engineering Skills Framework (UESF)
 * **Document ID**: UESF-CORE-001
 * **Canonical Path**: README.md
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -24,22 +24,28 @@ Instead of treating an AI coding assistant as a single generalist prompt that ju
 
 ## 2. 2-Minute Quickstart: Install & Onboard Your First Project
 
-### Step 1 — Clone UESF & Install Globally Across Your Coding Agents
-Clone this repository once on your machine and run the installer. It automatically detects your installed coding agents (`Antigravity`, `Claude Code`, `Gemini CLI`, `Codex`, `Cline`, `Kilo Code`) and installs all 12 self-contained UESF skills and slash commands:
+### Step 1 — Install UESF Globally Across Your Coding Agents
+Run the cross-platform Node.js CLI installer (requires **Node.js >= 18**). It automatically detects your installed coding agents (`Antigravity`, `Claude Code`, `Gemini CLI`, `Codex`, `Cline`, `Kilo Code`) and installs all 12 self-contained UESF skills and slash commands:
 
-**Windows (PowerShell):**
-```powershell
-git clone https://github.com/m-ebrahimzadeh/uesf.git
-cd uesf
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install.ps1
-```
+* **Option A — One-Command Install via `npx` (Windows, macOS, Linux — No Manual Clone Needed):**
+  ```sh
+  npx --yes github:m-ebrahimzadeh/uesf install
+  ```
 
-**macOS / Linux (POSIX Shell with `pwsh`):**
-```sh
-git clone https://github.com/m-ebrahimzadeh/uesf.git
-cd uesf
-sh scripts/install.sh
-```
+* **Option B — Install a Specific UESF Version or Tag:**
+  ```sh
+  npx --yes github:m-ebrahimzadeh/uesf#v0.6.2 install
+  # Or from a local clone:
+  node bin/uesf.mjs install --version 0.6.2
+  ```
+
+* **Option C — Local Clone & Contributor CLI:**
+  ```sh
+  git clone https://github.com/m-ebrahimzadeh/uesf.git
+  cd uesf
+  node bin/uesf.mjs install
+  ```
+  *(Thin pass-through wrappers `scripts/install.ps1` and `scripts/install.sh` remain available and delegate directly to `bin/uesf.mjs`.)*
 
 ### Step 2 — Open Any Project (New or Existing) & Run `/uesf:init`
 Open your target software project in your coding agent and invoke:
@@ -84,7 +90,7 @@ What `/uesf:init` (`workflows/INIT_WORKFLOW.md`) does automatically:
 | **`/uesf:documentation`** (`@uesf-documentation`) | **Documentation** (`roles/documentation/SKILL.md`) | `A1` | **Technical docs & index maintenance.** Keeps approved specifications, `KNOWLEDGE_MAP.md` routing tables, and READMEs synchronized without altering policy decisions. |
 
 ### 3.3 How to Invoke Commands in Each Agent Platform
-Because different coding agents use different native triggers, `scripts/install.ps1` installs UESF in each tool's native format (`adapters/README.md`):
+Because different coding agents use different native triggers, `bin/uesf.mjs` (also wrapped by `scripts/install.ps1` / `scripts/install.sh`) installs UESF in each tool's native format (`adapters/README.md`):
 
 | Agent / Environment | Installed Location | How to Invoke a Role or Workflow |
 | :--- | :--- | :--- |
@@ -165,24 +171,28 @@ your-project/
 ## 6. Updating, Maintaining & Verifying UESF
 
 ### Updating UESF to the Latest Version
-Whenever you pull new improvements in the `uesf` repository (or edit a canonical specification), run the installer to refresh all detected coding agents:
-```powershell
+Run the `npx` installer at any time (or pull and run `bin/uesf.mjs` from a local clone) to refresh all detected coding agents:
+```sh
+npx --yes github:m-ebrahimzadeh/uesf install
+# Or from a local clone:
 cd path/to/uesf
 git pull
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install.ps1
+node bin/uesf.mjs install
 ```
 *(Your downstream projects' `.uesf/` task and decision ledgers live inside their own repositories and are never overwritten when you update UESF.)*
 
 ### Checking If Installed Agents Are Up to Date
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install.ps1 -Check
+```sh
+node bin/uesf.mjs check
+# Or without a local clone:
+npx --yes github:m-ebrahimzadeh/uesf check
 ```
 Compares the SHA-256 source hash in each agent's `.uesf-manifest.json` against `dist/manifest.json` and reports `UP_TO_DATE` or `OUTDATED`.
 
 ### Rebuilding `dist/` Bundles & Running the Repository Audit (For UESF Contributors)
 If you modify any canonical specification inside `core/`, `policies/`, `protocols/`, `roles/`, `workflows/`, `adapters/`, `extensions/`, or `templates/`:
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-dist.ps1
+node bin/uesf.mjs build
 powershell -NoProfile -ExecutionPolicy Bypass -File management/validation/audit.ps1
 ```
 
@@ -224,9 +234,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File management/validation/audit.
    * `workflows/INIT_WORKFLOW.md` (`UESF-WKFL-001` — `/uesf:init`)
    * `workflows/HANDOFF_WORKFLOW.md` (`UESF-WKFL-002` — `/uesf:handoff`)
    * `workflows/STATUS_WORKFLOW.md` (`UESF-WKFL-003` — `/uesf:status`)
-6. **Layer 5 — Platform Adapters & Compiled Distribution (`adapters/`, `scripts/`, `dist/`)**:
+6. **Layer 5 — Platform Adapters & Compiled Distribution (`adapters/`, `bin/`, `scripts/`, `dist/`)**:
    * `adapters/README.md` (`UESF-ADPT-001`), `adapters/antigravity-vscode/ADAPTER.md` (`UESF-ADPT-002`), `adapters/gemini-strategic-workspace/ADAPTER.md` (`UESF-ADPT-003`), `adapters/generic-cli-mcp/ADAPTER.md` (`UESF-ADPT-004`)
-   * Automation & Distribution: `scripts/sync-snapshot.ps1`, `scripts/build-dist.ps1`, `scripts/install.ps1`, and compiled 12-command bundles in `dist/`
+   * Automation & Distribution: `package.json`, `bin/uesf.mjs`, `scripts/sync-snapshot.ps1`, `scripts/build-dist.ps1`, `scripts/install.ps1`, and compiled 12-command bundles in `dist/`
 7. **Layer 6 — Project-Specific Extensions (`extensions/`)**:
    * `extensions/README.md` (`UESF-EXT-001`), `extensions/example-web-service/EXTENSION.md` (`UESF-EXT-002`)
 8. **Layer-Targeted Reusable Artifact Templates (`templates/`)**:

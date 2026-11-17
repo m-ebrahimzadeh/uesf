@@ -2,7 +2,7 @@
 * **Document ID**: UESF-WKFL-001
 * **Canonical Path**: workflows/INIT_WORKFLOW.md
 * **Workflow Trigger**: /uesf:init
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -36,7 +36,7 @@ Per `core/CAPABILITY_MODEL.md`:
    * Ask: *"Do you approve scaffolding this `.uesf/` configuration (or would you like to adjust any build/test commands first)?"*
 3. **Stage 2 — Self-Contained Scaffolding & Automatic Snapshot Hook (`A1`)**:
    * Upon human confirmation, create `.uesf/` and `.uesf/scripts/` containing:
-     * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.6.1`).
+     * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.6.2`).
      * `.uesf/KNOWLEDGE_MAP.md` (routing table indexing existing project docs in `docs/` and operational files in `.uesf/`).
      * `.uesf/ACTIVE_TASKS.md` (initialized with `TASK-001: Initialize UESF Project Control Plane (.uesf/)` marked `ACCEPTED`).
      * `.uesf/DECISION_LOG.md` (initialized with `DEC-001: Onboard Project to UESF Three-Domain Governance`).
@@ -49,7 +49,7 @@ Per `core/CAPABILITY_MODEL.md`:
      * `/uesf:status` — Reconstruct project context at the start of any future local or cloud session.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the first response with: `**[UESF v0.6.1 | Active: /uesf:init | Autonomy: A0 -> A1 on Approval]**`
+* Begin the first response with: `**[UESF v0.6.2 | Active: /uesf:init | Autonomy: A0 -> A1 on Approval]**`
 * Distinguish `[VERIFIED]` repository observations (from `package.json`, `pyproject.toml`, `Cargo.toml`, `git remote -v`, etc.) from `[INFERRED]` architectural conventions (`policies/VERIFICATION_POLICY.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries

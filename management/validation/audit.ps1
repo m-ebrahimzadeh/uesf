@@ -279,7 +279,7 @@ if (-not (Test-Path $manifestPath)) {
             $_.FullName.Substring($repoRoot.Length + 1).Replace('\', '/')
         }
     }
-    $sourceFiles = @($sourceFiles | Sort-Object)
+    $sourceFiles = @($sourceFiles | Sort-Object { $_.ToLowerInvariant() })
     $concatSource = ($sourceFiles | ForEach-Object { "=== $_ ===`n" + (Get-NormalizedText $_) }) -join "`n"
     $expectedSourceHash = Get-Sha256Hex $concatSource
     if ($manifest.source_sha256 -ne $expectedSourceHash) {
@@ -303,5 +303,33 @@ if (-not (Test-Path $manifestPath)) {
 }
 "DIST_BUNDLE_ISSUES=$distBundleIssues"
 "DIST_DRIFT_ISSUES=$distDriftIssues"
+
+# 12. Zero-Dependency Node.js CLI & Consolidated Wrapper Check (DEC-026)
+$cliIssues = 0
+if (-not (Test-Path 'package.json')) {
+    $cliIssues++; "  CLI_MISSING package.json"
+} else {
+    $pkg = Get-Content 'package.json' -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($pkg.version -ne '0.6.2' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
+        $cliIssues++; "  CLI_PKG_INVALID version or bin.uesf mismatch"
+    }
+    if ($pkg.PSObject.Properties.Name -contains 'dependencies' -and ($pkg.dependencies.PSObject.Properties | Measure-Object).Count -gt 0) {
+        $cliIssues++; "  CLI_NONZERO_DEPS package.json must have zero runtime dependencies"
+    }
+}
+if (-not (Test-Path 'bin/uesf.mjs')) {
+    $cliIssues++; "  CLI_MISSING bin/uesf.mjs"
+}
+foreach ($w in @('scripts/sync-snapshot.ps1', 'scripts/build-dist.ps1', 'scripts/install.ps1', 'scripts/sync-snapshot.sh', 'scripts/build-dist.sh', 'scripts/install.sh')) {
+    if (-not (Test-Path $w)) {
+        $cliIssues++; "  CLI_WRAPPER_MISSING $w"
+    } else {
+        $wt = Get-NormalizedText $w
+        if (-not $wt.Contains('uesf.mjs')) {
+            $cliIssues++; "  CLI_WRAPPER_NOT_DELEGATING $w"
+        }
+    }
+}
+"CLI_ENGINE_ISSUES=$cliIssues"
 
 "CRLF_WORKING_TREE_COUNT=$(@(git ls-files --eol | Select-String 'w/crlf').Count)"

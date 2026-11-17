@@ -1,7 +1,7 @@
 # Framework Architecture
 * **Document ID**: UESF-CORE-003
 * **Canonical Path**: core/FRAMEWORK_ARCHITECTURE.md
-* **Version**: 0.3.0
+* **Version**: 0.3.1
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -23,7 +23,7 @@ Covers all architectural layers and operational directories of UESF: Core Operat
 2. **Cross-Cutting Operational Directories**:
    * **Lifecycle Workflows (`workflows/`)**: Canonical specifications for the three cross-cutting operational commands (`/uesf:init` in `workflows/INIT_WORKFLOW.md`, `/uesf:handoff` in `workflows/HANDOFF_WORKFLOW.md`, and `/uesf:status` in `workflows/STATUS_WORKFLOW.md`).
    * **Layer-Targeted Templates (`templates/`)**: Each template declares `* **Target Layer**: Layer N` (`DEC-018`) and may reference canonical specifications in Layers `1..N`, while never referencing files in Layers `> N`.
-   * **Deterministic Automation & Distribution (`scripts/` and `dist/`)**: `scripts/sync-snapshot.*` generates the machine-maintained `CONTEXT_SNAPSHOT.md`; `scripts/build-dist.*` compiles the 9 Role Skills and 3 Lifecycle Workflows into self-contained multi-agent bundles in `dist/`; and `scripts/install.*` installs them across coding agents (`DEC-021`, `DEC-023`).
+   * **Deterministic Automation & Distribution (`package.json`, `bin/uesf.mjs`, `scripts/` and `dist/`)**: `package.json` and `bin/uesf.mjs` provide the consolidated zero-dependency Node.js CLI engine for `install`, `check`, `sync-snapshot`, and `build` (`DEC-026`), while `scripts/*.ps1` and `scripts/*.sh` serve as thin pass-through wrappers. `sync-snapshot` generates the machine-maintained `CONTEXT_SNAPSHOT.md`; `build` compiles the 9 Role Skills and 3 Lifecycle Workflows into self-contained multi-agent bundles in `dist/`; and `install` installs them across coding agents (`DEC-021`, `DEC-023`, `DEC-026`).
 3. **Three-Domain Knowledge Partitioning (`DEC-022`)**:
    * **Domain 1 — Universal UESF Knowledge**: Lives exclusively in the UESF repository and compiled `dist/` bundles.
    * **Domain 2 — Permanent Project Documentation**: Lives in the target project's native `docs/` directory (architecture, technical specs, PRDs, roadmap) and is indexed in `.uesf/KNOWLEDGE_MAP.md`.
@@ -33,11 +33,11 @@ Covers all architectural layers and operational directories of UESF: Core Operat
 
 ## 4. Responsibilities
 * **CTO & Architect**: Maintain architectural layer integrity and review any structural changes under `policies/GOVERNANCE_POLICY.md`.
-* **DevOps Role**: Maintains `scripts/sync-snapshot.*`, `scripts/build-dist.*`, `scripts/install.*`, and `management/validation/audit.ps1`.
+* **DevOps Role**: Maintains `package.json`, `bin/uesf.mjs`, `scripts/*.ps1`, `scripts/*.sh`, and `management/validation/audit.ps1`.
 * **All Roles**: Place artifacts exclusively in their designated architectural directory and respect unidirectional dependencies.
 
 ## 5. Relevant Workflows
-1. **Specification & Bundle Pipeline**: Author/update canonical `.md` spec -> register in `management/KNOWLEDGE_MAP.md` -> run `scripts/build-dist.ps1` (which updates `management/CONTEXT_SNAPSHOT.md` and `dist/`) -> verify via `management/validation/audit.ps1`.
+1. **Specification & Bundle Pipeline**: Author/update canonical `.md` spec -> register in `management/KNOWLEDGE_MAP.md` -> run `node bin/uesf.mjs build` (or `scripts/build-dist.ps1`, which updates `management/CONTEXT_SNAPSHOT.md` and `dist/`) -> verify via `management/validation/audit.ps1`.
 
 ## 6. Relationships with Other Documents
 * **Operating Model**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/CAPABILITY_MODEL.md`
