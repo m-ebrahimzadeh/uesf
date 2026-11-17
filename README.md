@@ -1,22 +1,51 @@
 # Universal Engineering Skills Framework (UESF)
 * **Document ID**: UESF-CORE-001
 * **Canonical Path**: README.md
-* **Version**: 0.1.0
+* **Version**: 0.3.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
-Provide the entry-point overview, architectural orientation, and canonical navigation index for the Universal Engineering Skills Framework (UESF).
+Serve as the canonical root entry point, architectural map, and master navigation index for the Universal Engineering Skills Framework (UESF)—a reusable, platform-independent collection of AI agent Skills, policies, and protocols that establish a disciplined software engineering organization composed of specialized AI agents.
 
 ## 2. Scope
-Applies to all human operators and AI agents participating in UESF governance, specification authoring, role execution, platform adaptation, and project delivery. Excludes project-specific implementations and platform-proprietary runtime configurations.
+Applies to all human stakeholders and AI agents operating within or integrating with UESF across any runtime environment (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`).
 
-## 3. Rules and Requirements
-1. **Markdown-First Canonical Definitions**: All universal specifications, policies, protocols, and role definitions MUST be authored in standard Markdown with structured metadata headers.
-2. **Platform Independence**: Universal definitions in `core/`, `policies/`, `protocols/`, and `roles/` MUST NOT depend on any specific LLM provider, IDE, CLI, or cloud workspace.
-3. **Capability Verification**: Agents MUST evaluate runtime capabilities per `core/CAPABILITY_MODEL.md` before executing tasks.
-4. **Single Source of Truth**: Every document and governance record MUST have exactly one authoritative location as defined in `policies/SOURCE_OF_TRUTH_POLICY.md` and indexed in `management/KNOWLEDGE_MAP.md`.
+## 3. Framework Architecture & Directory Index
+1. **Layer 1 — Core Operating Model (`core/`)**:
+   * `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` (`UESF-CORE-002`)
+   * `core/FRAMEWORK_ARCHITECTURE.md` (`UESF-CORE-003`)
+   * `core/CAPABILITY_MODEL.md` (`UESF-CORE-004`)
+2. **Layer 2 — Universal Normative Policies (`policies/`)**:
+   * `policies/AUTONOMY_POLICY.md` (`UESF-POL-001`)
+   * `policies/GOVERNANCE_POLICY.md` (`UESF-POL-002`)
+   * `policies/SECURITY_POLICY.md` (`UESF-POL-003`)
+   * `policies/GIT_POLICY.md` (`UESF-POL-004`)
+   * `policies/VERIFICATION_POLICY.md` (`UESF-POL-005`)
+   * `policies/KNOWLEDGE_GOVERNANCE_POLICY.md` (`UESF-POL-006`)
+   * `policies/SOURCE_OF_TRUTH_POLICY.md` (`UESF-POL-007`)
+3. **Layer 3 — Execution, Collaboration & Accountability Protocols (`protocols/`)**:
+   * `protocols/TASK_CONTRACT_PROTOCOL.md` (`UESF-PROT-001`)
+   * `protocols/HANDOFF_PROTOCOL.md` (`UESF-PROT-002`)
+   * `protocols/AGENT_COLLABORATION.md` (`UESF-PROT-003`)
+   * `protocols/TASK_ACCEPTANCE_PROTOCOL.md` (`UESF-PROT-004`)
+   * `protocols/KNOWLEDGE_SYNCHRONIZATION.md` (`UESF-PROT-005`)
+   * `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` (`UESF-PROT-006`)
+   * `protocols/ESCALATION_PROTOCOL.md` (`UESF-PROT-007`)
+4. **Layer 4 — Universal Agent Role Skills (`roles/`)**:
+   * `roles/cto/SKILL.md` (`UESF-ROLE-001`), `roles/architect/SKILL.md` (`UESF-ROLE-002`), `roles/developer/SKILL.md` (`UESF-ROLE-003`), `roles/qa/SKILL.md` (`UESF-ROLE-004`), `roles/devops/SKILL.md` (`UESF-ROLE-005`), `roles/security/SKILL.md` (`UESF-ROLE-006`), `roles/sre/SKILL.md` (`UESF-ROLE-007`), `roles/documentation/SKILL.md` (`UESF-ROLE-008`)
+5. **Layer 5 — Platform Adapters (`adapters/`)**:
+   * `adapters/README.md` (`UESF-ADPT-001`)
+   * `adapters/antigravity-vscode/ADAPTER.md` (`UESF-ADPT-002`)
+   * `adapters/gemini-strategic-workspace/ADAPTER.md` (`UESF-ADPT-003`)
+   * `adapters/generic-cli-mcp/ADAPTER.md` (`UESF-ADPT-004`)
+6. **Reusable Artifact Templates (`templates/`)**:
+   * `templates/ROLE_SKILL_TEMPLATE.md` (`UESF-TMPL-001`), `templates/TASK_CONTRACT_TEMPLATE.md` (`UESF-TMPL-002`), `templates/HANDOFF_PACKAGE_TEMPLATE.md` (`UESF-TMPL-003`), `templates/EVIDENCE_PACKAGE_TEMPLATE.md` (`UESF-TMPL-004`), `templates/KDP_TEMPLATE.md` (`UESF-TMPL-005`), `templates/ESCALATION_RECORD_TEMPLATE.md` (`UESF-TMPL-006`), `templates/PLATFORM_ADAPTER_TEMPLATE.md` (`UESF-TMPL-007`)
+7. **Project Governance, State & Validation (`management/`)**:
+   * `management/PROJECT_PROFILE.md` (`UESF-MGMT-001`), `management/ACTIVE_TASKS.md` (`UESF-MGMT-002`), `management/DECISION_LOG.md` (`UESF-MGMT-003`), `management/KNOWLEDGE_MAP.md` (`UESF-MGMT-004`), `management/RELEASE_HISTORY.md` (`UESF-MGMT-005`), `management/IMPLEMENTATION_ROADMAP.md` (`UESF-MGMT-006`)
+   * Validation Reports: `management/validation/VALIDATION_REPORT_001.md` (`UESF-VAL-001`), `management/validation/VALIDATION_REPORT_002.md` (`UESF-VAL-002`), `management/validation/VALIDATION_REPORT_003.md` (`UESF-VAL-003`)
+8. **Layer 6 — Project-Specific Extensions (`extensions/`)**: Reserved for Milestone M4 (`v1.0.0`).
 
 ## 4. Responsibilities
 * **CTO**: Curates and approves canonical framework specifications, governs the roadmap, and resolves cross-functional or architectural conflicts.
@@ -24,13 +53,12 @@ Applies to all human operators and AI agents participating in UESF governance, s
 * **All Agent Roles**: Read and comply with the foundational specifications listed in this index prior to executing assigned tasks.
 
 ## 5. Relevant Workflows
-1. **Environment & Capability Discovery**: Assess active runtime environment (`core/CAPABILITY_MODEL.md`).
+1. **Environment & Capability Discovery**: Assess active runtime environment (`core/CAPABILITY_MODEL.md`) and bind via the appropriate platform adapter (`adapters/README.md`).
 2. **Task Initialization**: Receive or propose a Task Contract (`protocols/TASK_CONTRACT_PROTOCOL.md`).
 3. **Bounded Execution & Collaboration**: Execute work within assigned Autonomy Level (`policies/AUTONOMY_POLICY.md`) and delegate subtasks if authorized (`protocols/AGENT_COLLABORATION.md`).
 4. **Verification & Evidence Submission**: Validate deliverables (`policies/VERIFICATION_POLICY.md`) and submit structured evidence (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`).
 5. **Acceptance & Synchronization**: Complete formal task acceptance (`protocols/TASK_ACCEPTANCE_PROTOCOL.md`) and synchronize authoritative knowledge (`protocols/KNOWLEDGE_SYNCHRONIZATION.md`).
 
 ## 6. Relationships with Other Documents
-* **Governed By**: `policies/GOVERNANCE_POLICY.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`
-* **Architecture & Operating Model**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`
-* **Project Management Index**: `management/PROJECT_PROFILE.md`, `management/KNOWLEDGE_MAP.md`, `management/ACTIVE_TASKS.md`
+* **Master Registry**: `management/KNOWLEDGE_MAP.md`
+* **Project Profile & Roadmap**: `management/PROJECT_PROFILE.md`, `management/IMPLEMENTATION_ROADMAP.md`

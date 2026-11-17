@@ -1,38 +1,28 @@
 # Release History
 * **Document ID**: UESF-MGMT-005
 * **Canonical Path**: management/RELEASE_HISTORY.md
-* **Version**: 0.2.0
+* **Version**: 0.3.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose
-Record all formal version milestones, baseline states, and verification statuses of the Universal Engineering Skills Framework (UESF).
+Maintain an immutable chronological record of UESF milestone releases, commit baselines, and verification evidence references.
 
 ## 2. Scope
-Applies to all tagged and untagged milestone releases of UESF.
+Covers all tagged and milestone releases of UESF (`management/IMPLEMENTATION_ROADMAP.md`).
 
-## 3. Release Log
-### `v0.2.0` — Universal Agent Role Skills & Reusable Templates (2026-11-16)
-* **Milestone**: Milestone M2 — Universal Agent Role Skills & Protocol Templates (`TASK-002`..`TASK-006`)
-* **Release State**: Released — Verified & Accepted on `main` (`ff33485dc7a583e523b700be7a45d23e5afb84fd`, `TASK-002`..`TASK-006`; closed out 2026-11-17)
-* **Summary of Deliverables**:
-  * Authored 6 reusable Markdown templates in `templates/`: `ROLE_SKILL_TEMPLATE.md`, `TASK_CONTRACT_TEMPLATE.md`, `HANDOFF_PACKAGE_TEMPLATE.md`, `EVIDENCE_PACKAGE_TEMPLATE.md`, `KDP_TEMPLATE.md`, and `ESCALATION_RECORD_TEMPLATE.md`.
-  * Authored all 8 platform-independent Layer 4 Universal Agent Role Skills (`roles/<role>/SKILL.md`): `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, and `Documentation`.
-  * Completed Milestone M2 structural, non-overlap, delegation-safety, and unidirectional-dependency validation (`management/validation/VALIDATION_REPORT_002.md`).
-* **Verification Evidence**: `EV-TASK-006-01` (`management/validation/VALIDATION_REPORT_002.md`) and `EV-TASK-002-01` (Branch Materialization Verification).
+## 3. Release Ledger
+| Version | Milestone | Release Date | Status | Summary of Included Deliverables | Verification Evidence |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `v0.1.0` | **M1: Foundational Architecture & Governance** | 2026-11-16 | **Released & Accepted** (`main` @ `288d6dc`) | 25 foundational Markdown documents (`README.md`, 3 `core/`, 7 `policies/`, 7 `protocols/`, 6 `management/`, `VALIDATION_REPORT_001.md`) and reserved layer directories. | `EV-TASK-000-01`, `EV-TASK-001-01` (`HO-TASK-001-02`) |
+| `v0.2.0` | **M2: Universal Agent Role Skills & Templates** | 2026-11-16 | **Released & Accepted** (`ff33485` merged to `main`) | 6 reusable protocol/skill templates (`templates/`), 8 universal Agent Role Skills (`roles/<role>/SKILL.md`), `VALIDATION_REPORT_002.md`, and `0.2.0` management updates (40 `.md` files). | `EV-TASK-006-01`, `EV-TASK-002-01` (`HO-TASK-002-02`) |
+| `v0.3.0` | **M3: Layer 5 Platform Adapters & Repo Hygiene** | 2026-11-17 | **Staged on `feat/TASK-007-platform-adapters` (In Review)** | `.gitattributes` (`KDP-001`), `templates/PLATFORM_ADAPTER_TEMPLATE.md`, `adapters/README.md`, 3 concrete Platform Adapters (`antigravity-vscode`, `gemini-strategic-workspace`, `generic-cli-mcp`), `VALIDATION_REPORT_003.md`, and `0.3.0` management updates including `DECISION_LOG.md` (`KDP-002`, `OQ-001`/`OQ-002` resolved; 46 `.md` files). | `EV-TASK-010-01` (`VALIDATION_REPORT_003.md`), `EV-TASK-007-01` |
 
-### `v0.1.0` — Foundational Architecture & Governance Baseline (2026-11-16)
-* **Milestone**: Mission 001 — Project Initialization and Foundational Architecture
-* **Release State**: Verified & Accepted on `main` (`288d6dc62a154cf41b0dff40f9e421f22e48f56e`, `TASK-001`)
-* **Summary of Deliverables**:
-  * Established 6-layer platform-independent architecture (`core/FRAMEWORK_ARCHITECTURE.md`).
-  * Defined Universal Agent Operating Model (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`) and runtime Capability Model (`core/CAPABILITY_MODEL.md`).
-  * Established 7 normative policies: Autonomy (`A0`–`A3`), Governance, Security, Git, Verification, Knowledge Governance, and Source of Truth.
-  * Established 7 operational protocols: Task Contract, Handoff, Agent Collaboration, Task Acceptance, Knowledge Synchronization, Evidence Submission, and Escalation.
-  * Initialized project management suite (`PROJECT_PROFILE.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, `KNOWLEDGE_MAP.md`, `RELEASE_HISTORY.md`, `IMPLEMENTATION_ROADMAP.md`) and completed Phase 6 validation (`management/validation/VALIDATION_REPORT_001.md`).
-* **Verification Evidence**: `EV-TASK-000-01` (`management/validation/VALIDATION_REPORT_001.md`) and `EV-TASK-001-01` (Repository Materialization Verification).
+## 4. Responsibilities
+* **CTO**: Approves milestone release entries upon verifying Evidence Packages.
+* **DevOps Role**: Executes Git merges, tags, and remote synchronization per `policies/GIT_POLICY.md`.
 
-## 4. Relationships with Other Documents
+## 5. Relationships with Other Documents
 * **Roadmap & Tasks**: `management/IMPLEMENTATION_ROADMAP.md`, `management/ACTIVE_TASKS.md`
-* **Validation**: `management/validation/VALIDATION_REPORT_001.md`, `management/validation/VALIDATION_REPORT_002.md`
+* **Validations**: `management/validation/VALIDATION_REPORT_001.md`, `management/validation/VALIDATION_REPORT_002.md`, `management/validation/VALIDATION_REPORT_003.md`
