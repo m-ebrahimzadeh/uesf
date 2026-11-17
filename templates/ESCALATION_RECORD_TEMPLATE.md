@@ -1,10 +1,11 @@
 # Escalation Record Template
 * **Document ID**: UESF-TMPL-006
 * **Canonical Path**: templates/ESCALATION_RECORD_TEMPLATE.md
-* **Version**: 0.2.0
+* **Version**: 0.2.1
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Target Layer**: Layer 3
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Provide the standardized template for halting unsafe/ambiguous execution and escalating blockers (`ESC-<TASK-ID>-<SEQ>`) per `protocols/ESCALATION_PROTOCOL.md`.

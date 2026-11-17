@@ -1,7 +1,7 @@
 # Project Profile
 * **Document ID**: UESF-MGMT-001
 * **Canonical Path**: management/PROJECT_PROFILE.md
-* **Version**: 1.0.0
+* **Version**: 0.5.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -15,16 +15,16 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `1.0.0` (Full-Stack 6-Layer Release)
-   * **Current Phase**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), and M4 (`v1.0.0`) Completed, Verified, and Accepted
+   * **Current Version**: `0.5.0` (Milestone M5 — Feature Discovery Role, Template Target-Layer Architecture & Cumulative Audit Suite)
+   * **Current Phase**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), and M4 (`v0.4.0`) Accepted; Milestone M5 (`v0.5.0`) Implemented on `feat/TASK-015-discovery-role-v0.5.0` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
-2. **Delivered Architecture (All 6 Layers Complete in `v1.0.0`)**:
-   * **Layer 1 — Core Operating Model (`core/`)**: Operating model, 6-layer architecture, and capability taxonomy.
-   * **Layer 2 — Universal Policies (`policies/`)**: Autonomy, governance, security, Git, verification, knowledge governance, and source-of-truth policies.
-   * **Layer 3 — Interaction Protocols (`protocols/`)**: Task contracts, handoffs, peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
-   * **Layer 4 — Universal Agent Role Skills (`roles/`)**: Eight canonical engineering role skills (`CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).
+2. **Delivered Architecture (`v0.5.0` — All 6 Layers + 9 Roles)**:
+   * **Layer 1 — Core Operating Model (`core/`)**: Operating model (`0.2.0`), 6-layer architecture with Template Target-Layer Rule (`0.2.0`), and capability taxonomy (`0.1.0`).
+   * **Layer 2 — Universal Policies (`policies/`)**: Autonomy (`0.2.0` with hard `A0` discovery lock), governance, security, Git, verification, knowledge governance, and source-of-truth policies.
+   * **Layer 3 — Interaction Protocols (`protocols/`)**: Feature discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`), task contracts (`0.2.0`), handoffs, peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
+   * **Layer 4 — Universal Agent Role Skills (`roles/`)**: Nine canonical engineering role skills (`Discovery`, `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).
    * **Layer 5 — Platform Adapters (`adapters/`)**: Runtime bindings for Antigravity/VS Code (`antigravity-vscode`), Gemini Strategic Workspace (`gemini-strategic-workspace`), and portable CLI/MCP hosts (`generic-cli-mcp`).
    * **Layer 6 — Project-Specific Extensions (`extensions/`)**: Extension isolation standard (`extensions/README.md`), template (`templates/PROJECT_EXTENSION_TEMPLATE.md`), and reference web-service blueprint (`extensions/example-web-service/EXTENSION.md`).
 3. **Dual-Environment Operating Topology**:
@@ -40,4 +40,4 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 6. Relationships with Other Documents
 * **Roadmap & Releases**: `management/IMPLEMENTATION_ROADMAP.md`, `management/RELEASE_HISTORY.md`
 * **Tasks & Decisions**: `management/ACTIVE_TASKS.md`, `management/DECISION_LOG.md`, `management/KNOWLEDGE_MAP.md`
-* **Adapters & Extensions**: `adapters/README.md`, `extensions/README.md`
+* **Discovery, Adapters & Extensions**: `protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `adapters/README.md`, `extensions/README.md`

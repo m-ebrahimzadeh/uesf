@@ -1,7 +1,7 @@
 # Reference Project Extension — Modular Web Service Blueprint
 * **Document ID**: UESF-EXT-002
 * **Canonical Path**: extensions/example-web-service/EXTENSION.md
-* **Version**: 1.0.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -13,6 +13,7 @@ Provide a canonical, vendor-neutral Layer 6 reference extension demonstrating ho
 Applies only when explicitly activated for the reference modular web service target project. Defines a three-tier application boundary (`api/`, `domain/`, `infrastructure/`) where `domain/` has zero outward dependency on `api/` or `infrastructure/`.
 
 ## 3. Role Specialization & Domain Responsibilities
+* **Discovery (`roles/discovery/SKILL.md`)**: Leads pre-specification feature discovery, API/domain requirement clarification, and architectural conflict checks under `protocols/FEATURE_DISCOVERY_PROTOCOL.md` (locked at `A0` until human approval).
 * **CTO (`roles/cto/SKILL.md`)**: Owns project milestone acceptance and cross-service architectural rulings.
 * **Architect (`roles/architect/SKILL.md`)**: Enforces API schema contracts (OpenAPI/JSON Schema) and `domain/` layer purity.
 * **Developer (`roles/developer/SKILL.md`)**: Implements domain logic, API handlers, and unit tests on `<type>/TASK-XXX-<slug>` branches.
@@ -41,5 +42,5 @@ In addition to universal requirements in `policies/VERIFICATION_POLICY.md` and `
 ## 7. Relationships with Other Documents
 * **Layer 6 Standard & Template**: `extensions/README.md`, `templates/PROJECT_EXTENSION_TEMPLATE.md`
 * **Core & Policies**: `core/FRAMEWORK_ARCHITECTURE.md`, `policies/AUTONOMY_POLICY.md`, `policies/GIT_POLICY.md`, `policies/SECURITY_POLICY.md`, `policies/VERIFICATION_POLICY.md`
-* **Protocols & Roles**: `protocols/TASK_CONTRACT_PROTOCOL.md`, `protocols/TASK_ACCEPTANCE_PROTOCOL.md`, `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`, `roles/cto/SKILL.md`, `roles/architect/SKILL.md`, `roles/developer/SKILL.md`, `roles/qa/SKILL.md`, `roles/devops/SKILL.md`, `roles/security/SKILL.md`, `roles/sre/SKILL.md`, `roles/documentation/SKILL.md`
+* **Protocols & Roles**: `protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `protocols/TASK_CONTRACT_PROTOCOL.md`, `protocols/TASK_ACCEPTANCE_PROTOCOL.md`, `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`, `roles/discovery/SKILL.md`, `roles/cto/SKILL.md`, `roles/architect/SKILL.md`, `roles/developer/SKILL.md`, `roles/qa/SKILL.md`, `roles/devops/SKILL.md`, `roles/security/SKILL.md`, `roles/sre/SKILL.md`, `roles/documentation/SKILL.md`
 * **Adapters**: `adapters/README.md`, `adapters/antigravity-vscode/ADAPTER.md`, `adapters/gemini-strategic-workspace/ADAPTER.md`, `adapters/generic-cli-mcp/ADAPTER.md`

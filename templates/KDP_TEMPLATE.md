@@ -1,10 +1,11 @@
 # Knowledge Discovery Proposal (KDP) Template
 * **Document ID**: UESF-TMPL-005
 * **Canonical Path**: templates/KDP_TEMPLATE.md
-* **Version**: 0.2.0
+* **Version**: 0.2.1
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Target Layer**: Layer 3
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Provide the standardized template for submitting implementation discoveries or proposed specification updates (`KDP-XXX`) per `protocols/KNOWLEDGE_SYNCHRONIZATION.md`.

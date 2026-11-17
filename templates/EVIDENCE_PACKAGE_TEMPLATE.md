@@ -1,10 +1,11 @@
 # Evidence Package Template
 * **Document ID**: UESF-TMPL-004
 * **Canonical Path**: templates/EVIDENCE_PACKAGE_TEMPLATE.md
-* **Version**: 0.2.0
+* **Version**: 0.2.1
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Target Layer**: Layer 3
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Provide the standardized Evidence Package template (`EV-<TASK-ID>-<SEQ>`) enforcing epistemic discipline (`Verified`, `Observed`, `Reported`, `Inferred`, `Unknown / Pending`) per `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`.
