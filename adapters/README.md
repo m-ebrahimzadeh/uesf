@@ -1,7 +1,7 @@
 # Layer 5: Platform Adapters Architecture & Registry
 * **Document ID**: UESF-ADPT-001
 * **Canonical Path**: adapters/README.md
-* **Version**: 0.3.0
+* **Version**: 0.3.1
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -16,12 +16,12 @@ Applies to all runtime environment bindings in `adapters/` (`core/FRAMEWORK_ARCH
 1. **Strict Layer 5 Isolation**:
    * Universal layers (`core/`, `policies/`, `protocols/`, `roles/`, `templates/`) remain 100% platform-agnostic.
    * All host-specific tool names, shell syntax, IDE integrations, workspace connectors, and MCP bindings MUST be encapsulated inside `adapters/<adapter-id>/ADAPTER.md`.
-2. **Canonical Adapter Registry (`v0.3.0`)**:
+2. **Canonical Adapter Registry (`v0.3.1`)**:
    | Adapter ID | Canonical Path | Target Runtime Environment | Primary Capabilities Bound |
    | :--- | :--- | :--- | :--- |
    | `UESF-ADPT-002` | `adapters/antigravity-vscode/ADAPTER.md` | Antigravity in VS Code (Engineering Workspace) | `CAP-FS`, `CAP-TERM`, `CAP-GIT` |
    | `UESF-ADPT-003` | `adapters/gemini-strategic-workspace/ADAPTER.md` | Gemini Desktop / Connected Workspace & Notebook (Strategic Workspace) | `CAP-WS` (with handoff fallback for `CAP-FS`/`CAP-GIT`) |
-   | `UESF-ADPT-004` | `adapters/generic-cli-mcp/ADAPTER.md` | Generic CLI & Model Context Protocol (MCP) Agent Runtimes | Configurable `CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-MCP`, `CAP-NET` |
+   | `UESF-ADPT-004` | `adapters/generic-cli-mcp/ADAPTER.md` | Generic CLI & Model Context Protocol (MCP) Agent Runtimes | Configurable `CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-MCP`, `CAP-WEB` |
 3. **Runtime Capability Verification**: Presence of an adapter specification does NOT imply automatic tool availability. Every agent MUST still execute a runtime capability probe per `core/CAPABILITY_MODEL.md` at session start.
 
 ## 4. Responsibilities

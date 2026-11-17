@@ -1,7 +1,7 @@
 # Generic CLI & Model Context Protocol (MCP) Adapter
 * **Document ID**: UESF-ADPT-004
 * **Canonical Path**: adapters/generic-cli-mcp/ADAPTER.md
-* **Version**: 0.3.0
+* **Version**: 0.3.1
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -18,7 +18,7 @@ Supports any of the eight universal UESF roles (`CTO`, `Architect`, `Developer`,
 | `CAP-FS` (Filesystem Read/Write) | MCP `filesystem` server (`read_file`, `write_file`, `list_directory`) or POSIX/Windows CLI file IO | Probe read/write permissions inside the configured repository root before accepting `A1`/`A2` implementation tasks. |
 | `CAP-TERM` (Terminal Execution) | CLI subshell runner or MCP command-execution tool | Verify allowed command allowlist, timeout constraints, and working directory isolation. |
 | `CAP-GIT` (Git Version Control) | Local `git` binary via `CAP-TERM` or MCP `git`/`github` server tools | Confirm repository root (`git rev-parse --show-toplevel`) and branch state before mutating files. |
-| `CAP-MCP` (External MCP Tool Servers) | Standard MCP tool discovery (`tools/list`) | Classify each discovered MCP tool into its corresponding `CAP-*` domain (`CAP-FS`, `CAP-GIT`, `CAP-WS`, `CAP-NET`) at session start. |
+| `CAP-MCP` (External MCP Tool Servers) | Standard MCP tool discovery (`tools/list`) | Classify each discovered MCP tool into its corresponding `CAP-*` domain (`CAP-FS`, `CAP-GIT`, `CAP-WS`, `CAP-WEB`) at session start. |
 | `CAP-WS` (Shared Workspace / Docs) | MCP workspace/drive connector or local Markdown staging directory | Verify canonical source precedence per `policies/SOURCE_OF_TRUTH_POLICY.md`. |
 
 ## 4. Constraint Handling & Graceful Degradation Rules
