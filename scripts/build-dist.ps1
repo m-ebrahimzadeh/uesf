@@ -33,7 +33,7 @@ $sourceFiles = @($sourceFiles | Sort-Object)
 $concatSource = ($sourceFiles | ForEach-Object { "=== $_ ===`n" + (Get-NormalizedText $_) }) -join "`n"
 $sourceHashFull = Get-Sha256Hex $concatSource
 $sourceHashShort = $sourceHashFull.Substring(0, 12)
-$fwVersion = '0.6.0'
+$fwVersion = '0.6.1'
 $emDash = [string][char]0x2014
 
 $coreInvariantsBlock = @'
@@ -93,6 +93,27 @@ foreach ($b in $bundles) {
         $tmplSection = $tb.ToString().Replace("`r`n", "`n")
     }
 
+    $extraSection = ""
+    if ($name -eq 'init') {
+        $eb = New-Object System.Text.StringBuilder
+        [void]$eb.AppendLine('')
+        [void]$eb.AppendLine('---')
+        [void]$eb.AppendLine('## Embedded Project Automation Scripts (.uesf/scripts/ & .git/hooks/pre-commit)')
+        $embeddedScripts = @(
+            @{ Path='scripts/sync-snapshot.ps1'; Target='.uesf/scripts/sync-snapshot.ps1'; Lang='powershell' },
+            @{ Path='scripts/sync-snapshot.sh';  Target='.uesf/scripts/sync-snapshot.sh';  Lang='sh' },
+            @{ Path='scripts/hooks/pre-commit';  Target='.git/hooks/pre-commit';           Lang='sh' }
+        )
+        foreach ($es in $embeddedScripts) {
+            [void]$eb.AppendLine('')
+            [void]$eb.AppendLine(('### Target `{0}` (Source: `{1}`)' -f $es.Target, $es.Path))
+            [void]$eb.AppendLine(('```{0}' -f $es.Lang))
+            [void]$eb.AppendLine((Get-NormalizedText $es.Path))
+            [void]$eb.AppendLine('```')
+        }
+        $extraSection = $eb.ToString().Replace("`r`n", "`n")
+    }
+
     $headerBlock = @'
 > **NON-AUTHORITATIVE COMPILED UESF BUNDLE __EM__ DO NOT EDIT MANUALLY**
 > * **Bundle ID**: `__SKILL_ID__` (`/uesf:__NAME__`)
@@ -102,7 +123,7 @@ foreach ($b in $bundles) {
 '@.Replace("`r`n", "`n").Replace('__EM__', $emDash).Replace('__SKILL_ID__', $skillId).Replace('__NAME__', $name).Replace('__SRC_PATH__', $srcPath).Replace('__FW_VERSION__', $fwVersion).Replace('__SOURCE_HASH_FULL__', $sourceHashFull).Replace('__SOURCE_HASH_SHORT__', $sourceHashShort).Replace('__AUTONOMY__', $b.Autonomy)
 
     $specHeading = ('## Canonical Specification (`{0}`)' -f $srcPath)
-    $compiledBody = ($headerBlock + "`n`n" + $coreInvariantsBlock + "`n`n---`n" + $specHeading + "`n`n" + $srcText + $tmplSection).Trim() + "`n"
+    $compiledBody = ($headerBlock + "`n`n" + $coreInvariantsBlock + "`n`n---`n" + $specHeading + "`n`n" + $srcText + $tmplSection + $extraSection).Trim() + "`n"
 
     # 1. dist/skills/uesf-<name>/SKILL.md
     $skillDir = Join-Path $distRoot "skills/$skillId"

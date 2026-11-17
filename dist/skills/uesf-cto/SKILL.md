@@ -1,16 +1,16 @@
 ---
 name: uesf-cto
 description: UESF Founding CTO & Chief Architect (Governance, Task Contracting & Acceptance)
-version: 0.6.0
+version: 0.6.1
 ---
 
 > **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
 > * **Bundle ID**: `uesf-cto` (`/uesf:cto`)
-> * **Canonical Source**: `roles/cto/SKILL.md` (`uesf@v0.6.0`)
-> * **Source-SHA256**: `716fb5b7623c7564545ce5d86bb77b38a32f1bac490d5a3f95fb801032e1f282` (`716fb5b7623c`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.0 | Active: uesf-cto | Autonomy: A2 (A3 Human-Gated)]**`
+> * **Canonical Source**: `roles/cto/SKILL.md` (`uesf@v0.6.1`)
+> * **Source-SHA256**: `7d8c19d4912aefdac9544a625adce0d20718518908175f33330c72f988849c60` (`7d8c19d4912a`)
+> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.1 | Active: uesf-cto | Autonomy: A2 (A3 Human-Gated)]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.6.0`)
+## UESF Embedded Core & Policy Invariants (`v0.6.1`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
