@@ -1,21 +1,21 @@
-# Milestone M4 Validation Report — Layer 6 Project Extensions & v1.0.0 Full-Stack Audit
+# Milestone M4 Validation Report — Layer 6 Project Extensions & v0.4.0 Full-Stack Audit
 * **Document ID**: UESF-VAL-004
 * **Canonical Path**: management/validation/VALIDATION_REPORT_004.md
-* **Version**: 1.0.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose
-Document the formal full-stack architectural, schema, cross-reference, line-ending, and governance audit for Milestone M4 (`v1.0.0` — Layer 6 Project-Specific Extensions, `KDP-003`..`KDP-007` harmonization, and complete 6-layer framework release readiness across `TASK-011` through `TASK-014`).
+Document the formal full-stack architectural, schema, cross-reference, line-ending, and governance audit for Milestone M4 (`v0.4.0 (re-versioned from 1.0.0 per DEC-017)` — Layer 6 Project-Specific Extensions, `KDP-003`..`KDP-007` harmonization, and complete 6-layer framework validation across `TASK-011` through `TASK-014`).
 
 ## 2. Scope
-Covers all **50 canonical Markdown documents** and `.gitattributes` across all 6 architectural layers (`core/`, `policies/`, `protocols/`, `roles/`, `adapters/`, `extensions/`), reusable `templates/`, and `management/` registries at release `v1.0.0`.
+Covers all **50 canonical Markdown documents** and `.gitattributes` across all 6 architectural layers (`core/`, `policies/`, `protocols/`, `roles/`, `adapters/`, `extensions/`), reusable `templates/`, and `management/` registries at release `v0.4.0 (re-versioned from 1.0.0 per DEC-017)`.
 
 ## 3. Rules and Requirements
 Evaluated against `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`, `policies/KNOWLEDGE_GOVERNANCE_POLICY.md`, `policies/VERIFICATION_POLICY.md`, `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`, and `templates/PROJECT_EXTENSION_TEMPLATE.md`.
 
-## 4. Full-Stack v1.0.0 Audit Matrix (EV-TASK-014-01)
+## 4. Full-Stack v0.4.0 Audit Matrix (EV-TASK-014-01)
 | Check ID | Validation Dimension | Verification Method | Result | Concrete Evidence |
 | :--- | :--- | :--- | :--- | :--- |
 | `M4-CHK-01` | **Complete 6-Layer Topology & Zero Placeholders** | Inspected all repository directories (`core/`, `policies/`, `protocols/`, `roles/`, `adapters/`, `extensions/`, `templates/`, `management/`). | **PASS** | All 6 layers populated with verified canonical `.md` specs; `GITKEEP_COUNT=0` (`extensions/.gitkeep` removed). |
@@ -25,7 +25,7 @@ Evaluated against `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`, 
 | `M4-CHK-05` | **1-to-1 Knowledge Map Parity & Zero Broken Links (`KDP-006`)** | Verified `management/KNOWLEDGE_MAP.md` (`KM_COUNT=50`) against on-disk `.md` files (`MD_COUNT=50`) and resolved all non-wildcard `.md` path and basename references (excluding `*XXX*` template placeholders such as `VALIDATION_REPORT_XXX.md`). | **PASS** | `MISSING_ON_DISK=0`, `EXTRA_ON_DISK=0`, `KM_VERSION_MISMATCHES=0`, `BROKEN_PATH_REFS=0`, `BROKEN_BASENAME_REFS=0`, `M4_PLANNED_REFS=0`. |
 
 ## 5. Responsibilities
-* **CTO**: Approves Milestone M4 (`v1.0.0`) validation and authorizes final merge of `feat/TASK-011-project-extensions-v1` into `main` and `v1.0.0` release tagging.
+* **CTO**: Approves Milestone M4 (`v0.4.0 (re-versioned from 1.0.0 per DEC-017)`) validation and authorizes merge of `feat/TASK-011-project-extensions-v1` into `main` (premature `v1.0.0` tag rolled back per `DEC-017`).
 * **QA / DevOps**: Executes the post-commit verification audit in the Engineering Workspace.
 
 ## 6. Relationships with Other Documents

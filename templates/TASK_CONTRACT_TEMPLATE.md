@@ -1,10 +1,11 @@
 # Task Contract Template
 * **Document ID**: UESF-TMPL-002
 * **Canonical Path**: templates/TASK_CONTRACT_TEMPLATE.md
-* **Version**: 0.2.0
+* **Version**: 0.2.1
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Target Layer**: Layer 3
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Provide the standardized copy-paste Markdown template for creating primary Task Contracts (`TASK-XXX`) and bounded delegated subtasks (`TASK-XXX.Y`) per `protocols/TASK_CONTRACT_PROTOCOL.md`.

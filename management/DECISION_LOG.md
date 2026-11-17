@@ -1,7 +1,7 @@
 # Architectural & Governance Decision Log
 * **Document ID**: UESF-MGMT-003
 * **Canonical Path**: management/DECISION_LOG.md
-* **Version**: 1.0.0
+* **Version**: 0.5.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -30,7 +30,11 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 | `DEC-013` | Cross-Platform Line-Ending Normalization (`KDP-001`) & Layer 5 Adapter Suite | Adopt `.gitattributes` (`* text=auto eol=lf` for `.md`/`.sh`) per `KDP-001` and establish three canonical Layer 5 Platform Adapters (`antigravity-vscode`, `gemini-strategic-workspace`, `generic-cli-mcp`) governed by `templates/PLATFORM_ADAPTER_TEMPLATE.md`. | Approved | CTO (`A2`) | 2026-11-17 |
 | `DEC-014` | Milestone M3 (`v0.3.0`) Acceptance & `KDP-003`/`KDP-004` Harmonization | Formally accept `TASK-007`–`TASK-010` (`f548df7` / `0fa8bbe`) based on `EV-TASK-007-01`, harmonize `CAP-WEB` in `adapters/` (`KDP-003`), and add explicit `* **Owner**: CTO` metadata headers to `VALIDATION_REPORT_001.md` and `VALIDATION_REPORT_002.md` (`KDP-004`). | Approved | CTO (`A2`) | 2026-11-17 |
 | `DEC-015` | Layer 6 Project Extension Isolation & `v1.0.0` Full-Stack Baseline | Establish `templates/PROJECT_EXTENSION_TEMPLATE.md`, `extensions/README.md`, and the vendor-neutral reference blueprint `extensions/example-web-service/EXTENSION.md` to complete all 6 architectural layers for `v1.0.0` without introducing external product lock-in. | Approved | CTO (`A2`) | 2026-11-17 |
-| `DEC-016` | Milestone M4 Audit Harmonization (`KDP-005`–`KDP-007`) & `v1.0.0` Release Sign-Off | Remove upward `adapters/README.md` and `extensions/README.md` references from `templates/PLATFORM_ADAPTER_TEMPLATE.md` (`0.3.1`) and `templates/PROJECT_EXTENSION_TEMPLATE.md` (`1.0.0`) (`KDP-005`), distinguish upward `.md` file references from layer-directory topology mentions, recognize `*XXX*` placeholder tokens (`KDP-006`), normalize all working-tree files to `w/lf` (`KDP-007`), and authorize `v1.0.0` merge and tag on `main`. | Approved | CTO (`A2`) | 2026-11-17 |
+| `DEC-016` | Milestone M4 Audit Harmonization (`KDP-005`–`KDP-007`) | Resolved `*XXX*` placeholder tokens (`KDP-006`) and normalized working-tree files to `w/lf` (`KDP-007`); initial template link stripping and `v1.0.0` tag superseded by `DEC-017` and `DEC-018`. | Superseded (Partially by `DEC-017`/`DEC-018`) | CTO (`A2`) | 2026-11-17 |
+| `DEC-017` | Rollback of Premature `v1.0.0` Tag & Re-Versioning of M4 to `v0.4.0` | Delete tag `v1.0.0` locally and on `origin`, re-version Milestone M4 Layer 6 artifacts from `1.0.0` to `0.4.0`, designate Milestone M5 as `v0.5.0`, and reserve `v1.0.0` strictly for an explicit future `A3` Human Stakeholder release gate (`DSC-001` Q1). | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
+| `DEC-018` | Template Target-Layer Rule & Versioned Cumulative Audit Script | Define `* **Target Layer**: Layer N` metadata for all `templates/*.md` in `core/FRAMEWORK_ARCHITECTURE.md` (`0.2.0`) so templates targeting Layer `N` may link to canonical specs in Layers `<= N` (restoring `adapters/README.md` and `extensions/README.md` in `UESF-TMPL-007` and `UESF-TMPL-008`), and commit a cumulative verification script at `management/validation/audit.ps1` (`DSC-001` Q2). | Approved | CTO (`A2`) / Human Stakeholder | 2026-11-17 |
+| `DEC-019` | Addition of 9th Universal Agent Role (`Discovery`) & Iterative Discovery Protocol | Expand `DEC-001` from 8 to 9 canonical roles by introducing `Discovery` (`roles/discovery/SKILL.md`), `protocols/FEATURE_DISCOVERY_PROTOCOL.md`, and `templates/FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` with a hard `A0` zero-mutation gate requiring iterative refinement until explicit human confirmation (`DSC-001` Q3 — Option A). | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
+| `DEC-020` | Milestone M5 (`v0.5.0`) Acceptance & Merge to `main` | Formally accept `TASK-015`–`TASK-018` (`e7d8b2b`) based on verified Evidence Package `EV-TASK-015-01` (`MD_COUNT=54`, `ROLE_COUNT=9`, `V1_TAG_COUNT=0`, 0 audit failures across all 19 checks) and authorize merge of `feat/TASK-015-discovery-role-v0.5.0` into `main`. | Approved | CTO (`A2`) | 2026-11-17 |
 
 ## 4. Open Questions & Pending Human Decisions (`A3` / Clarification Items)
 | Question ID | Topic | Resolution Summary | Status |

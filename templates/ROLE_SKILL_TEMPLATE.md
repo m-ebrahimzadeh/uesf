@@ -1,10 +1,11 @@
 # Role Skill Template
 * **Document ID**: UESF-TMPL-001
 * **Canonical Path**: templates/ROLE_SKILL_TEMPLATE.md
-* **Version**: 0.2.0
+* **Version**: 0.2.1
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Target Layer**: Layer 4
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Provide the canonical Markdown structure and metadata schema for all Layer 4 Universal Agent Role Skills (`roles/<role>/SKILL.md`).

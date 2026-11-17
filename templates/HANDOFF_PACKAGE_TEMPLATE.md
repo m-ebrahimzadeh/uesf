@@ -1,10 +1,11 @@
 # Handoff Package Template
 * **Document ID**: UESF-TMPL-003
 * **Canonical Path**: templates/HANDOFF_PACKAGE_TEMPLATE.md
-* **Version**: 0.2.0
+* **Version**: 0.2.1
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Target Layer**: Layer 3
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Provide the standardized Outbound and Inbound Handoff Package templates (`HO-<TASK-ID>-<SEQ>`) for cross-environment and cross-role transfers per `protocols/HANDOFF_PROTOCOL.md`.

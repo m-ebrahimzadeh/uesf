@@ -2,4 +2,4 @@
 * text=auto eol=lf
 *.md text diff=markdown eol=lf
 *.sh text eol=lf
-*.ps1 text eol=crlf
+*.ps1 text eol=lf
