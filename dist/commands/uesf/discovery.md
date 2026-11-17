@@ -1,10 +1,10 @@
 > **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
 > * **Bundle ID**: `uesf-discovery` (`/uesf:discovery`)
-> * **Canonical Source**: `roles/discovery/SKILL.md` (`uesf@v0.6.2`)
-> * **Source-SHA256**: `bf44ca16f52b5d7dbcacdc0a1a4acf2d392c3745c1785a379d361374d7afdd71` (`bf44ca16f52b`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.2 | Active: uesf-discovery | Autonomy: A0 (Read-Only Lock)]**`
+> * **Canonical Source**: `roles/discovery/SKILL.md` (`uesf@v0.6.3`)
+> * **Source-SHA256**: `c0c2b3d64227d2d92e1af55d2810723a8012c3ec035792b276ec43bbc546ed86` (`c0c2b3d64227`)
+> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.3 | Active: uesf-discovery | Autonomy: A0 (Read-Only Lock)]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.6.2`)
+## UESF Embedded Core & Policy Invariants (`v0.6.3`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).

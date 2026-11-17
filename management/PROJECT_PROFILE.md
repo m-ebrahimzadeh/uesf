@@ -1,7 +1,7 @@
 # Project Profile
 * **Document ID**: UESF-MGMT-001
 * **Canonical Path**: management/PROJECT_PROFILE.md
-* **Version**: 0.6.2
+* **Version**: 0.6.3
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -15,8 +15,8 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `0.6.2` (Milestone M6.2 — Zero-Dependency Node.js CLI `bin/uesf.mjs`, Consolidated Build/Install/Snapshot Engine & Version Selection)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M6.2 (`v0.6.2`) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Version**: `0.6.3` (Milestone M6.3 — Zero-Dependency Node.js CLI `bin/uesf.mjs`, Downstream `init-project` Engine Wiring & Multi-Agent Distribution)
+   * **Current Phase**: Milestones M1 (`v0.1.0`) through M6.3 (`v0.6.3`) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)

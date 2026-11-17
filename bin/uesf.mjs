@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
-const FW_VERSION = '0.6.2';
+const FW_VERSION = '0.6.3';
 
 function readNormalized(filePath) {
   if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) return '';
@@ -286,30 +286,24 @@ export function runBuildDist() {
     }
 
     if (b.name === 'init') {
-      const syncPs1 = readNormalized(path.join(REPO_ROOT, 'scripts/sync-snapshot.ps1'));
-      const syncSh = readNormalized(path.join(REPO_ROOT, 'scripts/sync-snapshot.sh'));
-      const hookSh = readNormalized(path.join(REPO_ROOT, 'scripts/hooks/pre-commit'));
-      const initScriptsBlock = [
+      const initWiringBlock = [
         '',
         '---',
-        '## Embedded Project Automation Scripts (`.uesf/scripts/` & `.git/hooks/pre-commit`)',
+        '## Embedded Project Automation Wiring (`.uesf/bin/uesf.mjs`, `.uesf/scripts/` & `.git/hooks/pre-commit`)',
+        'After creating `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TASKS.md`, and `.uesf/DECISION_LOG.md` in Stage 2, wire the standalone snapshot engine and Git pre-commit hook and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by executing ONE of the following commands in the target project root:',
         '',
-        '### Script 1: `.uesf/scripts/sync-snapshot.ps1`',
-        '```powershell',
-        syncPs1,
-        '```',
-        '',
-        '### Script 2: `.uesf/scripts/sync-snapshot.sh`',
-        '```sh',
-        syncSh,
-        '```',
-        '',
-        '### Script 3: `.git/hooks/pre-commit`',
-        '```sh',
-        hookSh,
-        '```',
+        '1. **Fast Local Wiring (Preferred when `.uesf-manifest.json` exists in your agent skills folder)**:',
+        '   Read `uesf_repo_path` from `.uesf-manifest.json` (in `~/.gemini/antigravity/skills/`, `~/.gemini/skills/`, `~/.claude/skills/`, or `~/.codex/skills/`) and run:',
+        '   ```bash',
+        '   node "<uesf_repo_path>/bin/uesf.mjs" init-project .',
+        '   ```',
+        '2. **Zero-Clone Fallback (Via GitHub `npx`)**:',
+        '   ```bash',
+        '   npx --yes github:m-ebrahimzadeh/uesf init-project .',
+        '   ```',
+        'Both commands atomically install `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit`, and automatically generate `.uesf/CONTEXT_SNAPSHOT.md`.',
       ].join('\n');
-      extraSections += initScriptsBlock;
+      extraSections += initWiringBlock;
     }
 
     const compiledBody = [
@@ -381,7 +375,44 @@ export function runBuildDist() {
 }
 
 // ============================================================================
-// 3. INSTALL & CHECK COMMANDS
+// 3. INIT-PROJECT COMMAND (DEC-027)
+// ============================================================================
+export function runInitProject(projDirArg = '.') {
+  const projPath = path.resolve(projDirArg || '.');
+  const projUesfScripts = path.join(projPath, '.uesf/scripts');
+  fs.mkdirSync(projUesfScripts, { recursive: true });
+  for (const s of ['sync-snapshot.ps1', 'sync-snapshot.sh']) {
+    const src = path.join(REPO_ROOT, 'scripts', s);
+    if (fs.existsSync(src)) {
+      const dst = path.join(projUesfScripts, s);
+      fs.copyFileSync(src, dst);
+      if (s.endsWith('.sh')) {
+        try { fs.chmodSync(dst, 0o755); } catch {}
+      }
+    }
+  }
+  const projBinDir = path.join(projPath, '.uesf/bin');
+  fs.mkdirSync(projBinDir, { recursive: true });
+  const dstCli = path.join(projBinDir, 'uesf.mjs');
+  fs.copyFileSync(__filename, dstCli);
+  try { fs.chmodSync(dstCli, 0o755); } catch {}
+
+  const hookSrc = path.join(REPO_ROOT, 'scripts/hooks/pre-commit');
+  const projHooks = path.join(projPath, '.git/hooks');
+  if (fs.existsSync(projHooks) && fs.existsSync(hookSrc)) {
+    const dstH = path.join(projHooks, 'pre-commit');
+    fs.copyFileSync(hookSrc, dstH);
+    try { fs.chmodSync(dstH, 0o755); } catch {}
+  }
+  console.log(`PROJECT_HOOK_WIRED=${projPath.replace(/\\/g, '/')}`);
+
+  if (fs.existsSync(path.join(projPath, '.uesf/EXTENSION.md'))) {
+    runSyncSnapshot(projPath);
+  }
+}
+
+// ============================================================================
+// 4. INSTALL & CHECK COMMANDS
 // ============================================================================
 export function runInstallOrCheck(options = {}) {
   const {
@@ -389,6 +420,7 @@ export function runInstallOrCheck(options = {}) {
     link = false,
     initProject = '',
     targets = ['auto'],
+    explicitTargets = false,
     version = '',
   } = options;
 
@@ -421,6 +453,12 @@ export function runInstallOrCheck(options = {}) {
     }
   }
 
+  // Optional downstream project hook & script wiring
+  if (initProject && !check) {
+    runInitProject(initProject);
+    if (!explicitTargets) return;
+  }
+
   // 1. Install Git pre-commit hook if inside UESF repo
   const gitHooksDir = path.join(REPO_ROOT, '.git/hooks');
   const hookSrc = path.join(REPO_ROOT, 'scripts/hooks/pre-commit');
@@ -429,27 +467,6 @@ export function runInstallOrCheck(options = {}) {
     fs.copyFileSync(hookSrc, hookDst);
     try { fs.chmodSync(hookDst, 0o755); } catch {}
     console.log('HOOK_INSTALLED=.git/hooks/pre-commit');
-  }
-
-  // 2. Optional downstream project hook & script wiring
-  if (initProject) {
-    const projPath = path.resolve(initProject);
-    const projUesfScripts = path.join(projPath, '.uesf/scripts');
-    fs.mkdirSync(projUesfScripts, { recursive: true });
-    for (const s of ['sync-snapshot.ps1', 'sync-snapshot.sh']) {
-      const src = path.join(REPO_ROOT, 'scripts', s);
-      if (fs.existsSync(src)) fs.copyFileSync(src, path.join(projUesfScripts, s));
-    }
-    const projBinDir = path.join(projPath, '.uesf/bin');
-    fs.mkdirSync(projBinDir, { recursive: true });
-    fs.copyFileSync(__filename, path.join(projBinDir, 'uesf.mjs'));
-    const projHooks = path.join(projPath, '.git/hooks');
-    if (fs.existsSync(projHooks) && fs.existsSync(hookSrc)) {
-      const dstH = path.join(projHooks, 'pre-commit');
-      fs.copyFileSync(hookSrc, dstH);
-      try { fs.chmodSync(dstH, 0o755); } catch {}
-    }
-    console.log(`PROJECT_HOOK_WIRED=${projPath}`);
   }
 
   const userHome = os.homedir();
@@ -548,7 +565,7 @@ export function runInstallOrCheck(options = {}) {
 }
 
 // ============================================================================
-// 4. CLI ARGUMENT PARSER
+// 5. CLI ARGUMENT PARSER
 // ============================================================================
 function parseCliArgs(argv) {
   const args = argv.slice(2);
@@ -565,8 +582,17 @@ function parseCliArgs(argv) {
     initProject: '',
     targetRoot: '',
     targets: ['auto'],
+    explicitTargets: false,
     version: '',
   };
+
+  if (subcommand === 'init-project') {
+    if (args[idx] && !args[idx].startsWith('-')) {
+      opts.initProject = args[idx++];
+    } else {
+      opts.initProject = '.';
+    }
+  }
 
   for (let i = idx; i < args.length; i++) {
     const a = args[i];
@@ -576,12 +602,13 @@ function parseCliArgs(argv) {
     } else if (lower === '--link' || lower === '-link') {
       opts.link = true;
     } else if (lower === '--init-project' || lower === '-initproject') {
-      opts.initProject = args[++i] || '';
+      opts.initProject = args[++i] || '.';
     } else if (lower === '--target-root' || lower === '-targetroot') {
       opts.targetRoot = args[++i] || '';
     } else if (lower === '--target' || lower === '--targets' || lower === '-targets') {
       const val = args[++i] || 'auto';
       opts.targets = val.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+      opts.explicitTargets = true;
     } else if (lower === '--version' || lower === '-version' || lower === '--ref') {
       opts.version = args[++i] || '';
     } else if (lower === '--help' || lower === '-h' || subcommand === 'help') {
@@ -589,8 +616,9 @@ function parseCliArgs(argv) {
         `UESF CLI v${FW_VERSION} — Universal Engineering Skills Framework`,
         'Usage:',
         '  npx github:m-ebrahimzadeh/uesf install [--version <ver>] [--target <auto|all|name>] [--link]',
+        '  npx github:m-ebrahimzadeh/uesf init-project [path]',
         '  npx github:m-ebrahimzadeh/uesf check',
-        '  node bin/uesf.mjs <install|check|sync-snapshot|build> [options]',
+        '  node bin/uesf.mjs <install|init-project|check|sync-snapshot|build> [options]',
       ].join('\n'));
       process.exit(0);
     }
@@ -613,9 +641,11 @@ if (isMain) {
     runSyncSnapshot(opts.targetRoot);
   } else if (subcommand === 'build' || subcommand === 'build-dist') {
     runBuildDist();
+  } else if (subcommand === 'init-project') {
+    runInitProject(opts.initProject || '.');
   } else if (subcommand === 'install' || subcommand === 'check') {
     runInstallOrCheck(opts);
   } else {
-    throw new Error(`Unknown subcommand '${subcommand}'. Use install, check, sync-snapshot, or build.`);
+    throw new Error(`Unknown subcommand '${subcommand}'. Use install, init-project, check, sync-snapshot, or build.`);
   }
 }

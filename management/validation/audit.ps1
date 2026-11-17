@@ -304,13 +304,13 @@ if (-not (Test-Path $manifestPath)) {
 "DIST_BUNDLE_ISSUES=$distBundleIssues"
 "DIST_DRIFT_ISSUES=$distDriftIssues"
 
-# 12. Zero-Dependency Node.js CLI & Consolidated Wrapper Check (DEC-026)
+# 12. Zero-Dependency Node.js CLI & Consolidated Wrapper Check (DEC-026 / DEC-027)
 $cliIssues = 0
 if (-not (Test-Path 'package.json')) {
     $cliIssues++; "  CLI_MISSING package.json"
 } else {
     $pkg = Get-Content 'package.json' -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($pkg.version -ne '0.6.2' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
+    if ($pkg.version -ne '0.6.3' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
         $cliIssues++; "  CLI_PKG_INVALID version or bin.uesf mismatch"
     }
     if ($pkg.PSObject.Properties.Name -contains 'dependencies' -and ($pkg.dependencies.PSObject.Properties | Measure-Object).Count -gt 0) {
@@ -319,6 +319,11 @@ if (-not (Test-Path 'package.json')) {
 }
 if (-not (Test-Path 'bin/uesf.mjs')) {
     $cliIssues++; "  CLI_MISSING bin/uesf.mjs"
+} else {
+    $cliText = Get-NormalizedText 'bin/uesf.mjs'
+    if (-not $cliText.Contains('runInitProject')) {
+        $cliIssues++; "  CLI_ENGINE_MISSING_INIT_PROJECT runInitProject not found in bin/uesf.mjs"
+    }
 }
 foreach ($w in @('scripts/sync-snapshot.ps1', 'scripts/build-dist.ps1', 'scripts/install.ps1', 'scripts/sync-snapshot.sh', 'scripts/build-dist.sh', 'scripts/install.sh')) {
     if (-not (Test-Path $w)) {
