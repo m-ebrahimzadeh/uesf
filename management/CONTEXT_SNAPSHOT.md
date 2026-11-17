@@ -3,7 +3,7 @@
 > Generated deterministically by `bin/uesf.mjs sync-snapshot` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`, `DEC-026`).
 > * **Canonical Control Plane**: `management/`
 > * **Snapshot Version**: `0.7.0`
-> * **Source-Ledger-SHA256**: `630b5c98312ea78ef1f97ce519e5115a3eadb735f5ef197d84f00627ed8587c6` (`630b5c98312e`)
+> * **Source-Ledger-SHA256**: `391df9a6dca61008e558a112d1b01489027b36b629aa465edd3373ab8ca58647` (`391df9a6dca6`)
 > * **Last Ledger Update**: `2026-11-17`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
@@ -12,8 +12,8 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `29 / 30`
-* **Total Recorded Decisions (`DEC-*`)**: `28`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `31 / 31`
+* **Total Recorded Decisions (`DEC-*`)**: `29`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
 ## 2. Recorded Project & Governance State (`[RECORDED_IN_LEDGER]`)
@@ -35,8 +35,8 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `0.7.0` (Milestone M7 — Native Single-Skill Agent Adapters, Claude Code / Gemini CLI / Cline Metadata & Duplicate Fixes, and Full `install` / `update` / `check` / `doctor` / `uninstall` CLI)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M6.3 (`v0.6.3`) Accepted on `main`; Milestone M7 (`v0.7.0`) Staged on Feature Branch `feat/TASK-029-native-agent-installer-v0.7.0` for CTO & Stakeholder Verification (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Version**: `0.7.0` (Milestone M7 — Native Multi-Agent Skill & Workflow Adapters, Claude Code / Gemini CLI / Cline Metadata & Duplicate Fixes, and Full `install` / `update` / `check` / `doctor` / `uninstall` CLI)
+   * **Current Phase**: Milestones M1 (`v0.1.0`) through M7 (`v0.7.0` — Native Multi-Agent Skill & Workflow Adapters, Lifecycle CLI `install`/`update`/`check`/`doctor`/`uninstall` & Automatic Context Snapshot) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
@@ -45,7 +45,7 @@ Applies to all milestones, tasks, and environments participating in UESF develop
    * **Layer 2 — Universal Policies (`policies/`)**: Autonomy (`0.2.0` with hard `A0` discovery lock), governance, security, Git, verification, knowledge governance, and source-of-truth policies (`0.2.0`).
    * **Layer 3 — Interaction Protocols (`protocols/`)**: Feature discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`), task contracts (`0.2.0`), handoffs, peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
    * **Layer 4 — Universal Agent Role Skills (`roles/`)**: Nine canonical engineering role skills (`Discovery`, `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).
-   * **Layer 5 — Platform Adapters & CLI Distribution (`adapters/`, `bin/uesf.mjs`, `dist/`)**: Runtime bindings for Antigravity/VS Code (`antigravity-vscode`), Gemini Strategic Workspace (`gemini-strategic-workspace`), and portable CLI/MCP hosts (`generic-cli-mcp`), installing exclusively via native per-agent `skills/` directories tracked in `~/.uesf/install-state.json`.
+   * **Layer 5 — Platform Adapters & CLI Distribution (`adapters/`, `bin/uesf.mjs`, `dist/`)**: Runtime bindings for Antigravity/VS Code (`antigravity-vscode`), Gemini Strategic Workspace (`gemini-strategic-workspace`), and portable CLI/MCP hosts (`generic-cli-mcp`), installing native per-agent `skills/` directories (plus flat `/` menu workflow triggers in Cline per `DEC-029`) tracked in `~/.uesf/install-state.json`.
    * **Layer 6 — Project-Specific Extensions (`extensions/`)**: Extension isolation standard (`extensions/README.md`), template (`templates/PROJECT_EXTENSION_TEMPLATE.md`), and reference web-service blueprint (`extensions/example-web-service/EXTENSION.md`).
 3. **Dual-Environment Operating Topology**:
    * **Strategic Workspace (`adapters/gemini-strategic-workspace/ADAPTER.md`)**: Gemini 4 Argon with connected Shared Workspace (`UNIVERSAL ENGINEERING SKILLS` Gemini Notebook & Google Workspace).
@@ -114,12 +114,12 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-026` | Implement Zero-Dependency Node.js CLI (`package.json` + `bin/uesf.mjs`), Consolidate Scripts & Release `v0.6.2` (`DEC-026`) | DevOps / Developer | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-026-01` (`HO-TASK-026-02`, merged to `main` and tagged `v0.6.2` per `DEC-026`). |
 | `TASK-027` | Add `init-project` Downstream Wiring to `bin/uesf.mjs`, Update `INIT_WORKFLOW.md` & Release `v0.6.3` (`DEC-027`) | DevOps / Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-027-01` (`HO-TASK-027-02`, merged to `main` and tagged `v0.6.3` per `DEC-027`). |
 | `TASK-028` | Forensic Multi-Agent Discovery Audit Across Antigravity, Kilo Code, Codex, Claude Code, Gemini CLI & Cline (`DEC-028`) | QA / DevOps | CTO | Engineering Workspace | `A0` | `ACCEPTED` | `EV-TASK-028-01` (`management/validation/VALIDATION_REPORT_007.md`). |
-| `TASK-029` | Fix Duplicate Commands & Description Metadata in Claude Code and Gemini CLI, Migrate Cline to Native Skills Only, Implement `install`/`update`/`check`/`doctor`/`uninstall` in `bin/uesf.mjs` & Stage `v0.7.0` (`DEC-028`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | `EV-TASK-029-01` (`HO-TASK-029-02` on branch `feat/TASK-029-native-agent-installer-v0.7.0`; `management/validation/VALIDATION_REPORT_007.md`). |
+| `TASK-029` | Fix Duplicate Commands & Description Metadata in Claude Code and Gemini CLI, Migrate Cline to Native Skills Only, Implement `install`/`update`/`check`/`doctor`/`uninstall` in `bin/uesf.mjs` & Stage `v0.7.0` (`DEC-028`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-029-01` (`HO-TASK-029-02` on branch `feat/TASK-029-native-agent-installer-v0.7.0`, accepted via `DEC-029`; `management/validation/VALIDATION_REPORT_007.md`). |
+| `TASK-030` | Enable Cline `/` Menu Workflow Triggers + Native Skills, Close Out Milestone M7 (`v0.7.0`) Registries & Merge to `main` (`DEC-029`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-030-01` (`HO-TASK-030-02`, merged to `main` and tagged `v0.7.0` per `DEC-029`). |
 
 ## 5. Active Outbound Task Contract Queue
-* Milestones M1 (`v0.1.0`) through M6.3 (`v0.6.3`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main`.
-* Milestone M7 (`v0.7.0` — `TASK-029` under `DEC-028`) is staged on `feat/TASK-029-native-agent-installer-v0.7.0` pending CTO and Human Stakeholder live UI confirmation before merging to `main`.
-* All 12 UESF skills (`/uesf-discovery`, `/uesf-cto`, `/uesf-architect`, `/uesf-developer`, `/uesf-qa`, `/uesf-devops`, `/uesf-security`, `/uesf-sre`, `/uesf-documentation`, `/uesf-init`, `/uesf-handoff`, `/uesf-status`) are compiled in `dist/` and managed across native agent `skills/` directories via `bin/uesf.mjs` and `~/.uesf/install-state.json`.
+* Milestones M1 (`v0.1.0`) through M7 (`v0.7.0`, `TASK-000`–`TASK-030`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.7.0`).
+* All 12 UESF skills (`/uesf-discovery`, `/uesf-cto`, `/uesf-architect`, `/uesf-developer`, `/uesf-qa`, `/uesf-devops`, `/uesf-security`, `/uesf-sre`, `/uesf-documentation`, `/uesf-init`, `/uesf-handoff`, `/uesf-status`) are compiled in `dist/` and managed across native agent `skills/` directories (plus flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers in Cline) via `bin/uesf.mjs` and `~/.uesf/install-state.json`.
 * Any future feature proposal or architectural enhancement enters through Track 1 Iterative Discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `roles/discovery/SKILL.md`) locked at `A0` until explicit human confirmation.
 
 ## 6. Relationships with Other Documents
@@ -172,6 +172,7 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 | `DEC-026` | Zero-Dependency Node.js CLI (`package.json` + `bin/uesf.mjs`) & Script Consolidation (`v0.6.2`) | Adopt `package.json` + `bin/uesf.mjs` (`dependencies: {}`) inside the UESF repository as the primary cross-platform CLI for `install` (`npx github:m-ebrahimzadeh/uesf install`), `check`, `sync-snapshot`, and `build` with `--version <ref>` support; refactor `scripts/*.ps1`, `scripts/*.sh`, and `scripts/hooks/pre-commit` into thin pass-through wrappers calling `bin/uesf.mjs` so zero duplicate logic is maintained; and defer `npmjs.com` registry publishing until a mature release. | Confirmed | Human Stakeholder / CTO (`A2`) | 2026-11-17 |
 | `DEC-027` | Downstream `/uesf:init` CLI Engine Wiring (`init-project` Subcommand, `v0.6.3`) | Add `init-project [path]` subcommand (and standalone `--init-project` behavior) to `bin/uesf.mjs` (`0.6.3`) and update `workflows/INIT_WORKFLOW.md` (`0.6.3`) so downstream projects initialized via `/uesf:init` receive `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.{ps1,sh}`, `.git/hooks/pre-commit`, and an initial `.uesf/CONTEXT_SNAPSHOT.md` in one step without dead wrapper references. | Approved | CTO (`A2`) | 2026-11-17 |
 | `DEC-028` | Forensic Multi-Agent Native Skills Alignment, Removal of Duplicate Command/Workflow Paths & Full Lifecycle CLI (`v0.7.0`) | Standardize on native single-skill `SKILL.md` installation per local agent (`~/.gemini/config/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.cline/skills/`, `~/.kilo/skills/`, `~/.codex/skills/`) with strict 2-key YAML frontmatter (`name` and JSON-quoted `description`, zero `version:` key), eliminate top-of-body `> **NON-AUTHORITATIVE` boilerplate in favor of a bottom HTML comment provenance footer (`<!-- UESF-BUNDLE-METADATA: ... -->`), remove duplicate `commands/uesf` and `Workflows/uesf*` files in Claude Code / Gemini CLI / Cline / Kilo Code / Antigravity, centralize state in `~/.uesf/install-state.json` (zero `.uesf-manifest.json` files inside agent directories), and implement `install`, `update`, `check`, `doctor [--fix]`, and `uninstall` in `bin/uesf.mjs` (`TASK-028`, `TASK-029`). | Approved | CTO (`A2`) | 2026-11-17 |
+| `DEC-029` | Milestone M7 (`v0.7.0`) Live UI Sign-Off, Dual Cline `/` Workflow + Skill Integration & Merge to `main` | Following live UI confirmation across Antigravity, Kilo Code, Codex, Claude Code, and Gemini CLI, enable flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu triggers alongside `~/.cline/skills/uesf-<name>/SKILL.md` in the Cline adapter, formally accept `TASK-029` and `TASK-030`, and authorize merging `feat/TASK-029-native-agent-installer-v0.7.0` into `main` with tag `v0.7.0`. | Confirmed | Human Stakeholder (`A3`) / CTO (`A2`) | 2026-11-17 |
 
 ## 4. Open Questions & Pending Human Decisions (`A3` / Clarification Items)
 | Question ID | Topic | Resolution Summary | Status |
@@ -278,4 +279,4 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 630b5c98312e`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 391df9a6dca6`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.

@@ -116,4 +116,4 @@ Provide the standardized Evidence Package template (`EV-<TASK-ID>-<SEQ>`) enforc
 ## 3. Relationships with Other Documents
 * **Governing Specs**: `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`, `policies/VERIFICATION_POLICY.md`, `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-sre command=/uesf-sre source=roles/sre/SKILL.md version=0.7.0 sha256=06309527c7039e3687d36c9c0b012281b176277662b81fdbbfec5a603882ca55 short_sha256=06309527c703 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-sre command=/uesf-sre source=roles/sre/SKILL.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->

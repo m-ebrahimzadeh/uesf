@@ -15,8 +15,8 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `0.7.0` (Milestone M7 — Native Single-Skill Agent Adapters, Claude Code / Gemini CLI / Cline Metadata & Duplicate Fixes, and Full `install` / `update` / `check` / `doctor` / `uninstall` CLI)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M6.3 (`v0.6.3`) Accepted on `main`; Milestone M7 (`v0.7.0`) Staged on Feature Branch `feat/TASK-029-native-agent-installer-v0.7.0` for CTO & Stakeholder Verification (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Version**: `0.7.0` (Milestone M7 — Native Multi-Agent Skill & Workflow Adapters, Claude Code / Gemini CLI / Cline Metadata & Duplicate Fixes, and Full `install` / `update` / `check` / `doctor` / `uninstall` CLI)
+   * **Current Phase**: Milestones M1 (`v0.1.0`) through M7 (`v0.7.0` — Native Multi-Agent Skill & Workflow Adapters, Lifecycle CLI `install`/`update`/`check`/`doctor`/`uninstall` & Automatic Context Snapshot) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
@@ -25,7 +25,7 @@ Applies to all milestones, tasks, and environments participating in UESF develop
    * **Layer 2 — Universal Policies (`policies/`)**: Autonomy (`0.2.0` with hard `A0` discovery lock), governance, security, Git, verification, knowledge governance, and source-of-truth policies (`0.2.0`).
    * **Layer 3 — Interaction Protocols (`protocols/`)**: Feature discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`), task contracts (`0.2.0`), handoffs, peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
    * **Layer 4 — Universal Agent Role Skills (`roles/`)**: Nine canonical engineering role skills (`Discovery`, `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).
-   * **Layer 5 — Platform Adapters & CLI Distribution (`adapters/`, `bin/uesf.mjs`, `dist/`)**: Runtime bindings for Antigravity/VS Code (`antigravity-vscode`), Gemini Strategic Workspace (`gemini-strategic-workspace`), and portable CLI/MCP hosts (`generic-cli-mcp`), installing exclusively via native per-agent `skills/` directories tracked in `~/.uesf/install-state.json`.
+   * **Layer 5 — Platform Adapters & CLI Distribution (`adapters/`, `bin/uesf.mjs`, `dist/`)**: Runtime bindings for Antigravity/VS Code (`antigravity-vscode`), Gemini Strategic Workspace (`gemini-strategic-workspace`), and portable CLI/MCP hosts (`generic-cli-mcp`), installing native per-agent `skills/` directories (plus flat `/` menu workflow triggers in Cline per `DEC-029`) tracked in `~/.uesf/install-state.json`.
    * **Layer 6 — Project-Specific Extensions (`extensions/`)**: Extension isolation standard (`extensions/README.md`), template (`templates/PROJECT_EXTENSION_TEMPLATE.md`), and reference web-service blueprint (`extensions/example-web-service/EXTENSION.md`).
 3. **Dual-Environment Operating Topology**:
    * **Strategic Workspace (`adapters/gemini-strategic-workspace/ADAPTER.md`)**: Gemini 4 Argon with connected Shared Workspace (`UNIVERSAL ENGINEERING SKILLS` Gemini Notebook & Google Workspace).

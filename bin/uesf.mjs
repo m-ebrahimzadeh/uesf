@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * UESF Canonical Cross-Platform CLI Engine (DEC-026, DEC-027, DEC-028)
+ * UESF Canonical Cross-Platform CLI Engine (DEC-026, DEC-027, DEC-028, DEC-029)
  * Zero external dependencies. Consolidates install, update, check, doctor,
  * uninstall, init-project, sync-snapshot, and build.
  */
@@ -487,7 +487,7 @@ function listInstalledVsCodeExtNames(userHome) {
 }
 
 /**
- * Returns the 6 native single-skill local agent adapters (DEC-028).
+ * Returns the 6 local coding agent adapters (DEC-028, DEC-029).
  */
 export function getAgentAdapters(userHome = os.homedir()) {
   const vsCodeExtNames = listInstalledVsCodeExtNames(userHome);
@@ -542,13 +542,13 @@ export function getAgentAdapters(userHome = os.homedir()) {
         fs.existsSync(path.join(userHome, 'Documents/Cline')) ||
         hasVsCodeExt('saoudrizwan.claude-dev'),
       skillsDir: path.join(userHome, '.cline/skills'),
+      workflowsDir: path.join(userHome, 'Documents/Cline/Workflows'),
       legacyPathsToClean: [
         path.join(userHome, 'Documents/Cline/Workflows/uesf'),
-        path.join(userHome, 'Documents/Cline/Workflows/uesf-*.md'),
         path.join(userHome, 'Documents/Cline/Workflows/.uesf-manifest.json'),
         path.join(userHome, '.cline/skills/.uesf-manifest.json'),
       ],
-      uiHint: 'Manage in Cline Skills tab (scale icon -> Skills) & invoke via /uesf-<name>',
+      uiHint: 'Invoke via /uesf-<name>.md in chat or manage in Cline Skills tab',
     },
     {
       name: 'kilocode',
@@ -577,6 +577,16 @@ export function getAgentAdapters(userHome = os.homedir()) {
       uiHint: "Run 'Force reload skills' (or restart Codex), then invoke via $uesf-<name> or /",
     },
   ];
+}
+
+function buildInstalledPathEntry(adapter) {
+  if (adapter.workflowsDir) {
+    return {
+      skills_dir: toPosix(adapter.skillsDir),
+      workflows_dir: toPosix(adapter.workflowsDir),
+    };
+  }
+  return toPosix(adapter.skillsDir);
 }
 
 function getInstallStatePath(userHome = os.homedir()) {
@@ -720,10 +730,11 @@ function decodeYamlScalar(rawVal) {
   return { value: rawVal, quoted: false };
 }
 
-function validateSkillBundleFile(filePath, expectedSkillName, expectedShortSha = '') {
+function validateBundleFile(filePath, { kind = 'skill', expectedId = '', expectedShortSha = '' } = {}) {
   const issues = [];
+  const label = kind === 'skill' ? 'SKILL.md' : 'Workflow .md';
   if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
-    return { valid: false, missing: true, issues: ['SKILL.md missing'] };
+    return { valid: false, missing: true, issues: [`${label} missing`] };
   }
   const raw = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '').replace(/\r\n/g, '\n');
   const fmMatch = raw.match(/^---\n([\s\S]*?)\n---(?:\n|$)([\s\S]*)$/);
@@ -739,22 +750,27 @@ function validateSkillBundleFile(filePath, expectedSkillName, expectedShortSha =
     if (keys.includes('version')) {
       issues.push("Unexpected top-level 'version' key in YAML frontmatter");
     }
-    const extraKeys = keys.filter((k) => k !== 'name' && k !== 'description');
+    const allowedKeys = kind === 'skill' ? ['name', 'description'] : ['description'];
+    const extraKeys = keys.filter((k) => !allowedKeys.includes(k));
     if (extraKeys.length > 0) {
       issues.push(`Unexpected frontmatter key(s): ${extraKeys.join(', ')}`);
     }
-    if (!keys.includes('name')) issues.push("Missing 'name' in frontmatter");
-    if (!keys.includes('description')) issues.push("Missing 'description' in frontmatter");
+    if (kind === 'skill' && !keys.includes('name')) {
+      issues.push("Missing 'name' in frontmatter");
+    }
+    if (!keys.includes('description')) {
+      issues.push("Missing 'description' in frontmatter");
+    }
 
-    if (fields.name !== undefined) {
+    if (kind === 'skill' && fields.name !== undefined) {
       const nameDecoded = decodeYamlScalar(fields.name);
       const nameVal = (nameDecoded.value || '').trim();
       if (!nameVal || nameVal.length > 64) {
         issues.push(`Invalid skill name length (${nameVal.length})`);
       } else if (!/^[a-z0-9-]+$/.test(nameVal) || nameVal.startsWith('-') || nameVal.endsWith('-') || nameVal.includes('--')) {
         issues.push(`Invalid skill name format '${nameVal}'`);
-      } else if (expectedSkillName && nameVal !== expectedSkillName) {
-        issues.push(`Skill name '${nameVal}' does not match directory '${expectedSkillName}'`);
+      } else if (expectedId && nameVal !== expectedId) {
+        issues.push(`Skill name '${nameVal}' does not match directory '${expectedId}'`);
       }
     }
 
@@ -786,8 +802,13 @@ function validateSkillBundleFile(filePath, expectedSkillName, expectedShortSha =
   const metaMatch = body.match(/<!--\s*UESF-BUNDLE-METADATA:\s*([^>]+)-->/);
   if (!metaMatch) {
     issues.push('Missing UESF-BUNDLE-METADATA HTML comment footer');
-  } else if (expectedShortSha && !metaMatch[1].includes(`short_sha256=${expectedShortSha}`)) {
-    issues.push(`SHA256 mismatch (expected short_sha256=${expectedShortSha})`);
+  } else {
+    if (expectedId && !metaMatch[1].includes(`bundle=${expectedId}`)) {
+      issues.push(`Bundle metadata mismatch (expected bundle=${expectedId})`);
+    }
+    if (expectedShortSha && !metaMatch[1].includes(`short_sha256=${expectedShortSha}`)) {
+      issues.push(`SHA256 mismatch (expected short_sha256=${expectedShortSha})`);
+    }
   }
 
   return { valid: issues.length === 0, missing: false, issues };
@@ -809,6 +830,32 @@ function syncAdapterSkills(adapter, distRoot, distManifest, link = false) {
       fs.cpSync(srcSkillDir, dstSkillDir, { recursive: true, force: true });
     }
   }
+}
+
+function syncAdapterWorkflows(adapter, distRoot, distManifest) {
+  if (!adapter.workflowsDir) return;
+  fs.mkdirSync(adapter.workflowsDir, { recursive: true });
+  for (const entry of fs.readdirSync(adapter.workflowsDir, { withFileTypes: true })) {
+    if ((entry.isFile() || entry.isSymbolicLink()) && /^uesf-.*\.md$/.test(entry.name)) {
+      removePathSafely(path.join(adapter.workflowsDir, entry.name));
+    }
+  }
+  for (const b of distManifest.bundles) {
+    const srcCmdFile = path.join(path.dirname(distRoot), b.command_path);
+    const dstWorkflowFile = path.join(adapter.workflowsDir, `${b.id}.md`);
+    fs.copyFileSync(srcCmdFile, dstWorkflowFile);
+  }
+}
+
+function syncAdapterTargets(adapter, distRoot, distManifest, link = false) {
+  syncAdapterSkills(adapter, distRoot, distManifest, link);
+  syncAdapterWorkflows(adapter, distRoot, distManifest);
+}
+
+function formatAdapterTargetPaths(adapter) {
+  return adapter.workflowsDir
+    ? `${toPosix(adapter.skillsDir)} & ${toPosix(adapter.workflowsDir)}`
+    : toPosix(adapter.skillsDir);
 }
 
 function maybeRedirectVersion(subcommand, options) {
@@ -872,10 +919,10 @@ export function runInstallOrUpdate(options = {}, commandName = 'install') {
 
   const installedMap = {};
   for (const adapter of selected) {
-    syncAdapterSkills(adapter, distRoot, distManifest, Boolean(options.link));
-    installedMap[adapter.name] = toPosix(adapter.skillsDir);
+    syncAdapterTargets(adapter, distRoot, distManifest, Boolean(options.link));
+    installedMap[adapter.name] = buildInstalledPathEntry(adapter);
     console.log(
-      `INSTALLED_TARGET=${adapter.name} (v${distManifest.version}, SHA256=${distManifest.source_sha256_short}) -> ${toPosix(adapter.skillsDir)} [${adapter.uiHint}]`
+      `INSTALLED_TARGET=${adapter.name} (v${distManifest.version}, SHA256=${distManifest.source_sha256_short}) -> ${formatAdapterTargetPaths(adapter)} [${adapter.uiHint}]`
     );
   }
 
@@ -906,14 +953,34 @@ export function runCheck(options = {}) {
     const legacyHits = findLegacyArtifacts([adapter]);
     let missingCount = 0;
     const problemBundles = [];
+    let wfMissingCount = 0;
+    const wfProblemBundles = [];
 
     for (const b of distManifest.bundles) {
       const skillMd = path.join(adapter.skillsDir, b.id, 'SKILL.md');
-      const res = validateSkillBundleFile(skillMd, b.id, distManifest.source_sha256_short);
+      const res = validateBundleFile(skillMd, {
+        kind: 'skill',
+        expectedId: b.id,
+        expectedShortSha: distManifest.source_sha256_short,
+      });
       if (res.missing) {
         missingCount++;
       } else if (!res.valid) {
         problemBundles.push(`${b.id} (${res.issues.join('; ')})`);
+      }
+
+      if (adapter.workflowsDir) {
+        const wfMd = path.join(adapter.workflowsDir, `${b.id}.md`);
+        const wfRes = validateBundleFile(wfMd, {
+          kind: 'workflow',
+          expectedId: b.id,
+          expectedShortSha: distManifest.source_sha256_short,
+        });
+        if (wfRes.missing) {
+          wfMissingCount++;
+        } else if (!wfRes.valid) {
+          wfProblemBundles.push(`${b.id}.md (${wfRes.issues.join('; ')})`);
+        }
       }
     }
 
@@ -926,9 +993,32 @@ export function runCheck(options = {}) {
       }
     }
 
-    if (missingCount === distManifest.bundles.length && legacyHits.length === 0 && extraDirs.length === 0) {
+    const extraWorkflows = [];
+    if (adapter.workflowsDir && fs.existsSync(adapter.workflowsDir)) {
+      for (const entry of fs.readdirSync(adapter.workflowsDir, { withFileTypes: true })) {
+        if ((entry.isFile() || entry.isSymbolicLink()) && /^uesf-.*\.md$/.test(entry.name)) {
+          const wfId = entry.name.replace(/\.md$/, '');
+          if (!expectedIds.has(wfId)) {
+            extraWorkflows.push(entry.name);
+          }
+        }
+      }
+    }
+
+    const skillsAbsent = missingCount === distManifest.bundles.length;
+    const workflowsAbsent = !adapter.workflowsDir || wfMissingCount === distManifest.bundles.length;
+
+    if (skillsAbsent && workflowsAbsent && legacyHits.length === 0 && extraDirs.length === 0 && extraWorkflows.length === 0) {
       console.log(`CHECK_TARGET=${adapter.name}: NOT_INSTALLED`);
-    } else if (missingCount === 0 && problemBundles.length === 0 && legacyHits.length === 0 && extraDirs.length === 0) {
+    } else if (
+      missingCount === 0 &&
+      wfMissingCount === 0 &&
+      problemBundles.length === 0 &&
+      wfProblemBundles.length === 0 &&
+      legacyHits.length === 0 &&
+      extraDirs.length === 0 &&
+      extraWorkflows.length === 0
+    ) {
       console.log(
         `CHECK_TARGET=${adapter.name}: UP_TO_DATE (v${distManifest.version}, SHA256=${distManifest.source_sha256_short})`
       );
@@ -936,9 +1026,86 @@ export function runCheck(options = {}) {
       const reasons = [];
       if (missingCount > 0) reasons.push(`missing=${missingCount}`);
       if (problemBundles.length > 0) reasons.push(`invalid_or_outdated=${problemBundles.length}`);
+      if (wfMissingCount > 0) reasons.push(`missing_workflows=${wfMissingCount}`);
+      if (wfProblemBundles.length > 0) reasons.push(`invalid_or_outdated_workflows=${wfProblemBundles.length}`);
       if (legacyHits.length > 0) reasons.push(`legacy_artifacts=${legacyHits.length}`);
       if (extraDirs.length > 0) reasons.push(`stray_uesf_dirs=${extraDirs.join(',')}`);
+      if (extraWorkflows.length > 0) reasons.push(`stray_uesf_workflows=${extraWorkflows.join(',')}`);
       console.log(`CHECK_TARGET=${adapter.name}: OUTDATED (${reasons.join(', ')})`);
+    }
+  }
+}
+
+function inspectAdapterDirectory(adapter, dirPath, kind, expectedIds, expectedSha, issues) {
+  let installedCount = 0;
+  const seenIds = new Set();
+
+  if (fs.existsSync(dirPath)) {
+    for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+      const isSkill =
+        kind === 'skill' &&
+        (entry.isDirectory() || entry.isSymbolicLink()) &&
+        entry.name.startsWith('uesf-');
+      const isWorkflow =
+        kind === 'workflow' &&
+        (entry.isFile() || entry.isSymbolicLink()) &&
+        /^uesf-.*\.md$/.test(entry.name);
+      if (!isSkill && !isWorkflow) continue;
+
+      const bundleId = isWorkflow ? entry.name.replace(/\.md$/, '') : entry.name;
+      const targetFile = isSkill
+        ? path.join(dirPath, entry.name, 'SKILL.md')
+        : path.join(dirPath, entry.name);
+
+      installedCount++;
+      seenIds.add(bundleId);
+
+      const res = validateBundleFile(targetFile, {
+        kind,
+        expectedId: bundleId,
+        expectedShortSha: expectedSha,
+      });
+      if (!res.valid) {
+        issues.push({
+          type:
+            kind === 'skill'
+              ? 'INVALID_SKILL_FRONTMATTER_OR_METADATA'
+              : 'INVALID_WORKFLOW_FRONTMATTER_OR_METADATA',
+          adapter: adapter.name,
+          path: targetFile,
+          detail: res.issues.join('; '),
+        });
+      }
+      if (expectedIds && !expectedIds.has(bundleId)) {
+        issues.push({
+          type: kind === 'skill' ? 'STRAY_UESF_SKILL_DIR' : 'STRAY_UESF_WORKFLOW_FILE',
+          adapter: adapter.name,
+          path: path.join(dirPath, entry.name),
+          detail: `Unexpected UESF ${kind} '${entry.name}' not in dist/manifest.json`,
+        });
+      }
+    }
+  }
+
+  if (expectedIds) {
+    const missingIds = [...expectedIds].filter((id) => !seenIds.has(id));
+    if (installedCount > 0 && missingIds.length > 0) {
+      issues.push({
+        type: kind === 'skill' ? 'INCOMPLETE_SKILL_SET' : 'INCOMPLETE_WORKFLOW_SET',
+        adapter: adapter.name,
+        path: dirPath,
+        detail: `Missing UESF ${kind}s: ${missingIds.join(', ')}`,
+      });
+    } else if (installedCount === 0) {
+      issues.push({
+        type: kind === 'skill' ? 'MISSING_SKILLS' : 'MISSING_WORKFLOWS',
+        adapter: adapter.name,
+        path: dirPath,
+        detail:
+          kind === 'skill'
+            ? 'No UESF skills installed in detected agent directory'
+            : 'No UESF workflows installed in detected agent Workflows directory',
+      });
     }
   }
 }
@@ -958,53 +1125,9 @@ function collectDoctorIssues(allAdapters, selectedAdapters, distManifest) {
   }
 
   for (const adapter of selectedAdapters) {
-    let installedUesfCount = 0;
-    const seenIds = new Set();
-
-    if (fs.existsSync(adapter.skillsDir)) {
-      for (const entry of fs.readdirSync(adapter.skillsDir, { withFileTypes: true })) {
-        if ((entry.isDirectory() || entry.isSymbolicLink()) && entry.name.startsWith('uesf-')) {
-          installedUesfCount++;
-          seenIds.add(entry.name);
-          const skillMd = path.join(adapter.skillsDir, entry.name, 'SKILL.md');
-          const res = validateSkillBundleFile(skillMd, entry.name, expectedSha);
-          if (!res.valid) {
-            issues.push({
-              type: 'INVALID_SKILL_FRONTMATTER_OR_METADATA',
-              adapter: adapter.name,
-              path: skillMd,
-              detail: res.issues.join('; '),
-            });
-          }
-          if (expectedIds && !expectedIds.has(entry.name)) {
-            issues.push({
-              type: 'STRAY_UESF_SKILL_DIR',
-              adapter: adapter.name,
-              path: path.join(adapter.skillsDir, entry.name),
-              detail: `Unexpected UESF directory '${entry.name}' not in dist/manifest.json`,
-            });
-          }
-        }
-      }
-    }
-
-    if (expectedIds) {
-      const missingIds = [...expectedIds].filter((id) => !seenIds.has(id));
-      if (installedUesfCount > 0 && missingIds.length > 0) {
-        issues.push({
-          type: 'INCOMPLETE_SKILL_SET',
-          adapter: adapter.name,
-          path: adapter.skillsDir,
-          detail: `Missing UESF skills: ${missingIds.join(', ')}`,
-        });
-      } else if (installedUesfCount === 0) {
-        issues.push({
-          type: 'MISSING_SKILLS',
-          adapter: adapter.name,
-          path: adapter.skillsDir,
-          detail: `No UESF skills installed in detected agent directory`,
-        });
-      }
+    inspectAdapterDirectory(adapter, adapter.skillsDir, 'skill', expectedIds, expectedSha, issues);
+    if (adapter.workflowsDir) {
+      inspectAdapterDirectory(adapter, adapter.workflowsDir, 'workflow', expectedIds, expectedSha, issues);
     }
   }
 
@@ -1027,9 +1150,9 @@ export function runDoctor(options = {}) {
       const installedMap = {};
       for (const adapter of selected) {
         if (affectedNames.has(adapter.name)) {
-          syncAdapterSkills(adapter, distRoot, distManifest, Boolean(options.link));
-          installedMap[adapter.name] = toPosix(adapter.skillsDir);
-          console.log(`DOCTOR_FIXED_TARGET=${adapter.name} -> ${toPosix(adapter.skillsDir)}`);
+          syncAdapterTargets(adapter, distRoot, distManifest, Boolean(options.link));
+          installedMap[adapter.name] = buildInstalledPathEntry(adapter);
+          console.log(`DOCTOR_FIXED_TARGET=${adapter.name} -> ${formatAdapterTargetPaths(adapter)}`);
         }
       }
       if (Object.keys(installedMap).length > 0) {
@@ -1100,10 +1223,21 @@ export function runUninstall(options = {}) {
         }
       }
     }
+    let removedWorkflowCount = 0;
+    if (adapter.workflowsDir && fs.existsSync(adapter.workflowsDir)) {
+      for (const entry of fs.readdirSync(adapter.workflowsDir, { withFileTypes: true })) {
+        if ((entry.isFile() || entry.isSymbolicLink()) && /^uesf-.*\.md$/.test(entry.name)) {
+          if (removePathSafely(path.join(adapter.workflowsDir, entry.name))) {
+            removedWorkflowCount++;
+          }
+        }
+      }
+    }
     const legacyRemoved = cleanLegacyArtifacts([adapter]);
-    if (adapter.detect() || removedCount > 0 || legacyRemoved.length > 0 || mode === 'explicit') {
+    if (adapter.detect() || removedCount > 0 || removedWorkflowCount > 0 || legacyRemoved.length > 0 || mode === 'explicit') {
+      const wfSummary = adapter.workflowsDir ? ` and ${removedWorkflowCount} UESF workflows` : '';
       console.log(
-        `UNINSTALLED_TARGET=${adapter.name} (removed ${removedCount} UESF skills; preserved all non-UESF files)`
+        `UNINSTALLED_TARGET=${adapter.name} (removed ${removedCount} UESF skills${wfSummary}; preserved all non-UESF files)`
       );
     }
   }

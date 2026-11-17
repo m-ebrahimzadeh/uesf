@@ -1,8 +1,8 @@
 {
   "framework": "Universal Engineering Skills Framework (UESF)",
   "version": "0.7.0",
-  "source_sha256": "06309527c7039e3687d36c9c0b012281b176277662b81fdbbfec5a603882ca55",
-  "source_sha256_short": "06309527c703",
+  "source_sha256": "974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21",
+  "source_sha256_short": "974ed54739f5",
   "bundle_count": 12,
   "bundles": [
     {

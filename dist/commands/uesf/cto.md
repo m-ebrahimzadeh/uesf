@@ -161,4 +161,4 @@ Provide the standardized Outbound and Inbound Handoff Package templates (`HO-<TA
 ## 4. Relationships with Other Documents
 * **Governing Protocol**: `protocols/HANDOFF_PROTOCOL.md`, `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-cto command=/uesf-cto source=roles/cto/SKILL.md version=0.7.0 sha256=06309527c7039e3687d36c9c0b012281b176277662b81fdbbfec5a603882ca55 short_sha256=06309527c703 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-cto command=/uesf-cto source=roles/cto/SKILL.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->

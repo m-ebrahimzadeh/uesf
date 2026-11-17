@@ -52,7 +52,7 @@ Open your target software project in your coding agent and invoke:
 ```text
 /uesf-init
 ```
-*(Or `$uesf-init` in Codex, or activate `uesf-init` in Cline Skills; see Section 3.3 for exact per-agent syntax.)*
+*(Or `$uesf-init` in Codex, or /uesf-init.md / Skills tab in Cline; see Section 3.3 for exact per-agent syntax.)*
 
 What `/uesf-init` (`workflows/INIT_WORKFLOW.md`) does automatically:
 1. **Audits in Read-Only Mode (`A0` First)**: Inspects your project's tech stack, directory structure, build/test commands, and existing documentation in `docs/` without modifying any files.
@@ -90,7 +90,7 @@ What `/uesf-init` (`workflows/INIT_WORKFLOW.md`) does automatically:
 | **`uesf-documentation`** (`/uesf-documentation`) | **Documentation** (`roles/documentation/SKILL.md`) | `A1` | **Technical docs & index maintenance.** Keeps approved specifications, `KNOWLEDGE_MAP.md` routing tables, and READMEs synchronized without altering policy decisions. |
 
 ### 3.3 How to Invoke Commands in Each Agent Platform
-Starting in `v0.7.0` (`DEC-028`), `bin/uesf.mjs` installs UESF exclusively via each coding agent's **native single-skill directory** (`SKILL.md` with strict 2-key YAML frontmatter and zero duplicate command/workflow directories; `adapters/README.md`):
+Starting in `v0.7.0` (`DEC-028`, `DEC-029`), `bin/uesf.mjs` installs UESF via each coding agent's **native single-skill directory** (`SKILL.md` with strict 2-key YAML frontmatter and zero duplicate command directories; `adapters/README.md`), plus flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers for Cline:
 
 | Agent / Environment | Native Installed Location | How to Invoke a Role or Workflow |
 | :--- | :--- | :--- |
@@ -98,7 +98,7 @@ Starting in `v0.7.0` (`DEC-028`), `bin/uesf.mjs` installs UESF exclusively via e
 | **Gemini CLI** | `~/.gemini/skills/` | Type `/uesf-discovery`, `/uesf-cto`, `/uesf-developer`, `/uesf-init`, `/uesf-status`, `/uesf-handoff` (or `/skills list`) |
 | **Antigravity (VS Code)** | `~/.gemini/config/skills/` | Type `/uesf-discovery`, `/uesf-cto`, `/uesf-developer`, `/uesf-init`, `/uesf-status`, `/uesf-handoff` (or automatic skill matching) |
 | **Kilo Code** | `~/.kilo/skills/` | Type `/uesf-discovery`, `/uesf-cto`, `/uesf-developer`, `/uesf-init`, `/uesf-status`, `/uesf-handoff` (or Skills settings) |
-| **Cline (VS Code)** | `~/.cline/skills/` | Manage in Cline Skills tab (`scale icon -> Skills`); activated on-demand via `use_skill` (or `/uesf-<name>` prompt guidance) |
+| **Cline** | `~/.cline/skills/` & `~/Documents/Cline/Workflows/` | Type /uesf-discovery.md, /uesf-status.md in chat or toggle in Cline Skills tab |
 | **Codex CLI** | `~/.codex/skills/` | Run `Force reload skills` (or restart), then invoke `$uesf-discovery`, `$uesf-cto`, `$uesf-developer`, `$uesf-init`, `$uesf-status`, `$uesf-handoff` (or `/`) |
 | **Gemini Cloud Chat** | Remote GitHub Raw / Snapshot Paste (`adapters/gemini-strategic-workspace/ADAPTER.md`) | Start session with `/uesf:status <owner/repo> [branch]` (or paste `.uesf/CONTEXT_SNAPSHOT.md`) |
 
