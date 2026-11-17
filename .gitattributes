@@ -3,5 +3,6 @@
 *.md text diff=markdown eol=lf
 *.sh text eol=lf
 *.ps1 text eol=lf
+*.mjs text eol=lf
 *.toml text eol=lf
 *.json text eol=lf

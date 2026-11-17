@@ -1,10 +1,10 @@
 > **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
 > * **Bundle ID**: `uesf-init` (`/uesf:init`)
-> * **Canonical Source**: `workflows/INIT_WORKFLOW.md` (`uesf@v0.6.1`)
-> * **Source-SHA256**: `7d8c19d4912aefdac9544a625adce0d20718518908175f33330c72f988849c60` (`7d8c19d4912a`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.1 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
+> * **Canonical Source**: `workflows/INIT_WORKFLOW.md` (`uesf@v0.6.2`)
+> * **Source-SHA256**: `bf44ca16f52b5d7dbcacdc0a1a4acf2d392c3745c1785a379d361374d7afdd71` (`bf44ca16f52b`)
+> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.2 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.6.1`)
+## UESF Embedded Core & Policy Invariants (`v0.6.2`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -23,7 +23,7 @@
 * **Document ID**: UESF-WKFL-001
 * **Canonical Path**: workflows/INIT_WORKFLOW.md
 * **Workflow Trigger**: /uesf:init
-* **Version**: 0.6.1
+* **Version**: 0.6.2
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -57,7 +57,7 @@ Per `core/CAPABILITY_MODEL.md`:
    * Ask: *"Do you approve scaffolding this `.uesf/` configuration (or would you like to adjust any build/test commands first)?"*
 3. **Stage 2 — Self-Contained Scaffolding & Automatic Snapshot Hook (`A1`)**:
    * Upon human confirmation, create `.uesf/` and `.uesf/scripts/` containing:
-     * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.6.1`).
+     * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.6.2`).
      * `.uesf/KNOWLEDGE_MAP.md` (routing table indexing existing project docs in `docs/` and operational files in `.uesf/`).
      * `.uesf/ACTIVE_TASKS.md` (initialized with `TASK-001: Initialize UESF Project Control Plane (.uesf/)` marked `ACCEPTED`).
      * `.uesf/DECISION_LOG.md` (initialized with `DEC-001: Onboard Project to UESF Three-Domain Governance`).
@@ -70,7 +70,7 @@ Per `core/CAPABILITY_MODEL.md`:
      * `/uesf:status` — Reconstruct project context at the start of any future local or cloud session.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the first response with: `**[UESF v0.6.1 | Active: /uesf:init | Autonomy: A0 -> A1 on Approval]**`
+* Begin the first response with: `**[UESF v0.6.2 | Active: /uesf:init | Autonomy: A0 -> A1 on Approval]**`
 * Distinguish `[VERIFIED]` repository observations (from `package.json`, `pyproject.toml`, `Cargo.toml`, `git remote -v`, etc.) from `[INFERRED]` architectural conventions (`policies/VERIFICATION_POLICY.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
@@ -125,208 +125,47 @@ Mandatory template for all Layer 6 project extension specifications (`core/FRAME
 * **Architecture & Layer 6 Registry**: `core/FRAMEWORK_ARCHITECTURE.md`, `extensions/README.md`
 * **Policies**: `policies/AUTONOMY_POLICY.md`, `policies/GOVERNANCE_POLICY.md`, `policies/SECURITY_POLICY.md`, `policies/VERIFICATION_POLICY.md`
 * **Adapters**: `adapters/README.md`
-
 ---
-## Embedded Project Automation Scripts (.uesf/scripts/ & .git/hooks/pre-commit)
+## Embedded Project Automation Scripts (`.uesf/scripts/` & `.git/hooks/pre-commit`)
 
-### Target `.uesf/scripts/sync-snapshot.ps1` (Source: `scripts/sync-snapshot.ps1`)
+### Script 1: `.uesf/scripts/sync-snapshot.ps1`
 ```powershell
-param(
-    [string]$TargetRoot = ""
-)
+param([string]$TargetRoot = "")
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-
+$cli = Join-Path $PSScriptRoot '..\bin\uesf.mjs'
 if ([string]::IsNullOrWhiteSpace($TargetRoot)) {
-    $parentDir = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-    if ((Split-Path $parentDir -Leaf) -eq '.uesf') {
-        $TargetRoot = (Resolve-Path (Join-Path $parentDir '..')).Path
-    } else {
-        $TargetRoot = $parentDir
-    }
+    & node $cli sync-snapshot
 } else {
-    $TargetRoot = (Resolve-Path $TargetRoot).Path
+    & node $cli sync-snapshot --target-root $TargetRoot
 }
-Set-Location $TargetRoot
-
-function Get-NormalizedText([string]$path) {
-    if (-not (Test-Path $path -PathType Leaf)) { return "" }
-    return ([System.IO.File]::ReadAllText((Resolve-Path $path).Path)).Replace("`r`n", "`n").Trim()
-}
-
-function Get-Sha256Hex([string]$text) {
-    $bytes = [System.Text.Encoding]::UTF8.GetBytes($text)
-    $sha = [System.Security.Cryptography.SHA256]::Create()
-    try {
-        return ([System.BitConverter]::ToString($sha.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
-    } finally {
-        $sha.Dispose()
-    }
-}
-
-$isUesfCore = (Test-Path 'management/PROJECT_PROFILE.md') -and (Test-Path 'core/UNIVERSAL_AGENT_OPERATING_MODEL.md')
-if ($isUesfCore) {
-    $ctrlDir = 'management'
-    $profilePath = 'management/PROJECT_PROFILE.md'
-    $tasksPath = 'management/ACTIVE_TASKS.md'
-    $decisionsPath = 'management/DECISION_LOG.md'
-    $kmPath = 'management/KNOWLEDGE_MAP.md'
-    $releasesPath = 'management/RELEASE_HISTORY.md'
-    $roadmapPath = 'management/IMPLEMENTATION_ROADMAP.md'
-    $outPath = 'management/CONTEXT_SNAPSHOT.md'
-    $ledgerFiles = @($profilePath, $tasksPath, $decisionsPath, $kmPath, $releasesPath, $roadmapPath)
-} elseif (Test-Path '.uesf/EXTENSION.md') {
-    $ctrlDir = '.uesf'
-    $profilePath = '.uesf/EXTENSION.md'
-    $tasksPath = '.uesf/ACTIVE_TASKS.md'
-    $decisionsPath = '.uesf/DECISION_LOG.md'
-    $kmPath = '.uesf/KNOWLEDGE_MAP.md'
-    $outPath = '.uesf/CONTEXT_SNAPSHOT.md'
-    $ledgerFiles = @($profilePath, $tasksPath, $decisionsPath, $kmPath)
-} else {
-    throw "No UESF control plane found in $TargetRoot (expected management/PROJECT_PROFILE.md or .uesf/EXTENSION.md)."
-}
-
-$concatLedger = ($ledgerFiles | ForEach-Object { "=== $_ ===`n" + (Get-NormalizedText $_) }) -join "`n"
-$ledgerHashFull = Get-Sha256Hex $concatLedger
-$ledgerHashShort = $ledgerHashFull.Substring(0, 12)
-
-$profileText = Get-NormalizedText $profilePath
-$verMatch = [regex]::Match($profileText, '\* \*\*Version\*\*: ([^\r\n]+)')
-$projVer = if ($verMatch.Success) { $verMatch.Groups[1].Value.Trim() } else { '0.6.0' }
-$updMatch = [regex]::Match($profileText, '\* \*\*Last Updated\*\*: ([^\r\n]+)')
-$lastUpd = if ($updMatch.Success) { $updMatch.Groups[1].Value.Trim() } else { '2026-11-17' }
-
-# Section 1: Deterministic Filesystem & Registry Probe
-$kmText = Get-NormalizedText $kmPath
-$kmRows = [regex]::Matches($kmText, '(?m)^\| `([^`]+)` \| `([^`]+)` \|[^|]*\|[^|]*\| `([^`]+)` \|')
-$kmPaths = @($kmRows | ForEach-Object { $_.Groups[2].Value })
-
-$allMd = Get-ChildItem -Recurse -File -Filter *.md | Where-Object {
-    $_.FullName -notmatch '[/\\]\.git[/\\]' -and
-    $_.FullName -notmatch '[/\\]dist[/\\]' -and
-    $_.FullName -notmatch 'CONTEXT_SNAPSHOT\.md$'
-}
-$relMd = @($allMd | ForEach-Object { $_.FullName.Substring($TargetRoot.Length + 1).Replace('\', '/') } | Sort-Object)
-$missingOnDisk = @($kmPaths | Where-Object { $relMd -notcontains $_ })
-$extraOnDisk = @($relMd | Where-Object { $kmPaths -notcontains $_ })
-
-$verMismatches = @()
-foreach ($r in $kmRows) {
-    $p = $r.Groups[2].Value
-    $expectedV = $r.Groups[3].Value
-    if (Test-Path $p) {
-        $ft = Get-NormalizedText $p
-        if ($ft -notmatch ('\* \*\*Version\*\*: ' + [regex]::Escape($expectedV))) {
-            $verMismatches += $p
-        }
-    }
-}
-
-$tasksText = Get-NormalizedText $tasksPath
-$taskRows = [regex]::Matches($tasksText, '(?m)^\| `(TASK-\d+)` \| ([^|]+) \| ([^|]+) \| ([^|]+) \| ([^|]+) \| `([^`]+)` \| `([^`]+)` \|')
-$acceptedCount = @($taskRows | Where-Object { $_.Groups[7].Value.Trim() -eq 'ACCEPTED' }).Count
-
-$decisionsText = Get-NormalizedText $decisionsPath
-$decRows = [regex]::Matches($decisionsText, '(?m)^\| `(DEC-\d+)` \| ([^|]+) \| ([^|]+) \| ([^|]+) \|')
-$openQuestions = [regex]::Matches($decisionsText, '(?m)^\| `(OQ-\d+)` \| ([^|]+) \| ([^|]+) \| ([^|]+) \|')
-$unresolvedOq = @($openQuestions | Where-Object { $_.Groups[4].Value -notmatch 'Closed|Resolved' })
-
-$driftAlerts = @()
-if ($missingOnDisk.Count -gt 0) { $driftAlerts += "MISSING_ON_DISK: $($missingOnDisk -join ', ')" }
-if ($extraOnDisk.Count -gt 0)   { $driftAlerts += "UNINDEXED_MD_ON_DISK: $($extraOnDisk -join ', ')" }
-if ($verMismatches.Count -gt 0) { $driftAlerts += "KM_VERSION_MISMATCH: $($verMismatches -join ', ')" }
-$driftStatus = if ($driftAlerts.Count -eq 0) { 'CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)' } else { "DRIFT_DETECTED ($($driftAlerts.Count) issue(s))" }
-
-$emDash = [string][char]0x2014
-
-$sb = New-Object System.Text.StringBuilder
-[void]$sb.AppendLine('# UESF Context Snapshot (Machine-Generated)')
-[void]$sb.AppendLine(('> **NON-AUTHORITATIVE DERIVED ARTIFACT {0} DO NOT EDIT MANUALLY**' -f $emDash))
-[void]$sb.AppendLine('> Generated deterministically by `scripts/sync-snapshot.ps1` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`).')
-[void]$sb.AppendLine(('> * **Canonical Control Plane**: `{0}/`' -f $ctrlDir))
-[void]$sb.AppendLine(('> * **Snapshot Version**: `{0}`' -f $projVer))
-[void]$sb.AppendLine(('> * **Source-Ledger-SHA256**: `{0}` (`{1}`)' -f $ledgerHashFull, $ledgerHashShort))
-[void]$sb.AppendLine(('> * **Last Ledger Update**: `{0}`' -f $lastUpd))
-[void]$sb.AppendLine('')
-[void]$sb.AppendLine('## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)')
-[void]$sb.AppendLine(('* **Canonical Specification Files on Disk**: `{0}`' -f $relMd.Count))
-[void]$sb.AppendLine(('* **Registered Documents in `KNOWLEDGE_MAP.md`**: `{0}`' -f $kmRows.Count))
-[void]$sb.AppendLine(('* **Missing Registered Files on Disk**: `{0}`' -f $missingOnDisk.Count))
-[void]$sb.AppendLine(('* **Unindexed Canonical Markdown Files on Disk**: `{0}`' -f $extraOnDisk.Count))
-[void]$sb.AppendLine(('* **Header-to-Registry Version Mismatches**: `{0}`' -f $verMismatches.Count))
-[void]$sb.AppendLine(('* **Total Recorded Tasks (`ACCEPTED` / Total)**: `{0} / {1}`' -f $acceptedCount, $taskRows.Count))
-[void]$sb.AppendLine(('* **Total Recorded Decisions (`DEC-*`)**: `{0}`' -f $decRows.Count))
-[void]$sb.AppendLine(('* **Unresolved Open Questions (`OQ-*`)**: `{0}`' -f $unresolvedOq.Count))
-[void]$sb.AppendLine('')
-[void]$sb.AppendLine('## 2. Recorded Project & Governance State (`[RECORDED_IN_LEDGER]`)')
-[void]$sb.AppendLine(('### 2.1 Project Identity & Architecture Profile (`{0}`)' -f $profilePath))
-[void]$sb.AppendLine((Get-NormalizedText $profilePath))
-[void]$sb.AppendLine('')
-[void]$sb.AppendLine(('### 2.2 Active & Recent Task Ledger (`{0}`)' -f $tasksPath))
-[void]$sb.AppendLine((Get-NormalizedText $tasksPath))
-[void]$sb.AppendLine('')
-[void]$sb.AppendLine(('### 2.3 Architectural & Governance Decisions (`{0}`)' -f $decisionsPath))
-[void]$sb.AppendLine((Get-NormalizedText $decisionsPath))
-[void]$sb.AppendLine('')
-[void]$sb.AppendLine(('### 2.4 Master Knowledge Map Routing Index (`{0}`)' -f $kmPath))
-[void]$sb.AppendLine((Get-NormalizedText $kmPath))
-[void]$sb.AppendLine('')
-[void]$sb.AppendLine('## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)')
-[void]$sb.AppendLine(('* **Drift Audit Verdict**: `{0}`' -f $driftStatus))
-if ($driftAlerts.Count -gt 0) {
-    foreach ($a in $driftAlerts) {
-        [void]$sb.AppendLine(('  * **Alert**: `{0}`' -f $a))
-    }
-}
-[void]$sb.AppendLine(('* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: {0}`, treat Section 2 as `[REPORTED {1} Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN {1} Local FS Unavailable]`.' -f $ledgerHashShort, $emDash))
-
-$finalContent = $sb.ToString().Replace("`r`n", "`n")
-$fullOut = Join-Path $TargetRoot $outPath
-[System.IO.File]::WriteAllText($fullOut, $finalContent, (New-Object System.Text.UTF8Encoding($false)))
-"SNAPSHOT_SYNCED=$outPath (SHA256=$ledgerHashShort)"
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 ```
 
-### Target `.uesf/scripts/sync-snapshot.sh` (Source: `scripts/sync-snapshot.sh`)
+### Script 2: `.uesf/scripts/sync-snapshot.sh`
 ```sh
 #!/usr/bin/env sh
 set -e
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
-if command -v pwsh >/dev/null 2>&1; then
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "$SCRIPT_DIR/sync-snapshot.ps1" "$@"
-elif command -v powershell.exe >/dev/null 2>&1; then
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$SCRIPT_DIR/sync-snapshot.ps1" "$@"
-else
-    echo "Error: PowerShell (pwsh or powershell.exe) is required to run sync-snapshot.ps1" >&2
-    exit 1
-fi
+exec node "$SCRIPT_DIR/../bin/uesf.mjs" sync-snapshot "$@"
 ```
 
-### Target `.git/hooks/pre-commit` (Source: `scripts/hooks/pre-commit`)
+### Script 3: `.git/hooks/pre-commit`
 ```sh
 #!/usr/bin/env sh
-# UESF Automatic Context Snapshot Pre-Commit Hook (DEC-023)
+# UESF Automatic Context Snapshot Pre-Commit Hook (DEC-023 / DEC-026)
 set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
-if [ -f "scripts/sync-snapshot.ps1" ]; then
-    SYNC_PS1="scripts/sync-snapshot.ps1"
-    SNAP_OUT="management/CONTEXT_SNAPSHOT.md"
-elif [ -f ".uesf/scripts/sync-snapshot.ps1" ]; then
-    SYNC_PS1=".uesf/scripts/sync-snapshot.ps1"
-    SNAP_OUT=".uesf/CONTEXT_SNAPSHOT.md"
-else
-    exit 0
-fi
-
-if command -v pwsh >/dev/null 2>&1; then
-    pwsh -NoProfile -ExecutionPolicy Bypass -File "$SYNC_PS1" >/dev/null
-elif command -v powershell.exe >/dev/null 2>&1; then
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$SYNC_PS1" >/dev/null
-fi
-
-if [ -f "$SNAP_OUT" ]; then
-    git add "$SNAP_OUT"
+if [ -f "bin/uesf.mjs" ]; then
+    node "bin/uesf.mjs" sync-snapshot >/dev/null
+    git add "management/CONTEXT_SNAPSHOT.md"
+elif [ -f ".uesf/bin/uesf.mjs" ]; then
+    node ".uesf/bin/uesf.mjs" sync-snapshot --target-root "$REPO_ROOT" >/dev/null
+    git add ".uesf/CONTEXT_SNAPSHOT.md"
+elif [ -f ".uesf/scripts/sync-snapshot.ps1" ] && command -v powershell.exe >/dev/null 2>&1; then
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".uesf/scripts/sync-snapshot.ps1" >/dev/null
+    git add ".uesf/CONTEXT_SNAPSHOT.md"
 fi
 ```

@@ -1,7 +1,7 @@
 # Generic CLI & Model Context Protocol (MCP) Adapter
 * **Document ID**: UESF-ADPT-004
 * **Canonical Path**: adapters/generic-cli-mcp/ADAPTER.md
-* **Version**: 0.4.0
+* **Version**: 0.4.1
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -27,7 +27,7 @@ Supports any of the eight universal UESF roles (`CTO`, `Architect`, `Developer`,
 3. **File-Based Handoff Transport**: When multiple CLI/MCP agent invocations do not share memory, persist Outbound/Inbound Handoff Packages (`HO-TASK-XXX-YY`) and Evidence Packages (`EV-TASK-XXX-YY`) as structured Markdown artifacts or PR comments following `protocols/HANDOFF_PROTOCOL.md`.
 
 ## 5. Session Initialization & Handoff Execution Workflow
-1. **Bootstrap Context**: Load `README.md`, `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `management/PROJECT_PROFILE.md`, and the assigned Role Skill (`roles/<role>/SKILL.md`). Note that `scripts/install.ps1` / `scripts/install.sh` installs the 12 self-contained bundles into `~/.claude/commands/uesf/` & `~/.claude/skills/`, `~/.gemini/commands/uesf/` & `~/.gemini/skills/`, `~/.codex/skills/`, and Cline/Kilo workflow folders, keeping MCP strictly optional.
+1. **Bootstrap Context**: Load `README.md`, `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `management/PROJECT_PROFILE.md`, and the assigned Role Skill (`roles/<role>/SKILL.md`). Note that `npx --yes github:m-ebrahimzadeh/uesf install` (or `node bin/uesf.mjs install`, with `scripts/install.ps1` / `scripts/install.sh` thin wrappers) installs the 12 self-contained bundles across all supported coding agents (`~/.claude/commands/uesf/` & `~/.claude/skills/`, `~/.gemini/commands/uesf/` & `~/.gemini/skills/`, `~/.codex/skills/`, and Cline/Kilo workflow folders) on Windows, macOS, and Linux without requiring PowerShell on POSIX systems, keeping MCP strictly optional.
 2. **Capability & Autonomy Alignment**: Enumerate MCP/CLI tools -> map to `CAP-*` -> verify compatibility with the assigned Task Contract (`protocols/TASK_CONTRACT_PROTOCOL.md`).
 3. **Execute & Verify**: Perform contracted actions within branch and scope boundaries (`policies/GIT_POLICY.md`) -> run verification checks -> emit structured `EV-TASK-XXX-YY` report.
 
