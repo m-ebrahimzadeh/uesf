@@ -1,16 +1,11 @@
 ---
 name: uesf-status
-description: UESF Unified Session-Entry & Context Reconstruction Workflow (/uesf:status)
-version: 0.6.3
+description: "UESF Unified Session-Entry & Context Reconstruction Workflow (/uesf-status)"
 ---
 
-> **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
-> * **Bundle ID**: `uesf-status` (`/uesf:status`)
-> * **Canonical Source**: `workflows/STATUS_WORKFLOW.md` (`uesf@v0.6.3`)
-> * **Source-SHA256**: `c0c2b3d64227d2d92e1af55d2810723a8012c3ec035792b276ec43bbc546ed86` (`c0c2b3d64227`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.3 | Active: uesf-status | Autonomy: A0 (Read-Only)]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-status | Autonomy: A0 (Read-Only)]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.6.3`)
+## UESF Embedded Core & Policy Invariants (`v0.7.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -80,3 +75,5 @@ Per `core/CAPABILITY_MODEL.md` and `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `/u
 * **Core & Policies**: `core/CAPABILITY_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`, `policies/VERIFICATION_POLICY.md`
 * **Protocols & Workflows**: `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `protocols/HANDOFF_PROTOCOL.md`, `workflows/INIT_WORKFLOW.md`, `workflows/HANDOFF_WORKFLOW.md`
 * **Management**: `management/KNOWLEDGE_MAP.md`, `management/ACTIVE_TASKS.md`, `management/DECISION_LOG.md`
+
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-status command=/uesf-status source=workflows/STATUS_WORKFLOW.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->

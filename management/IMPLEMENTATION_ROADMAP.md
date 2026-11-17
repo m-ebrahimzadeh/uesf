@@ -1,7 +1,7 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.6.3
+* **Version**: 0.7.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -10,7 +10,7 @@
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, feature discovery workflows, and project integrations.
 
 ## 2. Scope
-Covers Milestones M1 through M7 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-027` (`management/DECISION_LOG.md`).
+Covers Milestones M1 through M8 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-029` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
 
@@ -38,7 +38,11 @@ Covers Milestones M1 through M7 of UESF development in alignment with `DEC-007` 
 * **Objective**: Compile the 9 Universal Role Skills and 3 Lifecycle Workflows (`init`, `handoff`, `status`) into self-contained `dist/` packages with a multi-agent installer (`DEC-021`), establish the Three-Domain Knowledge Model (`DEC-022`), implement automatic machine-generated `CONTEXT_SNAPSHOT.md` synchronization (`DEC-023`), deliver the newcomer-friendly `README.md` and self-contained `/uesf:init` bundle (`DEC-025`), consolidate all build/install/snapshot tooling into a zero-dependency Node.js CLI (`package.json` + `bin/uesf.mjs` with `npx` & `--version <ref>` support and thin script wrappers per `DEC-026`), and provide atomic downstream project wiring via `init-project` (`DEC-027`).
 * **Status**: `ACCEPTED` (`TASK-020`–`TASK-027`, originating from approved Feature Discovery Brief `DSC-002` and `DEC-025`–`DEC-027`, completed and accepted on `main` via `EV-TASK-020-01`, `EV-TASK-024-01`, `EV-TASK-025-01`, `EV-TASK-026-01`, `EV-TASK-027-01`, and `management/validation/VALIDATION_REPORT_006.md`).
 
-### Milestone M7: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
+### Milestone M7: Native Multi-Agent Skill & Workflow Adapters, Metadata/Duplicate Fixes & Full Lifecycle CLI (`v0.7.0`) — *COMPLETED & ACCEPTED*
+* **Objective**: Align all 6 local coding agent adapters (`Antigravity`, `Claude Code`, `Gemini CLI`, `Cline`, `Kilo Code`, `Codex`) on native `SKILL.md` directories (`DEC-028`), enable flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers alongside `~/.cline/skills/` in Cline (`DEC-029`), eliminate duplicate command directories and top-of-body compiler boilerplate leaks, enforce strict 2-key YAML frontmatter with bottom HTML-comment SHA-256 metadata, centralize installation state in `~/.uesf/install-state.json`, and deliver `install`, `update`, `check`, `doctor [--fix]`, and `uninstall` in `bin/uesf.mjs`.
+* **Status**: `ACCEPTED` (`TASK-028`–`TASK-030`, merged to `main` and tagged `v0.7.0` per `DEC-029`, verified via `EV-TASK-028-01`, `EV-TASK-029-01`, `EV-TASK-030-01`, and `management/validation/VALIDATION_REPORT_007.md`).
+
+### Milestone M8: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).
 
 ## 4. Responsibilities

@@ -1,16 +1,11 @@
 ---
 name: uesf-init
-description: UESF Project Initialization Workflow (/uesf:init - A0 Audit & .uesf/ Scaffold)
-version: 0.6.3
+description: "UESF Project Initialization Workflow (/uesf-init - A0 Audit & .uesf/ Scaffold)"
 ---
 
-> **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
-> * **Bundle ID**: `uesf-init` (`/uesf:init`)
-> * **Canonical Source**: `workflows/INIT_WORKFLOW.md` (`uesf@v0.6.3`)
-> * **Source-SHA256**: `c0c2b3d64227d2d92e1af55d2810723a8012c3ec035792b276ec43bbc546ed86` (`c0c2b3d64227`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.3 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.6.3`)
+## UESF Embedded Core & Policy Invariants (`v0.7.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -25,17 +20,17 @@ version: 0.6.3
 ---
 ## Canonical Specification (`workflows/INIT_WORKFLOW.md`)
 
-# Lifecycle Workflow — Project Initialization & Onboarding (`/uesf:init`)
+# Lifecycle Workflow — Project Initialization & Onboarding (`/uesf-init`)
 * **Document ID**: UESF-WKFL-001
 * **Canonical Path**: workflows/INIT_WORKFLOW.md
-* **Workflow Trigger**: /uesf:init
-* **Version**: 0.6.3
+* **Workflow Trigger**: /uesf-init
+* **Version**: 0.7.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
 
 ## 1. Purpose & Command Trigger
-Define the standardized, newcomer-friendly onboarding workflow for `/uesf:init` (`@uesf-init`), enabling an agent in any new or existing software repository to audit the codebase in read-only mode (`A0`), present a clear plain-English setup proposal, and self-containedly scaffold the `.uesf/` operational control plane and automatic snapshot hook (`A1`) upon explicit human confirmation.
+Define the standardized, newcomer-friendly onboarding workflow for `/uesf-init` (`uesf-init`), enabling an agent in any new or existing software repository to audit the codebase in read-only mode (`A0`), present a clear plain-English setup proposal, and self-containedly scaffold the `.uesf/` operational control plane and automatic snapshot hook (`A1`) upon explicit human confirmation.
 
 ## 2. Scope & Autonomy Profile
 * **Scope**: Applies when onboarding any new or existing downstream software project to UESF (`extensions/README.md`).
@@ -45,13 +40,13 @@ Define the standardized, newcomer-friendly onboarding workflow for `/uesf:init` 
 
 ## 3. Capability Detection & Environment Modes
 Per `core/CAPABILITY_MODEL.md`:
-* **Local Coding Agent (`CAP-FS` & `CAP-GIT` Verified Available)**: Directly inspects the local project directory tree, existing `docs/`, build/test manifests, and `git remote -v` / `git branch`, then in Stage 2 scaffolds `.uesf/` governance files, wires `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit`, and generates `.uesf/CONTEXT_SNAPSHOT.md` by invoking `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (or `npx --yes github:m-ebrahimzadeh/uesf init-project .`) upon approval.
+* **Local Coding Agent (`CAP-FS` & `CAP-GIT` Verified Available)**: Directly inspects the local project directory tree, existing `docs/`, build/test manifests, and `git remote -v` / `git branch`, then in Stage 2 scaffolds `.uesf/` governance files, wires `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit`, and generates `.uesf/CONTEXT_SNAPSHOT.md` by invoking `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (reading `uesf_repo_path` from `~/.uesf/install-state.json`, or `npx --yes github:m-ebrahimzadeh/uesf init-project .`) upon approval.
 * **Cloud Chat Environment (`CAP-FS` Unavailable)**: Generates the complete `.uesf/` bootstrap files and setup commands in chat for the user or local coding agent to materialize.
 
 ## 4. Step-by-Step Execution Workflow
 1. **Dogfooding Guard Check**:
-   * Check whether the current repository root contains `README.md` with `Document ID: UESF-CORE-001`. If so, inform the user that this is the canonical UESF framework repository itself (already governed via `management/`), suggest running `/uesf:status`, and halt `/uesf:init`.
-   * If `.uesf/EXTENSION.md` already exists, inform the user that the project is already initialized, summarize the current `.uesf/` setup, and ask whether they want to refresh `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit` or run `/uesf:status` instead.
+   * Check whether the current repository root contains `README.md` with `Document ID: UESF-CORE-001`. If so, inform the user that this is the canonical UESF framework repository itself (already governed via `management/`), suggest running `/uesf-status`, and halt `/uesf-init`.
+   * If `.uesf/EXTENSION.md` already exists, inform the user that the project is already initialized, summarize the current `.uesf/` setup, and ask whether they want to refresh `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit` or run `/uesf-status` instead.
 2. **Stage 1 — Read-Only Codebase & Documentation Audit (`A0`)**:
    * Inspect existing project documentation (`README.md`, `docs/`, `adr/`) without moving or duplicating those files.
    * Detect the tech stack, directory boundaries, build/lint/test commands, default Git branch, and remote repository URL.
@@ -63,19 +58,19 @@ Per `core/CAPABILITY_MODEL.md`:
    * Ask: *"Do you approve scaffolding this `.uesf/` configuration (or would you like to adjust any build/test commands first)?"*
 3. **Stage 2 — Self-Contained Scaffolding & Automatic Snapshot Hook (`A1`)**:
    * Upon human confirmation, create `.uesf/` containing:
-     * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.6.3`).
+     * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.7.0`).
      * `.uesf/KNOWLEDGE_MAP.md` (routing table indexing existing project docs in `docs/` and operational files in `.uesf/`).
      * `.uesf/ACTIVE_TASKS.md` (initialized with `TASK-001: Initialize UESF Project Control Plane (.uesf/)` marked `ACCEPTED`).
      * `.uesf/DECISION_LOG.md` (initialized with `DEC-001: Onboard Project to UESF Three-Domain Governance`).
-   * Wire the standalone snapshot engine and Git `pre-commit` hook and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by running `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (reading `uesf_repo_path` from `.uesf-manifest.json` in your agent's skills directory, or falling back to `npx --yes github:m-ebrahimzadeh/uesf init-project .`), which atomically copies `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit` and runs `sync-snapshot`.
+   * Wire the standalone snapshot engine and Git `pre-commit` hook and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by running `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (reading `uesf_repo_path` from `~/.uesf/install-state.json`, or falling back to `npx --yes github:m-ebrahimzadeh/uesf init-project .`), which atomically copies `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit` and runs `sync-snapshot`.
 4. **Stage 3 — Post-Init Welcome & Next Commands Card**:
    * Conclude by displaying a concise **"Your Project Is Ready"** summary showing the verified `.uesf/` files created and the 3 primary commands to use next:
-     * `/uesf:discovery <idea>` — Brainstorm a new feature or change in read-only mode (`A0`).
-     * `/uesf:cto` — Create a bounded task contract (`TASK-XXX`) for well-defined work.
-     * `/uesf:status` — Reconstruct project context at the start of any future local or cloud session.
+     * `/uesf-discovery <idea>` — Brainstorm a new feature or change in read-only mode (`A0`).
+     * `/uesf-cto` — Create a bounded task contract (`TASK-XXX`) for well-defined work.
+     * `/uesf-status` — Reconstruct project context at the start of any future local or cloud session.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the first response with: `**[UESF v0.6.3 | Active: /uesf:init | Autonomy: A0 -> A1 on Approval]**`
+* Begin the first response with: `**[UESF v0.7.0 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
 * Distinguish `[VERIFIED]` repository observations (from `package.json`, `pyproject.toml`, `Cargo.toml`, `git remote -v`, etc.) from `[INFERRED]` architectural conventions (`policies/VERIFICATION_POLICY.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
@@ -134,8 +129,8 @@ Mandatory template for all Layer 6 project extension specifications (`core/FRAME
 ## Embedded Project Automation Wiring (`.uesf/bin/uesf.mjs`, `.uesf/scripts/` & `.git/hooks/pre-commit`)
 After creating `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TASKS.md`, and `.uesf/DECISION_LOG.md` in Stage 2, wire the standalone snapshot engine and Git pre-commit hook and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by executing ONE of the following commands in the target project root:
 
-1. **Fast Local Wiring (Preferred when `.uesf-manifest.json` exists in your agent skills folder)**:
-   Read `uesf_repo_path` from `.uesf-manifest.json` (in `~/.gemini/antigravity/skills/`, `~/.gemini/skills/`, `~/.claude/skills/`, or `~/.codex/skills/`) and run:
+1. **Fast Local Wiring (Preferred when `~/.uesf/install-state.json` exists)**:
+   Read `uesf_repo_path` from `~/.uesf/install-state.json` and run:
    ```bash
    node "<uesf_repo_path>/bin/uesf.mjs" init-project .
    ```
@@ -144,3 +139,5 @@ After creating `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TAS
    npx --yes github:m-ebrahimzadeh/uesf init-project .
    ```
 Both commands atomically install `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit`, and automatically generate `.uesf/CONTEXT_SNAPSHOT.md`.
+
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-init command=/uesf-init source=workflows/INIT_WORKFLOW.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->

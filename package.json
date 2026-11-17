@@ -1,6 +1,6 @@
 {
   "name": "uesf",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "description": "Universal Engineering Skills Framework (UESF) — Reusable Multi-Agent Engineering Roles, Workflows, and Context Control Plane",
   "type": "module",
   "bin": {
@@ -13,8 +13,11 @@
   ],
   "scripts": {
     "install-skills": "node ./bin/uesf.mjs install",
-    "init-project": "node ./bin/uesf.mjs init-project",
+    "update-skills": "node ./bin/uesf.mjs update",
+    "uninstall-skills": "node ./bin/uesf.mjs uninstall",
     "check": "node ./bin/uesf.mjs check",
+    "doctor": "node ./bin/uesf.mjs doctor",
+    "init-project": "node ./bin/uesf.mjs init-project",
     "build": "node ./bin/uesf.mjs build",
     "sync-snapshot": "node ./bin/uesf.mjs sync-snapshot"
   },

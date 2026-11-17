@@ -1,7 +1,7 @@
 # Release History
 * **Document ID**: UESF-MGMT-005
 * **Canonical Path**: management/RELEASE_HISTORY.md
-* **Version**: 0.6.3
+* **Version**: 0.7.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-17
@@ -24,6 +24,7 @@ Covers all tagged and milestone releases of UESF (`management/IMPLEMENTATION_ROA
 | `v0.6.1` | **M6.1: Newcomer Onboarding Guide (`README.md`), Self-Contained `/uesf:init` Bundle & Installer Quickstart** | 2026-11-17 | **Released & Accepted** (`TASK-025` merged to `main`) | Comprehensive newcomer-friendly `README.md` (`0.6.1`), interactive `/uesf:init` wizard (`workflows/INIT_WORKFLOW.md` `0.6.1`) with embedded `sync-snapshot.*` & `pre-commit` payloads in `dist/`, installer quickstart summary (`DEC-025`), refreshed `CONTEXT_SNAPSHOT.md`, and rebuilt `v0.6.1` `dist/` bundles. | `EV-TASK-025-01` (`HO-TASK-025-02`) |
 | `v0.6.2` | **M6.2: Zero-Dependency Node.js CLI (`package.json` + `bin/uesf.mjs`), Script Consolidation & Version Selection** | 2026-11-17 | **Released & Accepted** (`TASK-026` merged to `main` & tagged `v0.6.2`) | Consolidated zero-dependency Node.js CLI engine (`package.json` + `bin/uesf.mjs` supporting `npx github:m-ebrahimzadeh/uesf install`, `--version <ref>`, `check`, `sync-snapshot`, and `build`), refactored `scripts/*.ps1` & `scripts/*.sh` into thin pass-through wrappers (`DEC-026`), refreshed `CONTEXT_SNAPSHOT.md`, and rebuilt `v0.6.2` `dist/` bundles. | `EV-TASK-026-01` (`HO-TASK-026-02`) |
 | `v0.6.3` | **M6.3: Downstream `/uesf:init` CLI Engine Wiring (`init-project` Subcommand & Smoke Test)** | 2026-11-17 | **Released & Accepted** (`TASK-027` merged to `main` & tagged `v0.6.3`) | Added `init-project` subcommand to `bin/uesf.mjs` (`0.6.3`), updated `workflows/INIT_WORKFLOW.md` (`0.6.3`) and compiled `uesf-init` bundle so downstream projects wire `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, `.git/hooks/pre-commit`, and `.uesf/CONTEXT_SNAPSHOT.md` atomically (`DEC-027`), and verified via end-to-end temporary-project smoke test. | `EV-TASK-027-01` (`HO-TASK-027-02`) |
+| `v0.7.0` | **M7: Native Multi-Agent Skill & Workflow Adapters, Metadata/Duplicate Fixes & Lifecycle CLI (`install`, `update`, `check`, `doctor`, `uninstall`)** | 2026-11-17 | **Released & Accepted** (`TASK-028`..`TASK-030` merged to `main` & tagged `v0.7.0`) | Standardized all 6 local coding agents (`antigravity`, `claude-code`, `gemini-cli`, `cline`, `kilocode`, `codex`) on native `skills/` directories with strict 2-key `SKILL.md` frontmatter and bottom HTML-comment metadata (`DEC-028`), enabled flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers alongside `~/.cline/skills/` in Cline (`DEC-029`), removed duplicate `commands/uesf` and broken nested `Workflows/uesf` artifacts, centralized state in `~/.uesf/install-state.json`, implemented `install`/`update`/`check`/`doctor`/`uninstall` in `bin/uesf.mjs`, added `VALIDATION_REPORT_007.md`, and upgraded `audit.ps1` (59 canonical `.md` files). | `EV-TASK-028-01`, `EV-TASK-029-01`, `EV-TASK-030-01` (`VALIDATION_REPORT_007.md`) |
 
 ## 4. Responsibilities
 * **CTO**: Approves milestone release entries upon verifying Evidence Packages, and enforces the `A3` Human Stakeholder approval gate before any `v1.0.0` tag is created.
@@ -31,4 +32,4 @@ Covers all tagged and milestone releases of UESF (`management/IMPLEMENTATION_ROA
 
 ## 5. Relationships with Other Documents
 * **Roadmap & Tasks**: `management/IMPLEMENTATION_ROADMAP.md`, `management/ACTIVE_TASKS.md`
-* **Validations**: `management/validation/VALIDATION_REPORT_001.md`, `management/validation/VALIDATION_REPORT_002.md`, `management/validation/VALIDATION_REPORT_003.md`, `management/validation/VALIDATION_REPORT_004.md`, `management/validation/VALIDATION_REPORT_005.md`, `management/validation/VALIDATION_REPORT_006.md`
+* **Validations**: `management/validation/VALIDATION_REPORT_001.md`, `management/validation/VALIDATION_REPORT_002.md`, `management/validation/VALIDATION_REPORT_003.md`, `management/validation/VALIDATION_REPORT_004.md`, `management/validation/VALIDATION_REPORT_005.md`, `management/validation/VALIDATION_REPORT_006.md`, `management/validation/VALIDATION_REPORT_007.md`

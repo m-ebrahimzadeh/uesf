@@ -1,7 +1,7 @@
 # Generic CLI & Model Context Protocol (MCP) Adapter
 * **Document ID**: UESF-ADPT-004
 * **Canonical Path**: adapters/generic-cli-mcp/ADAPTER.md
-* **Version**: 0.4.1
+* **Version**: 0.5.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-17
@@ -10,7 +10,7 @@
 Provide a portable, vendor-neutral adapter profile for running UESF agent roles inside **standard Command-Line Interface (CLI) agent harnesses, CI/CD runners, and Model Context Protocol (MCP) host environments** beyond Gemini Desktop and Antigravity/VS Code.
 
 ## 2. Scope & Supported Roles
-Supports any of the eight universal UESF roles (`CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`) when activated in a CLI or MCP-compliant agent runtime.
+Supports any of the nine universal UESF roles (`Discovery`, `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`) and three lifecycle workflows (`init`, `handoff`, `status`) when activated in a CLI or MCP-compliant agent runtime.
 
 ## 3. Capability Mapping Matrix (CAP-* to Runtime Bindings)
 | Abstract Capability (`core/CAPABILITY_MODEL.md`) | MCP / CLI Binding Mechanism | Runtime Discovery & Verification Rule |
@@ -27,7 +27,7 @@ Supports any of the eight universal UESF roles (`CTO`, `Architect`, `Developer`,
 3. **File-Based Handoff Transport**: When multiple CLI/MCP agent invocations do not share memory, persist Outbound/Inbound Handoff Packages (`HO-TASK-XXX-YY`) and Evidence Packages (`EV-TASK-XXX-YY`) as structured Markdown artifacts or PR comments following `protocols/HANDOFF_PROTOCOL.md`.
 
 ## 5. Session Initialization & Handoff Execution Workflow
-1. **Bootstrap Context**: Load `README.md`, `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `management/PROJECT_PROFILE.md`, and the assigned Role Skill (`roles/<role>/SKILL.md`). Note that `npx --yes github:m-ebrahimzadeh/uesf install` (or `node bin/uesf.mjs install`, with `scripts/install.ps1` / `scripts/install.sh` thin wrappers) installs the 12 self-contained bundles across all supported coding agents (`~/.claude/commands/uesf/` & `~/.claude/skills/`, `~/.gemini/commands/uesf/` & `~/.gemini/skills/`, `~/.codex/skills/`, and Cline/Kilo workflow folders) on Windows, macOS, and Linux without requiring PowerShell on POSIX systems, keeping MCP strictly optional.
+1. **Bootstrap Context**: Load `README.md`, `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `management/PROJECT_PROFILE.md`, and the assigned Role Skill (`roles/<role>/SKILL.md`). Note that `npx --yes github:m-ebrahimzadeh/uesf install` (plus `update`, `check`, `doctor`, and `uninstall`, with `scripts/install.ps1` / `scripts/install.sh` thin wrappers) installs the 12 self-contained native skills into each detected coding agent's `skills/` directory (`~/.claude/skills/`, `~/.gemini/skills/`, `~/.cline/skills/`, `~/.kilo/skills/`, `~/.codex/skills/`)—and for the `cline` adapter (`DEC-029`), installs both native skills (`~/.cline/skills/uesf-<name>/SKILL.md`) and flat `/` menu workflow triggers (`~/Documents/Cline/Workflows/uesf-<name>.md`)—with zero duplicate command folders in Claude Code / Gemini CLI, tracks state centrally in `~/.uesf/install-state.json`, and keeps MCP strictly optional.
 2. **Capability & Autonomy Alignment**: Enumerate MCP/CLI tools -> map to `CAP-*` -> verify compatibility with the assigned Task Contract (`protocols/TASK_CONTRACT_PROTOCOL.md`).
 3. **Execute & Verify**: Perform contracted actions within branch and scope boundaries (`policies/GIT_POLICY.md`) -> run verification checks -> emit structured `EV-TASK-XXX-YY` report.
 

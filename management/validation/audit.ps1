@@ -51,7 +51,7 @@ foreach ($r in $rows) {
 "HAS_GITATTRIBUTES=$(Test-Path '.gitattributes')"
 "V1_TAG_COUNT=$(@(git tag -l 'v1.0.0').Count)"
 
-# 1. Metadata Headers Check (All 58 canonical .md files)
+# 1. Metadata Headers Check (All 59 canonical .md files)
 $hi = 0
 foreach ($f in $rel) {
     $t = Get-Content $f -Raw -Encoding UTF8
@@ -299,18 +299,52 @@ if (-not (Test-Path $manifestPath)) {
                 }
             }
         }
+        if (Test-Path $b.skill_path) {
+            $st = Get-NormalizedText $b.skill_path
+            $fmMatch = [regex]::Match($st, '(?s)^---\n(.*?)\n---\n(.*)$')
+            if (-not $fmMatch.Success) {
+                $distBundleIssues++
+                "  DIST_SKILL_INVALID_FRONTMATTER $($b.skill_path)"
+            } else {
+                $fm = $fmMatch.Groups[1].Value
+                $body = $fmMatch.Groups[2].Value
+                if ($fm -match '(?m)^version:') {
+                    $distBundleIssues++
+                    "  DIST_SKILL_FORBIDDEN_VERSION_KEY $($b.skill_path)"
+                }
+                if ($fm -notmatch ('^name: ' + [regex]::Escape($b.id) + '\ndescription: ".+"$')) {
+                    $distBundleIssues++
+                    "  DIST_SKILL_NONSTRICT_2KEY_FRONTMATTER $($b.skill_path)"
+                }
+                if ($body -match '(?m)^>\s*\*\*NON-AUTHORITATIVE') {
+                    $distBundleIssues++
+                    "  DIST_SKILL_BOILERPLATE_LEAK $($b.skill_path)"
+                }
+                if ($body -notmatch ('<!-- UESF-BUNDLE-METADATA:[^>]*short_sha256=' + [regex]::Escape($manifest.source_sha256_short))) {
+                    $distDriftIssues++
+                    "  DIST_SKILL_FOOTER_DRIFT $($b.skill_path)"
+                }
+            }
+        }
+        if (Test-Path $b.command_path) {
+            $ct = Get-NormalizedText $b.command_path
+            if ($ct -notmatch '(?s)^---\ndescription: ".+"\n---\n' -or $ct -match '(?m)^>\s*\*\*NON-AUTHORITATIVE') {
+                $distBundleIssues++
+                "  DIST_COMMAND_METADATA_INVALID $($b.command_path)"
+            }
+        }
     }
 }
 "DIST_BUNDLE_ISSUES=$distBundleIssues"
 "DIST_DRIFT_ISSUES=$distDriftIssues"
 
-# 12. Zero-Dependency Node.js CLI & Consolidated Wrapper Check (DEC-026 / DEC-027)
+# 12. Zero-Dependency Node.js CLI & Consolidated Wrapper Check (DEC-026 / DEC-027 / DEC-028)
 $cliIssues = 0
 if (-not (Test-Path 'package.json')) {
     $cliIssues++; "  CLI_MISSING package.json"
 } else {
     $pkg = Get-Content 'package.json' -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($pkg.version -ne '0.6.3' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
+    if ($pkg.version -ne '0.7.0' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
         $cliIssues++; "  CLI_PKG_INVALID version or bin.uesf mismatch"
     }
     if ($pkg.PSObject.Properties.Name -contains 'dependencies' -and ($pkg.dependencies.PSObject.Properties | Measure-Object).Count -gt 0) {
@@ -321,8 +355,15 @@ if (-not (Test-Path 'bin/uesf.mjs')) {
     $cliIssues++; "  CLI_MISSING bin/uesf.mjs"
 } else {
     $cliText = Get-NormalizedText 'bin/uesf.mjs'
-    if (-not $cliText.Contains('runInitProject')) {
-        $cliIssues++; "  CLI_ENGINE_MISSING_INIT_PROJECT runInitProject not found in bin/uesf.mjs"
+    foreach ($fn in @('runInitProject', 'runInstallOrUpdate', 'runCheck', 'runDoctor', 'runUninstall')) {
+        if (-not $cliText.Contains($fn)) {
+            $cliIssues++; "  CLI_ENGINE_MISSING $fn not found in bin/uesf.mjs"
+        }
+    }
+    foreach ($cmd in @("'install'", "'update'", "'uninstall'", "'check'", "'doctor'", "'init-project'")) {
+        if (-not $cliText.Contains($cmd)) {
+            $cliIssues++; "  CLI_SUBCOMMAND_MISSING $cmd not handled in bin/uesf.mjs"
+        }
     }
 }
 foreach ($w in @('scripts/sync-snapshot.ps1', 'scripts/build-dist.ps1', 'scripts/install.ps1', 'scripts/sync-snapshot.sh', 'scripts/build-dist.sh', 'scripts/install.sh')) {

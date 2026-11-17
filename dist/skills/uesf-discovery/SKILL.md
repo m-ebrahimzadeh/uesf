@@ -1,16 +1,11 @@
 ---
 name: uesf-discovery
-description: UESF Feature Discovery & Requirements Strategist (Iterative A0 Brainstorming)
-version: 0.6.3
+description: "UESF Feature Discovery & Requirements Strategist (Iterative A0 Brainstorming)"
 ---
 
-> **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
-> * **Bundle ID**: `uesf-discovery` (`/uesf:discovery`)
-> * **Canonical Source**: `roles/discovery/SKILL.md` (`uesf@v0.6.3`)
-> * **Source-SHA256**: `c0c2b3d64227d2d92e1af55d2810723a8012c3ec035792b276ec43bbc546ed86` (`c0c2b3d64227`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.3 | Active: uesf-discovery | Autonomy: A0 (Read-Only Lock)]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-discovery | Autonomy: A0 (Read-Only Lock)]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.6.3`)
+## UESF Embedded Core & Policy Invariants (`v0.7.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -132,3 +127,5 @@ Applies to all Track 1 feature discovery cycles conducted by the `Discovery` rol
 ## 6. Relationships with Other Documents
 * **Core & Policies**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`, `policies/AUTONOMY_POLICY.md`, `policies/GOVERNANCE_POLICY.md`
 * **Protocols**: `protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `protocols/TASK_CONTRACT_PROTOCOL.md`, `protocols/HANDOFF_PROTOCOL.md`
+
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-discovery command=/uesf-discovery source=roles/discovery/SKILL.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->

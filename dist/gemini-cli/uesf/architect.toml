@@ -1,13 +1,9 @@
-# UESF Compiled Gemini CLI Command: /uesf:architect (v0.6.3 | Source-SHA256: c0c2b3d64227)
+# UESF Compiled Gemini CLI Reference Command: /uesf-architect (v0.7.0 | Source-SHA256: 974ed54739f5)
 description = "UESF Architect Role (System Design, Interface Contracts & Layer Isolation)"
 prompt = """
-> **NON-AUTHORITATIVE COMPILED UESF BUNDLE — DO NOT EDIT MANUALLY**
-> * **Bundle ID**: `uesf-architect` (`/uesf:architect`)
-> * **Canonical Source**: `roles/architect/SKILL.md` (`uesf@v0.6.3`)
-> * **Source-SHA256**: `c0c2b3d64227d2d92e1af55d2810723a8012c3ec035792b276ec43bbc546ed86` (`c0c2b3d64227`)
-> * **Activation Banner Rule**: Begin your first response with: `**[UESF v0.6.3 | Active: uesf-architect | Autonomy: A1/A2]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-architect | Autonomy: A1/A2]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.6.3`)
+## UESF Embedded Core & Policy Invariants (`v0.7.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -117,4 +113,6 @@ Mandatory template for all Layer 6 project extension specifications (`core/FRAME
 * **Architecture & Layer 6 Registry**: `core/FRAMEWORK_ARCHITECTURE.md`, `extensions/README.md`
 * **Policies**: `policies/AUTONOMY_POLICY.md`, `policies/GOVERNANCE_POLICY.md`, `policies/SECURITY_POLICY.md`, `policies/VERIFICATION_POLICY.md`
 * **Adapters**: `adapters/README.md`
+
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-architect command=/uesf-architect source=roles/architect/SKILL.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->
 """
