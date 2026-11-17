@@ -16,7 +16,7 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
    * **Current Version**: `0.6.0` (Milestone M6 — 12 Compiled Skill/Command Bundles, Lifecycle Workflows & Automatic Context Snapshot)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M5 (`v0.5.0`) Accepted on `main`; Milestone M6 (`v0.6.0`) Implemented on `feat/TASK-020-skill-distribution-v0.6.0` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Phase**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), M5 (`v0.5.0`), and M6 (`v0.6.0` — 12 Compiled Skill/Command Bundles, Lifecycle Workflows & Automatic Context Snapshot) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)

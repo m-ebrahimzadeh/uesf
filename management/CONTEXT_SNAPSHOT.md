@@ -3,7 +3,7 @@
 > Generated deterministically by `scripts/sync-snapshot.ps1` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`).
 > * **Canonical Control Plane**: `management/`
 > * **Snapshot Version**: `0.6.0`
-> * **Source-Ledger-SHA256**: `ab3dac4f0159c6e4d6563505d841b36c6ef1ead00e5047f3ddfd043b3b529ced` (`ab3dac4f0159`)
+> * **Source-Ledger-SHA256**: `e8bc7cd2f05fb98e8e3742934107e93160300cf2d90468210a203deedccc9ec3` (`e8bc7cd2f05f`)
 > * **Last Ledger Update**: `2026-11-17`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
@@ -12,8 +12,8 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `20 / 24`
-* **Total Recorded Decisions (`DEC-*`)**: `23`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `25 / 25`
+* **Total Recorded Decisions (`DEC-*`)**: `24`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
 ## 2. Recorded Project & Governance State (`[RECORDED_IN_LEDGER]`)
@@ -36,7 +36,7 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
    * **Current Version**: `0.6.0` (Milestone M6 — 12 Compiled Skill/Command Bundles, Lifecycle Workflows & Automatic Context Snapshot)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M5 (`v0.5.0`) Accepted on `main`; Milestone M6 (`v0.6.0`) Implemented on `feat/TASK-020-skill-distribution-v0.6.0` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Phase**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), M5 (`v0.5.0`), and M6 (`v0.6.0` — 12 Compiled Skill/Command Bundles, Lifecycle Workflows & Automatic Context Snapshot) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
@@ -105,14 +105,15 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-017` | Author 9th Role `Discovery` (`roles/discovery/SKILL.md`), `FEATURE_DISCOVERY_PROTOCOL.md` & `FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` (`DEC-019`) | Architect / CTO | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-015-01` (`HO-TASK-015-02`, commit `e7d8b2b`). Accepted via `DEC-020`. |
 | `TASK-018` | Commit Versioned Cumulative Audit Script (`management/validation/audit.ps1`), Author `VALIDATION_REPORT_005.md` & Sync Registries to `0.5.0` | QA / DevOps | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-015-01` (`management/validation/VALIDATION_REPORT_005.md`). Accepted via `DEC-020`. |
 | `TASK-019` | Close Out Accepted Milestone M5 (`v0.5.0`) Registries & Merge `feat/TASK-015-discovery-role-v0.5.0` to `main` | DevOps / Documentation | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-019-01` (`HO-TASK-019-02`, merged to `main` per `DEC-020`). |
-| `TASK-020` | Author Lifecycle Workflows (`workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md`) & Update Architecture/Policies for 3-Domain Model (`DEC-021`, `DEC-022`) | Architect / CTO | CTO | Strategic & Engineering | `A1` | `IN_REVIEW` | Dispatched via `HO-TASK-020-01` (`DSC-002`) on `feat/TASK-020-skill-distribution-v0.6.0`. |
-| `TASK-021` | Implement Automatic Snapshot Generator (`scripts/sync-snapshot.*`, `scripts/hooks/pre-commit`) & Generate `management/CONTEXT_SNAPSHOT.md` (`DEC-023`) | DevOps / Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Dispatched via `HO-TASK-020-01` (`DSC-002`) on `feat/TASK-020-skill-distribution-v0.6.0`. |
-| `TASK-022` | Implement Deterministic Bundle Compiler (`scripts/build-dist.*`) & Multi-Agent Installer (`scripts/install.*`), Compiling 12 Bundles into `dist/` | DevOps / Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Dispatched via `HO-TASK-020-01` (`DSC-002`) on `feat/TASK-020-skill-distribution-v0.6.0`. |
-| `TASK-023` | Upgrade `management/validation/audit.ps1` (`SNAPSHOT_DRIFT`, `DIST_DRIFT`), Author `VALIDATION_REPORT_006.md` & Sync Registries to `0.6.0` | QA / DevOps | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | `EV-TASK-020-01` (`management/validation/VALIDATION_REPORT_006.md`, `HO-TASK-020-02`). |
+| `TASK-020` | Author Lifecycle Workflows (`workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md`) & Update Architecture/Policies for 3-Domain Model (`DEC-021`, `DEC-022`) | Architect / CTO | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-020-01` (`HO-TASK-020-02`, commit `c6d894e`). Accepted via `DEC-024`. |
+| `TASK-021` | Implement Automatic Snapshot Generator (`scripts/sync-snapshot.*`, `scripts/hooks/pre-commit`) & Generate `management/CONTEXT_SNAPSHOT.md` (`DEC-023`) | DevOps / Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-020-01` (`HO-TASK-020-02`, commit `c6d894e`). Accepted via `DEC-024`. |
+| `TASK-022` | Implement Deterministic Bundle Compiler (`scripts/build-dist.*`) & Multi-Agent Installer (`scripts/install.*`), Compiling 12 Bundles into `dist/` | DevOps / Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-020-01` (`HO-TASK-020-02`, commit `c6d894e`). Accepted via `DEC-024`. |
+| `TASK-023` | Upgrade `management/validation/audit.ps1` (`SNAPSHOT_DRIFT`, `DIST_DRIFT`), Author `VALIDATION_REPORT_006.md` & Sync Registries to `0.6.0` | QA / DevOps | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-020-01` (`management/validation/VALIDATION_REPORT_006.md`). Accepted via `DEC-024`. |
+| `TASK-024` | Close Out Accepted Milestone M6 (`v0.6.0`) Registries, Refresh `CONTEXT_SNAPSHOT.md` & Merge `feat/TASK-020-skill-distribution-v0.6.0` to `main` | DevOps / Documentation | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-024-01` (`HO-TASK-024-02`, merged to `main` per `DEC-024`). |
 
 ## 5. Active Outbound Task Contract Queue
-* **Active Handoff (`HO-TASK-020-01`)**: `TASK-020`–`TASK-023` (Originating Discovery Brief: `DSC-002` — Milestone M6 `v0.6.0`: Lifecycle Workflows `init`/`handoff`/`status`, Three-Domain Knowledge Model, Automatic `CONTEXT_SNAPSHOT.md`, 12 Compiled Skill/Command Bundles in `dist/`, Multi-Agent Installer, and Upgraded Cumulative Audit) — **Executed on `feat/TASK-020-skill-distribution-v0.6.0` and pending CTO Tier 2 Review (`HO-TASK-020-02` / `EV-TASK-020-01`)**.
-* **Accepted Baseline**: Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), and M5 (`v0.5.0`) (`TASK-000`–`TASK-019`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main`.
+* All planned tasks for Milestones M1 (`v0.1.0`), M2 (`v0.2.0`), M3 (`v0.3.0`), M4 (`v0.4.0`), M5 (`v0.5.0`), and M6 (`v0.6.0`) are **COMPLETED, VERIFIED, AND ACCEPTED**.
+* All 12 UESF skills and commands (`/uesf:discovery`, `/uesf:cto`, `/uesf:architect`, `/uesf:developer`, `/uesf:qa`, `/uesf:devops`, `/uesf:security`, `/uesf:sre`, `/uesf:documentation`, `/uesf:init`, `/uesf:handoff`, `/uesf:status`) are compiled in `dist/` and installed across local coding agents.
 * Any future feature proposal or architectural enhancement enters through Track 1 Iterative Discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `roles/discovery/SKILL.md`) locked at `A0` until explicit human confirmation.
 
 ## 6. Relationships with Other Documents
@@ -160,6 +161,7 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 | `DEC-021` | 12-Command Compiled Skill Distribution & Multi-Agent Installer (`DSC-002`) | Compile the 9 Universal Role Skills (`roles/*/SKILL.md`) and 3 Lifecycle Workflows (`workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md`) via `scripts/build-dist.ps1` into self-contained `dist/` packages (`skills/`, `commands/`, `gemini-cli/`, `manifest.json`) installed via `scripts/install.ps1` (atomic copy default, `-Check`, `-Link`), without an always-on Micro-Kernel and keeping MCP optional. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
 | `DEC-022` | Three-Domain Knowledge Partitioning & Unified `/uesf:status` (`DSC-002`) | Separate Universal UESF Knowledge (`uesf/` & `dist/`), Permanent Project Documentation (native project `docs/` indexed by `.uesf/KNOWLEDGE_MAP.md`), and Operational Project State (`.uesf/{EXTENSION,KNOWLEDGE_MAP,ACTIVE_TASKS,DECISION_LOG,CONTEXT_SNAPSHOT}.md` using standard `TASK-XXX`/`DEC-XXX` IDs), with `/uesf:status` serving as the unified session-entry and context-reconstruction workflow and `/uesf:handoff` serving as the session-exit packaging workflow. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
 | `DEC-023` | Automatic Machine-Generated `CONTEXT_SNAPSHOT.md` (`DSC-002` Refinement A) | Maintain `CONTEXT_SNAPSHOT.md` automatically via `scripts/sync-snapshot.*`, `.git/hooks/pre-commit`, and on-read refresh in `/uesf:status` (verified by `SNAPSHOT_DRIFT_ISSUES=0` in `management/validation/audit.ps1`), strictly separating `[VERIFIED_BY_GIT_AND_FS_PROBE]` facts from `[RECORDED_IN_LEDGER]` tables and `[DRIFT_CHECK]` alerts. | Confirmed | Human Stakeholder (`A3`) | 2026-11-17 |
+| `DEC-024` | Milestone M6 (`v0.6.0`) Acceptance, `KDP-008` Approval & Merge to `main` | Formally accept `TASK-020`–`TASK-023` (`c6d894e`) based on verified Evidence Package `EV-TASK-020-01` (`MD_COUNT=58`, `WORKFLOW_COUNT=3`, `DIST_BUNDLE_ISSUES=0`, `SNAPSHOT_DRIFT_ISSUES=0`, 5 host agent targets `UP_TO_DATE`), approve `KDP-008` (PowerShell 5.1 ASCII/UTF-8 safety, `.uesf/scripts/` root resolution, and `100755` POSIX script modes), and authorize merge of `feat/TASK-020-skill-distribution-v0.6.0` into `main`. | Approved | CTO (`A2`) | 2026-11-17 |
 
 ## 4. Open Questions & Pending Human Decisions (`A3` / Clarification Items)
 | Question ID | Topic | Resolution Summary | Status |
@@ -265,4 +267,4 @@ Covers all 58 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: ab3dac4f0159`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: e8bc7cd2f05f`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
