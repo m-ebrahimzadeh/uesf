@@ -4,7 +4,7 @@
 * **Version**: 0.2.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Record all formal version milestones, baseline states, and verification statuses of the Universal Engineering Skills Framework (UESF).
@@ -15,7 +15,7 @@ Applies to all tagged and untagged milestone releases of UESF.
 ## 3. Release Log
 ### `v0.2.0` — Universal Agent Role Skills & Reusable Templates (2026-11-16)
 * **Milestone**: Milestone M2 — Universal Agent Role Skills & Protocol Templates (`TASK-002`..`TASK-006`)
-* **Release State**: In Review on branch `feat/TASK-002-universal-role-skills` (Pending CTO Tier 2 Merge Acceptance)
+* **Release State**: Released — Verified & Accepted on `main` (`ff33485dc7a583e523b700be7a45d23e5afb84fd`, `TASK-002`..`TASK-006`; closed out 2026-11-17)
 * **Summary of Deliverables**:
   * Authored 6 reusable Markdown templates in `templates/`: `ROLE_SKILL_TEMPLATE.md`, `TASK_CONTRACT_TEMPLATE.md`, `HANDOFF_PACKAGE_TEMPLATE.md`, `EVIDENCE_PACKAGE_TEMPLATE.md`, `KDP_TEMPLATE.md`, and `ESCALATION_RECORD_TEMPLATE.md`.
   * Authored all 8 platform-independent Layer 4 Universal Agent Role Skills (`roles/<role>/SKILL.md`): `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, and `Documentation`.

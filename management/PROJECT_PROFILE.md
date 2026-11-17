@@ -4,7 +4,7 @@
 * **Version**: 0.2.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Maintain the canonical identity, scope definition, operating topology, and active baseline metadata of the Universal Engineering Skills Framework (UESF) project.
@@ -16,7 +16,7 @@ Applies to the UESF initiative as a whole across both the Strategic Workspace an
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
    * **Current Version**: `0.2.0` (Milestone M2 — Universal Agent Role Skills & Templates)
-   * **Current Phase**: Milestone M2 Staged / In Review (Universal Agent Role Skills & Protocol Templates v0.2.0)
+   * **Current Phase**: Milestone M2 Released (`v0.2.0` accepted on `main` at `ff33485`); Milestone M3 (Platform Adapters) eligible to begin, not yet started
    * **Founding CTO & Chief Architect**: Activated (CTO Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
 2. **Confirmed Scope Boundaries**:
    * **In Scope (Initial Framework)**: Universal operating model, capability model, governance/security/Git/verification/knowledge policies, multi-agent interaction protocols, and eight universal engineering agent role Skills (`CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).

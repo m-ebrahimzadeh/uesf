@@ -4,7 +4,7 @@
 * **Version**: 0.2.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-17
 
 ## 1. Purpose
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, and project integrations.
@@ -20,18 +20,19 @@ Covers Phases 1 through 4 of UESF development in alignment with `DEC-007` (`mana
   * `TASK-001` (Git Repository Materialization in Engineering Workspace): `VERIFIED / ACCEPTED` (Committed on `main` @ `288d6dc62a154cf41b0dff40f9e421f22e48f56e`).
 * **Exit Criteria**: All 25 foundational documents committed to `main` in the canonical Git repository and verified via `EV-TASK-001-01`.
 
-### Milestone M2: Universal Agent Role Skills (`v0.2.0`) — *IN_REVIEW (Ready for CTO Tier 2 Merge Acceptance)*
+### Milestone M2: Universal Agent Role Skills (`v0.2.0`) — *COMPLETED (Released)*
 * **Objective**: Author, review, and verify the eight platform-independent Agent Role Skills (`roles/<role>/SKILL.md`) and reusable Markdown artifact templates (`templates/`).
-* **Planned Tasks**:
-  * `TASK-002`: Define Universal Role Skill Standard Schema & Reusable Protocol Templates (`templates/`) — `IN_REVIEW` (on `feat/TASK-002-universal-role-skills`).
-  * `TASK-003`: Author Governance, Architecture & Knowledge Role Skills (`CTO`, `Architect`, `Documentation`) — `IN_REVIEW`.
-  * `TASK-004`: Author Implementation & Quality Role Skills (`Developer`, `QA`) — `IN_REVIEW`.
-  * `TASK-005`: Author Infrastructure, Security & Reliability Role Skills (`DevOps`, `Security`, `SRE`) — `IN_REVIEW`.
-  * `TASK-006`: Cross-Role Interaction Dry-Run & Consistency Audit (`v0.2.0` Release Sign-Off) — `IN_REVIEW` (`management/validation/VALIDATION_REPORT_002.md`).
-* **Exit Criteria**: All 8 universal Role Skills pass structural, boundary, and non-overlap verification without platform coupling.
+* **Status**:
+  * `TASK-002`: Define Universal Role Skill Standard Schema & Reusable Protocol Templates (`templates/`) — `VERIFIED / ACCEPTED` (Merged on `main` @ `ff33485dc7a583e523b700be7a45d23e5afb84fd`).
+  * `TASK-003`: Author Governance, Architecture & Knowledge Role Skills (`CTO`, `Architect`, `Documentation`) — `VERIFIED / ACCEPTED` (Merged on `main` @ `ff33485dc7a583e523b700be7a45d23e5afb84fd`).
+  * `TASK-004`: Author Implementation & Quality Role Skills (`Developer`, `QA`) — `VERIFIED / ACCEPTED` (Merged on `main` @ `ff33485dc7a583e523b700be7a45d23e5afb84fd`).
+  * `TASK-005`: Author Infrastructure, Security & Reliability Role Skills (`DevOps`, `Security`, `SRE`) — `VERIFIED / ACCEPTED` (Merged on `main` @ `ff33485dc7a583e523b700be7a45d23e5afb84fd`).
+  * `TASK-006`: Cross-Role Interaction Dry-Run & Consistency Audit (`v0.2.0` Release Sign-Off) — `VERIFIED / ACCEPTED` (`management/validation/VALIDATION_REPORT_002.md`; merged on `main` @ `ff33485dc7a583e523b700be7a45d23e5afb84fd`).
+* **Exit Criteria**: All 8 universal Role Skills pass structural, boundary, and non-overlap verification without platform coupling — satisfied (`EV-TASK-002-01`, `EV-TASK-006-01`).
 
-### Milestone M3: Platform Adapters (`v0.3.0`) — *FUTURE*
+### Milestone M3: Platform Adapters (`v0.3.0`) — *ELIGIBLE (Not Started)*
 * **Objective**: Create thin, modular platform adapters in `adapters/` mapping universal capabilities (`CAP-*`) and protocols to concrete environments.
+* **Status**: Eligible to begin (`TASK-007` `PROPOSED`; prerequisite Milestone M2 accepted and released on `main`), not yet started.
 * **Target Adapters**:
   * `adapters/gemini-strategic-workspace/` (Gemini 4 Argon + Notebook/Workspace bindings).
   * `adapters/antigravity-vscode/` (Antigravity + Gemini 4 Hydrogen/Orchestrator + local Git/terminal bindings).
