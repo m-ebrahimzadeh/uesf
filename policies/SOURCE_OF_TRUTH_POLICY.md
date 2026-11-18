@@ -1,10 +1,10 @@
 # Source of Truth Policy
 * **Document ID**: UESF-POL-007
 * **Canonical Path**: policies/SOURCE_OF_TRUTH_POLICY.md
-* **Version**: 0.2.0
+* **Version**: 0.3.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose
 Prevent competing, fragmented, or contradictory documentation by assigning a single authoritative canonical location to every information category across the hybrid repository-and-workspace architecture and across downstream projects.
@@ -28,6 +28,10 @@ Applies to all specifications, policies, protocols, role skills, lifecycle workf
    * Tier 3: Interaction Protocols (`protocols/`).
    * Tier 4: Role Skills (`roles/`), Workflows (`workflows/`), Platform Adapters (`adapters/`), and Project Extensions (`extensions/`).
    * Tier 5: Derived Artifacts (`dist/` and `CONTEXT_SNAPSHOT.md` — if a hash mismatch occurs, the canonical source files and live Git state govern).
+5. **Ephemeral Local Handoff Spool (`<ctrlDir>/handoffs/`, `DEC-031`)**:
+   * The flat directory `management/handoffs/` (in the UESF repository) or `.uesf/handoffs/` (in downstream projects) is a **gitignored, non-authoritative local transport spool** used to exchange Outbound (`HO-TASK-XXX-01.md`) and Inbound (`HO-TASK-XXX-02.md` with embedded `EV-TASK-XXX`) handoff packages across sessions and coding agents without manual copy-paste.
+   * Handoff spool files are excluded from `KNOWLEDGE_MAP.md` and `CONTEXT_SNAPSHOT.md` so local in-flight handoffs never cause Git working-tree or snapshot drift.
+   * Authoritative task states, acceptance verdicts, and architectural rulings MUST always be distilled into the Git-tracked ledgers (`ACTIVE_TASKS.md` and `DECISION_LOG.md`).
 
 ## 4. Responsibilities
 * **CTO**: Designates canonical locations and resolves cross-document conflicts.

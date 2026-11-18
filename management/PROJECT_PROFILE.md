@@ -1,7 +1,7 @@
 # Project Profile
 * **Document ID**: UESF-MGMT-001
 * **Canonical Path**: management/PROJECT_PROFILE.md
-* **Version**: 0.8.0
+* **Version**: 0.9.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-18
@@ -15,16 +15,16 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `0.8.0` (Milestone M8 — Risk-Gated Proportional Execution, Selective Role Hardening & Bundle Template Trimming)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M8 (`v0.8.0`) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Version**: `0.9.0` (Milestone M9 — File-Backed Operational Handoff Spool, Odd/Even Pickup, Compact Chat Cards & Uninstall History Protection)
+   * **Current Phase**: Milestones M1 (`v0.1.0`) through M9 (`v0.9.0`) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
-2. **Delivered Architecture (`v0.8.0` — All 6 Layers + 9 Roles + 3 Workflows + Native Multi-Agent CLI)**:
+2. **Delivered Architecture (`v0.9.0` — All 6 Layers + 9 Roles + 3 Workflows + Native Multi-Agent CLI)**:
    * **Layer 1 — Core Operating Model (`core/`)**: Operating model (`0.3.0` with `Fast-Path` vs. `Standard-Contract` execution tracks), 6-layer architecture with Template Target-Layer Rule (`0.3.1`), and capability taxonomy (`0.1.0`).
-   * **Layer 2 — Universal Policies (`policies/`)**: Autonomy (`0.2.0` with hard `A0` discovery lock), governance, security, Git, verification, knowledge governance, and source-of-truth policies (`0.2.0`).
-   * **Layer 3 — Interaction Protocols (`protocols/`)**: Feature discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`), task contracts (`0.3.0` with 4 mandatory `Fast-Path` eligibility gates and `IN_PROGRESS -> BLOCKED` Track Promotion), handoffs, peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
-   * **Layer 4 — Universal Agent Role Skills (`roles/`)**: Nine canonical engineering role skills (`Discovery`, `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).
+   * **Layer 2 — Universal Policies (`policies/`)**: Autonomy (`0.2.0` with hard `A0` discovery lock), governance, security, Git, verification, knowledge governance, and source-of-truth policy (`0.3.0`).
+   * **Layer 3 — Interaction Protocols (`protocols/`)**: Feature discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`), task contracts (`0.3.0` with 4 mandatory `Fast-Path` eligibility gates and `IN_PROGRESS -> BLOCKED` Track Promotion), handoffs (`0.3.0` with file-backed `<ctrlDir>/handoffs/` spool), peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
+   * **Layer 4 — Universal Agent Role Skills (`roles/`)**: Nine canonical engineering role skills (`Discovery`, `CTO` and `Developer` at `0.4.0`, `Architect`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).
    * **Layer 5 — Platform Adapters & CLI Distribution (`adapters/`, `bin/uesf.mjs`, `dist/`)**: Runtime bindings for Antigravity/VS Code (`antigravity-vscode`), Gemini Strategic Workspace (`gemini-strategic-workspace`), and portable CLI/MCP hosts (`generic-cli-mcp`), installing native per-agent `skills/` directories (plus flat `/` menu workflow triggers in Cline per `DEC-029`) tracked in `~/.uesf/install-state.json`.
    * **Layer 6 — Project-Specific Extensions (`extensions/`)**: Extension isolation standard (`extensions/README.md`), template (`templates/PROJECT_EXTENSION_TEMPLATE.md`), and reference web-service blueprint (`extensions/example-web-service/EXTENSION.md`).
 3. **Dual-Environment Operating Topology**:

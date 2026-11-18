@@ -1,7 +1,7 @@
 # Universal Engineering Skills Framework (UESF)
 * **Document ID**: UESF-CORE-001
 * **Canonical Path**: README.md
-* **Version**: 0.8.0
+* **Version**: 0.9.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-18
@@ -34,9 +34,9 @@ Run the cross-platform Node.js CLI installer (requires **Node.js >= 18**). It au
 
 * **Option B — Install a Specific UESF Version or Tag:**
   ```sh
-  npx --yes github:m-ebrahimzadeh/uesf#v0.8.0 install
+  npx --yes github:m-ebrahimzadeh/uesf#v0.9.0 install
   # Or from a local clone:
-  node bin/uesf.mjs install --version 0.8.0
+  node bin/uesf.mjs install --version 0.9.0
   ```
 
 * **Option C — Local Clone & Contributor CLI:**
@@ -57,7 +57,7 @@ Open your target software project in your coding agent and invoke:
 What `/uesf-init` (`workflows/INIT_WORKFLOW.md`) does automatically:
 1. **Audits in Read-Only Mode (`A0` First)**: Inspects your project's tech stack, directory structure, build/test commands, and existing documentation in `docs/` without modifying any files.
 2. **Asks for Your Confirmation**: Presents a plain-English summary of the proposed setup and waits for your approval.
-3. **Scaffolds `.uesf/` & Automatic Snapshot Hook (`A1`)**: Creates a lightweight `.uesf/` control plane (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, `CONTEXT_SNAPSHOT.md`) and wires `.uesf/bin/uesf.mjs` + a Git `pre-commit` hook that keeps `.uesf/CONTEXT_SNAPSHOT.md` up to date on every commit.
+3. **Scaffolds `.uesf/` & Automatic Snapshot Hook (`A1`)**: Creates a lightweight `.uesf/` control plane (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, `CONTEXT_SNAPSHOT.md`, plus the gitignored `handoffs/` spool and `.gitignore` entry) and wires `.uesf/bin/uesf.mjs` + a Git `pre-commit` hook that keeps `.uesf/CONTEXT_SNAPSHOT.md` up to date on every commit.
 
 ### Step 3 — Use the 4-Step Daily Engineering Loop
 1. **Discover (`/uesf-discovery`)**: Brainstorm new features or changes in read-only mode (`A0`) until you approve the direction.
@@ -164,6 +164,7 @@ your-project/
     ├── ACTIVE_TASKS.md              # Active task contracts (TASK-001, TASK-002...) & states
     ├── DECISION_LOG.md              # Architectural decisions (DEC-001...) & open questions (OQ-001...)
     ├── CONTEXT_SNAPSHOT.md          # 100% machine-generated snapshot (auto-updated on every git commit)
+    ├── handoffs/                    # Gitignored local handoff spool for HO-TASK-XXX-01.md & HO-TASK-XXX-02.md
     ├── bin/
     │   └── uesf.mjs                 # Standalone zero-dependency snapshot engine installed by init-project
     └── scripts/
@@ -210,7 +211,7 @@ node bin/uesf.mjs uninstall
 node bin/uesf.mjs uninstall --target claude-code
 node bin/uesf.mjs uninstall --project path/to/your-project
 ```
-Safely removes only `uesf-*` directories, legacy UESF command/workflow paths, and `~/.uesf/install-state.json`, preserving all non-UESF skills, `.git` repositories, downstream `.uesf/` ledgers, and project `docs/`.
+Safely removes only `uesf-*` directories, legacy UESF command/workflow paths, and `~/.uesf/install-state.json`, preserving all non-UESF skills, `.git` repositories, downstream `.uesf/` ledgers, `.uesf/handoffs/` history, and project `docs/`.
 
 ### Rebuilding `dist/` Bundles & Running the Repository Audit (For UESF Contributors)
 If you modify any canonical specification inside `core/`, `policies/`, `protocols/`, `roles/`, `workflows/`, `adapters/`, `extensions/`, or `templates/`:

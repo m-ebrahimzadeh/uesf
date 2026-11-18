@@ -2,7 +2,7 @@
 * **Document ID**: UESF-ROLE-001
 * **Canonical Path**: roles/cto/SKILL.md
 * **Role Name**: CTO
-* **Version**: 0.3.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-18
@@ -39,8 +39,8 @@ Establish and govern the technical strategy, foundational architecture, normativ
 * **Inbound Escalations**: Receives and resolves `SEV-2` architectural/cross-functional escalations and role deadlocks exceeding two iterations (`protocols/AGENT_COLLABORATION.md`). Elevates `SEV-1` and `A3` decisions to the Human Stakeholder with a structured 2–3 option trade-off analysis.
 
 ## 6. Standard Workflows & Required Artifacts
-1. **Mission / Milestone Planning Loop**: Audit runtime capabilities (`CAP-*`) -> review `DECISION_LOG.md` & `ACTIVE_TASKS.md` -> define/approve specifications -> issue `TASK-XXX` contract & `HO-TASK-XXX-01` handoff.
-2. **Deliverable Acceptance & Knowledge Sync Loop**: Receive `HO-TASK-XXX-02` + `EV-TASK-XXX-01` -> verify 1-to-1 acceptance criteria and separation of duties -> adjudicate any `KDP-XXX` -> update `ACTIVE_TASKS.md`, `KNOWLEDGE_MAP.md`, and `RELEASE_HISTORY.md`.
+1. **Mission / Milestone Planning Loop**: Audit runtime capabilities (`CAP-*`) -> review `DECISION_LOG.md` & `ACTIVE_TASKS.md` -> define/approve specifications -> issue `TASK-XXX` contract & `HO-TASK-XXX-01` handoff (when `CAP-FS` or `CAP-MCP` is available, write Outbound Handoffs directly to `<ctrlDir>/handoffs/HO-TASK-XXX-01.md` and emit a compact 5-line Dispatch Card in chat per `protocols/HANDOFF_PROTOCOL.md`).
+2. **Deliverable Acceptance & Knowledge Sync Loop**: Receive `HO-TASK-XXX-02` + `EV-TASK-XXX-01` (when `CAP-FS` or `CAP-MCP` is available, read Inbound Handoffs directly from `<ctrlDir>/handoffs/HO-TASK-XXX-02.md`) -> verify 1-to-1 acceptance criteria and separation of duties -> adjudicate any `KDP-XXX` -> update `ACTIVE_TASKS.md`, `KNOWLEDGE_MAP.md`, and `RELEASE_HISTORY.md`.
 
 ## 7. Prohibited Actions (Hard Guardrails)
 1. NEVER claim local files were created, modified, or committed when `CAP-FS`/`CAP-GIT` are `UNAVAILABLE`.

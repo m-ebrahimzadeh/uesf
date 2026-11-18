@@ -2,9 +2,9 @@
 description: "UESF DevOps Role (Build/Dist Automation, Git Workflows & Environment Tooling)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.8.0 | Active: uesf-devops | Autonomy: A1/A2]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.0 | Active: uesf-devops | Autonomy: A1/A2]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.8.0`)
+## UESF Embedded Core & Policy Invariants (`v0.9.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -17,6 +17,9 @@ description: "UESF DevOps Role (Build/Dist Automation, Git Workflows & Environme
    * If working in a downstream project with `.uesf/`, read operational state from `.uesf/{EXTENSION.md, KNOWLEDGE_MAP.md, ACTIVE_TASKS.md, DECISION_LOG.md, CONTEXT_SNAPSHOT.md}` and permanent project documentation from native `docs/` paths indexed in `.uesf/KNOWLEDGE_MAP.md`. If working in the UESF repository itself, read `management/`.
 4. **Risk-Gated Proportional Execution (`protocols/TASK_CONTRACT_PROTOCOL.md`)**:
    * Unambiguous, single-concern, low-risk tasks in a single workspace may use the `Fast-Path` inline contract (registering `IN_PROGRESS` in `ACTIVE_TASKS.md` on disk before code edits, running `Verified` checks, and updating the row to `IN_REVIEW`/`ACCEPTED` before committing with `[TASK-XXX]`). Any task touching auth, secrets, deletion logic, policies, multi-module interfaces, or `A3` gates requires the `Standard-Contract` track (or immediate `IN_PROGRESS -> BLOCKED` Track Promotion if discovered mid-task).
+5. **File-Backed Operational Handoff Spool (`protocols/HANDOFF_PROTOCOL.md`, `DEC-031`)**:
+   * Cross-session and cross-agent handoffs use the gitignored flat directory `<ctrlDir>/handoffs/` (`.uesf/handoffs/` in downstream projects, `management/handoffs/` in UESF) with paired sequential filenames: odd sequences (`HO-TASK-XXX-01.md`, `-03.md`) for Outbound dispatches and even sequences (`HO-TASK-XXX-02.md`, `-04.md`) for Inbound returns with embedded `EV-TASK-XXX` evidence.
+   * When `CAP-FS` or `CAP-MCP` is available, read/write handoff files directly in `<ctrlDir>/handoffs/` and emit a compact 5-line Dispatch/Return Summary Card in chat; fall back to full inline chat Markdown only when filesystem access is unavailable. Permanent task states and decisions MUST still be recorded in `ACTIVE_TASKS.md` and `DECISION_LOG.md`.
 
 ---
 ## Canonical Specification (`roles/devops/SKILL.md`)
@@ -104,4 +107,4 @@ Manage repository initialization, branch and merge automation, build and CI/CD p
 * <Explicitly list any unexecuted checks and the follow-up task responsible>
 ```
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-devops command=/uesf-devops source=roles/devops/SKILL.md version=0.8.0 sha256=542d4afc67ba5ebb63d14c3c4633d1db7cdd850e57a4d3fc4aa54a98f1630443 short_sha256=542d4afc67ba -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-devops command=/uesf-devops source=roles/devops/SKILL.md version=0.9.0 sha256=d919b4ebaf0e1f54779fc3759702bb0ba32fc69b0028ce5ed440bebb21cedc89 short_sha256=d919b4ebaf0e -->

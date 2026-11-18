@@ -2,7 +2,7 @@
 * **Document ID**: UESF-ROLE-003
 * **Canonical Path**: roles/developer/SKILL.md
 * **Role Name**: Developer
-* **Version**: 0.3.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-18
@@ -38,7 +38,7 @@ Implement clean, modular, well-tested software code, scripts, and technical arti
 * **Escalation & Discovery**: Emits `KDP-XXX` (`protocols/KNOWLEDGE_SYNCHRONIZATION.md`) when discovering undocumented codebase constraints, and emits `ESC-TASK-XXX-XX` (`protocols/ESCALATION_PROTOCOL.md`) when blocked by ambiguous specs or missing capabilities.
 
 ## 6. Standard Workflows & Required Artifacts
-1. **Implementation Loop**: Validate Task Contract & `CAP-*` -> create/checkout branch -> implement changes & unit tests -> run build/linter/test suite -> inspect `git status` & `git diff` -> scan for secrets (`policies/SECURITY_POLICY.md`) -> commit with `[TASK-ID]` -> emit `HO-TASK-XXX-02` + `EV-TASK-XXX-01`.
+1. **Implementation Loop**: Validate Task Contract & `CAP-*` (when `CAP-FS` or `CAP-MCP` is available, automatically read the active Outbound Handoff `<ctrlDir>/handoffs/HO-TASK-XXX-01.md` or latest odd sequence upon activation) -> create/checkout branch -> implement changes & unit tests -> run build/linter/test suite -> inspect `git status` & `git diff` -> scan for secrets (`policies/SECURITY_POLICY.md`) -> commit with `[TASK-ID]` -> emit `HO-TASK-XXX-02` + `EV-TASK-XXX-01` (when `CAP-FS` or `CAP-MCP` is available, write directly to `<ctrlDir>/handoffs/HO-TASK-XXX-02.md` and emit a compact 5-line Return Card in chat per `protocols/HANDOFF_PROTOCOL.md`).
 
 ## 7. Prohibited Actions (Hard Guardrails)
 1. NEVER claim tests passed, code compiled, or commits succeeded without actual runtime execution (`policies/VERIFICATION_POLICY.md`).
