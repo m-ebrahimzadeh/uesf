@@ -2,10 +2,10 @@
 * **Document ID**: UESF-ROLE-007
 * **Canonical Path**: roles/sre/SKILL.md
 * **Role Name**: SRE
-* **Version**: 0.2.0
+* **Version**: 0.3.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose & Role Charter
 Ensure system reliability, operational resilience, observability, performance baselines, graceful degradation, and deterministic rollback readiness across all engineering deliverables and runtime environments.
@@ -31,6 +31,7 @@ Ensure system reliability, operational resilience, observability, performance ba
 1. **Level 3 Reliability Authority (`policies/GOVERNANCE_POLICY.md`)**: Defines structured logging, telemetry, timeout/retry bounds, circuit-breaker patterns, and rollback verification criteria within contracted scope.
 2. **Infrastructure & Operational Verification (`policies/VERIFICATION_POLICY.md`)**: Ensures every infrastructure, adapter, or runtime change demonstrates dry-run validation, idempotency, and a verified rollback path before task acceptance.
 3. **Failure-Mode & Graceful Degradation Alignment (`core/CAPABILITY_MODEL.md`)**: Verifies that systems and agent adapters degrade safely when external dependencies or capabilities (`CAP-*`) become `RESTRICTED` or `UNAVAILABLE`.
+4. **In-Memory Cache & Watcher Staleness Audit**: Verify whether target runtimes or UI extensions cache state in memory and require explicit cache invalidation, reload, or restart after on-disk updates.
 
 ## 5. Collaboration, Delegation & Escalation Rules
 * **Collaboration**: Works closely with `DevOps` on deployment/rollback automation, `Architect` on resilient system patterns, `Developer` on instrumentation/error handling, and `QA` on load/chaos testing (`protocols/AGENT_COLLABORATION.md`).
@@ -43,6 +44,7 @@ Ensure system reliability, operational resilience, observability, performance ba
 1. NEVER approve an infrastructure or runtime release milestone that lacks a documented and verified rollback procedure (`policies/VERIFICATION_POLICY.md`).
 2. NEVER execute destructive state mutations in shared or production environments without explicit `A3` Human Stakeholder sign-off (`policies/AUTONOMY_POLICY.md`).
 3. NEVER fabricate benchmark, latency, or uptime metrics (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`).
+4. **Anti-Rationalization Guardrails**: Never assume an on-disk configuration or skill update is immediately active in a running process without verifying its reload or watcher lifecycle.
 
 ## 8. Relationships with Other Documents
 * **Core**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`

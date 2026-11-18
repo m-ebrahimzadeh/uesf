@@ -1,10 +1,10 @@
 # Active Tasks Registry
 * **Document ID**: UESF-MGMT-002
 * **Canonical Path**: management/ACTIVE_TASKS.md
-* **Version**: 0.7.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose
 Track all active, pending, and completed UESF tasks with unique identifiers, assigned roles, autonomy levels, states, and verification evidence links.
@@ -50,9 +50,10 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-028` | Forensic Multi-Agent Discovery Audit Across Antigravity, Kilo Code, Codex, Claude Code, Gemini CLI & Cline (`DEC-028`) | QA / DevOps | CTO | Engineering Workspace | `A0` | `ACCEPTED` | `EV-TASK-028-01` (`management/validation/VALIDATION_REPORT_007.md`). |
 | `TASK-029` | Fix Duplicate Commands & Description Metadata in Claude Code and Gemini CLI, Migrate Cline to Native Skills Only, Implement `install`/`update`/`check`/`doctor`/`uninstall` in `bin/uesf.mjs` & Stage `v0.7.0` (`DEC-028`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-029-01` (`HO-TASK-029-02` on branch `feat/TASK-029-native-agent-installer-v0.7.0`, accepted via `DEC-029`; `management/validation/VALIDATION_REPORT_007.md`). |
 | `TASK-030` | Enable Cline `/` Menu Workflow Triggers + Native Skills, Close Out Milestone M7 (`v0.7.0`) Registries & Merge to `main` (`DEC-029`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-030-01` (`HO-TASK-030-02`, merged to `main` and tagged `v0.7.0` per `DEC-029`). |
+| `TASK-031` | Implement Risk-Gated Proportional Execution (`DSC-003` / `DEC-030`), Selective Role Hardening, Bundle Template Trimming & Release `v0.8.0` | Developer / Documentation / DevOps | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-031-01` (`HO-TASK-031-02`, `ESC-TASK-031-01` / `KDP-009` adjudicated by CTO `A2`, merged to `main` and tagged `v0.8.0` per `DEC-030`). |
 
 ## 5. Active Outbound Task Contract Queue
-* Milestones M1 (`v0.1.0`) through M7 (`v0.7.0`, `TASK-000`–`TASK-030`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.7.0`).
+* Milestones M1 (`v0.1.0`) through M8 (`v0.8.0`, `TASK-000`–`TASK-031`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.8.0`).
 * All 12 UESF skills (`/uesf-discovery`, `/uesf-cto`, `/uesf-architect`, `/uesf-developer`, `/uesf-qa`, `/uesf-devops`, `/uesf-security`, `/uesf-sre`, `/uesf-documentation`, `/uesf-init`, `/uesf-handoff`, `/uesf-status`) are compiled in `dist/` and managed across native agent `skills/` directories (plus flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers in Cline) via `bin/uesf.mjs` and `~/.uesf/install-state.json`.
 * Any future feature proposal or architectural enhancement enters through Track 1 Iterative Discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `roles/discovery/SKILL.md`) locked at `A0` until explicit human confirmation.
 

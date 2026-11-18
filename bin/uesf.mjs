@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
-const FW_VERSION = '0.7.0';
+const FW_VERSION = '0.8.0';
 
 function toPosix(p) {
   return p.replace(/\\/g, '/');
@@ -258,6 +258,31 @@ export function runSyncSnapshot(targetRootArg = '') {
 // ============================================================================
 // 2. BUILD-DIST COMMAND
 // ============================================================================
+function extractTemplateStructure(filePath) {
+  const raw = readNormalized(filePath);
+  // 1. Fenced-block templates (Task Contract, Handoff, Evidence, KDP, Escalation):
+  //    extract copy-pasteable ```markdown blocks directly, stripping metadata headers,
+  //    Purpose, redundant wrapper headings ("## 2. Canonical ... Block"), and Relationships.
+  const fencedBlocks = [...raw.matchAll(/```markdown\n[\s\S]*?\n```/g)].map((m) => m[0].trim());
+  if (fencedBlocks.length > 0) {
+    return fencedBlocks.join('\n\n');
+  }
+  // 2. Schema-rule templates (Feature Discovery Brief, Project Extension, or future
+  //    "## 2. Canonical Markdown Structure" templates): extract actionable schema body.
+  const schemaMatch = raw.match(
+    /## (?:2\. Canonical Markdown Structure|3\. Rules and Requirements)\s*\n([\s\S]*?)(?=\n## \d+\.|\s*$)/
+  );
+  if (schemaMatch) {
+    return schemaMatch[1].trim();
+  }
+  // 3. Deterministic fallback for any unstructured template: strip header, Purpose, Relationships.
+  return raw
+    .replace(/^# [^\n]+\n(?:\* \*\*[^\n]+\n)+\s*/, '')
+    .replace(/## 1\. Purpose\s*\n[\s\S]*?(?=\n## \d+\.|\s*$)/, '')
+    .replace(/\n## \d+\. Relationships with Other Documents\s*\n[\s\S]*$/, '')
+    .trim();
+}
+
 export function runBuildDist() {
   runSyncSnapshot(REPO_ROOT);
 
@@ -295,6 +320,8 @@ export function runBuildDist() {
     '3. **Capability Probing & Three-Domain Knowledge Lookup (`core/CAPABILITY_MODEL.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`)**:',
     '   * Probe available capabilities (`CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-WS`, `CAP-WEB`, `CAP-MCP`, `CAP-AGENT`) before acting.',
     '   * If working in a downstream project with `.uesf/`, read operational state from `.uesf/{EXTENSION.md, KNOWLEDGE_MAP.md, ACTIVE_TASKS.md, DECISION_LOG.md, CONTEXT_SNAPSHOT.md}` and permanent project documentation from native `docs/` paths indexed in `.uesf/KNOWLEDGE_MAP.md`. If working in the UESF repository itself, read `management/`.',
+    '4. **Risk-Gated Proportional Execution (`protocols/TASK_CONTRACT_PROTOCOL.md`)**:',
+    '   * Unambiguous, single-concern, low-risk tasks in a single workspace may use the `Fast-Path` inline contract (registering `IN_PROGRESS` in `ACTIVE_TASKS.md` on disk before code edits, running `Verified` checks, and updating the row to `IN_REVIEW`/`ACCEPTED` before committing with `[TASK-XXX]`). Any task touching auth, secrets, deletion logic, policies, multi-module interfaces, or `A3` gates requires the `Standard-Contract` track (or immediate `IN_PROGRESS -> BLOCKED` Track Promotion if discovered mid-task).',
   ].join('\n');
 
   const bundles = [
@@ -325,7 +352,7 @@ export function runBuildDist() {
     if (b.templates.length > 0) {
       const tLines = ['', '---', '## Embedded Canonical Output Templates'];
       for (const tp of b.templates) {
-        tLines.push('', `### Template Source: \`${tp}\``, readNormalized(path.join(REPO_ROOT, tp)));
+        tLines.push('', `### Template Source: \`${tp}\``, extractTemplateStructure(path.join(REPO_ROOT, tp)));
       }
       extraSections += tLines.join('\n');
     }

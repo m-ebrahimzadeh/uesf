@@ -2,9 +2,9 @@
 > **NON-AUTHORITATIVE DERIVED ARTIFACT — DO NOT EDIT MANUALLY**
 > Generated deterministically by `bin/uesf.mjs sync-snapshot` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`, `DEC-026`).
 > * **Canonical Control Plane**: `management/`
-> * **Snapshot Version**: `0.7.0`
-> * **Source-Ledger-SHA256**: `391df9a6dca61008e558a112d1b01489027b36b629aa465edd3373ab8ca58647` (`391df9a6dca6`)
-> * **Last Ledger Update**: `2026-11-17`
+> * **Snapshot Version**: `0.8.0`
+> * **Source-Ledger-SHA256**: `84f6f4973b1868527a8074f89575bc5d09144947f8146badb9c63199e28e2a0f` (`84f6f4973b18`)
+> * **Last Ledger Update**: `2026-11-18`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
 * **Canonical Specification Files on Disk**: `59`
@@ -12,8 +12,8 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `31 / 31`
-* **Total Recorded Decisions (`DEC-*`)**: `29`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `32 / 32`
+* **Total Recorded Decisions (`DEC-*`)**: `30`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
 ## 2. Recorded Project & Governance State (`[RECORDED_IN_LEDGER]`)
@@ -21,10 +21,10 @@
 # Project Profile
 * **Document ID**: UESF-MGMT-001
 * **Canonical Path**: management/PROJECT_PROFILE.md
-* **Version**: 0.7.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose
 Establish the authoritative identity, scope boundaries, canonical repository coordinates, and operational workspace topology of the Universal Engineering Skills Framework (UESF).
@@ -35,15 +35,15 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 ## 3. Rules and Requirements
 1. **Project Identity**:
    * **Project Name**: Universal Engineering Skills Framework (UESF)
-   * **Current Version**: `0.7.0` (Milestone M7 — Native Multi-Agent Skill & Workflow Adapters, Claude Code / Gemini CLI / Cline Metadata & Duplicate Fixes, and Full `install` / `update` / `check` / `doctor` / `uninstall` CLI)
-   * **Current Phase**: Milestones M1 (`v0.1.0`) through M7 (`v0.7.0` — Native Multi-Agent Skill & Workflow Adapters, Lifecycle CLI `install`/`update`/`check`/`doctor`/`uninstall` & Automatic Context Snapshot) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
+   * **Current Version**: `0.8.0` (Milestone M8 — Risk-Gated Proportional Execution, Selective Role Hardening & Bundle Template Trimming)
+   * **Current Phase**: Milestones M1 (`v0.1.0`) through M8 (`v0.8.0`) Completed, Verified, and Accepted on `main` (`v1.0.0` reserved for future `A3` Human Stakeholder release gate)
    * **Canonical Local Repository Path**: `c:/Users/user/Project/uesf`
    * **Canonical Remote Git Repository**: `https://github.com/m-ebrahimzadeh/uesf` (`DEC-012`)
    * **Founding CTO & Chief Architect**: Activated (`CTO` Role, Autonomy Level `A2` for routine governance / `A3` for human-gated decisions)
-2. **Delivered Architecture (`v0.7.0` — All 6 Layers + 9 Roles + 3 Workflows + Native Multi-Agent CLI)**:
-   * **Layer 1 — Core Operating Model (`core/`)**: Operating model (`0.2.0`), 6-layer architecture with Template Target-Layer Rule (`0.3.1`), and capability taxonomy (`0.1.0`).
+2. **Delivered Architecture (`v0.8.0` — All 6 Layers + 9 Roles + 3 Workflows + Native Multi-Agent CLI)**:
+   * **Layer 1 — Core Operating Model (`core/`)**: Operating model (`0.3.0` with `Fast-Path` vs. `Standard-Contract` execution tracks), 6-layer architecture with Template Target-Layer Rule (`0.3.1`), and capability taxonomy (`0.1.0`).
    * **Layer 2 — Universal Policies (`policies/`)**: Autonomy (`0.2.0` with hard `A0` discovery lock), governance, security, Git, verification, knowledge governance, and source-of-truth policies (`0.2.0`).
-   * **Layer 3 — Interaction Protocols (`protocols/`)**: Feature discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`), task contracts (`0.2.0`), handoffs, peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
+   * **Layer 3 — Interaction Protocols (`protocols/`)**: Feature discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`), task contracts (`0.3.0` with 4 mandatory `Fast-Path` eligibility gates and `IN_PROGRESS -> BLOCKED` Track Promotion), handoffs, peer collaboration, task acceptance, knowledge synchronization, evidence submission, and escalation protocols.
    * **Layer 4 — Universal Agent Role Skills (`roles/`)**: Nine canonical engineering role skills (`Discovery`, `CTO`, `Architect`, `Developer`, `QA`, `DevOps`, `Security`, `SRE`, `Documentation`).
    * **Layer 5 — Platform Adapters & CLI Distribution (`adapters/`, `bin/uesf.mjs`, `dist/`)**: Runtime bindings for Antigravity/VS Code (`antigravity-vscode`), Gemini Strategic Workspace (`gemini-strategic-workspace`), and portable CLI/MCP hosts (`generic-cli-mcp`), installing native per-agent `skills/` directories (plus flat `/` menu workflow triggers in Cline per `DEC-029`) tracked in `~/.uesf/install-state.json`.
    * **Layer 6 — Project-Specific Extensions (`extensions/`)**: Extension isolation standard (`extensions/README.md`), template (`templates/PROJECT_EXTENSION_TEMPLATE.md`), and reference web-service blueprint (`extensions/example-web-service/EXTENSION.md`).
@@ -67,10 +67,10 @@ Applies to all milestones, tasks, and environments participating in UESF develop
 # Active Tasks Registry
 * **Document ID**: UESF-MGMT-002
 * **Canonical Path**: management/ACTIVE_TASKS.md
-* **Version**: 0.7.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose
 Track all active, pending, and completed UESF tasks with unique identifiers, assigned roles, autonomy levels, states, and verification evidence links.
@@ -116,9 +116,10 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-028` | Forensic Multi-Agent Discovery Audit Across Antigravity, Kilo Code, Codex, Claude Code, Gemini CLI & Cline (`DEC-028`) | QA / DevOps | CTO | Engineering Workspace | `A0` | `ACCEPTED` | `EV-TASK-028-01` (`management/validation/VALIDATION_REPORT_007.md`). |
 | `TASK-029` | Fix Duplicate Commands & Description Metadata in Claude Code and Gemini CLI, Migrate Cline to Native Skills Only, Implement `install`/`update`/`check`/`doctor`/`uninstall` in `bin/uesf.mjs` & Stage `v0.7.0` (`DEC-028`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-029-01` (`HO-TASK-029-02` on branch `feat/TASK-029-native-agent-installer-v0.7.0`, accepted via `DEC-029`; `management/validation/VALIDATION_REPORT_007.md`). |
 | `TASK-030` | Enable Cline `/` Menu Workflow Triggers + Native Skills, Close Out Milestone M7 (`v0.7.0`) Registries & Merge to `main` (`DEC-029`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-030-01` (`HO-TASK-030-02`, merged to `main` and tagged `v0.7.0` per `DEC-029`). |
+| `TASK-031` | Implement Risk-Gated Proportional Execution (`DSC-003` / `DEC-030`), Selective Role Hardening, Bundle Template Trimming & Release `v0.8.0` | Developer / Documentation / DevOps | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-031-01` (`HO-TASK-031-02`, `ESC-TASK-031-01` / `KDP-009` adjudicated by CTO `A2`, merged to `main` and tagged `v0.8.0` per `DEC-030`). |
 
 ## 5. Active Outbound Task Contract Queue
-* Milestones M1 (`v0.1.0`) through M7 (`v0.7.0`, `TASK-000`–`TASK-030`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.7.0`).
+* Milestones M1 (`v0.1.0`) through M8 (`v0.8.0`, `TASK-000`–`TASK-031`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.8.0`).
 * All 12 UESF skills (`/uesf-discovery`, `/uesf-cto`, `/uesf-architect`, `/uesf-developer`, `/uesf-qa`, `/uesf-devops`, `/uesf-security`, `/uesf-sre`, `/uesf-documentation`, `/uesf-init`, `/uesf-handoff`, `/uesf-status`) are compiled in `dist/` and managed across native agent `skills/` directories (plus flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers in Cline) via `bin/uesf.mjs` and `~/.uesf/install-state.json`.
 * Any future feature proposal or architectural enhancement enters through Track 1 Iterative Discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `roles/discovery/SKILL.md`) locked at `A0` until explicit human confirmation.
 
@@ -130,10 +131,10 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 # Architectural & Governance Decision Log
 * **Document ID**: UESF-MGMT-003
 * **Canonical Path**: management/DECISION_LOG.md
-* **Version**: 0.7.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose
 Maintain an immutable, auditable ledger of all confirmed stakeholder constraints, CTO architectural and governance decisions, adjudicated Knowledge Discovery Proposals (`KDP-*`), and resolved open questions.
@@ -173,6 +174,7 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 | `DEC-027` | Downstream `/uesf:init` CLI Engine Wiring (`init-project` Subcommand, `v0.6.3`) | Add `init-project [path]` subcommand (and standalone `--init-project` behavior) to `bin/uesf.mjs` (`0.6.3`) and update `workflows/INIT_WORKFLOW.md` (`0.6.3`) so downstream projects initialized via `/uesf:init` receive `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.{ps1,sh}`, `.git/hooks/pre-commit`, and an initial `.uesf/CONTEXT_SNAPSHOT.md` in one step without dead wrapper references. | Approved | CTO (`A2`) | 2026-11-17 |
 | `DEC-028` | Forensic Multi-Agent Native Skills Alignment, Removal of Duplicate Command/Workflow Paths & Full Lifecycle CLI (`v0.7.0`) | Standardize on native single-skill `SKILL.md` installation per local agent (`~/.gemini/config/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.cline/skills/`, `~/.kilo/skills/`, `~/.codex/skills/`) with strict 2-key YAML frontmatter (`name` and JSON-quoted `description`, zero `version:` key), eliminate top-of-body `> **NON-AUTHORITATIVE` boilerplate in favor of a bottom HTML comment provenance footer (`<!-- UESF-BUNDLE-METADATA: ... -->`), remove duplicate `commands/uesf` and `Workflows/uesf*` files in Claude Code / Gemini CLI / Cline / Kilo Code / Antigravity, centralize state in `~/.uesf/install-state.json` (zero `.uesf-manifest.json` files inside agent directories), and implement `install`, `update`, `check`, `doctor [--fix]`, and `uninstall` in `bin/uesf.mjs` (`TASK-028`, `TASK-029`). | Approved | CTO (`A2`) | 2026-11-17 |
 | `DEC-029` | Milestone M7 (`v0.7.0`) Live UI Sign-Off, Dual Cline `/` Workflow + Skill Integration & Merge to `main` | Following live UI confirmation across Antigravity, Kilo Code, Codex, Claude Code, and Gemini CLI, enable flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu triggers alongside `~/.cline/skills/uesf-<name>/SKILL.md` in the Cline adapter, formally accept `TASK-029` and `TASK-030`, and authorize merging `feat/TASK-029-native-agent-installer-v0.7.0` into `main` with tag `v0.7.0`. | Confirmed | Human Stakeholder (`A3`) / CTO (`A2`) | 2026-11-17 |
+| `DEC-030` | Milestone M8 (`v0.8.0`) Risk-Gated Proportional Execution, On-Disk `IN_PROGRESS` Fast-Path Lifecycle, Selective Role Hardening & Bundle Template Trimming (`DSC-003`, `ESC-TASK-031-01`, `KDP-009`) | Adopt the refined `DSC-003` scope for `v0.8.0` (with CTO `A2` discrepancy adjudication per `ESC-TASK-031-01` / `KDP-009`): (1) integrate risk-gated `Fast-Path` vs. `Standard-Contract` execution tracks into `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` (`0.3.0`, rule `5.`) and `protocols/TASK_CONTRACT_PROTOCOL.md` (`0.3.0`, rule `5.`) with 4 mandatory eligibility gates, orthogonality to `A1`/`A2` autonomy, pre-implementation `IN_PROGRESS` registration in `ACTIVE_TASKS.md`, and `IN_PROGRESS -> BLOCKED` mid-task Track Promotion; (2) add selective tactical practices and anti-rationalization guardrails to 8 roles (`0.3.0` for 7 roles, `0.6.0` for `discovery`, preserving the 8 canonical `ROLE_SKILL_TEMPLATE.md` H2 sections) and `HANDOFF_WORKFLOW.md` (`0.8.0`) while leaving `documentation`, `init`, and `status` untouched; (3) extract actionable fenced markdown blocks and schema rules via `extractTemplateStructure()` in `bin/uesf.mjs` (`0.8.0`) to strip template wrapper boilerplate for a net line and byte reduction across `dist/skills/`; and (4) keep P2 (trigger evals) and P5 (plugin manifests) deferred. | Confirmed | Human Stakeholder (`A3`) / CTO (`A2`) | 2026-11-18 |
 
 ## 4. Open Questions & Pending Human Decisions (`A3` / Clarification Items)
 | Question ID | Topic | Resolution Summary | Status |
@@ -191,10 +193,10 @@ Governs all structural, policy, protocol, role, adapter, and project extension d
 # Master Knowledge Map & Source-of-Truth Registry
 * **Document ID**: UESF-MGMT-004
 * **Canonical Path**: management/KNOWLEDGE_MAP.md
-* **Version**: 0.7.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose
 Maintain the single authoritative registry mapping every canonical UESF specification document to its unique Document ID, canonical repository path, architectural layer, owner role, version, and verification status.
@@ -206,11 +208,11 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 1. **Single Canonical Home**: The Git repository (`c:/Users/user/Project/uesf` synced with `https://github.com/m-ebrahimzadeh/uesf`) is the canonical source of truth for all registered specifications.
 2. **1-to-1 Inventory Parity**: Every canonical `.md` specification file in the repository MUST have an exact corresponding row in Section 4 of this registry.
 
-## 4. Master Source-of-Truth Matrix (`v0.7.0` — 59 Canonical Documents)
+## 4. Master Source-of-Truth Matrix (`v0.8.0` — 59 Canonical Documents)
 | Doc ID | Canonical Repository Path | Layer / Category | Owner Role | Version | Lifecycle Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `UESF-CORE-001` | `README.md` | Core Index | CTO | `0.7.0` | Verified |
-| `UESF-CORE-002` | `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` | Layer 1: Core | CTO | `0.2.0` | Verified |
+| `UESF-CORE-001` | `README.md` | Core Index | CTO | `0.8.0` | Verified |
+| `UESF-CORE-002` | `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` | Layer 1: Core | CTO | `0.3.0` | Verified |
 | `UESF-CORE-003` | `core/FRAMEWORK_ARCHITECTURE.md` | Layer 1: Core | CTO | `0.3.1` | Verified |
 | `UESF-CORE-004` | `core/CAPABILITY_MODEL.md` | Layer 1: Core | CTO | `0.1.0` | Verified |
 | `UESF-POL-001` | `policies/AUTONOMY_POLICY.md` | Layer 2: Policy | CTO | `0.2.0` | Verified |
@@ -220,7 +222,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-POL-005` | `policies/VERIFICATION_POLICY.md` | Layer 2: Policy | CTO | `0.1.0` | Verified |
 | `UESF-POL-006` | `policies/KNOWLEDGE_GOVERNANCE_POLICY.md` | Layer 2: Policy | CTO | `0.1.0` | Verified |
 | `UESF-POL-007` | `policies/SOURCE_OF_TRUTH_POLICY.md` | Layer 2: Policy | CTO | `0.2.0` | Verified |
-| `UESF-PROT-001` | `protocols/TASK_CONTRACT_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.2.0` | Verified |
+| `UESF-PROT-001` | `protocols/TASK_CONTRACT_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.3.0` | Verified |
 | `UESF-PROT-002` | `protocols/HANDOFF_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.2.0` | Verified |
 | `UESF-PROT-003` | `protocols/AGENT_COLLABORATION.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-004` | `protocols/TASK_ACCEPTANCE_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
@@ -229,7 +231,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-PROT-007` | `protocols/ESCALATION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-008` | `protocols/FEATURE_DISCOVERY_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.5.0` | Verified |
 | `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.7.0` | Verified |
-| `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.6.0` | Verified |
+| `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.8.0` | Verified |
 | `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.6.0` | Verified |
 | `UESF-TMPL-001` | `templates/ROLE_SKILL_TEMPLATE.md` | Templates (L4) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-002` | `templates/TASK_CONTRACT_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
@@ -240,27 +242,27 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-TMPL-007` | `templates/PLATFORM_ADAPTER_TEMPLATE.md` | Templates (L5) | Architect | `0.4.0` | Verified |
 | `UESF-TMPL-008` | `templates/PROJECT_EXTENSION_TEMPLATE.md` | Templates (L6) | Architect | `0.6.0` | Verified |
 | `UESF-TMPL-009` | `templates/FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` | Templates (L3) | Architect | `0.5.0` | Verified |
-| `UESF-ROLE-001` | `roles/cto/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
-| `UESF-ROLE-002` | `roles/architect/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
-| `UESF-ROLE-003` | `roles/developer/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
-| `UESF-ROLE-004` | `roles/qa/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
-| `UESF-ROLE-005` | `roles/devops/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
-| `UESF-ROLE-006` | `roles/security/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
-| `UESF-ROLE-007` | `roles/sre/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
+| `UESF-ROLE-001` | `roles/cto/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
+| `UESF-ROLE-002` | `roles/architect/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
+| `UESF-ROLE-003` | `roles/developer/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
+| `UESF-ROLE-004` | `roles/qa/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
+| `UESF-ROLE-005` | `roles/devops/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
+| `UESF-ROLE-006` | `roles/security/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
+| `UESF-ROLE-007` | `roles/sre/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
 | `UESF-ROLE-008` | `roles/documentation/SKILL.md` | Layer 4: Role Skill | CTO | `0.2.0` | Verified |
-| `UESF-ROLE-009` | `roles/discovery/SKILL.md` | Layer 4: Role Skill | CTO | `0.5.0` | Verified |
+| `UESF-ROLE-009` | `roles/discovery/SKILL.md` | Layer 4: Role Skill | CTO | `0.6.0` | Verified |
 | `UESF-ADPT-001` | `adapters/README.md` | Layer 5: Adapter | Architect | `0.5.0` | Verified |
 | `UESF-ADPT-002` | `adapters/antigravity-vscode/ADAPTER.md` | Layer 5: Adapter | DevOps | `0.5.0` | Verified |
 | `UESF-ADPT-003` | `adapters/gemini-strategic-workspace/ADAPTER.md` | Layer 5: Adapter | Architect | `0.5.0` | Verified |
 | `UESF-ADPT-004` | `adapters/generic-cli-mcp/ADAPTER.md` | Layer 5: Adapter | Architect | `0.5.0` | Verified |
 | `UESF-EXT-001` | `extensions/README.md` | Layer 6: Extension | Architect | `0.6.0` | Verified |
 | `UESF-EXT-002` | `extensions/example-web-service/EXTENSION.md` | Layer 6: Extension | Architect | `0.6.0` | Verified |
-| `UESF-MGMT-001` | `management/PROJECT_PROFILE.md` | Management | CTO | `0.7.0` | Verified |
-| `UESF-MGMT-002` | `management/ACTIVE_TASKS.md` | Management | CTO | `0.7.0` | Verified |
-| `UESF-MGMT-003` | `management/DECISION_LOG.md` | Management | CTO | `0.7.0` | Verified |
-| `UESF-MGMT-004` | `management/KNOWLEDGE_MAP.md` | Management | CTO | `0.7.0` | Verified |
-| `UESF-MGMT-005` | `management/RELEASE_HISTORY.md` | Management | CTO | `0.7.0` | Verified |
-| `UESF-MGMT-006` | `management/IMPLEMENTATION_ROADMAP.md` | Management | CTO | `0.7.0` | Verified |
+| `UESF-MGMT-001` | `management/PROJECT_PROFILE.md` | Management | CTO | `0.8.0` | Verified |
+| `UESF-MGMT-002` | `management/ACTIVE_TASKS.md` | Management | CTO | `0.8.0` | Verified |
+| `UESF-MGMT-003` | `management/DECISION_LOG.md` | Management | CTO | `0.8.0` | Verified |
+| `UESF-MGMT-004` | `management/KNOWLEDGE_MAP.md` | Management | CTO | `0.8.0` | Verified |
+| `UESF-MGMT-005` | `management/RELEASE_HISTORY.md` | Management | CTO | `0.8.0` | Verified |
+| `UESF-MGMT-006` | `management/IMPLEMENTATION_ROADMAP.md` | Management | CTO | `0.8.0` | Verified |
 | `UESF-VAL-001` | `management/validation/VALIDATION_REPORT_001.md` | Validation Evidence | CTO | `0.1.1` | Verified |
 | `UESF-VAL-002` | `management/validation/VALIDATION_REPORT_002.md` | Validation Evidence | CTO | `0.2.1` | Verified |
 | `UESF-VAL-003` | `management/validation/VALIDATION_REPORT_003.md` | Validation Evidence | CTO | `0.3.0` | Verified |
@@ -279,4 +281,4 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 391df9a6dca6`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 84f6f4973b18`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.

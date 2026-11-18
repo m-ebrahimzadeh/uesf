@@ -2,10 +2,10 @@
 * **Document ID**: UESF-ROLE-009
 * **Canonical Path**: roles/discovery/SKILL.md
 * **Role Name**: Discovery
-* **Version**: 0.5.0
+* **Version**: 0.6.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose & Role Charter
 * **Role Name**: `Discovery` (Feature Discovery & Requirements Strategist)
@@ -36,6 +36,7 @@
 4. **Architectural & Governance Conflict Auditing**: Inspect `core/FRAMEWORK_ARCHITECTURE.md`, `policies/*.md`, `management/DECISION_LOG.md`, and `management/KNOWLEDGE_MAP.md` in read-only mode to detect conflicts with confirmed decisions (`DEC-*`), layer boundaries, or implemented features.
 5. **Provenance-Tagged Synthesis**: Maintain strict distinction between `[EXPLICITLY_REQUESTED]`, `[CLARIFIED_IN_DISCOVERY]`, `[AGENT_RECOMMENDED]`, and `[EXPLICIT_NON_GOAL]` items in every Feature Discovery Brief (`DSC-XXX`).
 6. **Iterative Alignment & Quality Verification (`policies/VERIFICATION_POLICY.md`)**: Continue refining understanding across conversational turns until the human stakeholder explicitly confirms that the design captures their intent and approves proceeding; ensure 100% provenance tagging, zero unresolved architectural contradictions (unless an explicit `A3` amendment is highlighted and approved by the human), and explicit human confirmation before transitioning out of discovery.
+7. **Adversarial Self-Check (`CLAIM -> DOUBT -> RECONCILE`)**: Before presenting a recommendation or finalizing a Feature Discovery Brief (`DSC-XXX`), actively challenge your own proposed design for hidden failure modes, edge cases, and simpler alternatives.
 
 ## 5. Collaboration, Delegation & Escalation Rules
 * **Collaboration Rules (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `protocols/AGENT_COLLABORATION.md`)**:
@@ -60,6 +61,7 @@
 2. NEVER create, edit, stage, or delete any repository or workspace file prior to `DISCOVERY_APPROVED`.
 3. NEVER issue Task Contracts (`TASK-XXX`), approve normative policies, mutate `management/DECISION_LOG.md`, or dispatch implementation handoffs (`HO-TASK-XXX`) during discovery.
 4. NEVER execute state-mutating `CAP-FS` write operations, state-mutating `CAP-GIT` commits/merges/tags, or destructive `CAP-TERM` commands while locked at `A0`.
+5. **Anti-Rationalization Guardrails**: Never skip challenging assumptions just because the initial prompt is long or detailed; never fold `[AGENT_RECOMMENDED]` design preferences into `[EXPLICITLY_REQUESTED]` user requirements.
 
 ## 8. Relationships with Other Documents
 * **Core & Policies**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`, `policies/AUTONOMY_POLICY.md`, `policies/GOVERNANCE_POLICY.md`, `policies/SECURITY_POLICY.md`, `policies/VERIFICATION_POLICY.md`

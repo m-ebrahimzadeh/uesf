@@ -2,9 +2,9 @@
 description: "UESF Unified Session-Entry & Context Reconstruction Workflow (/uesf-status)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-status | Autonomy: A0 (Read-Only)]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.8.0 | Active: uesf-status | Autonomy: A0 (Read-Only)]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.7.0`)
+## UESF Embedded Core & Policy Invariants (`v0.8.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -15,6 +15,8 @@ description: "UESF Unified Session-Entry & Context Reconstruction Workflow (/ues
 3. **Capability Probing & Three-Domain Knowledge Lookup (`core/CAPABILITY_MODEL.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`)**:
    * Probe available capabilities (`CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-WS`, `CAP-WEB`, `CAP-MCP`, `CAP-AGENT`) before acting.
    * If working in a downstream project with `.uesf/`, read operational state from `.uesf/{EXTENSION.md, KNOWLEDGE_MAP.md, ACTIVE_TASKS.md, DECISION_LOG.md, CONTEXT_SNAPSHOT.md}` and permanent project documentation from native `docs/` paths indexed in `.uesf/KNOWLEDGE_MAP.md`. If working in the UESF repository itself, read `management/`.
+4. **Risk-Gated Proportional Execution (`protocols/TASK_CONTRACT_PROTOCOL.md`)**:
+   * Unambiguous, single-concern, low-risk tasks in a single workspace may use the `Fast-Path` inline contract (registering `IN_PROGRESS` in `ACTIVE_TASKS.md` on disk before code edits, running `Verified` checks, and updating the row to `IN_REVIEW`/`ACCEPTED` before committing with `[TASK-XXX]`). Any task touching auth, secrets, deletion logic, policies, multi-module interfaces, or `A3` gates requires the `Standard-Contract` track (or immediate `IN_PROGRESS -> BLOCKED` Track Promotion if discovered mid-task).
 
 ---
 ## Canonical Specification (`workflows/STATUS_WORKFLOW.md`)
@@ -75,4 +77,4 @@ Per `core/CAPABILITY_MODEL.md` and `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `/u
 * **Protocols & Workflows**: `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `protocols/HANDOFF_PROTOCOL.md`, `workflows/INIT_WORKFLOW.md`, `workflows/HANDOFF_WORKFLOW.md`
 * **Management**: `management/KNOWLEDGE_MAP.md`, `management/ACTIVE_TASKS.md`, `management/DECISION_LOG.md`
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-status command=/uesf-status source=workflows/STATUS_WORKFLOW.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-status command=/uesf-status source=workflows/STATUS_WORKFLOW.md version=0.8.0 sha256=542d4afc67ba5ebb63d14c3c4633d1db7cdd850e57a4d3fc4aa54a98f1630443 short_sha256=542d4afc67ba -->

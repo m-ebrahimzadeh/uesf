@@ -2,9 +2,9 @@
 description: "UESF Session-Exit Handoff Workflow (/uesf-handoff - Package Work & Evidence)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-handoff | Autonomy: A0/A1]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.8.0 | Active: uesf-handoff | Autonomy: A0/A1]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.7.0`)
+## UESF Embedded Core & Policy Invariants (`v0.8.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -15,6 +15,8 @@ description: "UESF Session-Exit Handoff Workflow (/uesf-handoff - Package Work &
 3. **Capability Probing & Three-Domain Knowledge Lookup (`core/CAPABILITY_MODEL.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`)**:
    * Probe available capabilities (`CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-WS`, `CAP-WEB`, `CAP-MCP`, `CAP-AGENT`) before acting.
    * If working in a downstream project with `.uesf/`, read operational state from `.uesf/{EXTENSION.md, KNOWLEDGE_MAP.md, ACTIVE_TASKS.md, DECISION_LOG.md, CONTEXT_SNAPSHOT.md}` and permanent project documentation from native `docs/` paths indexed in `.uesf/KNOWLEDGE_MAP.md`. If working in the UESF repository itself, read `management/`.
+4. **Risk-Gated Proportional Execution (`protocols/TASK_CONTRACT_PROTOCOL.md`)**:
+   * Unambiguous, single-concern, low-risk tasks in a single workspace may use the `Fast-Path` inline contract (registering `IN_PROGRESS` in `ACTIVE_TASKS.md` on disk before code edits, running `Verified` checks, and updating the row to `IN_REVIEW`/`ACCEPTED` before committing with `[TASK-XXX]`). Any task touching auth, secrets, deletion logic, policies, multi-module interfaces, or `A3` gates requires the `Standard-Contract` track (or immediate `IN_PROGRESS -> BLOCKED` Track Promotion if discovered mid-task).
 
 ---
 ## Canonical Specification (`workflows/HANDOFF_WORKFLOW.md`)
@@ -23,10 +25,10 @@ description: "UESF Session-Exit Handoff Workflow (/uesf-handoff - Package Work &
 * **Document ID**: UESF-WKFL-002
 * **Canonical Path**: workflows/HANDOFF_WORKFLOW.md
 * **Workflow Trigger**: /uesf:handoff
-* **Version**: 0.6.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: Architect
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose & Command Trigger
 Define the standardized session-exit workflow for `/uesf:handoff` (`@uesf-handoff`), packaging completed work, verification evidence, remaining tasks, decisions, and next steps into a self-contained Handoff Package (`HO-TASK-XXX`) and Evidence Package (`EV-TASK-XXX`) while refreshing `CONTEXT_SNAPSHOT.md`.
@@ -48,14 +50,16 @@ Per `core/CAPABILITY_MODEL.md`:
    * Execute `scripts/sync-snapshot.ps1` (or `.uesf/scripts/sync-snapshot.ps1`) so `CONTEXT_SNAPSHOT.md` reflects the latest ledger state before ending the session.
 3. **Emit Structured Handoff & Evidence Block**:
    * Output the complete Markdown handoff package conforming to `protocols/HANDOFF_PROTOCOL.md` and `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`.
+4. **Apply Recency Ordering & Context Budgeting**: Keep handoffs focused on task-relevant files and place active blockers, exact verification commands, and the immediate next action at the very end of the handoff block.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the response with: `**[UESF v0.6.0 | Active: /uesf:handoff | Autonomy: A0/A1]**`
+* Begin the response with: `**[UESF v0.8.0 | Active: /uesf:handoff | Autonomy: A0/A1]**`
 * Every Inbound Handoff MUST include the 5-state **Epistemic Classification Table** (`Verified`, `Observed`, `Reported`, `Inferred`, `Unknown / Pending`) and the **1-to-1 Acceptance Criteria Mapping Table** (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
 * **Distinct from `/uesf:status`**: `/uesf:handoff` is a **session-exit producer** that packages deliverables and evidence for transfer or review; `/uesf:status` (`workflows/STATUS_WORKFLOW.md`) is a **session-entry consumer** that reconstructs context when opening a workspace or starting a fresh chat.
 * **Zero Fabricated Evidence**: Never mark an acceptance criterion `Verified` without concrete command or inspection output from the current session (`policies/VERIFICATION_POLICY.md`).
+* **Anti-Rationalization Guardrails**: Never bury blocking action items or required verification gates in the middle of a long narrative section.
 
 ## 7. Relationships with Other Documents
 * **Policies**: `policies/AUTONOMY_POLICY.md`, `policies/GIT_POLICY.md`, `policies/VERIFICATION_POLICY.md`
@@ -65,19 +69,6 @@ Per `core/CAPABILITY_MODEL.md`:
 ## Embedded Canonical Output Templates
 
 ### Template Source: `templates/HANDOFF_PACKAGE_TEMPLATE.md`
-# Handoff Package Template
-* **Document ID**: UESF-TMPL-003
-* **Canonical Path**: templates/HANDOFF_PACKAGE_TEMPLATE.md
-* **Version**: 0.2.1
-* **Status**: Verified
-* **Owner**: CTO
-* **Target Layer**: Layer 3
-* **Last Updated**: 2026-11-17
-
-## 1. Purpose
-Provide the standardized Outbound and Inbound Handoff Package templates (`HO-<TASK-ID>-<SEQ>`) for cross-environment and cross-role transfers per `protocols/HANDOFF_PROTOCOL.md`.
-
-## 2. Outbound Handoff Template (Dispatching Work)
 ```markdown
 # UESF OUTBOUND HANDOFF PACKAGE — HO-TASK-XXX-01
 * **Handoff ID**: `HO-TASK-XXX-01`
@@ -91,7 +82,6 @@ Provide the standardized Outbound and Inbound Handoff Package templates (`HO-<TA
 * **Return Instructions**: Return Inbound Handoff `HO-TASK-XXX-02` with attached Evidence Package `EV-TASK-XXX-01`.
 ```
 
-## 3. Inbound Handoff Template (Returning Results)
 ```markdown
 # UESF INBOUND HANDOFF PACKAGE — HO-TASK-XXX-02
 * **Handoff ID**: `HO-TASK-XXX-02`
@@ -106,23 +96,7 @@ Provide the standardized Outbound and Inbound Handoff Package templates (`HO-<TA
 * **Knowledge Discoveries / Escalations**: `None` (or attach `KDP-XXX` / `ESC-TASK-XXX-XX`)
 ```
 
-## 4. Relationships with Other Documents
-* **Governing Protocol**: `protocols/HANDOFF_PROTOCOL.md`, `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`
-
 ### Template Source: `templates/EVIDENCE_PACKAGE_TEMPLATE.md`
-# Evidence Package Template
-* **Document ID**: UESF-TMPL-004
-* **Canonical Path**: templates/EVIDENCE_PACKAGE_TEMPLATE.md
-* **Version**: 0.2.1
-* **Status**: Verified
-* **Owner**: CTO
-* **Target Layer**: Layer 3
-* **Last Updated**: 2026-11-17
-
-## 1. Purpose
-Provide the standardized Evidence Package template (`EV-<TASK-ID>-<SEQ>`) enforcing epistemic discipline (`Verified`, `Observed`, `Reported`, `Inferred`, `Unknown / Pending`) per `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`.
-
-## 2. Canonical Evidence Package Block
 ```markdown
 ### Evidence Package: EV-TASK-XXX-01
 * **Evidence ID**: `EV-TASK-XXX-01`
@@ -150,7 +124,4 @@ Provide the standardized Evidence Package template (`EV-<TASK-ID>-<SEQ>`) enforc
 * <Explicitly list any unexecuted checks and the follow-up task responsible>
 ```
 
-## 3. Relationships with Other Documents
-* **Governing Specs**: `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`, `policies/VERIFICATION_POLICY.md`, `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`
-
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-handoff command=/uesf-handoff source=workflows/HANDOFF_WORKFLOW.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-handoff command=/uesf-handoff source=workflows/HANDOFF_WORKFLOW.md version=0.8.0 sha256=542d4afc67ba5ebb63d14c3c4633d1db7cdd850e57a4d3fc4aa54a98f1630443 short_sha256=542d4afc67ba -->
