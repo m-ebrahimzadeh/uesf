@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
-const FW_VERSION = '0.8.0';
+const FW_VERSION = '0.9.0';
 
 function toPosix(p) {
   return p.replace(/\\/g, '/');
@@ -81,7 +81,7 @@ function walkMdFiles(dirPath, rootDir, excludeDistAndSnap = false) {
     const full = path.join(dirPath, entry.name);
     const rel = toPosix(path.relative(rootDir, full));
     if (entry.isDirectory()) {
-      if (entry.name === '.git') continue;
+      if (entry.name === '.git' || entry.name === 'handoffs') continue;
       if (excludeDistAndSnap && entry.name === 'dist') continue;
       results.push(...walkMdFiles(full, rootDir, excludeDistAndSnap));
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
@@ -322,6 +322,9 @@ export function runBuildDist() {
     '   * If working in a downstream project with `.uesf/`, read operational state from `.uesf/{EXTENSION.md, KNOWLEDGE_MAP.md, ACTIVE_TASKS.md, DECISION_LOG.md, CONTEXT_SNAPSHOT.md}` and permanent project documentation from native `docs/` paths indexed in `.uesf/KNOWLEDGE_MAP.md`. If working in the UESF repository itself, read `management/`.',
     '4. **Risk-Gated Proportional Execution (`protocols/TASK_CONTRACT_PROTOCOL.md`)**:',
     '   * Unambiguous, single-concern, low-risk tasks in a single workspace may use the `Fast-Path` inline contract (registering `IN_PROGRESS` in `ACTIVE_TASKS.md` on disk before code edits, running `Verified` checks, and updating the row to `IN_REVIEW`/`ACCEPTED` before committing with `[TASK-XXX]`). Any task touching auth, secrets, deletion logic, policies, multi-module interfaces, or `A3` gates requires the `Standard-Contract` track (or immediate `IN_PROGRESS -> BLOCKED` Track Promotion if discovered mid-task).',
+    '5. **File-Backed Operational Handoff Spool (`protocols/HANDOFF_PROTOCOL.md`, `DEC-031`)**:',
+    '   * Cross-session and cross-agent handoffs use the gitignored flat directory `<ctrlDir>/handoffs/` (`.uesf/handoffs/` in downstream projects, `management/handoffs/` in UESF) with paired sequential filenames: odd sequences (`HO-TASK-XXX-01.md`, `-03.md`) for Outbound dispatches and even sequences (`HO-TASK-XXX-02.md`, `-04.md`) for Inbound returns with embedded `EV-TASK-XXX` evidence.',
+    '   * When `CAP-FS` or `CAP-MCP` is available, read/write handoff files directly in `<ctrlDir>/handoffs/` and emit a compact 5-line Dispatch/Return Summary Card in chat; fall back to full inline chat Markdown only when filesystem access is unavailable. Permanent task states and decisions MUST still be recorded in `ACTIVE_TASKS.md` and `DECISION_LOG.md`.',
   ].join('\n');
 
   const bundles = [
@@ -477,6 +480,21 @@ export function runInitProject(projDirArg = '.') {
   const dstCli = path.join(projBinDir, 'uesf.mjs');
   fs.copyFileSync(__filename, dstCli);
   try { fs.chmodSync(dstCli, 0o755); } catch {}
+
+  const projHandoffsDir = path.join(projPath, '.uesf/handoffs');
+  fs.mkdirSync(projHandoffsDir, { recursive: true });
+
+  const gitignorePath = path.join(projPath, '.gitignore');
+  const ignoreEntry = '.uesf/handoffs/';
+  if (fs.existsSync(gitignorePath) && fs.statSync(gitignorePath).isFile()) {
+    const giText = readNormalized(gitignorePath);
+    const giLines = giText.split('\n').map((l) => l.trim());
+    if (!giLines.includes(ignoreEntry) && !giLines.includes('.uesf/handoffs')) {
+      writeLf(gitignorePath, (giText ? giText + '\n' : '') + ignoreEntry + '\n');
+    }
+  } else {
+    writeLf(gitignorePath, `# UESF Ephemeral Local Handoff Spool (DEC-031)\n${ignoreEntry}\n`);
+  }
 
   const hookSrc = path.join(REPO_ROOT, 'scripts/hooks/pre-commit');
   const projHooks = path.join(projPath, '.git/hooks');
@@ -1223,8 +1241,9 @@ function uninstallProjectWiring(projectDirArg) {
     }
   }
 
+  removeDirIfEmpty(path.join(projPath, '.uesf/handoffs'));
   console.log(
-    `PROJECT_UNINSTALLED=${toPosix(projPath)} (removed UESF automation scripts/hooks; preserved .uesf/ ledgers and docs/)`
+    `PROJECT_UNINSTALLED=${toPosix(projPath)} (removed UESF automation scripts/hooks; preserved .uesf/ ledgers, .uesf/handoffs/ history, and docs/)`
   );
 }
 

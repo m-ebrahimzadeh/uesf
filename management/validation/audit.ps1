@@ -18,10 +18,11 @@ function Get-Sha256Hex([string]$text) {
     }
 }
 
-# Scan Canonical .md files (excluding machine-generated dist/ and management/CONTEXT_SNAPSHOT.md)
+# Scan Canonical .md files (excluding machine-generated dist/, gitignored handoffs/, and management/CONTEXT_SNAPSHOT.md)
 $mdFiles = Get-ChildItem -Recurse -File -Filter *.md | Where-Object {
     $_.FullName -notmatch '[/\\]\.git[/\\]' -and
     $_.FullName -notmatch '[/\\]dist[/\\]' -and
+    $_.FullName -notmatch '[/\\]handoffs[/\\]' -and
     $_.FullName -notmatch 'CONTEXT_SNAPSHOT\.md$'
 }
 $rel = @($mdFiles | ForEach-Object { $_.FullName.Substring($repoRoot.Length + 1).Replace('\', '/') } | Sort-Object)
@@ -201,7 +202,7 @@ foreach ($f in $rel) {
     $srcLayer = Get-FileLayer $f $tmplTargetLayer
     if ($srcLayer -ge 6) { continue }
     $t = Get-Content $f -Raw -Encoding UTF8
-    $refPaths = @([regex]::Matches($t, '`([A-Za-z0-9_./-]+\.md)`') | ForEach-Object { $_.Groups[1].Value } | Where-Object { $_ -match '/' -and $_ -notmatch 'XXX' -and $_ -notmatch '^\.uesf/' -and $_ -notmatch '^docs/' -and $_ -notmatch '^\.\.\./' })
+    $refPaths = @([regex]::Matches($t, '`([A-Za-z0-9_./-]+\.md)`') | ForEach-Object { $_.Groups[1].Value } | Where-Object { $_ -match '/' -and $_ -notmatch 'XXX' -and $_ -notmatch '^\.uesf/' -and $_ -notmatch '^docs/' -and $_ -notmatch '^\.\.\./' -and $_ -notmatch '(^|/)handoffs/' })
     foreach ($rp in $refPaths) {
         $dstLayer = Get-FileLayer $rp $tmplTargetLayer
         if ($dstLayer -lt 99 -and $dstLayer -gt $srcLayer) {
@@ -221,7 +222,7 @@ foreach ($f in $rel) {
     $t = Get-Content $f -Raw -Encoding UTF8
     foreach ($m in [regex]::Matches($t, '`([A-Za-z0-9_./-]+\.md)`')) {
         $p = $m.Groups[1].Value
-        if ($p -match 'XXX' -or $p -match '^\.uesf/' -or $p -match '^docs/' -or $p -match '^\.\.\./') { continue }
+        if ($p -match 'XXX' -or $p -match '^\.uesf/' -or $p -match '^docs/' -or $p -match '^\.\.\./' -or $p -match '(^|/)handoffs/') { continue }
         if ($p -match '/') {
             if ($knownDiskMd -notcontains $p) { $bp++; "  BROKEN $p in $f" }
         } else {
@@ -344,7 +345,7 @@ if (-not (Test-Path 'package.json')) {
     $cliIssues++; "  CLI_MISSING package.json"
 } else {
     $pkg = Get-Content 'package.json' -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($pkg.version -ne '0.8.0' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
+    if ($pkg.version -ne '0.9.0' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
         $cliIssues++; "  CLI_PKG_INVALID version or bin.uesf mismatch"
     }
     if ($pkg.PSObject.Properties.Name -contains 'dependencies' -and ($pkg.dependencies.PSObject.Properties | Measure-Object).Count -gt 0) {

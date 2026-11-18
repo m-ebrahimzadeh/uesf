@@ -1,7 +1,7 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.8.0
+* **Version**: 0.9.0
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-18
@@ -10,7 +10,7 @@
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, feature discovery workflows, and project integrations.
 
 ## 2. Scope
-Covers Milestones M1 through M9 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-030` (`management/DECISION_LOG.md`).
+Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-031` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
 
@@ -46,7 +46,11 @@ Covers Milestones M1 through M9 of UESF development in alignment with `DEC-007` 
 * **Objective**: Integrate risk-gated `Fast-Path` vs. `Standard-Contract` execution tracks with on-disk `IN_PROGRESS` registration and `IN_PROGRESS -> BLOCKED` mid-task Track Promotion (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md` `0.3.0`, `protocols/TASK_CONTRACT_PROTOCOL.md` `0.3.0`), add selective tactical practices and anti-rationalization guardrails across 8 roles (`0.3.0`/`0.6.0`) and `workflows/HANDOFF_WORKFLOW.md` (`0.8.0`), and strip template wrapper boilerplate in `bin/uesf.mjs` (`0.8.0`) via `extractTemplateStructure()` to reduce compiled `dist/skills/` token footprint (`DSC-003`, `DEC-030`, `ESC-TASK-031-01`, `KDP-009`).
 * **Status**: `ACCEPTED` (`TASK-031`, merged to `main` and tagged `v0.8.0` per `DEC-030`, verified via `EV-TASK-031-01` and `HO-TASK-031-02`).
 
-### Milestone M9: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
+### Milestone M9: File-Backed Operational Handoff Spool, Odd/Even Pickup, Compact Chat Cards & Uninstall History Protection (`v0.9.0`) — *COMPLETED & ACCEPTED*
+* **Objective**: Standardize a gitignored flat operational handoff spool (`management/handoffs/` in UESF, `.uesf/handoffs/` in downstream projects) with paired odd/even sequence naming (`HO-TASK-XXX-01.md` / `HO-TASK-XXX-02.md`), compact 5-line chat summary cards with automatic inline fallback (`policies/SOURCE_OF_TRUTH_POLICY.md` `0.3.0`, `protocols/HANDOFF_PROTOCOL.md` `0.3.0`, `workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md`, `roles/{cto,developer}/SKILL.md`), `handoffs/` exclusion in `bin/uesf.mjs` (`0.9.0`) and `management/validation/audit.ps1`, `init-project` spool and `.gitignore` scaffolding, and strict non-empty `.uesf/handoffs/` history protection during `uesf uninstall --project` (`DSC-004`, `DEC-031`).
+* **Status**: `ACCEPTED` (`TASK-032`, merged to `main` and tagged `v0.9.0` per `DEC-031`, verified via `EV-TASK-032-01` and `HO-TASK-032-02`).
+
+### Milestone M10: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).
 
 ## 4. Responsibilities

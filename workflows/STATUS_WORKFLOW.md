@@ -2,10 +2,10 @@
 * **Document ID**: UESF-WKFL-003
 * **Canonical Path**: workflows/STATUS_WORKFLOW.md
 * **Workflow Trigger**: /uesf:status
-* **Version**: 0.6.0
+* **Version**: 0.7.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose & Command Trigger
 Define the unified session-entry and context-reconstruction workflow for `/uesf:status [optional-target]` (`@uesf-status`), enabling any local coding agent or cloud-based chat session to rapidly reconstruct project identity, architecture, verified repository state, recorded progress, active tasks, blockers, and logical next steps without requiring the user to re-explain project history.
@@ -31,6 +31,7 @@ Per `core/CAPABILITY_MODEL.md` and `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `/u
 ## 4. Step-by-Step Execution Workflow
 1. **Hydrate Operational Context (Low-Token Control Plane)**:
    * Load `CONTEXT_SNAPSHOT.md` (which embeds `PROJECT_PROFILE.md`/`EXTENSION.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, `KNOWLEDGE_MAP.md`, and the automated `[DRIFT_CHECK]` results) plus live `git status -sb` / `git log -n 5 --oneline` when local `CAP-GIT` is available.
+   * When `CAP-FS` or `CAP-MCP` is available, inspect `<ctrlDir>/handoffs/` live and surface any pending Outbound (`HO-TASK-XXX-01.md` / `HO-TASK-XXX-03.md`) or unaccepted Inbound (`HO-TASK-XXX-02.md` / `HO-TASK-XXX-04.md`) handoff files in Part 3 and Part 5 of the briefing without modifying `CONTEXT_SNAPSHOT.md`.
    * Do **not** bulk-load all permanent documentation in `docs/` during baseline hydration; use the `KNOWLEDGE_MAP.md` routing table to know what documents exist and where they live.
 2. **Optional Targeted Deep-Resume (`/uesf:status <TASK-ID or topic>`)**:
    * If the user supplies a specific Task ID, role, or feature topic (e.g., `/uesf:status TASK-020` or `/uesf:status adapters`), use `KNOWLEDGE_MAP.md` to selectively read the 1–3 permanent project specifications in `docs/` (or UESF layer directories) relevant to that target so work can resume immediately.
@@ -42,7 +43,7 @@ Per `core/CAPABILITY_MODEL.md` and `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `/u
    * **Part 5 — Recommended Next Steps**: The 1–2 most logical immediate actions and which role or workflow to invoke next (e.g., `/uesf:discovery`, `/uesf:cto`, `/uesf:developer`).
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the response with: `**[UESF v0.6.0 | Active: /uesf:status | Mode: <Local-Verified | Cloud-Remote | Snapshot-Paste> | Autonomy: A0]**`
+* Begin the response with: `**[UESF v0.7.0 | Active: /uesf:status | Mode: <Local-Verified | Cloud-Remote | Snapshot-Paste> | Autonomy: A0]**`
 * Strictly separate **Verified Repository Facts** (confirmed by live Git/FS probes or deterministic snapshot probes) from **Recorded Ledger Information** (task/decision tables) and **Unknowns** (`policies/VERIFICATION_POLICY.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
