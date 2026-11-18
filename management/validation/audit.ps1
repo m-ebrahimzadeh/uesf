@@ -344,7 +344,7 @@ if (-not (Test-Path 'package.json')) {
     $cliIssues++; "  CLI_MISSING package.json"
 } else {
     $pkg = Get-Content 'package.json' -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($pkg.version -ne '0.7.0' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
+    if ($pkg.version -ne '0.8.0' -or $pkg.bin.uesf -ne './bin/uesf.mjs') {
         $cliIssues++; "  CLI_PKG_INVALID version or bin.uesf mismatch"
     }
     if ($pkg.PSObject.Properties.Name -contains 'dependencies' -and ($pkg.dependencies.PSObject.Properties | Measure-Object).Count -gt 0) {

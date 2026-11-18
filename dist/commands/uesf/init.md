@@ -2,9 +2,9 @@
 description: "UESF Project Initialization Workflow (/uesf-init - A0 Audit & .uesf/ Scaffold)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.7.0 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.8.0 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.7.0`)
+## UESF Embedded Core & Policy Invariants (`v0.8.0`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -15,6 +15,8 @@ description: "UESF Project Initialization Workflow (/uesf-init - A0 Audit & .ues
 3. **Capability Probing & Three-Domain Knowledge Lookup (`core/CAPABILITY_MODEL.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`)**:
    * Probe available capabilities (`CAP-FS`, `CAP-TERM`, `CAP-GIT`, `CAP-WS`, `CAP-WEB`, `CAP-MCP`, `CAP-AGENT`) before acting.
    * If working in a downstream project with `.uesf/`, read operational state from `.uesf/{EXTENSION.md, KNOWLEDGE_MAP.md, ACTIVE_TASKS.md, DECISION_LOG.md, CONTEXT_SNAPSHOT.md}` and permanent project documentation from native `docs/` paths indexed in `.uesf/KNOWLEDGE_MAP.md`. If working in the UESF repository itself, read `management/`.
+4. **Risk-Gated Proportional Execution (`protocols/TASK_CONTRACT_PROTOCOL.md`)**:
+   * Unambiguous, single-concern, low-risk tasks in a single workspace may use the `Fast-Path` inline contract (registering `IN_PROGRESS` in `ACTIVE_TASKS.md` on disk before code edits, running `Verified` checks, and updating the row to `IN_REVIEW`/`ACCEPTED` before committing with `[TASK-XXX]`). Any task touching auth, secrets, deletion logic, policies, multi-module interfaces, or `A3` gates requires the `Standard-Contract` track (or immediate `IN_PROGRESS -> BLOCKED` Track Promotion if discovered mid-task).
 
 ---
 ## Canonical Specification (`workflows/INIT_WORKFLOW.md`)
@@ -84,22 +86,6 @@ Per `core/CAPABILITY_MODEL.md`:
 ## Embedded Canonical Output Templates
 
 ### Template Source: `templates/PROJECT_EXTENSION_TEMPLATE.md`
-# Project-Specific Extension Template
-* **Document ID**: UESF-TMPL-008
-* **Canonical Path**: templates/PROJECT_EXTENSION_TEMPLATE.md
-* **Version**: 0.6.0
-* **Status**: Verified
-* **Owner**: Architect
-* **Target Layer**: Layer 6
-* **Last Updated**: 2026-11-17
-
-## 1. Purpose
-Provide the standardized structural schema for all Layer 6 Project-Specific Extensions (`extensions/<project-slug>/EXTENSION.md`), enabling downstream software projects to overlay domain architecture, tech-stack conventions, and custom quality gates while preserving 100% immutability of UESF Layers 1–5.
-
-## 2. Scope
-Mandatory template for all Layer 6 project extension specifications (`core/FRAMEWORK_ARCHITECTURE.md` and `extensions/README.md`).
-
-## 3. Rules and Requirements
 1. **Mandatory Sections**: Every `EXTENSION.md` specification MUST include:
    * Metadata Header (`Document ID`, `Canonical Path`, `Version`, `Status`, `Owner`, `Last Updated`)
    * `## 1. Purpose & Target Project Profile`
@@ -112,18 +98,6 @@ Mandatory template for all Layer 6 project extension specifications (`core/FRAME
 2. **Unidirectional Dependency Invariant (`DEC-009`, `DEC-018`)**: Because this template targets Layer 6 (`Target Layer: Layer 6`), both this template and concrete extensions in `extensions/` MAY depend downward on Layers 1–6 (`core/`, `policies/`, `protocols/`, `roles/`, `adapters/`, `extensions/`), while Layers 1–5 MUST NEVER reference or depend on any file inside `extensions/`.
 3. **Additive-Only Constraint**: A project extension MAY tighten verification gates or add domain-specific checklists, but MUST NOT weaken universal autonomy thresholds (`policies/AUTONOMY_POLICY.md`), Git protections (`policies/GIT_POLICY.md`), security rules (`policies/SECURITY_POLICY.md`), or epistemic verification requirements (`policies/VERIFICATION_POLICY.md`).
 4. **Three-Domain Project Capsule (`.uesf/` + `docs/`)**: Every project extension MUST specify its Canonical Remote Repository URL and Default Branch (enabling cloud `/uesf:status` context retrieval), keep permanent documentation in native project paths (such as `docs/`) indexed by `.uesf/KNOWLEDGE_MAP.md`, and maintain operational state in `.uesf/` (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, and the machine-generated `CONTEXT_SNAPSHOT.md`).
-
-## 4. Responsibilities
-* **Architect / CTO**: Author and approve project extension overlays prior to downstream project execution.
-* **QA / Security**: Verify that project-specific gates tighten rather than relax universal UESF policies.
-
-## 5. Relevant Workflows
-1. **Project Extension Onboarding**: Copy this template to `extensions/<project-slug>/EXTENSION.md` -> define tech stack, domain boundaries, and build/test commands -> map to Layer 5 runtime adapters (`adapters/README.md`) -> register in `extensions/README.md`.
-
-## 6. Relationships with Other Documents
-* **Architecture & Layer 6 Registry**: `core/FRAMEWORK_ARCHITECTURE.md`, `extensions/README.md`
-* **Policies**: `policies/AUTONOMY_POLICY.md`, `policies/GOVERNANCE_POLICY.md`, `policies/SECURITY_POLICY.md`, `policies/VERIFICATION_POLICY.md`
-* **Adapters**: `adapters/README.md`
 ---
 ## Embedded Project Automation Wiring (`.uesf/bin/uesf.mjs`, `.uesf/scripts/` & `.git/hooks/pre-commit`)
 After creating `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TASKS.md`, and `.uesf/DECISION_LOG.md` in Stage 2, wire the standalone snapshot engine and Git pre-commit hook and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by executing ONE of the following commands in the target project root:
@@ -139,4 +113,4 @@ After creating `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TAS
    ```
 Both commands atomically install `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit`, and automatically generate `.uesf/CONTEXT_SNAPSHOT.md`.
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-init command=/uesf-init source=workflows/INIT_WORKFLOW.md version=0.7.0 sha256=974ed54739f55758db450aaac79efd01111f3669d0eeabe60e63a5fd2949ba21 short_sha256=974ed54739f5 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-init command=/uesf-init source=workflows/INIT_WORKFLOW.md version=0.8.0 sha256=542d4afc67ba5ebb63d14c3c4633d1db7cdd850e57a4d3fc4aa54a98f1630443 short_sha256=542d4afc67ba -->

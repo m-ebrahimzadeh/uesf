@@ -1,10 +1,10 @@
 # Universal Engineering Skills Framework (UESF)
 * **Document ID**: UESF-CORE-001
 * **Canonical Path**: README.md
-* **Version**: 0.7.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. What Is UESF & Why Use It?
 
@@ -34,9 +34,9 @@ Run the cross-platform Node.js CLI installer (requires **Node.js >= 18**). It au
 
 * **Option B — Install a Specific UESF Version or Tag:**
   ```sh
-  npx --yes github:m-ebrahimzadeh/uesf#v0.7.0 install
+  npx --yes github:m-ebrahimzadeh/uesf#v0.8.0 install
   # Or from a local clone:
-  node bin/uesf.mjs install --version 0.7.0
+  node bin/uesf.mjs install --version 0.8.0
   ```
 
 * **Option C — Local Clone & Contributor CLI:**
@@ -64,6 +64,8 @@ What `/uesf-init` (`workflows/INIT_WORKFLOW.md`) does automatically:
 2. **Contract (`/uesf-cto` or `/uesf-architect`)**: Turn the approved idea into a bounded Task Contract (`TASK-XXX`) with testable acceptance criteria.
 3. **Build & Verify (`/uesf-developer` + `/uesf-qa`)**: Implement on a feature branch (`policies/GIT_POLICY.md`), run tests, and verify against acceptance criteria.
 4. **Handoff & Resume (`/uesf-handoff` & `/uesf-status`)**: Package session results with `/uesf-handoff` and resume work in any future local or cloud session with `/uesf-status`.
+
+> **Proportional Execution (`Fast-Path` vs. `Standard-Contract`)**: Multi-file features, architectural changes, and security-sensitive tasks use the full `Standard-Contract` loop above, while unambiguous, localized, low-risk fixes may use a lightweight 4-line `Fast-Path` inline contract registered in `ACTIVE_TASKS.md` (`protocols/TASK_CONTRACT_PROTOCOL.md`).
 
 ---
 

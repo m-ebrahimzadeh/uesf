@@ -1,6 +1,6 @@
 {
   "name": "uesf",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Universal Engineering Skills Framework (UESF) — Reusable Multi-Agent Engineering Roles, Workflows, and Context Control Plane",
   "type": "module",
   "bin": {

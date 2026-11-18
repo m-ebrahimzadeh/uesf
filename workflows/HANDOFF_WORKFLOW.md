@@ -2,10 +2,10 @@
 * **Document ID**: UESF-WKFL-002
 * **Canonical Path**: workflows/HANDOFF_WORKFLOW.md
 * **Workflow Trigger**: /uesf:handoff
-* **Version**: 0.6.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: Architect
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose & Command Trigger
 Define the standardized session-exit workflow for `/uesf:handoff` (`@uesf-handoff`), packaging completed work, verification evidence, remaining tasks, decisions, and next steps into a self-contained Handoff Package (`HO-TASK-XXX`) and Evidence Package (`EV-TASK-XXX`) while refreshing `CONTEXT_SNAPSHOT.md`.
@@ -27,14 +27,16 @@ Per `core/CAPABILITY_MODEL.md`:
    * Execute `scripts/sync-snapshot.ps1` (or `.uesf/scripts/sync-snapshot.ps1`) so `CONTEXT_SNAPSHOT.md` reflects the latest ledger state before ending the session.
 3. **Emit Structured Handoff & Evidence Block**:
    * Output the complete Markdown handoff package conforming to `protocols/HANDOFF_PROTOCOL.md` and `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`.
+4. **Apply Recency Ordering & Context Budgeting**: Keep handoffs focused on task-relevant files and place active blockers, exact verification commands, and the immediate next action at the very end of the handoff block.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the response with: `**[UESF v0.6.0 | Active: /uesf:handoff | Autonomy: A0/A1]**`
+* Begin the response with: `**[UESF v0.8.0 | Active: /uesf:handoff | Autonomy: A0/A1]**`
 * Every Inbound Handoff MUST include the 5-state **Epistemic Classification Table** (`Verified`, `Observed`, `Reported`, `Inferred`, `Unknown / Pending`) and the **1-to-1 Acceptance Criteria Mapping Table** (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
 * **Distinct from `/uesf:status`**: `/uesf:handoff` is a **session-exit producer** that packages deliverables and evidence for transfer or review; `/uesf:status` (`workflows/STATUS_WORKFLOW.md`) is a **session-entry consumer** that reconstructs context when opening a workspace or starting a fresh chat.
 * **Zero Fabricated Evidence**: Never mark an acceptance criterion `Verified` without concrete command or inspection output from the current session (`policies/VERIFICATION_POLICY.md`).
+* **Anti-Rationalization Guardrails**: Never bury blocking action items or required verification gates in the middle of a long narrative section.
 
 ## 7. Relationships with Other Documents
 * **Policies**: `policies/AUTONOMY_POLICY.md`, `policies/GIT_POLICY.md`, `policies/VERIFICATION_POLICY.md`

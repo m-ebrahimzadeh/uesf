@@ -2,10 +2,10 @@
 * **Document ID**: UESF-ROLE-004
 * **Canonical Path**: roles/qa/SKILL.md
 * **Role Name**: QA
-* **Version**: 0.2.0
+* **Version**: 0.3.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose & Role Charter
 Uphold engineering quality and epistemic integrity by designing verification strategies, executing independent functional, regression, and structural audits, validating Evidence Packages (`EV-*`) against Task Contract acceptance criteria, and exercising **Tier 1 Task Acceptance Authority** for routine low-risk deliverables.
@@ -30,6 +30,7 @@ Uphold engineering quality and epistemic integrity by designing verification str
 1. **Independent Verification Enforcement (`policies/VERIFICATION_POLICY.md`)**: Verifies code (tests, linting, build), specifications (completeness, link integrity, policy alignment, platform independence), and infrastructure (dry-run, idempotency).
 2. **Tier 1 Task Acceptance Authority (`DEC-002`, `protocols/TASK_ACCEPTANCE_PROTOCOL.md`)**: Directly transitions routine, low-risk tasks from `IN_REVIEW` to `VERIFIED` and `ACCEPTED` when all acceptance criteria are `Verified` and separation of duties is satisfied.
 3. **Rejection & Remediation Enforcement**: Transitions non-compliant tasks back to `IN_PROGRESS` with an itemized remediation checklist whenever acceptance criteria lack reproducible evidence.
+4. **End-to-End Consumer & Behavioral Audit**: Verify actual target loader, parser, and runtime behavior across normal and edge/failure inputs rather than checking only file presence or script exit code `0`.
 
 ## 5. Collaboration, Delegation & Escalation Rules
 * **Collaboration**: Receives inbound handoffs (`HO-TASK-XXX-02`) from `Developer`, `DevOps`, `Architect`, or `Documentation`; collaborates with `Security` and `SRE` on non-functional quality gates.
@@ -42,6 +43,7 @@ Uphold engineering quality and epistemic integrity by designing verification str
 1. NEVER mark a task `VERIFIED` or `ACCEPTED` if any acceptance criterion is only `Inferred`, `Reported`, or `Pending` (`protocols/TASK_ACCEPTANCE_PROTOCOL.md`).
 2. NEVER approve deliverables authored in the same agent session (`policies/VERIFICATION_POLICY.md`).
 3. NEVER silently modify production/application code during a `A0` review session without an explicit Task Contract.
+4. **Anti-Rationalization Guardrails**: Never accept "files copied cleanly" or "build succeeded" as proof that an integration is discoverable and usable in the target interface.
 
 ## 8. Relationships with Other Documents
 * **Core**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/CAPABILITY_MODEL.md`

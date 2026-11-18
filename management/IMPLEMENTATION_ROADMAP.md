@@ -1,16 +1,16 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.7.0
+* **Version**: 0.8.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-17
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, feature discovery workflows, and project integrations.
 
 ## 2. Scope
-Covers Milestones M1 through M8 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-029` (`management/DECISION_LOG.md`).
+Covers Milestones M1 through M9 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-030` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
 
@@ -42,7 +42,11 @@ Covers Milestones M1 through M8 of UESF development in alignment with `DEC-007` 
 * **Objective**: Align all 6 local coding agent adapters (`Antigravity`, `Claude Code`, `Gemini CLI`, `Cline`, `Kilo Code`, `Codex`) on native `SKILL.md` directories (`DEC-028`), enable flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers alongside `~/.cline/skills/` in Cline (`DEC-029`), eliminate duplicate command directories and top-of-body compiler boilerplate leaks, enforce strict 2-key YAML frontmatter with bottom HTML-comment SHA-256 metadata, centralize installation state in `~/.uesf/install-state.json`, and deliver `install`, `update`, `check`, `doctor [--fix]`, and `uninstall` in `bin/uesf.mjs`.
 * **Status**: `ACCEPTED` (`TASK-028`–`TASK-030`, merged to `main` and tagged `v0.7.0` per `DEC-029`, verified via `EV-TASK-028-01`, `EV-TASK-029-01`, `EV-TASK-030-01`, and `management/validation/VALIDATION_REPORT_007.md`).
 
-### Milestone M8: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
+### Milestone M8: Risk-Gated Proportional Execution, Selective Role Hardening & Bundle Template Trimming (`v0.8.0`) — *COMPLETED & ACCEPTED*
+* **Objective**: Integrate risk-gated `Fast-Path` vs. `Standard-Contract` execution tracks with on-disk `IN_PROGRESS` registration and `IN_PROGRESS -> BLOCKED` mid-task Track Promotion (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md` `0.3.0`, `protocols/TASK_CONTRACT_PROTOCOL.md` `0.3.0`), add selective tactical practices and anti-rationalization guardrails across 8 roles (`0.3.0`/`0.6.0`) and `workflows/HANDOFF_WORKFLOW.md` (`0.8.0`), and strip template wrapper boilerplate in `bin/uesf.mjs` (`0.8.0`) via `extractTemplateStructure()` to reduce compiled `dist/skills/` token footprint (`DSC-003`, `DEC-030`, `ESC-TASK-031-01`, `KDP-009`).
+* **Status**: `ACCEPTED` (`TASK-031`, merged to `main` and tagged `v0.8.0` per `DEC-030`, verified via `EV-TASK-031-01` and `HO-TASK-031-02`).
+
+### Milestone M9: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).
 
 ## 4. Responsibilities

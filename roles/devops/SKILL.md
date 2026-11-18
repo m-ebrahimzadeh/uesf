@@ -2,10 +2,10 @@
 * **Document ID**: UESF-ROLE-005
 * **Canonical Path**: roles/devops/SKILL.md
 * **Role Name**: DevOps
-* **Version**: 0.2.0
+* **Version**: 0.3.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-16
+* **Last Updated**: 2026-11-18
 
 ## 1. Purpose & Role Charter
 Manage repository initialization, branch and merge automation, build and CI/CD pipelines, environment provisioning, and release packaging with strict reproducibility, idempotency, and version-control governance.
@@ -31,6 +31,7 @@ Manage repository initialization, branch and merge automation, build and CI/CD p
 1. **Git Governance Execution (`policies/GIT_POLICY.md`)**: Enforces branch-by-default naming (`<type>/<task-id>-<slug>`), verifies explicit Task Contract authorization before any direct-to-`main` commit, and ensures clean working trees (`git status` / `git diff`).
 2. **Pipeline & Environment Reproducibility (`policies/VERIFICATION_POLICY.md`)**: Validates infrastructure and CI changes via dry-runs, idempotency checks, and rollback verification.
 3. **Tier 1 Reviewer for Build/CI Changes**: Acts as independent Tier 1 Reviewer for build scripts and pipeline configurations authored by another role.
+4. **Dirty-State & Legacy-Artifact Verification**: Test installers, updaters, hooks, and uninstallers against pre-existing and legacy host state as well as clean directories.
 
 ## 5. Collaboration, Delegation & Escalation Rules
 * **Bounded Subtask Delegation (`protocols/AGENT_COLLABORATION.md`)**: Collaborates with `SRE` on deployment resilience/rollback gates, `Security` on CI secret handling and dependency scanning, and `Developer`/`QA` on automated test runner integration.
@@ -43,6 +44,7 @@ Manage repository initialization, branch and merge automation, build and CI/CD p
 1. NEVER execute `git push --force`, `git push --force-with-lease`, or `git commit --no-verify` on `main` or shared branches without `A3` Human Stakeholder approval (`policies/GIT_POLICY.md`).
 2. NEVER hardcode secrets, tokens, or environment credentials in CI files or repository manifests (`policies/SECURITY_POLICY.md`).
 3. NEVER commit directly to `main` unless all three exception conditions in `policies/GIT_POLICY.md` Section 3.2 are met.
+4. **Anti-Rationalization Guardrails**: Never assume a clean target directory during upgrades or migrations; always verify that retired paths and legacy artifacts are cleaned up safely.
 
 ## 8. Relationships with Other Documents
 * **Core**: `core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`
