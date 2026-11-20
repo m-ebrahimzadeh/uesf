@@ -3,7 +3,7 @@
 > Generated deterministically by `bin/uesf.mjs sync-snapshot` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`, `DEC-026`).
 > * **Canonical Control Plane**: `management/`
 > * **Snapshot Version**: `0.9.0`
-> * **Source-Ledger-SHA256**: `b167d945823dcae4fc2d463a0fab940d9e1ea3edbba11df635d888b609e38070` (`b167d945823d`)
+> * **Source-Ledger-SHA256**: `885431281ef5a8d29a509f3b067468a529a6648180790a971ed89b132ecb5114` (`885431281ef5`)
 > * **Last Ledger Update**: `2026-11-18`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
@@ -12,7 +12,7 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `33 / 33`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `33 / 34`
 * **Total Recorded Decisions (`DEC-*`)**: `31`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
@@ -118,6 +118,7 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-030` | Enable Cline `/` Menu Workflow Triggers + Native Skills, Close Out Milestone M7 (`v0.7.0`) Registries & Merge to `main` (`DEC-029`) | DevOps / Developer / QA | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-030-01` (`HO-TASK-030-02`, merged to `main` and tagged `v0.7.0` per `DEC-029`). |
 | `TASK-031` | Implement Risk-Gated Proportional Execution (`DSC-003` / `DEC-030`), Selective Role Hardening, Bundle Template Trimming & Release `v0.8.0` | Developer / Documentation / DevOps | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-031-01` (`HO-TASK-031-02`, `ESC-TASK-031-01` / `KDP-009` adjudicated by CTO `A2`, merged to `main` and tagged `v0.8.0` per `DEC-030`). |
 | `TASK-032` | Implement File-Backed Operational Handoff Spool (`<ctrlDir>/handoffs/`), Odd/Even Pickup, Compact Chat Cards, Uninstall History Protection & Release `v0.9.0` (`DSC-004` / `DEC-031`) | Developer / DevOps / Documentation / QA | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-032-01` (`management/handoffs/HO-TASK-032-02.md`, merged to `main` and tagged `v0.9.0` per `DEC-031`). |
+| `TASK-033` | Implement `.gitignore`-Aware Markdown Discovery & Universal Non-Git Fallback for `sync-snapshot` in `bin/uesf.mjs` (`DSC-005` `REQ-3`) | Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Branch `fix/TASK-033-gitignore-aware-sync-snapshot` awaiting CTO review (HO-TASK-033-02 / EV-TASK-033-01). |
 
 ## 5. Active Outbound Task Contract Queue
 * Milestones M1 (`v0.1.0`) through M9 (`v0.9.0`, `TASK-000`–`TASK-032`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.9.0`).
@@ -284,4 +285,4 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: b167d945823d`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 885431281ef5`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.

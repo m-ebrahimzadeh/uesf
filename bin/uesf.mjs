@@ -74,6 +74,22 @@ function removeDirIfEmpty(dirPath) {
   }
 }
 
+const STRUCTURAL_EXCLUDED_DIRS = new Set(['.git', 'handoffs', 'dist']);
+
+const NON_GIT_SKIP_DIRS = new Set([
+  '.git',
+  'handoffs',
+  'dist',
+  'node_modules',
+  '.venv',
+  'venv',
+  'vendor',
+  'target',
+  '.next',
+  'build',
+  'coverage',
+]);
+
 function walkMdFiles(dirPath, rootDir, excludeDistAndSnap = false) {
   const results = [];
   if (!fs.existsSync(dirPath)) return results;
@@ -82,11 +98,44 @@ function walkMdFiles(dirPath, rootDir, excludeDistAndSnap = false) {
     const rel = toPosix(path.relative(rootDir, full));
     if (entry.isDirectory()) {
       if (entry.name === '.git' || entry.name === 'handoffs') continue;
-      if (excludeDistAndSnap && entry.name === 'dist') continue;
+      if (excludeDistAndSnap && NON_GIT_SKIP_DIRS.has(entry.name)) continue;
       results.push(...walkMdFiles(full, rootDir, excludeDistAndSnap));
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
       if (excludeDistAndSnap && entry.name === 'CONTEXT_SNAPSHOT.md') continue;
       results.push(rel);
+    }
+  }
+  return results;
+}
+
+function discoverSnapshotMdFiles(targetRoot) {
+  const res = spawnSync(
+    'git',
+    ['-c', 'core.quotepath=false', 'ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', '*.md'],
+    { cwd: targetRoot, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, windowsHide: true }
+  );
+  if (res.error || res.status !== 0 || typeof res.stdout !== 'string') {
+    return walkMdFiles(targetRoot, targetRoot, true);
+  }
+
+  const seen = new Set();
+  const results = [];
+  for (const raw of res.stdout.split('\0')) {
+    if (!raw) continue;
+    const rel = toPosix(raw);
+    if (!rel.endsWith('.md')) continue;
+    if (seen.has(rel)) continue;
+    const segs = rel.split('/');
+    if (segs[segs.length - 1] === 'CONTEXT_SNAPSHOT.md') continue;
+    if (segs.some((seg) => STRUCTURAL_EXCLUDED_DIRS.has(seg))) continue;
+    seen.add(rel);
+    const full = path.join(targetRoot, rel);
+    try {
+      if (fs.statSync(full).isFile()) {
+        results.push(rel);
+      }
+    } catch {
+      // Unstaged deletions stay excluded so MISSING_ON_DISK drift is surfaced
     }
   }
   return results;
@@ -169,7 +218,7 @@ export function runSyncSnapshot(targetRootArg = '') {
   }));
   const kmPaths = kmRows.map((r) => r.path);
 
-  const relMd = sortPathsCaseInsensitive(walkMdFiles(targetRoot, targetRoot, true));
+  const relMd = sortPathsCaseInsensitive(discoverSnapshotMdFiles(targetRoot));
   const missingOnDisk = kmPaths.filter((p) => !relMd.includes(p));
   const extraOnDisk = relMd.filter((p) => !kmPaths.includes(p));
 
