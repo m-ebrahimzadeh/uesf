@@ -1,16 +1,16 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.9.0
+* **Version**: 0.9.1
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-18
+* **Last Updated**: 2026-11-20
 
 ## 1. Purpose
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, feature discovery workflows, and project integrations.
 
 ## 2. Scope
-Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-031` (`management/DECISION_LOG.md`).
+Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-032` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
 
@@ -49,6 +49,10 @@ Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007`
 ### Milestone M9: File-Backed Operational Handoff Spool, Odd/Even Pickup, Compact Chat Cards & Uninstall History Protection (`v0.9.0`) — *COMPLETED & ACCEPTED*
 * **Objective**: Standardize a gitignored flat operational handoff spool (`management/handoffs/` in UESF, `.uesf/handoffs/` in downstream projects) with paired odd/even sequence naming (`HO-TASK-XXX-01.md` / `HO-TASK-XXX-02.md`), compact 5-line chat summary cards with automatic inline fallback (`policies/SOURCE_OF_TRUTH_POLICY.md` `0.3.0`, `protocols/HANDOFF_PROTOCOL.md` `0.3.0`, `workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md`, `roles/{cto,developer}/SKILL.md`), `handoffs/` exclusion in `bin/uesf.mjs` (`0.9.0`) and `management/validation/audit.ps1`, `init-project` spool and `.gitignore` scaffolding, and strict non-empty `.uesf/handoffs/` history protection during `uesf uninstall --project` (`DSC-004`, `DEC-031`).
 * **Status**: `ACCEPTED` (`TASK-032`, merged to `main` and tagged `v0.9.0` per `DEC-031`, verified via `EV-TASK-032-01` and `HO-TASK-032-02`).
+
+### Milestone M9.1: `.gitignore`-Aware `sync-snapshot` Markdown Discovery & Universal Non-Git Fallback (`v0.9.1`) — *COMPLETED & ACCEPTED*
+* **Objective**: Upgrade `runSyncSnapshot()` in `bin/uesf.mjs` (`0.9.1`) via `discoverSnapshotMdFiles()` to enumerate Markdown files using `git -c core.quotepath=false ls-files -z --cached --others --exclude-standard -- '*.md'` filtered to existing regular files on disk while always excluding `.git/`, `handoffs/`, `dist/`, and `CONTEXT_SNAPSHOT.md`, retain a deterministic non-Git fallback in `walkMdFiles()` skipping a minimal universal build/dependency set, and keep `runBuildDist()` and `management/validation/audit.ps1` unchanged (`DSC-005` `REQ-3`, `DEC-032`).
+* **Status**: `ACCEPTED` (`TASK-033`, commit `b76a3c9`, merged to `main` and tagged `v0.9.1` per `DEC-032`, verified via `EV-TASK-033-01` and `HO-TASK-033-02`).
 
 ### Milestone M10: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).
