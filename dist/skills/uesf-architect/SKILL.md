@@ -3,9 +3,9 @@ name: uesf-architect
 description: "UESF Architect Role (System Design, Interface Contracts & Layer Isolation)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.1 | Active: uesf-architect | Autonomy: A1/A2]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.2 | Active: uesf-architect | Autonomy: A1/A2]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.1`)
+## UESF Embedded Core & Policy Invariants (`v0.9.2`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -99,4 +99,4 @@ Translate strategic objectives and system requirements into modular, decoupled, 
 3. **Additive-Only Constraint**: A project extension MAY tighten verification gates or add domain-specific checklists, but MUST NOT weaken universal autonomy thresholds (`policies/AUTONOMY_POLICY.md`), Git protections (`policies/GIT_POLICY.md`), security rules (`policies/SECURITY_POLICY.md`), or epistemic verification requirements (`policies/VERIFICATION_POLICY.md`).
 4. **Three-Domain Project Capsule (`.uesf/` + `docs/`)**: Every project extension MUST specify its Canonical Remote Repository URL and Default Branch (enabling cloud `/uesf:status` context retrieval), keep permanent documentation in native project paths (such as `docs/`) indexed by `.uesf/KNOWLEDGE_MAP.md`, and maintain operational state in `.uesf/` (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, and the machine-generated `CONTEXT_SNAPSHOT.md`).
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-architect command=/uesf-architect source=roles/architect/SKILL.md version=0.9.1 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-architect command=/uesf-architect source=roles/architect/SKILL.md version=0.9.2 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->

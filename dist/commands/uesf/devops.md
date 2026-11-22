@@ -2,9 +2,9 @@
 description: "UESF DevOps Role (Build/Dist Automation, Git Workflows & Environment Tooling)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.1 | Active: uesf-devops | Autonomy: A1/A2]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.2 | Active: uesf-devops | Autonomy: A1/A2]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.1`)
+## UESF Embedded Core & Policy Invariants (`v0.9.2`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -111,4 +111,4 @@ Manage repository initialization, branch and merge automation, build and CI/CD p
 * <Explicitly list any unexecuted checks and the follow-up task responsible>
 ```
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-devops command=/uesf-devops source=roles/devops/SKILL.md version=0.9.1 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-devops command=/uesf-devops source=roles/devops/SKILL.md version=0.9.2 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->
