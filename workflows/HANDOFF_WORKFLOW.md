@@ -1,14 +1,14 @@
-# Lifecycle Workflow — Session-Exit & Cross-Agent Handoff (`/uesf:handoff`)
+# Lifecycle Workflow — Session-Exit & Cross-Agent Handoff (`/uesf-handoff`)
 * **Document ID**: UESF-WKFL-002
 * **Canonical Path**: workflows/HANDOFF_WORKFLOW.md
-* **Workflow Trigger**: /uesf:handoff
-* **Version**: 0.9.0
+* **Workflow Trigger**: /uesf-handoff
+* **Version**: 0.10.0
 * **Status**: Verified
 * **Owner**: Architect
-* **Last Updated**: 2026-11-18
+* **Last Updated**: 2026-11-22
 
 ## 1. Purpose & Command Trigger
-Define the standardized session-exit workflow for `/uesf:handoff` (`@uesf-handoff`), packaging completed work, verification evidence, remaining tasks, decisions, and next steps into a self-contained Handoff Package (`HO-TASK-XXX`) and Evidence Package (`EV-TASK-XXX`) while refreshing `CONTEXT_SNAPSHOT.md`.
+Define the standardized session-exit workflow for `/uesf-handoff` (`uesf-handoff`), packaging completed work, verification evidence, remaining tasks, decisions, and next steps into a self-contained Handoff Package (`HO-TASK-XXX`) and Evidence Package (`EV-TASK-XXX`) while refreshing `CONTEXT_SNAPSHOT.md`.
 
 ## 2. Scope & Autonomy Profile
 * **Scope**: Used at the conclusion of a planning or implementation session whenever transferring work between roles, sessions, or workspaces (`protocols/HANDOFF_PROTOCOL.md`).
@@ -16,8 +16,8 @@ Define the standardized session-exit workflow for `/uesf:handoff` (`@uesf-handof
 
 ## 3. Capability Detection & Environment Modes
 Per `core/CAPABILITY_MODEL.md`:
-* **Engineering Workspace (`CAP-FS`, `CAP-TERM`, `CAP-GIT` Available)**: Inspects live `git status -sb`, `git diff --stat`, `git log -n 3 --stat`, and test/audit outputs; runs `sync-snapshot` to ensure `CONTEXT_SNAPSHOT.md` is current; and whenever `CAP-FS` or `CAP-MCP` is available, `/uesf:handoff` writes the full **Inbound Handoff & Evidence Package (`HO-TASK-XXX-02.md` / `EV-TASK-XXX-01`)** directly to `<ctrlDir>/handoffs/` and emits a compact 5-line Return Summary Card in chat (falling back to full inline chat output only when filesystem access is unavailable).
-* **Strategic Workspace (`CAP-FS` Unavailable)**: Synthesizes approved specifications and task contracts (`protocols/TASK_CONTRACT_PROTOCOL.md`) into an **Outbound Handoff Package (`HO-TASK-XXX-01.md`)** ready for execution in a coding agent; whenever `CAP-FS` or `CAP-MCP` is available, `/uesf:handoff` writes the full Outbound package directly to `<ctrlDir>/handoffs/` and emits a compact 5-line Dispatch Summary Card in chat, falling back to full inline chat output only when filesystem access (`CAP-FS` and `CAP-MCP`) is unavailable.
+* **Engineering Workspace (`CAP-FS`, `CAP-TERM`, `CAP-GIT` Available)**: Inspects live `git status -sb`, `git diff --stat`, `git log -n 3 --stat`, and test/audit outputs; runs `sync-snapshot` to ensure `CONTEXT_SNAPSHOT.md` is current; and whenever `CAP-FS` or `CAP-MCP` is available, `/uesf-handoff` writes the full **Inbound Handoff & Evidence Package (`HO-TASK-XXX-02.md` / `EV-TASK-XXX-01`)** directly to `<ctrlDir>/handoffs/` and emits a compact 5-line Return Summary Card in chat (falling back to full inline chat output only when filesystem access is unavailable).
+* **Strategic Workspace (`CAP-FS` Unavailable)**: Synthesizes approved specifications and task contracts (`protocols/TASK_CONTRACT_PROTOCOL.md`) into an **Outbound Handoff Package (`HO-TASK-XXX-01.md`)** ready for execution in a coding agent; whenever `CAP-FS` or `CAP-MCP` is available, `/uesf-handoff` writes the full Outbound package directly to `<ctrlDir>/handoffs/` and emits a compact 5-line Dispatch Summary Card in chat, falling back to full inline chat output only when filesystem access (`CAP-FS` and `CAP-MCP`) is unavailable.
 
 ## 4. Step-by-Step Execution Workflow
 1. **Determine Handoff Direction**:
@@ -26,15 +26,15 @@ Per `core/CAPABILITY_MODEL.md`:
 2. **Refresh Context Snapshot (When `CAP-FS` Available)**:
    * Execute `scripts/sync-snapshot.ps1` (or `.uesf/scripts/sync-snapshot.ps1`) so `CONTEXT_SNAPSHOT.md` reflects the latest ledger state before ending the session.
 3. **Emit Structured Handoff & Evidence Block**:
-   * Whenever `CAP-FS` or `CAP-MCP` is available, write the complete Markdown handoff package conforming to `protocols/HANDOFF_PROTOCOL.md` and `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` directly to `<ctrlDir>/handoffs/HO-TASK-XXX-<SEQ>.md` (`management/handoffs/` in UESF, `.uesf/handoffs/` in downstream projects) and print the compact 5-line Dispatch/Return Summary Card in chat (`Handoff ID`, `On-Disk Path`, `Task & Role`, `Branch/Commit Status`, and `Next Command`); fall back to full inline chat output only when both `CAP-FS` and `CAP-MCP` are unavailable.
+   * Whenever `CAP-FS` or `CAP-MCP` is available, write the complete Markdown handoff package conforming to `protocols/HANDOFF_PROTOCOL.md` and `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` directly to `<ctrlDir>/handoffs/HO-TASK-XXX-<SEQ>.md` (`management/handoffs/` in UESF, `.uesf/handoffs/` in downstream projects) and print the compact 5-line Dispatch/Return Summary Card in chat (`Handoff ID`, `On-Disk Path`, `Task & Role`, `Branch/Commit Status`, and `Next Command`). The 5-line Summary Card's `Next Command` line satisfies the `DSC-006` single-sentence closing rule without duplicating a second line below the card; when both `CAP-FS` and `CAP-MCP` are unavailable, fall back to full inline chat output ending with one `**Next:**` closing sentence.
 4. **Apply Recency Ordering & Context Budgeting**: Keep handoffs focused on task-relevant files and place active blockers, exact verification commands, and the immediate next action at the very end of the handoff block.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the response with: `**[UESF v0.9.0 | Active: /uesf:handoff | Autonomy: A0/A1]**`
+* Begin the response with: `**[UESF v0.10.0 | Active: /uesf-handoff | Autonomy: A0/A1]**`
 * Every Inbound Handoff MUST include the 5-state **Epistemic Classification Table** (`Verified`, `Observed`, `Reported`, `Inferred`, `Unknown / Pending`) and the **1-to-1 Acceptance Criteria Mapping Table** (`protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
-* **Distinct from `/uesf:status`**: `/uesf:handoff` is a **session-exit producer** that packages deliverables and evidence for transfer or review; `/uesf:status` (`workflows/STATUS_WORKFLOW.md`) is a **session-entry consumer** that reconstructs context when opening a workspace or starting a fresh chat.
+* **Distinct from `/uesf-status`**: `/uesf-handoff` is a **session-exit producer** that packages deliverables and evidence for transfer or review; `/uesf-status` (`workflows/STATUS_WORKFLOW.md`) is a **session-entry consumer** that reconstructs context when opening a workspace or starting a fresh chat.
 * **Zero Fabricated Evidence**: Never mark an acceptance criterion `Verified` without concrete command or inspection output from the current session (`policies/VERIFICATION_POLICY.md`).
 * **Anti-Rationalization Guardrails**: Never bury blocking action items or required verification gates in the middle of a long narrative section.
 

@@ -20,6 +20,10 @@ description: "UESF Architect Role (System Design, Interface Contracts & Layer Is
 5. **File-Backed Operational Handoff Spool (`protocols/HANDOFF_PROTOCOL.md`, `DEC-031`)**:
    * Cross-session and cross-agent handoffs use the gitignored flat directory `<ctrlDir>/handoffs/` (`.uesf/handoffs/` in downstream projects, `management/handoffs/` in UESF) with paired sequential filenames: odd sequences (`HO-TASK-XXX-01.md`, `-03.md`) for Outbound dispatches and even sequences (`HO-TASK-XXX-02.md`, `-04.md`) for Inbound returns with embedded `EV-TASK-XXX` evidence.
    * When `CAP-FS` or `CAP-MCP` is available, read/write handoff files directly in `<ctrlDir>/handoffs/` and emit a compact 5-line Dispatch/Return Summary Card in chat; fall back to full inline chat Markdown only when filesystem access is unavailable. Permanent task states and decisions MUST still be recorded in `ACTIVE_TASKS.md` and `DECISION_LOG.md`.
+6. **Single-Sentence Closing Action Prompt (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `DSC-006`)**:
+   * End every UESF skill response with **one concise, actionable sentence** starting with `**Next:**` recommending the single best next step—no lengthy explanations or multi-option lists.
+   * On completed execution or handoff, include a ready-to-use `/uesf-<name>` command populated with concrete known context (`TASK-XXX`, `DSC-XXX`, `HO-TASK-XXX-YY`) without fabricating unknown IDs (adapt prefix to `$uesf-<name>` in Codex or `/uesf-<name>.md` in Cline when active). On `A0`/`A3` pauses or `BLOCKED` halts, state the exact in-chat reply, approval, or unblock action needed without prematurely recommending a gated downstream command.
+   * Exceptions: a 5-line Handoff Summary Card whose `Next Command` line already names the next step satisfies this rule without duplication; `/uesf-init` Stage 3 keeps its 3-command newcomer welcome card.
 
 ---
 ## Canonical Specification (`roles/architect/SKILL.md`)
@@ -94,4 +98,4 @@ Translate strategic objectives and system requirements into modular, decoupled, 
 3. **Additive-Only Constraint**: A project extension MAY tighten verification gates or add domain-specific checklists, but MUST NOT weaken universal autonomy thresholds (`policies/AUTONOMY_POLICY.md`), Git protections (`policies/GIT_POLICY.md`), security rules (`policies/SECURITY_POLICY.md`), or epistemic verification requirements (`policies/VERIFICATION_POLICY.md`).
 4. **Three-Domain Project Capsule (`.uesf/` + `docs/`)**: Every project extension MUST specify its Canonical Remote Repository URL and Default Branch (enabling cloud `/uesf:status` context retrieval), keep permanent documentation in native project paths (such as `docs/`) indexed by `.uesf/KNOWLEDGE_MAP.md`, and maintain operational state in `.uesf/` (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, and the machine-generated `CONTEXT_SNAPSHOT.md`).
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-architect command=/uesf-architect source=roles/architect/SKILL.md version=0.9.1 sha256=d919b4ebaf0e1f54779fc3759702bb0ba32fc69b0028ce5ed440bebb21cedc89 short_sha256=d919b4ebaf0e -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-architect command=/uesf-architect source=roles/architect/SKILL.md version=0.9.1 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->

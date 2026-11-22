@@ -20,7 +20,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | Doc ID | Canonical Repository Path | Layer / Category | Owner Role | Version | Lifecycle Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `UESF-CORE-001` | `README.md` | Core Index | CTO | `0.9.1` | Verified |
-| `UESF-CORE-002` | `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` | Layer 1: Core | CTO | `0.3.0` | Verified |
+| `UESF-CORE-002` | `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` | Layer 1: Core | CTO | `0.4.0` | Verified |
 | `UESF-CORE-003` | `core/FRAMEWORK_ARCHITECTURE.md` | Layer 1: Core | CTO | `0.3.1` | Verified |
 | `UESF-CORE-004` | `core/CAPABILITY_MODEL.md` | Layer 1: Core | CTO | `0.1.0` | Verified |
 | `UESF-POL-001` | `policies/AUTONOMY_POLICY.md` | Layer 2: Policy | CTO | `0.2.0` | Verified |
@@ -31,16 +31,16 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-POL-006` | `policies/KNOWLEDGE_GOVERNANCE_POLICY.md` | Layer 2: Policy | CTO | `0.1.0` | Verified |
 | `UESF-POL-007` | `policies/SOURCE_OF_TRUTH_POLICY.md` | Layer 2: Policy | CTO | `0.3.0` | Verified |
 | `UESF-PROT-001` | `protocols/TASK_CONTRACT_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.3.0` | Verified |
-| `UESF-PROT-002` | `protocols/HANDOFF_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.3.0` | Verified |
+| `UESF-PROT-002` | `protocols/HANDOFF_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.4.0` | Verified |
 | `UESF-PROT-003` | `protocols/AGENT_COLLABORATION.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-004` | `protocols/TASK_ACCEPTANCE_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-005` | `protocols/KNOWLEDGE_SYNCHRONIZATION.md` | Layer 3: Protocol | CTO | `0.2.0` | Verified |
 | `UESF-PROT-006` | `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-007` | `protocols/ESCALATION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-008` | `protocols/FEATURE_DISCOVERY_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.5.0` | Verified |
-| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.8.0` | Verified |
-| `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.9.0` | Verified |
-| `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.7.0` | Verified |
+| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.9.0` | Verified |
+| `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.10.0` | Verified |
+| `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.8.0` | Verified |
 | `UESF-TMPL-001` | `templates/ROLE_SKILL_TEMPLATE.md` | Templates (L4) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-002` | `templates/TASK_CONTRACT_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-003` | `templates/HANDOFF_PACKAGE_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |

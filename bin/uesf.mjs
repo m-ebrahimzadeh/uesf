@@ -374,6 +374,10 @@ export function runBuildDist() {
     '5. **File-Backed Operational Handoff Spool (`protocols/HANDOFF_PROTOCOL.md`, `DEC-031`)**:',
     '   * Cross-session and cross-agent handoffs use the gitignored flat directory `<ctrlDir>/handoffs/` (`.uesf/handoffs/` in downstream projects, `management/handoffs/` in UESF) with paired sequential filenames: odd sequences (`HO-TASK-XXX-01.md`, `-03.md`) for Outbound dispatches and even sequences (`HO-TASK-XXX-02.md`, `-04.md`) for Inbound returns with embedded `EV-TASK-XXX` evidence.',
     '   * When `CAP-FS` or `CAP-MCP` is available, read/write handoff files directly in `<ctrlDir>/handoffs/` and emit a compact 5-line Dispatch/Return Summary Card in chat; fall back to full inline chat Markdown only when filesystem access is unavailable. Permanent task states and decisions MUST still be recorded in `ACTIVE_TASKS.md` and `DECISION_LOG.md`.',
+    '6. **Single-Sentence Closing Action Prompt (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `DSC-006`)**:',
+    '   * End every UESF skill response with **one concise, actionable sentence** starting with `**Next:**` recommending the single best next step—no lengthy explanations or multi-option lists.',
+    '   * On completed execution or handoff, include a ready-to-use `/uesf-<name>` command populated with concrete known context (`TASK-XXX`, `DSC-XXX`, `HO-TASK-XXX-YY`) without fabricating unknown IDs (adapt prefix to `$uesf-<name>` in Codex or `/uesf-<name>.md` in Cline when active). On `A0`/`A3` pauses or `BLOCKED` halts, state the exact in-chat reply, approval, or unblock action needed without prematurely recommending a gated downstream command.',
+    '   * Exceptions: a 5-line Handoff Summary Card whose `Next Command` line already names the next step satisfies this rule without duplication; `/uesf-init` Stage 3 keeps its 3-command newcomer welcome card.',
   ].join('\n');
 
   const bundles = [

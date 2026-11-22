@@ -3,7 +3,7 @@
 > Generated deterministically by `bin/uesf.mjs sync-snapshot` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`, `DEC-026`).
 > * **Canonical Control Plane**: `management/`
 > * **Snapshot Version**: `0.9.1`
-> * **Source-Ledger-SHA256**: `1705cb659da2e54008d15e376d1af57cae75caa008e03909eda54ea150b7bd7e` (`1705cb659da2`)
+> * **Source-Ledger-SHA256**: `b013351ab678c034d710915d5af052eae9fc11c389e5697efb03e12200faea78` (`b013351ab678`)
 > * **Last Ledger Update**: `2026-11-20`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
@@ -12,7 +12,7 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `34 / 34`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `34 / 35`
 * **Total Recorded Decisions (`DEC-*`)**: `32`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
@@ -119,6 +119,7 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-031` | Implement Risk-Gated Proportional Execution (`DSC-003` / `DEC-030`), Selective Role Hardening, Bundle Template Trimming & Release `v0.8.0` | Developer / Documentation / DevOps | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-031-01` (`HO-TASK-031-02`, `ESC-TASK-031-01` / `KDP-009` adjudicated by CTO `A2`, merged to `main` and tagged `v0.8.0` per `DEC-030`). |
 | `TASK-032` | Implement File-Backed Operational Handoff Spool (`<ctrlDir>/handoffs/`), Odd/Even Pickup, Compact Chat Cards, Uninstall History Protection & Release `v0.9.0` (`DSC-004` / `DEC-031`) | Developer / DevOps / Documentation / QA | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-032-01` (`management/handoffs/HO-TASK-032-02.md`, merged to `main` and tagged `v0.9.0` per `DEC-031`). |
 | `TASK-033` | Implement `.gitignore`-Aware Markdown Discovery & Universal Non-Git Fallback for `sync-snapshot` in `bin/uesf.mjs` (`DSC-005` `REQ-3`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-033-01` (`management/handoffs/HO-TASK-033-02.md`, commit `b76a3c9`, merged to `main` and tagged `v0.9.1` per `DEC-032`). |
+| `TASK-034` | Implement Uniform Single-Sentence Next-Step Action Prompt Across All 12 UESF Skills (`DSC-006`) | Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Branch `feat/TASK-034-uniform-next-step-prompt` awaiting CTO review (`HO-TASK-034-02` / `EV-TASK-034-01`). |
 
 ## 5. Active Outbound Task Contract Queue
 * Milestones M1 (`v0.1.0`) through M9.1 (`v0.9.1`, `TASK-000`–`TASK-033`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.9.1`).
@@ -217,7 +218,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | Doc ID | Canonical Repository Path | Layer / Category | Owner Role | Version | Lifecycle Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `UESF-CORE-001` | `README.md` | Core Index | CTO | `0.9.1` | Verified |
-| `UESF-CORE-002` | `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` | Layer 1: Core | CTO | `0.3.0` | Verified |
+| `UESF-CORE-002` | `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` | Layer 1: Core | CTO | `0.4.0` | Verified |
 | `UESF-CORE-003` | `core/FRAMEWORK_ARCHITECTURE.md` | Layer 1: Core | CTO | `0.3.1` | Verified |
 | `UESF-CORE-004` | `core/CAPABILITY_MODEL.md` | Layer 1: Core | CTO | `0.1.0` | Verified |
 | `UESF-POL-001` | `policies/AUTONOMY_POLICY.md` | Layer 2: Policy | CTO | `0.2.0` | Verified |
@@ -228,16 +229,16 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-POL-006` | `policies/KNOWLEDGE_GOVERNANCE_POLICY.md` | Layer 2: Policy | CTO | `0.1.0` | Verified |
 | `UESF-POL-007` | `policies/SOURCE_OF_TRUTH_POLICY.md` | Layer 2: Policy | CTO | `0.3.0` | Verified |
 | `UESF-PROT-001` | `protocols/TASK_CONTRACT_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.3.0` | Verified |
-| `UESF-PROT-002` | `protocols/HANDOFF_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.3.0` | Verified |
+| `UESF-PROT-002` | `protocols/HANDOFF_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.4.0` | Verified |
 | `UESF-PROT-003` | `protocols/AGENT_COLLABORATION.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-004` | `protocols/TASK_ACCEPTANCE_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-005` | `protocols/KNOWLEDGE_SYNCHRONIZATION.md` | Layer 3: Protocol | CTO | `0.2.0` | Verified |
 | `UESF-PROT-006` | `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-007` | `protocols/ESCALATION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-008` | `protocols/FEATURE_DISCOVERY_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.5.0` | Verified |
-| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.8.0` | Verified |
-| `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.9.0` | Verified |
-| `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.7.0` | Verified |
+| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.9.0` | Verified |
+| `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.10.0` | Verified |
+| `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.8.0` | Verified |
 | `UESF-TMPL-001` | `templates/ROLE_SKILL_TEMPLATE.md` | Templates (L4) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-002` | `templates/TASK_CONTRACT_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-003` | `templates/HANDOFF_PACKAGE_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
@@ -286,4 +287,4 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 1705cb659da2`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: b013351ab678`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.

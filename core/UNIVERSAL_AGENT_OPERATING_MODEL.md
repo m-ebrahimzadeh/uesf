@@ -1,10 +1,10 @@
 # Universal Agent Operating Model
 * **Document ID**: UESF-CORE-002
 * **Canonical Path**: core/UNIVERSAL_AGENT_OPERATING_MODEL.md
-* **Version**: 0.3.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-18
+* **Last Updated**: 2026-11-22
 
 ## 1. Purpose
 Define the foundational operational lifecycle, role model, accountability structure, and epistemic standards for all AI agents operating within the Universal Engineering Skills Framework (UESF).
@@ -37,6 +37,9 @@ Applies to all nine universal UESF agent roles (`Discovery`, `CTO`, `Architect`,
    * UESF adapts documentation ceremony to task complexity and risk via two execution tracks defined in `protocols/TASK_CONTRACT_PROTOCOL.md`: the **Fast-Path Track (`Inline Contract`)** and the **Standard-Contract Track (`Full Ceremony`)**.
    * **Orthogonality to Autonomy Tiers**: Execution tracks govern documentation ceremony and may operate at either `A1` or `A2`; autonomy tiers (`A0`–`A3` in `policies/AUTONOMY_POLICY.md`) govern decision authority and are never relaxed by `Fast-Path`.
    * **Non-Bypassable Invariants**: Low implementation complexity never implies low risk. `Fast-Path` never bypasses `A3` human approval thresholds, mandatory Security review gates (`policies/SECURITY_POLICY.md`), Git branch and `[TASK-XXX]` commit conventions (`policies/GIT_POLICY.md`), `ACTIVE_TASKS.md` traceability, or empirical `Verified` execution (`policies/VERIFICATION_POLICY.md`).
+6. **Single-Sentence Closing Action Prompt (`DSC-006`)**:
+   * Every UESF skill or workflow response concludes with one concise, actionable sentence indicating the single recommended next step—using the runtime's canonical invocation command (populated with verified/known task, discovery, or handoff identifiers without fabricating unknown IDs) on completion or handoff, or stating the exact in-chat reply, confirmation, or unblock action required when paused at an `A0`/`A3` gate or `BLOCKED` state.
+   * Responses MUST avoid multi-option closing menus or verbose explanations; structured handoff cards whose final field already names the next command satisfy this rule without duplication, and post-initialization newcomer onboarding cards may present starter command choices as an explicit exception.
 
 ## 4. Responsibilities
 * **CTO**: Enforces role boundaries, assigns cross-functional milestones, and arbitrates role overlaps.
