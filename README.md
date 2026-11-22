@@ -1,10 +1,10 @@
 # Universal Engineering Skills Framework (UESF)
 * **Document ID**: UESF-CORE-001
 * **Canonical Path**: README.md
-* **Version**: 0.9.1
+* **Version**: 0.9.2
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-20
+* **Last Updated**: 2026-11-22
 
 ## 1. What Is UESF & Why Use It?
 
@@ -34,9 +34,9 @@ Run the cross-platform Node.js CLI installer (requires **Node.js >= 18**). It au
 
 * **Option B — Install a Specific UESF Version or Tag:**
   ```sh
-  npx --yes github:m-ebrahimzadeh/uesf#v0.9.1 install
+  npx --yes github:m-ebrahimzadeh/uesf#v0.9.2 install
   # Or from a local clone:
-  node bin/uesf.mjs install --version 0.9.1
+  node bin/uesf.mjs install --version 0.9.2
   ```
 
 * **Option C — Local Clone & Contributor CLI:**

@@ -1,10 +1,10 @@
 # Handoff Protocol
 * **Document ID**: UESF-PROT-002
 * **Canonical Path**: protocols/HANDOFF_PROTOCOL.md
-* **Version**: 0.3.0
+* **Version**: 0.4.0
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-18
+* **Last Updated**: 2026-11-22
 
 ## 1. Purpose
 Define the self-contained communication package required when transferring tasks, context, or deliverables between agents or across disconnected environments (e.g., Strategic Workspace <-> Engineering Workspace).
@@ -28,17 +28,17 @@ Applies to all inter-environment transfers and inter-role transitions where shar
    * `Deliverables Summary`: Exact files created/modified, commit hashes, or artifacts generated.
    * `Attached Evidence Package`: Structured verification output per `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md`.
    * `Discoveries / Escalations`: Any implementation discoveries (`protocols/KNOWLEDGE_SYNCHRONIZATION.md`) or blockers (`protocols/ESCALATION_PROTOCOL.md`).
-4. **Lifecycle Command Integration (`/uesf:handoff` & `/uesf:status`)**:
-   * Executing `/uesf:handoff` (`workflows/HANDOFF_WORKFLOW.md`) at session exit packages the Outbound or Inbound Handoff and refreshes `CONTEXT_SNAPSHOT.md` when `CAP-FS` is available.
-   * Executing `/uesf:status` (`workflows/STATUS_WORKFLOW.md`) at session entry reconstructs context from `CONTEXT_SNAPSHOT.md` and live Git probes without duplicating handoff packaging duties.
+4. **Lifecycle Command Integration (`/uesf-handoff` & `/uesf-status`)**:
+   * Executing `/uesf-handoff` (`workflows/HANDOFF_WORKFLOW.md`) at session exit packages the Outbound or Inbound Handoff and refreshes `CONTEXT_SNAPSHOT.md` when `CAP-FS` is available.
+   * Executing `/uesf-status` (`workflows/STATUS_WORKFLOW.md`) at session entry reconstructs context from `CONTEXT_SNAPSHOT.md` and live Git probes without duplicating handoff packaging duties.
 5. **File-Backed Handoff Spool, Odd/Even Sequence Pickup & Compact Chat Cards (`DEC-031`)**:
    * **Flat Spool Location & Naming**: When local filesystem or MCP access (`CAP-FS` or `CAP-MCP`) is available, handoff packages are written to and read from `<ctrlDir>/handoffs/HO-TASK-XXX-<SEQ>.md` (`management/handoffs/` in UESF, `.uesf/handoffs/` in downstream projects).
    * **Deterministic Odd/Even Sequence Convention**:
      * *Odd Sequence (`HO-TASK-XXX-01.md`, `HO-TASK-XXX-03.md`)*: Outbound Handoff (embeds the `TASK-XXX` contract and payloads). When the highest sequence file for an active task in `<ctrlDir>/handoffs/` is odd, it is waiting for execution by the target role.
      * *Even Sequence (`HO-TASK-XXX-02.md`, `HO-TASK-XXX-04.md`)*: Inbound Handoff (embeds the `EV-TASK-XXX` Evidence Package and any `KDP-XXX` / `ESC-TASK-XXX`). When the highest sequence file for an unaccepted task is even, it is waiting for review by the Reviewer Role or CTO.
    * **File-First with Compact Chat Card (and Inline Fallback)**:
-     * Whenever `CAP-FS` or `CAP-MCP` is available, the sending agent writes the full Markdown handoff package to `<ctrlDir>/handoffs/HO-TASK-XXX-<SEQ>.md` and outputs a **compact 5-line Handoff Dispatch/Return Summary Card** in chat (stating `Handoff ID`, `On-Disk Path`, `Task & Role`, `Branch/Commit Status`, and `Next Command`).
-     * If `CAP-FS` and `CAP-MCP` are both unavailable, the agent falls back automatically to emitting the full Markdown handoff block inline in chat.
+     * Whenever `CAP-FS` or `CAP-MCP` is available, the sending agent writes the full Markdown handoff package to `<ctrlDir>/handoffs/HO-TASK-XXX-<SEQ>.md` and outputs a **compact 5-line Handoff Dispatch/Return Summary Card** in chat (stating `Handoff ID`, `On-Disk Path`, `Task & Role`, `Branch/Commit Status`, and `Next Command`). The 5th line (`Next Command`) fulfills the `DSC-006` single-sentence closing action rule with a ready-to-use `/uesf-<name>` command populated with known context; do not append a duplicate `**Next:**` line below the card.
+     * If `CAP-FS` and `CAP-MCP` are both unavailable, the agent falls back automatically to emitting the full Markdown handoff block inline in chat, concluding with one concise `**Next:**` closing sentence.
 
 ## 4. Responsibilities
 * **Sending Agent**: Packages complete context, verifies zero secret leakage (`policies/SECURITY_POLICY.md`), and emits the structured handoff block.

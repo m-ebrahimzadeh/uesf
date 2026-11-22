@@ -3,9 +3,9 @@ name: uesf-init
 description: "UESF Project Initialization Workflow (/uesf-init - A0 Audit & .uesf/ Scaffold)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.1 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.2 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.1`)
+## UESF Embedded Core & Policy Invariants (`v0.9.2`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -21,6 +21,10 @@ description: "UESF Project Initialization Workflow (/uesf-init - A0 Audit & .ues
 5. **File-Backed Operational Handoff Spool (`protocols/HANDOFF_PROTOCOL.md`, `DEC-031`)**:
    * Cross-session and cross-agent handoffs use the gitignored flat directory `<ctrlDir>/handoffs/` (`.uesf/handoffs/` in downstream projects, `management/handoffs/` in UESF) with paired sequential filenames: odd sequences (`HO-TASK-XXX-01.md`, `-03.md`) for Outbound dispatches and even sequences (`HO-TASK-XXX-02.md`, `-04.md`) for Inbound returns with embedded `EV-TASK-XXX` evidence.
    * When `CAP-FS` or `CAP-MCP` is available, read/write handoff files directly in `<ctrlDir>/handoffs/` and emit a compact 5-line Dispatch/Return Summary Card in chat; fall back to full inline chat Markdown only when filesystem access is unavailable. Permanent task states and decisions MUST still be recorded in `ACTIVE_TASKS.md` and `DECISION_LOG.md`.
+6. **Single-Sentence Closing Action Prompt (`core/UNIVERSAL_AGENT_OPERATING_MODEL.md`, `DSC-006`)**:
+   * End every UESF skill response with **one concise, actionable sentence** starting with `**Next:**` recommending the single best next step—no lengthy explanations or multi-option lists.
+   * On completed execution or handoff, include a ready-to-use `/uesf-<name>` command populated with concrete known context (`TASK-XXX`, `DSC-XXX`, `HO-TASK-XXX-YY`) without fabricating unknown IDs (adapt prefix to `$uesf-<name>` in Codex or `/uesf-<name>.md` in Cline when active). On `A0`/`A3` pauses or `BLOCKED` halts, state the exact in-chat reply, approval, or unblock action needed without prematurely recommending a gated downstream command.
+   * Exceptions: a 5-line Handoff Summary Card whose `Next Command` line already names the next step satisfies this rule without duplication; `/uesf-init` Stage 3 keeps its 3-command newcomer welcome card.
 
 ---
 ## Canonical Specification (`workflows/INIT_WORKFLOW.md`)
@@ -29,10 +33,10 @@ description: "UESF Project Initialization Workflow (/uesf-init - A0 Audit & .ues
 * **Document ID**: UESF-WKFL-001
 * **Canonical Path**: workflows/INIT_WORKFLOW.md
 * **Workflow Trigger**: /uesf-init
-* **Version**: 0.8.0
+* **Version**: 0.9.0
 * **Status**: Verified
 * **Owner**: Architect
-* **Last Updated**: 2026-11-18
+* **Last Updated**: 2026-11-22
 
 ## 1. Purpose & Command Trigger
 Define the standardized, newcomer-friendly onboarding workflow for `/uesf-init` (`uesf-init`), enabling an agent in any new or existing software repository to audit the codebase in read-only mode (`A0`), present a clear plain-English setup proposal, and self-containedly scaffold the `.uesf/` operational control plane and automatic snapshot hook (`A1`) upon explicit human confirmation.
@@ -60,7 +64,7 @@ Per `core/CAPABILITY_MODEL.md`:
      2. **Detected Verification Gates**: Exact build, linter, and test commands discovered (`[VERIFIED]` from config files vs. `[INFERRED]`).
      3. **Existing Documentation to Index (Left in Place)**: List of permanent docs found in `README.md` or `docs/` that will be indexed in `.uesf/KNOWLEDGE_MAP.md`.
      4. **Files to Create in `.uesf/`**: `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TASKS.md`, `.uesf/DECISION_LOG.md`, `.uesf/CONTEXT_SNAPSHOT.md`, `.uesf/handoffs/` (gitignored local handoff spool), `.gitignore` (ignoring `.uesf/handoffs/`), `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit`.
-   * Ask: *"Do you approve scaffolding this `.uesf/` configuration (or would you like to adjust any build/test commands first)?"*
+   * Conclude with: `**Next:** Reply to approve scaffolding this `.uesf/` configuration or specify any build/test command adjustments first.`
 3. **Stage 2 — Self-Contained Scaffolding & Automatic Snapshot Hook (`A1`)**:
    * Upon human confirmation, create `.uesf/` containing:
      * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.9.0`).
@@ -69,13 +73,13 @@ Per `core/CAPABILITY_MODEL.md`:
      * `.uesf/DECISION_LOG.md` (initialized with `DEC-001: Onboard Project to UESF Three-Domain Governance`).
    * Wire the standalone snapshot engine and Git `pre-commit` hook, scaffold the gitignored `.uesf/handoffs/` spool directory and `.gitignore` entry, and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by running `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (reading `uesf_repo_path` from `~/.uesf/install-state.json`, or falling back to `npx --yes github:m-ebrahimzadeh/uesf init-project .`), which atomically copies `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit`, scaffolds `.uesf/handoffs/` and adds `.uesf/handoffs/` to `.gitignore`, and runs `sync-snapshot`.
 4. **Stage 3 — Post-Init Welcome & Next Commands Card**:
-   * Conclude by displaying a concise **"Your Project Is Ready"** summary showing the verified `.uesf/` files created and the 3 primary commands to use next:
+   * Conclude by displaying a concise **"Your Project Is Ready"** summary showing the verified `.uesf/` files created and the 3 primary commands to use next (this 3-command newcomer welcome card is the designated exception to the single-command closing action rule, `DSC-006`):
      * `/uesf-discovery <idea>` — Brainstorm a new feature or change in read-only mode (`A0`).
      * `/uesf-cto` — Create a bounded task contract (`TASK-XXX`) for well-defined work.
      * `/uesf-status` — Reconstruct project context at the start of any future local or cloud session.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the first response with: `**[UESF v0.8.0 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
+* Begin the first response with: `**[UESF v0.9.0 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
 * Distinguish `[VERIFIED]` repository observations (from `package.json`, `pyproject.toml`, `Cargo.toml`, `git remote -v`, etc.) from `[INFERRED]` architectural conventions (`policies/VERIFICATION_POLICY.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
@@ -117,4 +121,4 @@ After creating `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TAS
    ```
 Both commands atomically install `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit`, and automatically generate `.uesf/CONTEXT_SNAPSHOT.md`.
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-init command=/uesf-init source=workflows/INIT_WORKFLOW.md version=0.9.1 sha256=d919b4ebaf0e1f54779fc3759702bb0ba32fc69b0028ce5ed440bebb21cedc89 short_sha256=d919b4ebaf0e -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-init command=/uesf-init source=workflows/INIT_WORKFLOW.md version=0.9.2 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->
