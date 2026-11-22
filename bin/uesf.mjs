@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
-const FW_VERSION = '0.9.2';
+const FW_VERSION = '0.9.3';
 
 function toPosix(p) {
   return p.replace(/\\/g, '/');
@@ -207,7 +207,7 @@ export function runSyncSnapshot(targetRootArg = '') {
   const verMatch = profileText.match(/\* \*\*Version\*\*: ([^\r\n]+)/);
   const projVer = verMatch ? verMatch[1].trim() : FW_VERSION;
   const updMatch = profileText.match(/\* \*\*Last Updated\*\*: ([^\r\n]+)/);
-  const lastUpd = updMatch ? updMatch[1].trim() : '2026-11-17';
+  const lastUpd = updMatch ? updMatch[1].trim() : new Date().toISOString().slice(0, 10);
 
   const kmText = readNormalized(path.join(targetRoot, kmPath));
   const kmRowRegex = /^\| `([^`]+)` \| `([^`]+)` \|[^|]*\|[^|]*\| `([^`]+)` \|/gm;
@@ -224,6 +224,7 @@ export function runSyncSnapshot(targetRootArg = '') {
 
   const verMismatches = [];
   for (const r of kmRows) {
+    if (!isUesfCore && !r.path.startsWith('.uesf/')) continue;
     const fullP = path.join(targetRoot, r.path);
     if (fs.existsSync(fullP)) {
       const ft = readNormalized(fullP);
@@ -251,7 +252,7 @@ export function runSyncSnapshot(targetRootArg = '') {
 
   const driftAlerts = [];
   if (missingOnDisk.length > 0) driftAlerts.push(`MISSING_ON_DISK: ${missingOnDisk.join(', ')}`);
-  if (extraOnDisk.length > 0) driftAlerts.push(`UNINDEXED_MD_ON_DISK: ${extraOnDisk.join(', ')}`);
+  if (isUesfCore && extraOnDisk.length > 0) driftAlerts.push(`UNINDEXED_MD_ON_DISK: ${extraOnDisk.join(', ')}`);
   if (verMismatches.length > 0) driftAlerts.push(`KM_VERSION_MISMATCH: ${verMismatches.join(', ')}`);
   const driftStatus =
     driftAlerts.length === 0
@@ -413,27 +414,6 @@ export function runBuildDist() {
       extraSections += tLines.join('\n');
     }
 
-    if (b.name === 'init') {
-      const initWiringBlock = [
-        '',
-        '---',
-        '## Embedded Project Automation Wiring (`.uesf/bin/uesf.mjs`, `.uesf/scripts/` & `.git/hooks/pre-commit`)',
-        'After creating `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TASKS.md`, and `.uesf/DECISION_LOG.md` in Stage 2, wire the standalone snapshot engine and Git pre-commit hook and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by executing ONE of the following commands in the target project root:',
-        '',
-        '1. **Fast Local Wiring (Preferred when `~/.uesf/install-state.json` exists)**:',
-        '   Read `uesf_repo_path` from `~/.uesf/install-state.json` and run:',
-        '   ```bash',
-        '   node "<uesf_repo_path>/bin/uesf.mjs" init-project .',
-        '   ```',
-        '2. **Zero-Clone Fallback (Via GitHub `npx`)**:',
-        '   ```bash',
-        '   npx --yes github:m-ebrahimzadeh/uesf init-project .',
-        '   ```',
-        'Both commands atomically install `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit`, and automatically generate `.uesf/CONTEXT_SNAPSHOT.md`.',
-      ].join('\n');
-      extraSections += initWiringBlock;
-    }
-
     const metadataFooter = `<!-- UESF-BUNDLE-METADATA: bundle=${skillId} command=/${skillId} source=${b.source} version=${FW_VERSION} sha256=${sourceHashFull} short_sha256=${sourceHashShort} -->`;
 
     const compiledBody = [
@@ -537,28 +517,138 @@ export function runInitProject(projDirArg = '.') {
   const projHandoffsDir = path.join(projPath, '.uesf/handoffs');
   fs.mkdirSync(projHandoffsDir, { recursive: true });
 
-  const gitignorePath = path.join(projPath, '.gitignore');
-  const ignoreEntry = '.uesf/handoffs/';
-  if (fs.existsSync(gitignorePath) && fs.statSync(gitignorePath).isFile()) {
-    const giText = readNormalized(gitignorePath);
-    const giLines = giText.split('\n').map((l) => l.trim());
-    if (!giLines.includes(ignoreEntry) && !giLines.includes('.uesf/handoffs')) {
-      writeLf(gitignorePath, (giText ? giText + '\n' : '') + ignoreEntry + '\n');
+  const rootGitignorePath = path.join(projPath, '.gitignore');
+  let rootIgnoresHandoffs = false;
+  if (fs.existsSync(rootGitignorePath) && fs.statSync(rootGitignorePath).isFile()) {
+    const giLines = readNormalized(rootGitignorePath).split('\n').map((l) => l.trim());
+    rootIgnoresHandoffs = giLines.includes('.uesf/handoffs/') || giLines.includes('.uesf/handoffs');
+  }
+  if (!rootIgnoresHandoffs) {
+    const uesfGitignorePath = path.join(projPath, '.uesf/.gitignore');
+    if (fs.existsSync(uesfGitignorePath) && fs.statSync(uesfGitignorePath).isFile()) {
+      const uesfGiText = readNormalized(uesfGitignorePath);
+      const uesfGiLines = uesfGiText.split('\n').map((l) => l.trim());
+      if (!uesfGiLines.includes('handoffs/') && !uesfGiLines.includes('handoffs')) {
+        writeLf(uesfGitignorePath, (uesfGiText ? uesfGiText + '\n' : '') + 'handoffs/\n');
+      }
+    } else {
+      writeLf(uesfGitignorePath, '# UESF Ephemeral Local Handoff Spool (DEC-031)\nhandoffs/\n');
     }
-  } else {
-    writeLf(gitignorePath, `# UESF Ephemeral Local Handoff Spool (DEC-031)\n${ignoreEntry}\n`);
   }
 
   const hookSrc = path.join(REPO_ROOT, 'scripts/hooks/pre-commit');
   const projHooks = path.join(projPath, '.git/hooks');
-  if (fs.existsSync(projHooks) && fs.existsSync(hookSrc)) {
-    const dstH = path.join(projHooks, 'pre-commit');
-    fs.copyFileSync(hookSrc, dstH);
-    try { fs.chmodSync(dstH, 0o755); } catch {}
+  if (!fs.existsSync(projHooks)) {
+    console.log(
+      `PROJECT_HOOK_SKIPPED_NO_GIT=${toPosix(projPath)} (run 'git init' and re-run init-project to wire pre-commit hook)`
+    );
+  } else {
+    const hooksPathRes = spawnSync('git', ['config', '--get', 'core.hooksPath'], {
+      cwd: projPath,
+      encoding: 'utf8',
+      windowsHide: true,
+    });
+    const customHooksPath =
+      hooksPathRes.status === 0 && typeof hooksPathRes.stdout === 'string'
+        ? hooksPathRes.stdout.trim()
+        : '';
+    if (customHooksPath) {
+      console.log(
+        `PROJECT_HOOK_SKIPPED_CUSTOM_HOOKSPATH=${toPosix(projPath)} (custom core.hooksPath detected; add 'node .uesf/bin/uesf.mjs sync-snapshot && git add .uesf/CONTEXT_SNAPSHOT.md' to your pre-commit hook)`
+      );
+    } else {
+      const dstH = path.join(projHooks, 'pre-commit');
+      if (
+        fs.existsSync(dstH) &&
+        !readNormalized(dstH).includes('UESF Automatic Context Snapshot')
+      ) {
+        console.log(
+          `PROJECT_HOOK_SKIPPED_EXISTING=${toPosix(projPath)} (existing pre-commit hook preserved; append 'node .uesf/bin/uesf.mjs sync-snapshot && git add .uesf/CONTEXT_SNAPSHOT.md' to chain UESF snapshot sync)`
+        );
+      } else if (fs.existsSync(hookSrc)) {
+        fs.copyFileSync(hookSrc, dstH);
+        try { fs.chmodSync(dstH, 0o755); } catch {}
+        console.log(`PROJECT_HOOK_WIRED=${toPosix(projPath)}`);
+      }
+    }
   }
-  console.log(`PROJECT_HOOK_WIRED=${toPosix(projPath)}`);
 
-  if (fs.existsSync(path.join(projPath, '.uesf/EXTENSION.md'))) {
+  const extPath = path.join(projPath, '.uesf/EXTENSION.md');
+  if (fs.existsSync(extPath)) {
+    const extText = readNormalized(extPath);
+    const extVerMatch = extText.match(/\* \*\*Version\*\*: ([^\r\n]+)/);
+    const extVer = extVerMatch ? extVerMatch[1].trim() : '0.1.0';
+    const today = new Date().toISOString().slice(0, 10);
+
+    const kmDest = path.join(projPath, '.uesf/KNOWLEDGE_MAP.md');
+    if (!fs.existsSync(kmDest)) {
+      writeLf(
+        kmDest,
+        [
+          '# Project Knowledge Map & Source-of-Truth Registry',
+          '* **Document ID**: PROJ-MGMT-004',
+          '* **Canonical Path**: .uesf/KNOWLEDGE_MAP.md',
+          '* **Version**: 0.1.0',
+          '* **Status**: Active',
+          '* **Owner**: CTO',
+          `* **Last Updated**: ${today}`,
+          '',
+          '## 1. Registered Project Documents',
+          '| Doc ID | Repository Path | Category | Owner | Version | Status |',
+          '| :--- | :--- | :--- | :--- | :--- | :--- |',
+          `| \`PROJ-EXT-001\` | \`.uesf/EXTENSION.md\` | Project Extension | CTO | \`${extVer}\` | Active |`,
+          '| `PROJ-MGMT-002` | `.uesf/ACTIVE_TASKS.md` | Operational State | CTO | `0.1.0` | Active |',
+          '| `PROJ-MGMT-003` | `.uesf/DECISION_LOG.md` | Operational State | CTO | `0.1.0` | Active |',
+          '| `PROJ-MGMT-004` | `.uesf/KNOWLEDGE_MAP.md` | Operational State | CTO | `0.1.0` | Active |',
+          '',
+        ].join('\n')
+      );
+    }
+
+    const tasksDest = path.join(projPath, '.uesf/ACTIVE_TASKS.md');
+    if (!fs.existsSync(tasksDest)) {
+      writeLf(
+        tasksDest,
+        [
+          '# Active Tasks Registry',
+          '* **Document ID**: PROJ-MGMT-002',
+          '* **Canonical Path**: .uesf/ACTIVE_TASKS.md',
+          '* **Version**: 0.1.0',
+          '* **Status**: Active',
+          '* **Owner**: CTO',
+          `* **Last Updated**: ${today}`,
+          '',
+          '## 1. Current Task Registry',
+          '| Task ID | Title | Responsible Role | Reviewer Role | Target Workspace | Autonomy | State | Evidence / Notes |',
+          '| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |',
+          '| `TASK-001` | Initialize UESF Project Control Plane (.uesf/) | CTO / DevOps | Human Stakeholder | Engineering Workspace | `A1` | `ACCEPTED` | Initialized via /uesf-init. |',
+          '',
+        ].join('\n')
+      );
+    }
+
+    const decDest = path.join(projPath, '.uesf/DECISION_LOG.md');
+    if (!fs.existsSync(decDest)) {
+      writeLf(
+        decDest,
+        [
+          '# Architectural & Governance Decision Log',
+          '* **Document ID**: PROJ-MGMT-003',
+          '* **Canonical Path**: .uesf/DECISION_LOG.md',
+          '* **Version**: 0.1.0',
+          '* **Status**: Active',
+          '* **Owner**: CTO',
+          `* **Last Updated**: ${today}`,
+          '',
+          '## 1. Confirmed & Approved Decisions',
+          '| Decision ID | Category | Decision Summary | Status | Authority | Date |',
+          '| :--- | :--- | :--- | :--- | :--- | :--- |',
+          `| \`DEC-001\` | Governance | Onboard Project to UESF Three-Domain Governance | Confirmed | Human Stakeholder | ${today} |`,
+          '',
+        ].join('\n')
+      );
+    }
+
     runSyncSnapshot(projPath);
   }
 }
