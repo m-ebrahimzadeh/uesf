@@ -3,7 +3,7 @@
 > Generated deterministically by `bin/uesf.mjs sync-snapshot` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`, `DEC-026`).
 > * **Canonical Control Plane**: `management/`
 > * **Snapshot Version**: `0.9.2`
-> * **Source-Ledger-SHA256**: `0a2e7802c13d3f784660f401ee590efcc8b2e8279223d50033bd9b7378d26270` (`0a2e7802c13d`)
+> * **Source-Ledger-SHA256**: `945fb2e59b8f6dc6fbc428bc448c34e9ea7cb8bc59894714dd47e514511db8e3` (`945fb2e59b8f`)
 > * **Last Ledger Update**: `2026-11-22`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
@@ -12,7 +12,7 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `35 / 35`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `35 / 36`
 * **Total Recorded Decisions (`DEC-*`)**: `33`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
@@ -120,6 +120,7 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-032` | Implement File-Backed Operational Handoff Spool (`<ctrlDir>/handoffs/`), Odd/Even Pickup, Compact Chat Cards, Uninstall History Protection & Release `v0.9.0` (`DSC-004` / `DEC-031`) | Developer / DevOps / Documentation / QA | CTO | Strategic & Engineering | `A1` | `ACCEPTED` | `EV-TASK-032-01` (`management/handoffs/HO-TASK-032-02.md`, merged to `main` and tagged `v0.9.0` per `DEC-031`). |
 | `TASK-033` | Implement `.gitignore`-Aware Markdown Discovery & Universal Non-Git Fallback for `sync-snapshot` in `bin/uesf.mjs` (`DSC-005` `REQ-3`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-033-01` (`management/handoffs/HO-TASK-033-02.md`, commit `b76a3c9`, merged to `main` and tagged `v0.9.1` per `DEC-032`). |
 | `TASK-034` | Implement Uniform Single-Sentence Next-Step Action Prompt Across All 12 UESF Skills (`DSC-006`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-034-01` (`management/handoffs/HO-TASK-034-02.md`, commit `ffe2f8f`, merged to `main` and tagged `v0.9.2` per `DEC-033`). |
+| `TASK-035` | Implement Non-Destructive, Maturity-Adaptive Existing-Repository Onboarding & Downstream Snapshot Reliability (`DSC-007`) | Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Branch feat/TASK-035-brownfield-init-onboarding awaiting CTO review (HO-TASK-035-02 / EV-TASK-035-01). |
 
 ## 5. Active Outbound Task Contract Queue
 * Milestones M1 (`v0.1.0`) through M9.2 (`v0.9.2`, `TASK-000`–`TASK-034`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.9.2`).
@@ -237,7 +238,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-PROT-006` | `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-007` | `protocols/ESCALATION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-008` | `protocols/FEATURE_DISCOVERY_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.5.0` | Verified |
-| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.9.0` | Verified |
+| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.10.0` | Verified |
 | `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.10.0` | Verified |
 | `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.8.0` | Verified |
 | `UESF-TMPL-001` | `templates/ROLE_SKILL_TEMPLATE.md` | Templates (L4) | CTO | `0.2.1` | Verified |
@@ -247,7 +248,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-TMPL-005` | `templates/KDP_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-006` | `templates/ESCALATION_RECORD_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-007` | `templates/PLATFORM_ADAPTER_TEMPLATE.md` | Templates (L5) | Architect | `0.4.0` | Verified |
-| `UESF-TMPL-008` | `templates/PROJECT_EXTENSION_TEMPLATE.md` | Templates (L6) | Architect | `0.6.0` | Verified |
+| `UESF-TMPL-008` | `templates/PROJECT_EXTENSION_TEMPLATE.md` | Templates (L6) | Architect | `0.7.0` | Verified |
 | `UESF-TMPL-009` | `templates/FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` | Templates (L3) | Architect | `0.5.0` | Verified |
 | `UESF-ROLE-001` | `roles/cto/SKILL.md` | Layer 4: Role Skill | CTO | `0.4.0` | Verified |
 | `UESF-ROLE-002` | `roles/architect/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |
@@ -288,4 +289,4 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 0a2e7802c13d`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 945fb2e59b8f`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.

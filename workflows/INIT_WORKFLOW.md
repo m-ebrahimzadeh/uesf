@@ -2,58 +2,64 @@
 * **Document ID**: UESF-WKFL-001
 * **Canonical Path**: workflows/INIT_WORKFLOW.md
 * **Workflow Trigger**: /uesf-init
-* **Version**: 0.9.0
+* **Version**: 0.10.0
 * **Status**: Verified
 * **Owner**: Architect
 * **Last Updated**: 2026-11-22
 
 ## 1. Purpose & Command Trigger
-Define the standardized, newcomer-friendly onboarding workflow for `/uesf-init` (`uesf-init`), enabling an agent in any new or existing software repository to audit the codebase in read-only mode (`A0`), present a clear plain-English setup proposal, and self-containedly scaffold the `.uesf/` operational control plane and automatic snapshot hook (`A1`) upon explicit human confirmation.
+Standardized, non-destructive, maturity-adaptive `/uesf-init` workflow for onboarding any greenfield or existing repository: inspect in read-only mode (`A0`), present a 5-section proposal, and scaffold `.uesf/` (`A1`) upon human confirmation without mutating existing project files.
 
 ## 2. Scope & Autonomy Profile
-* **Scope**: Applies when onboarding any new or existing downstream software project to UESF (`extensions/README.md`).
-* **Two-Stage Autonomy Gate (`policies/AUTONOMY_POLICY.md`)**:
-  * **Stage 1 — Read-Only Inspection & Plain-English Proposal (`A0` Lock)**: The agent inspects the repository and presents the proposed `.uesf/` setup without creating or modifying any files.
-  * **Stage 2 — Self-Contained Materialization & Hook Wiring (`A1` Bounded Execution)**: Triggered ONLY after the human stakeholder explicitly approves the proposal.
+* **Scope**: Onboarding any downstream project to UESF (`extensions/README.md`).
+* **Two-Stage Gate (`policies/AUTONOMY_POLICY.md`)**:
+  * **Stage 1 (`A0` Lock)**: Read-only inspection and proposal; zero file edits.
+  * **Stage 2 (`A1` Bounded Execution)**: Materializes `.uesf/` ONLY after explicit human approval.
 
 ## 3. Capability Detection & Environment Modes
 Per `core/CAPABILITY_MODEL.md`:
-* **Local Coding Agent (`CAP-FS` & `CAP-GIT` Verified Available)**: Directly inspects the local project directory tree, existing `docs/`, build/test manifests, and `git remote -v` / `git branch`, then in Stage 2 scaffolds `.uesf/` governance files, wires `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit`, and generates `.uesf/CONTEXT_SNAPSHOT.md` by invoking `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (reading `uesf_repo_path` from `~/.uesf/install-state.json`, or `npx --yes github:m-ebrahimzadeh/uesf init-project .`) upon approval.
-* **Cloud Chat Environment (`CAP-FS` Unavailable)**: Generates the complete `.uesf/` bootstrap files and setup commands in chat for the user or local coding agent to materialize.
+* **Local Coding Agent (`CAP-FS` & `CAP-GIT`)**: Runs Stage 1 discovery (`A0`) and Stage 2 `.uesf/` scaffolding + `init-project` wiring (`A1`) on approval.
+* **Cloud Chat (`CAP-FS` Unavailable)**: Outputs complete `.uesf/` bootstrap files and setup commands in chat.
 
 ## 4. Step-by-Step Execution Workflow
-1. **Dogfooding Guard Check**:
-   * Check whether the current repository root contains `README.md` with `Document ID: UESF-CORE-001`. If so, inform the user that this is the canonical UESF framework repository itself (already governed via `management/`), suggest running `/uesf-status`, and halt `/uesf-init`.
-   * If `.uesf/EXTENSION.md` already exists, inform the user that the project is already initialized, summarize the current `.uesf/` setup, and ask whether they want to refresh `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit` or run `/uesf-status` instead.
-2. **Stage 1 — Read-Only Codebase & Documentation Audit (`A0`)**:
-   * Inspect existing project documentation (`README.md`, `docs/`, `adr/`) without moving or duplicating those files.
-   * Detect the tech stack, directory boundaries, build/lint/test commands, default Git branch, and remote repository URL.
-   * Present a clear, newcomer-friendly **Project Onboarding Proposal** with four short sections:
-     1. **Detected Project Profile**: Project name, remote URL & default branch, tech stack, and key directory boundaries.
-     2. **Detected Verification Gates**: Exact build, linter, and test commands discovered (`[VERIFIED]` from config files vs. `[INFERRED]`).
-     3. **Existing Documentation to Index (Left in Place)**: List of permanent docs found in `README.md` or `docs/` that will be indexed in `.uesf/KNOWLEDGE_MAP.md`.
-     4. **Files to Create in `.uesf/`**: `.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TASKS.md`, `.uesf/DECISION_LOG.md`, `.uesf/CONTEXT_SNAPSHOT.md`, `.uesf/handoffs/` (gitignored local handoff spool), `.gitignore` (ignoring `.uesf/handoffs/`), `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and `.git/hooks/pre-commit`.
-   * Conclude with: `**Next:** Reply to approve scaffolding this `.uesf/` configuration or specify any build/test command adjustments first.`
-3. **Stage 2 — Self-Contained Scaffolding & Automatic Snapshot Hook (`A1`)**:
-   * Upon human confirmation, create `.uesf/` containing:
-     * `.uesf/EXTENSION.md` (conforming to `templates/PROJECT_EXTENSION_TEMPLATE.md`, pinning UESF version `0.9.0`).
-     * `.uesf/KNOWLEDGE_MAP.md` (routing table indexing existing project docs in `docs/` and operational files in `.uesf/`).
-     * `.uesf/ACTIVE_TASKS.md` (initialized with `TASK-001: Initialize UESF Project Control Plane (.uesf/)` marked `ACCEPTED`).
-     * `.uesf/DECISION_LOG.md` (initialized with `DEC-001: Onboard Project to UESF Three-Domain Governance`).
-   * Wire the standalone snapshot engine and Git `pre-commit` hook, scaffold the gitignored `.uesf/handoffs/` spool directory and `.gitignore` entry, and generate the initial `.uesf/CONTEXT_SNAPSHOT.md` by running `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (reading `uesf_repo_path` from `~/.uesf/install-state.json`, or falling back to `npx --yes github:m-ebrahimzadeh/uesf init-project .`), which atomically copies `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.ps1`, `.uesf/scripts/sync-snapshot.sh`, and `.git/hooks/pre-commit`, scaffolds `.uesf/handoffs/` and adds `.uesf/handoffs/` to `.gitignore`, and runs `sync-snapshot`.
+1. **Dogfooding & Non-Destructive Re-Audit Check**:
+   * **UESF Core Guard**: If `README.md` has `Document ID: UESF-CORE-001`, inform the user this is the canonical UESF repo (`management/`), suggest `/uesf-status`, and halt `/uesf-init`.
+   * **Existing `.uesf/EXTENSION.md`**: Summarize the current `.uesf/` setup and offer three safe options: (a) run a non-destructive `A0` diff re-audit of `.uesf/EXTENSION.md` and `.uesf/KNOWLEDGE_MAP.md` against the evolved repo (proposing targeted updates without touching `.uesf/ACTIVE_TASKS.md` or `.uesf/DECISION_LOG.md` history), (b) refresh `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, and hook wiring via `init-project`, or (c) run `/uesf-status`.
+2. **Stage 1 — Bounded Shallow Discovery Pass & 5-Section Proposal (`A0`)**:
+   * Run 4–6 fast read-only probes (never bulk-reading source code or full doc bodies; adapts from greenfield to monorepos):
+     1. Root & depth-2 layout (single-package vs. monorepo workspaces).
+     2. Build/test manifests (`package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `Makefile`) & CI (`.github/workflows/`).
+     3. AI/contributor guides (`AGENTS.md / CLAUDE.md / CONTRIBUTING.md`, `.cursorrules`, `.cursor/rules/`, `.github/copilot-instructions.md (if present)`, `.clinerules`) left untouched in place.
+     4. Docs & ADRs (`README.md`, `docs/`, `adr/`).
+     5. Live Git & hooks (`git status -sb`, `git branch -a`, `git remote -v`, `git log -n 10 --oneline`, `git config --get core.hooksPath`, `.git/hooks/pre-commit`).
+   * Present a **5-Section Project Onboarding Proposal**:
+     1. **Detected Project & Maturity Profile**: Name, remote URL & default branch, tech stack, layout (greenfield vs. active single-package vs. monorepo), and Git working-tree state (branch, clean vs. dirty).
+     2. **Existing Conventions, AI Instructions & Git Hook Compatibility**: Detected AI/contributor guides to respect by reference, commit/branch conventions, and `.git/hooks/pre-commit` plan (wire directly vs. skip/chain to preserve existing hooks or `core.hooksPath`).
+     3. **Detected Verification Gates**: Build, lint, typecheck, and test commands labeled `[VERIFIED]`, `[INFERRED]`, or `[UNKNOWN]`.
+     4. **Curated Documentation & ADRs to Index (Left Untouched in Place)**: High-value `README.md`, `docs/`, `adr/`, and AI guides for `.uesf/KNOWLEDGE_MAP.md` (skipping noisy boilerplate Markdown).
+     5. **Exact Non-Destructive File Plan**: Lists `.uesf/` files to create (`.uesf/EXTENSION.md`, `.uesf/KNOWLEDGE_MAP.md`, `.uesf/ACTIVE_TASKS.md`, `.uesf/DECISION_LOG.md`, `.uesf/CONTEXT_SNAPSHOT.md`, `.uesf/.gitignore`, `.uesf/handoffs/`, `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`), `.git/hooks/pre-commit` action, and confirms **0 existing tracked files modified and no automatic `git commit`**.
+   * End Stage 1 with: ``**Next:** Reply to approve scaffolding this `.uesf/` configuration or specify any adjustments first.``
+3. **Stage 2 — Delta-Only Scaffolding, Exact Ledgers & Wiring (`A1`)**:
+   * On approval, write `.uesf/` files without modifying existing files or running `git commit`:
+     * `.uesf/EXTENSION.md`: Delta-only per `templates/PROJECT_EXTENSION_TEMPLATE.md` (no universal 9-role restatement or internal UESF paths).
+     * `.uesf/KNOWLEDGE_MAP.md`: Row format ``| `<Doc-ID>` | `<repo-relative-path>` | <Category> | <Owner> | `<Version-or-N/A>` | <Status> |``.
+     * `.uesf/ACTIVE_TASKS.md`: Row format ``| `TASK-001` | Initialize UESF Project Control Plane (.uesf/) | CTO / DevOps | Human Stakeholder | Engineering Workspace | `A1` | `ACCEPTED` | Initialized via /uesf-init. |``.
+     * `.uesf/DECISION_LOG.md`: Row format ``| `DEC-001` | Governance | Onboard Project to UESF Three-Domain Governance | Confirmed | Human Stakeholder | YYYY-MM-DD |`` (plus optional `OQ-001` table and `docs/adr/` pointer).
+   * Wire `.uesf/bin/uesf.mjs`, `.uesf/scripts/sync-snapshot.*`, `.uesf/.gitignore`, `.uesf/handoffs/`, safe `.git/hooks/pre-commit`, and `.uesf/CONTEXT_SNAPSHOT.md` via ONE command in project root:
+     * `node "<uesf_repo_path>/bin/uesf.mjs" init-project .` (reading `uesf_repo_path` from `~/.uesf/install-state.json`), or fallback `npx --yes github:m-ebrahimzadeh/uesf init-project .`.
 4. **Stage 3 — Post-Init Welcome & Next Commands Card**:
-   * Conclude by displaying a concise **"Your Project Is Ready"** summary showing the verified `.uesf/` files created and the 3 primary commands to use next (this 3-command newcomer welcome card is the designated exception to the single-command closing action rule, `DSC-006`):
-     * `/uesf-discovery <idea>` — Brainstorm a new feature or change in read-only mode (`A0`).
-     * `/uesf-cto` — Create a bounded task contract (`TASK-XXX`) for well-defined work.
-     * `/uesf-status` — Reconstruct project context at the start of any future local or cloud session.
+   * Display **"Your Project Is Ready"** with created `.uesf/` files, any hook-chaining note, and the 3-command welcome card (`DSC-006` exception):
+     * `/uesf-discovery <idea>` — Brainstorm a new feature or change (`A0`).
+     * `/uesf-cto` — Create a bounded task contract (`TASK-XXX`).
+     * `/uesf-status` — Reconstruct project context in any session.
 
 ## 5. Epistemic & Output Formatting Rules
-* Begin the first response with: `**[UESF v0.9.0 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
-* Distinguish `[VERIFIED]` repository observations (from `package.json`, `pyproject.toml`, `Cargo.toml`, `git remote -v`, etc.) from `[INFERRED]` architectural conventions (`policies/VERIFICATION_POLICY.md`).
+* Start with the active compiled UESF version banner at the top of this skill (`**[UESF vX.Y.Z | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`).
+* Tag findings as `[VERIFIED]`, `[OBSERVED]`, `[INFERRED]`, or `[UNKNOWN]` (`policies/VERIFICATION_POLICY.md`).
 
 ## 6. Guardrails & Non-Overlap Boundaries
-* **Never Move Permanent Project Docs into `.uesf/`**: Permanent architecture, specifications, PRDs, and roadmaps remain in the project's native `docs/` structure and are indexed via `.uesf/KNOWLEDGE_MAP.md` (`policies/SOURCE_OF_TRUTH_POLICY.md`).
-* **Zero Universal Rule Duplication**: Never copy UESF `core/`, `policies/`, `protocols/`, or `roles/` files into `.uesf/`.
+* **Never Move or Mutate Existing Docs or AI Guides**: `README.md`, `docs/`, `adr/`, and AI/contributor guides stay untouched in place and are indexed in `.uesf/KNOWLEDGE_MAP.md` (`policies/SOURCE_OF_TRUTH_POLICY.md`).
+* **Zero Universal Rule Duplication**: Never copy `core/`, `policies/`, `protocols/`, or `roles/` into `.uesf/`.
 
 ## 7. Relationships with Other Documents
 * **Architecture & Policies**: `core/FRAMEWORK_ARCHITECTURE.md`, `core/CAPABILITY_MODEL.md`, `policies/AUTONOMY_POLICY.md`, `policies/SOURCE_OF_TRUTH_POLICY.md`

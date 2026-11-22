@@ -38,7 +38,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-PROT-006` | `protocols/EVIDENCE_SUBMISSION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-007` | `protocols/ESCALATION_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.1.0` | Verified |
 | `UESF-PROT-008` | `protocols/FEATURE_DISCOVERY_PROTOCOL.md` | Layer 3: Protocol | CTO | `0.5.0` | Verified |
-| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.9.0` | Verified |
+| `UESF-WKFL-001` | `workflows/INIT_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.10.0` | Verified |
 | `UESF-WKFL-002` | `workflows/HANDOFF_WORKFLOW.md` | Lifecycle Workflow | Architect | `0.10.0` | Verified |
 | `UESF-WKFL-003` | `workflows/STATUS_WORKFLOW.md` | Lifecycle Workflow | CTO | `0.8.0` | Verified |
 | `UESF-TMPL-001` | `templates/ROLE_SKILL_TEMPLATE.md` | Templates (L4) | CTO | `0.2.1` | Verified |
@@ -48,7 +48,7 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 | `UESF-TMPL-005` | `templates/KDP_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-006` | `templates/ESCALATION_RECORD_TEMPLATE.md` | Templates (L3) | CTO | `0.2.1` | Verified |
 | `UESF-TMPL-007` | `templates/PLATFORM_ADAPTER_TEMPLATE.md` | Templates (L5) | Architect | `0.4.0` | Verified |
-| `UESF-TMPL-008` | `templates/PROJECT_EXTENSION_TEMPLATE.md` | Templates (L6) | Architect | `0.6.0` | Verified |
+| `UESF-TMPL-008` | `templates/PROJECT_EXTENSION_TEMPLATE.md` | Templates (L6) | Architect | `0.7.0` | Verified |
 | `UESF-TMPL-009` | `templates/FEATURE_DISCOVERY_BRIEF_TEMPLATE.md` | Templates (L3) | Architect | `0.5.0` | Verified |
 | `UESF-ROLE-001` | `roles/cto/SKILL.md` | Layer 4: Role Skill | CTO | `0.4.0` | Verified |
 | `UESF-ROLE-002` | `roles/architect/SKILL.md` | Layer 4: Role Skill | CTO | `0.3.0` | Verified |

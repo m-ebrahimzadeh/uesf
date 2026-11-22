@@ -4,13 +4,17 @@ set -e
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
-if [ -f "bin/uesf.mjs" ]; then
-    node "bin/uesf.mjs" sync-snapshot >/dev/null
-    git add "management/CONTEXT_SNAPSHOT.md"
-elif [ -f ".uesf/bin/uesf.mjs" ]; then
-    node ".uesf/bin/uesf.mjs" sync-snapshot --target-root "$REPO_ROOT" >/dev/null
-    git add ".uesf/CONTEXT_SNAPSHOT.md"
-elif [ -f ".uesf/scripts/sync-snapshot.ps1" ] && command -v powershell.exe >/dev/null 2>&1; then
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".uesf/scripts/sync-snapshot.ps1" >/dev/null
-    git add ".uesf/CONTEXT_SNAPSHOT.md"
+if [ -f "management/PROJECT_PROFILE.md" ] && [ -f "bin/uesf.mjs" ]; then
+    if command -v node >/dev/null 2>&1; then
+        node "bin/uesf.mjs" sync-snapshot >/dev/null
+        git add "management/CONTEXT_SNAPSHOT.md"
+    fi
+elif [ -f ".uesf/EXTENSION.md" ] && [ -f ".uesf/bin/uesf.mjs" ]; then
+    if command -v node >/dev/null 2>&1; then
+        node ".uesf/bin/uesf.mjs" sync-snapshot --target-root "$REPO_ROOT" >/dev/null
+        git add ".uesf/CONTEXT_SNAPSHOT.md"
+    elif [ -f ".uesf/scripts/sync-snapshot.ps1" ] && command -v powershell.exe >/dev/null 2>&1; then
+        powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".uesf/scripts/sync-snapshot.ps1" >/dev/null
+        git add ".uesf/CONTEXT_SNAPSHOT.md"
+    fi
 fi

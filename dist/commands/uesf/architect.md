@@ -85,7 +85,7 @@ Translate strategic objectives and system requirements into modular, decoupled, 
 ## Embedded Canonical Output Templates
 
 ### Template Source: `templates/PROJECT_EXTENSION_TEMPLATE.md`
-1. **Mandatory Sections**: Every `EXTENSION.md` specification MUST include:
+1. **Mandatory Sections**: Every `EXTENSION.md` MUST include:
    * Metadata Header (`Document ID`, `Canonical Path`, `Version`, `Status`, `Owner`, `Last Updated`)
    * `## 1. Purpose & Target Project Profile`
    * `## 2. Scope & Domain Architecture Overlay`
@@ -94,8 +94,9 @@ Translate strategic objectives and system requirements into modular, decoupled, 
    * `## 5. Adapter & Tooling Bindings`
    * `## 6. Strict Layer 6 Isolation & Non-Override Guarantees`
    * `## 7. Relationships with Other Documents`
-2. **Unidirectional Dependency Invariant (`DEC-009`, `DEC-018`)**: Because this template targets Layer 6 (`Target Layer: Layer 6`), both this template and concrete extensions in `extensions/` MAY depend downward on Layers 1–6 (`core/`, `policies/`, `protocols/`, `roles/`, `adapters/`, `extensions/`), while Layers 1–5 MUST NEVER reference or depend on any file inside `extensions/`.
-3. **Additive-Only Constraint**: A project extension MAY tighten verification gates or add domain-specific checklists, but MUST NOT weaken universal autonomy thresholds (`policies/AUTONOMY_POLICY.md`), Git protections (`policies/GIT_POLICY.md`), security rules (`policies/SECURITY_POLICY.md`), or epistemic verification requirements (`policies/VERIFICATION_POLICY.md`).
-4. **Three-Domain Project Capsule (`.uesf/` + `docs/`)**: Every project extension MUST specify its Canonical Remote Repository URL and Default Branch (enabling cloud `/uesf:status` context retrieval), keep permanent documentation in native project paths (such as `docs/`) indexed by `.uesf/KNOWLEDGE_MAP.md`, and maintain operational state in `.uesf/` (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, and the machine-generated `CONTEXT_SNAPSHOT.md`).
+2. **Unidirectional Dependency Invariant (`DEC-009`, `DEC-018`)**: Targeting Layer 6 (`Target Layer: Layer 6`), this template and `extensions/` files MAY depend downward on Layers 1–6 (`core/`, `policies/`, `protocols/`, `roles/`, `adapters/`, `extensions/`), while Layers 1–5 MUST NEVER reference `extensions/`.
+3. **Additive-Only Constraint**: Extensions MAY tighten verification gates or add domain checklists, but MUST NOT weaken universal autonomy (`policies/AUTONOMY_POLICY.md`), Git (`policies/GIT_POLICY.md`), security (`policies/SECURITY_POLICY.md`), or verification (`policies/VERIFICATION_POLICY.md`) rules.
+4. **Three-Domain Project Capsule (`.uesf/` + `docs/`)**: Every extension MUST specify its Canonical Remote Repository URL and Default Branch (for cloud `/uesf-status` retrieval), keep permanent docs in native paths (e.g., `docs/`) indexed by `.uesf/KNOWLEDGE_MAP.md`, and maintain operational state in `.uesf/` (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, `CONTEXT_SNAPSHOT.md`, and gitignored `.uesf/handoffs/` via `.uesf/.gitignore`).
+5. **Downstream Delta-Only Conciseness & Convention Preservation**: Unlike full reference blueprints in `extensions/`, downstream `.uesf/EXTENSION.md` files created by `/uesf-init` MUST stay concise and delta-only to minimize `CONTEXT_SNAPSHOT.md` token overhead—capturing repo coordinates, maturity/layout profile, module boundaries, pointers to existing AI/contributor guides (left untouched in place), Git/commit conventions, high-risk paths, and `[VERIFIED]`/`[INFERRED]`/`[UNKNOWN]` verification commands, without restating universal 9-role definitions or linking to internal UESF paths.
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-architect command=/uesf-architect source=roles/architect/SKILL.md version=0.9.2 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-architect command=/uesf-architect source=roles/architect/SKILL.md version=0.9.2 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->

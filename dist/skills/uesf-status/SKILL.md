@@ -86,4 +86,4 @@ Per `core/CAPABILITY_MODEL.md` and `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `/u
 * **Protocols & Workflows**: `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `protocols/HANDOFF_PROTOCOL.md`, `workflows/INIT_WORKFLOW.md`, `workflows/HANDOFF_WORKFLOW.md`
 * **Management**: `management/KNOWLEDGE_MAP.md`, `management/ACTIVE_TASKS.md`, `management/DECISION_LOG.md`
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-status command=/uesf-status source=workflows/STATUS_WORKFLOW.md version=0.9.2 sha256=6b50b01c6f1a80ea074456188e399914badb0ee35470b290e86e5ce9d168b1b0 short_sha256=6b50b01c6f1a -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-status command=/uesf-status source=workflows/STATUS_WORKFLOW.md version=0.9.2 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
