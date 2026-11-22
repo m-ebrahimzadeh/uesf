@@ -2,9 +2,9 @@
 description: "UESF Project Initialization Workflow (/uesf-init - A0 Audit & .uesf/ Scaffold)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.2 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.3 | Active: uesf-init | Autonomy: A0 -> A1 on Approval]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.2`)
+## UESF Embedded Core & Policy Invariants (`v0.9.3`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -113,4 +113,4 @@ Per `core/CAPABILITY_MODEL.md`:
 4. **Three-Domain Project Capsule (`.uesf/` + `docs/`)**: Every extension MUST specify its Canonical Remote Repository URL and Default Branch (for cloud `/uesf-status` retrieval), keep permanent docs in native paths (e.g., `docs/`) indexed by `.uesf/KNOWLEDGE_MAP.md`, and maintain operational state in `.uesf/` (`EXTENSION.md`, `KNOWLEDGE_MAP.md`, `ACTIVE_TASKS.md`, `DECISION_LOG.md`, `CONTEXT_SNAPSHOT.md`, and gitignored `.uesf/handoffs/` via `.uesf/.gitignore`).
 5. **Downstream Delta-Only Conciseness & Convention Preservation**: Unlike full reference blueprints in `extensions/`, downstream `.uesf/EXTENSION.md` files created by `/uesf-init` MUST stay concise and delta-only to minimize `CONTEXT_SNAPSHOT.md` token overhead—capturing repo coordinates, maturity/layout profile, module boundaries, pointers to existing AI/contributor guides (left untouched in place), Git/commit conventions, high-risk paths, and `[VERIFIED]`/`[INFERRED]`/`[UNKNOWN]` verification commands, without restating universal 9-role definitions or linking to internal UESF paths.
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-init command=/uesf-init source=workflows/INIT_WORKFLOW.md version=0.9.2 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-init command=/uesf-init source=workflows/INIT_WORKFLOW.md version=0.9.3 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->

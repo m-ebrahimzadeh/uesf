@@ -3,9 +3,9 @@ name: uesf-discovery
 description: "UESF Feature Discovery & Requirements Strategist (Iterative A0 Brainstorming)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.2 | Active: uesf-discovery | Autonomy: A0 (Read-Only Lock)]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.3 | Active: uesf-discovery | Autonomy: A0 (Read-Only Lock)]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.2`)
+## UESF Embedded Core & Policy Invariants (`v0.9.3`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -112,4 +112,4 @@ description: "UESF Feature Discovery & Requirements Strategist (Iterative A0 Bra
    * `7. Explicit Human Approval Gate` (Confirmation status and readiness for `protocols/TASK_CONTRACT_PROTOCOL.md`)
 2. **Pre-Approval Read-Only Rule**: While `Lifecycle State` is `INTAKE` or `ITERATIVE_ALIGNMENT`, the brief exists strictly as an interactive response artifact (`A0`); no repository files may be created or modified until the human stakeholder grants `DISCOVERY_APPROVED`.
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-discovery command=/uesf-discovery source=roles/discovery/SKILL.md version=0.9.2 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-discovery command=/uesf-discovery source=roles/discovery/SKILL.md version=0.9.3 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->

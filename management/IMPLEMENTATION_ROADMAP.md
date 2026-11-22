@@ -1,16 +1,16 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.9.2
+* **Version**: 0.9.3
 * **Status**: Verified
 * **Owner**: CTO
-* **Last Updated**: 2026-11-22
+* **Last Updated**: 2026-11-23
 
 ## 1. Purpose
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, feature discovery workflows, and project integrations.
 
 ## 2. Scope
-Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-033` (`management/DECISION_LOG.md`).
+Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-034` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
 
@@ -57,6 +57,10 @@ Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007`
 ### Milestone M9.2: Uniform Single-Sentence Next-Step Action Prompt Across All 12 UESF Skills (`v0.9.2`) — *COMPLETED & ACCEPTED*
 * **Objective**: Add platform-neutral closing-action rule `6.` in `core/UNIVERSAL_AGENT_OPERATING_MODEL.md` (`0.4.0`), inject matching Invariant `6.` via `coreInvariantsBlock` in `bin/uesf.mjs` (`0.9.2`) across all 12 compiled bundles, normalize legacy `/uesf:` tokens and harmonize `protocols/HANDOFF_PROTOCOL.md` (`0.4.0`) and `workflows/{INIT,HANDOFF,STATUS}_WORKFLOW.md` (`0.9.0`/`0.10.0`/`0.8.0`) with the single-sentence `**Next:**` rule (preserving the 5-line Summary Card `Next Command` line without duplication and `/uesf-init` Stage 3's 3-command welcome card exception) (`DSC-006`, `DEC-033`).
 * **Status**: `ACCEPTED` (`TASK-034`, commit `ffe2f8f`, merged to `main` and tagged `v0.9.2` per `DEC-033`, verified via `EV-TASK-034-01` and `HO-TASK-034-02`).
+
+### Milestone M9.3: Non-Destructive Existing-Repository Onboarding & Downstream Snapshot Reliability (`v0.9.3`) — *COMPLETED & ACCEPTED*
+* **Objective**: Upgrade `bin/uesf.mjs` (`0.9.3`) and `scripts/hooks/pre-commit` for downstream-safe `sync-snapshot`, non-destructive `init-project` (`.uesf/.gitignore`, `core.hooksPath` & existing-hook preservation, missing-ledger skeletons), and multi-branch hook safety; update `workflows/INIT_WORKFLOW.md` (`0.10.0`) and `templates/PROJECT_EXTENSION_TEMPLATE.md` (`0.7.0`) for maturity-adaptive shallow discovery, `A0` re-audit, delta-only extensions, and exact ledger schemas; and remove redundant `initWiringBlock` (`DSC-007`, `DEC-034`).
+* **Status**: `ACCEPTED` (`TASK-035`, commit `9bbfecf`, merged to `main` and tagged `v0.9.3` per `DEC-034`, verified via `EV-TASK-035-01` and `HO-TASK-035-02`).
 
 ### Milestone M10: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).

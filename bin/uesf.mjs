@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
-const FW_VERSION = '0.9.2';
+const FW_VERSION = '0.9.3';
 
 function toPosix(p) {
   return p.replace(/\\/g, '/');

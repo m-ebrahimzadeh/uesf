@@ -3,9 +3,9 @@ name: uesf-handoff
 description: "UESF Session-Exit Handoff Workflow (/uesf-handoff - Package Work & Evidence)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.2 | Active: uesf-handoff | Autonomy: A0/A1]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.3 | Active: uesf-handoff | Autonomy: A0/A1]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.2`)
+## UESF Embedded Core & Policy Invariants (`v0.9.3`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -132,4 +132,4 @@ Per `core/CAPABILITY_MODEL.md`:
 * <Explicitly list any unexecuted checks and the follow-up task responsible>
 ```
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-handoff command=/uesf-handoff source=workflows/HANDOFF_WORKFLOW.md version=0.9.2 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-handoff command=/uesf-handoff source=workflows/HANDOFF_WORKFLOW.md version=0.9.3 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->

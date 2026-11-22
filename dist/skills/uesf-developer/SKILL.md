@@ -3,9 +3,9 @@ name: uesf-developer
 description: "UESF Developer Role (Bounded Implementation, Unit Tests & Branch Hygiene)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.2 | Active: uesf-developer | Autonomy: A1/A2]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.3 | Active: uesf-developer | Autonomy: A1/A2]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.2`)
+## UESF Embedded Core & Policy Invariants (`v0.9.3`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -129,4 +129,4 @@ Implement clean, modular, well-tested software code, scripts, and technical arti
 * **CTO Evaluation Status**: `Proposed` | `Approved` | `Rejected`
 ```
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-developer command=/uesf-developer source=roles/developer/SKILL.md version=0.9.2 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-developer command=/uesf-developer source=roles/developer/SKILL.md version=0.9.3 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
