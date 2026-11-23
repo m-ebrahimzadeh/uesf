@@ -3,7 +3,7 @@
 > Generated deterministically by `bin/uesf.mjs sync-snapshot` per `policies/SOURCE_OF_TRUTH_POLICY.md` (`DEC-023`, `DEC-026`).
 > * **Canonical Control Plane**: `management/`
 > * **Snapshot Version**: `0.9.3`
-> * **Source-Ledger-SHA256**: `5d0d1d9f30d60d5be4f0f2c5ec55c188df200b5cfbca4867902bce790034549e` (`5d0d1d9f30d6`)
+> * **Source-Ledger-SHA256**: `7f8d7fae3efedee80f73b56f2ce64410930ea78190680a92e686e629fb700081` (`7f8d7fae3efe`)
 > * **Last Ledger Update**: `2026-11-23`
 
 ## 1. Empirically Verified Repository Facts (`[VERIFIED_BY_GIT_AND_FS_PROBE]`)
@@ -12,7 +12,7 @@
 * **Missing Registered Files on Disk**: `0`
 * **Unindexed Canonical Markdown Files on Disk**: `0`
 * **Header-to-Registry Version Mismatches**: `0`
-* **Total Recorded Tasks (`ACCEPTED` / Total)**: `36 / 36`
+* **Total Recorded Tasks (`ACCEPTED` / Total)**: `36 / 37`
 * **Total Recorded Decisions (`DEC-*`)**: `34`
 * **Unresolved Open Questions (`OQ-*`)**: `0`
 
@@ -121,6 +121,7 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-033` | Implement `.gitignore`-Aware Markdown Discovery & Universal Non-Git Fallback for `sync-snapshot` in `bin/uesf.mjs` (`DSC-005` `REQ-3`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-033-01` (`management/handoffs/HO-TASK-033-02.md`, commit `b76a3c9`, merged to `main` and tagged `v0.9.1` per `DEC-032`). |
 | `TASK-034` | Implement Uniform Single-Sentence Next-Step Action Prompt Across All 12 UESF Skills (`DSC-006`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-034-01` (`management/handoffs/HO-TASK-034-02.md`, commit `ffe2f8f`, merged to `main` and tagged `v0.9.2` per `DEC-033`). |
 | `TASK-035` | Implement Non-Destructive, Maturity-Adaptive Existing-Repository Onboarding & Downstream Snapshot Reliability (`DSC-007`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-035-01` (`management/handoffs/HO-TASK-035-02.md`, commit `9bbfecf`, merged to `main` and tagged `v0.9.3` per `DEC-034`). |
+| `TASK-036` | Fix WSL / `npm 9.x` `npx` Compatibility & Harden WSL Adapter Detection and Zero-Target Feedback (`DSC-008`) | Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Branch `fix/TASK-036-wsl-npx-and-adapter-hardening` awaiting CTO review (`HO-TASK-036-02` / `EV-TASK-036-01`). |
 
 ## 5. Active Outbound Task Contract Queue
 * Milestones M1 (`v0.1.0`) through M9.3 (`v0.9.3`, `TASK-000`–`TASK-035`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.9.3`).
@@ -290,4 +291,4 @@ Covers all 59 canonical Markdown documents across the UESF repository (`policies
 
 ## 3. Automated Discrepancy & Drift Audit (`[DRIFT_CHECK]`)
 * **Drift Audit Verdict**: `CLEAN (0 discrepancies between canonical ledgers and on-disk specification tree)`
-* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 5d0d1d9f30d6`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.
+* **Cloud / Remote Session Note**: When reading this file remotely without local `CAP-FS`/`CAP-GIT`, treat Section 1 as verified at the time of the commit that produced `Source-Ledger-SHA256: 7f8d7fae3efe`, treat Section 2 as `[REPORTED — Remote Ledger]`, and treat any uncommitted local working-tree edits as `[UNKNOWN — Local FS Unavailable]`.

@@ -351,6 +351,14 @@ if (-not (Test-Path 'package.json')) {
     if ($pkg.PSObject.Properties.Name -contains 'dependencies' -and ($pkg.dependencies.PSObject.Properties | Measure-Object).Count -gt 0) {
         $cliIssues++; "  CLI_NONZERO_DEPS package.json must have zero runtime dependencies"
     }
+    if ($pkg.PSObject.Properties.Name -contains 'scripts' -and $null -ne $pkg.scripts) {
+        $scriptKeys = @($pkg.scripts.PSObject.Properties.Name)
+        foreach ($trigger in @('postinstall', 'build', 'preinstall', 'install', 'prepack', 'prepare')) {
+            if ($scriptKeys -contains $trigger) {
+                $cliIssues++; "  CLI_PACOTE_PREPARE_TRIGGER package.json scripts.$trigger triggers pacote git preparation (breaks npx on npm 9.x)"
+            }
+        }
+    }
 }
 if (-not (Test-Path 'bin/uesf.mjs')) {
     $cliIssues++; "  CLI_MISSING bin/uesf.mjs"
