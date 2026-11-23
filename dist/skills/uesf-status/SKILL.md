@@ -3,9 +3,9 @@ name: uesf-status
 description: "UESF Unified Session-Entry & Context Reconstruction Workflow (/uesf-status)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.3 | Active: uesf-status | Autonomy: A0 (Read-Only)]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.4 | Active: uesf-status | Autonomy: A0 (Read-Only)]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.3`)
+## UESF Embedded Core & Policy Invariants (`v0.9.4`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -86,4 +86,4 @@ Per `core/CAPABILITY_MODEL.md` and `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `/u
 * **Protocols & Workflows**: `protocols/KNOWLEDGE_SYNCHRONIZATION.md`, `protocols/HANDOFF_PROTOCOL.md`, `workflows/INIT_WORKFLOW.md`, `workflows/HANDOFF_WORKFLOW.md`
 * **Management**: `management/KNOWLEDGE_MAP.md`, `management/ACTIVE_TASKS.md`, `management/DECISION_LOG.md`
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-status command=/uesf-status source=workflows/STATUS_WORKFLOW.md version=0.9.3 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-status command=/uesf-status source=workflows/STATUS_WORKFLOW.md version=0.9.4 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->

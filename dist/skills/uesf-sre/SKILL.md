@@ -3,9 +3,9 @@ name: uesf-sre
 description: "UESF SRE Role (Operational Readiness, Observability & Rollback Verification)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.3 | Active: uesf-sre | Autonomy: A1/A2]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.4 | Active: uesf-sre | Autonomy: A1/A2]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.3`)
+## UESF Embedded Core & Policy Invariants (`v0.9.4`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -112,4 +112,4 @@ Ensure system reliability, operational resilience, observability, performance ba
 * <Explicitly list any unexecuted checks and the follow-up task responsible>
 ```
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-sre command=/uesf-sre source=roles/sre/SKILL.md version=0.9.3 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-sre command=/uesf-sre source=roles/sre/SKILL.md version=0.9.4 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->

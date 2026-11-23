@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
-const FW_VERSION = '0.9.3';
+const FW_VERSION = '0.9.4';
 
 function toPosix(p) {
   return p.replace(/\\/g, '/');
@@ -658,7 +658,13 @@ export function runInitProject(projDirArg = '.') {
 // ============================================================================
 function listInstalledVsCodeExtNames(userHome) {
   const names = [];
-  for (const rel of ['.vscode/extensions', '.vscode-insiders/extensions']) {
+  for (const rel of [
+    '.vscode/extensions',
+    '.vscode-insiders/extensions',
+    '.vscode-server/extensions',
+    '.vscode-server-insiders/extensions',
+    '.antigravity-server/extensions',
+  ]) {
     const extRoot = path.join(userHome, rel);
     if (!fs.existsSync(extRoot)) continue;
     try {
@@ -691,6 +697,7 @@ export function getAgentAdapters(userHome = os.homedir()) {
       detect: () =>
         fs.existsSync(path.join(userHome, '.gemini/config/.migrated')) ||
         fs.existsSync(path.join(userHome, '.gemini/config')) ||
+        fs.existsSync(path.join(userHome, '.gemini/antigravity-cli')) ||
         (localAppData ? fs.existsSync(path.join(localAppData, 'Programs/Antigravity')) : false) ||
         hasVsCodeExt('google.google-antigravity'),
       skillsDir: path.join(userHome, '.gemini/config/skills'),
@@ -1101,6 +1108,21 @@ export function runInstallOrUpdate(options = {}, commandName = 'install') {
   const allAdapters = getAgentAdapters(userHome);
   const { mode, selected } = resolveTargetSelection(options.targets, allAdapters, 'auto');
 
+  if (selected.length === 0) {
+    console.log(
+      `WARN_NO_TARGETS_DETECTED=No supported coding agents detected under ${toPosix(userHome)} (pass --target <antigravity|claude-code|gemini-cli|cline|kilocode|codex|all> to install explicitly)`
+    );
+    if (process.env.WSL_DISTRO_NAME) {
+      console.log(
+        `INFO_WSL_HOME_ISOLATION=WSL uses Linux home (${toPosix(userHome)}), separate from Windows %USERPROFILE%; run on Windows for Windows-hosted GUI agents or pass --target <agent|all> for WSL agents.`
+      );
+    }
+    console.log(
+      'INFO_REMOTE_TARGET=gemini-desktop -> adapters/gemini-strategic-workspace/ADAPTER.md (Remote GitHub Raw / CONTEXT_SNAPSHOT.md bridge; no local skills dir)'
+    );
+    return;
+  }
+
   // Clean legacy duplicate command/workflow directories & stray manifests
   const cleanupScope = mode === 'explicit' ? selected : allAdapters;
   cleanLegacyArtifacts(cleanupScope);
@@ -1135,6 +1157,12 @@ export function runCheck(options = {}) {
   const userHome = os.homedir();
   const allAdapters = getAgentAdapters(userHome);
   const { selected } = resolveTargetSelection(options.targets, allAdapters, 'auto');
+  if (selected.length === 0) {
+    console.log(
+      `CHECK_NO_TARGETS_DETECTED=No supported coding agents detected under ${toPosix(userHome)} (pass --target <agent|all> to inspect specific targets)`
+    );
+    return;
+  }
   const expectedIds = new Set(distManifest.bundles.map((b) => b.id));
 
   for (const adapter of selected) {
@@ -1351,6 +1379,12 @@ export function runDoctor(options = {}) {
   }
 
   if (issues.length === 0) {
+    if (selected.length === 0) {
+      console.log(
+        `DOCTOR_STATUS=NO_TARGETS_DETECTED (0 supported coding agents detected under ${toPosix(userHome)}; pass --target <agent|all> to inspect specific targets)`
+      );
+      return;
+    }
     console.log(`DOCTOR_STATUS=HEALTHY (0 issues across all detected agents)`);
     return;
   }
