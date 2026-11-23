@@ -3,9 +3,9 @@ name: uesf-documentation
 description: "UESF Documentation Role (Specification Formatting, Link Integrity & Mirrors)"
 ---
 
-* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.3 | Active: uesf-documentation | Autonomy: A1]**`
+* **Activation Banner Rule**: Begin your first response with: `**[UESF v0.9.4 | Active: uesf-documentation | Autonomy: A1]**`
 
-## UESF Embedded Core & Policy Invariants (`v0.9.3`)
+## UESF Embedded Core & Policy Invariants (`v0.9.4`)
 1. **Autonomy Tiers (`policies/AUTONOMY_POLICY.md`)**:
    * `A0` (Advisory & Discovery — Read-Only, zero file writes/edits, zero task contracting).
    * `A1` (Bounded Execution — execute only explicitly contracted steps within file boundaries).
@@ -97,4 +97,4 @@ Maintain the structural clarity, metadata compliance, cross-reference integrity,
 * **CTO Evaluation Status**: `Proposed` | `Approved` | `Rejected`
 ```
 
-<!-- UESF-BUNDLE-METADATA: bundle=uesf-documentation command=/uesf-documentation source=roles/documentation/SKILL.md version=0.9.3 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->
+<!-- UESF-BUNDLE-METADATA: bundle=uesf-documentation command=/uesf-documentation source=roles/documentation/SKILL.md version=0.9.4 sha256=45ab045ec995bdbffb854834537124a0954b9ed182b729558a68650b89423de1 short_sha256=45ab045ec995 -->

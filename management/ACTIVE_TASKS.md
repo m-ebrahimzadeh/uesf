@@ -1,7 +1,7 @@
 # Active Tasks Registry
 * **Document ID**: UESF-MGMT-002
 * **Canonical Path**: management/ACTIVE_TASKS.md
-* **Version**: 0.9.3
+* **Version**: 0.9.4
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-23
@@ -55,10 +55,10 @@ Covers all tasks across UESF development phases (`protocols/TASK_CONTRACT_PROTOC
 | `TASK-033` | Implement `.gitignore`-Aware Markdown Discovery & Universal Non-Git Fallback for `sync-snapshot` in `bin/uesf.mjs` (`DSC-005` `REQ-3`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-033-01` (`management/handoffs/HO-TASK-033-02.md`, commit `b76a3c9`, merged to `main` and tagged `v0.9.1` per `DEC-032`). |
 | `TASK-034` | Implement Uniform Single-Sentence Next-Step Action Prompt Across All 12 UESF Skills (`DSC-006`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-034-01` (`management/handoffs/HO-TASK-034-02.md`, commit `ffe2f8f`, merged to `main` and tagged `v0.9.2` per `DEC-033`). |
 | `TASK-035` | Implement Non-Destructive, Maturity-Adaptive Existing-Repository Onboarding & Downstream Snapshot Reliability (`DSC-007`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-035-01` (`management/handoffs/HO-TASK-035-02.md`, commit `9bbfecf`, merged to `main` and tagged `v0.9.3` per `DEC-034`). |
-| `TASK-036` | Fix WSL / `npm 9.x` `npx` Compatibility & Harden WSL Adapter Detection and Zero-Target Feedback (`DSC-008`) | Developer | CTO | Engineering Workspace | `A1` | `IN_REVIEW` | Branch `fix/TASK-036-wsl-npx-and-adapter-hardening` awaiting CTO review (`HO-TASK-036-02` / `EV-TASK-036-01`). |
+| `TASK-036` | Fix WSL / `npm 9.x` `npx` Compatibility & Harden WSL Adapter Detection and Zero-Target Feedback (`DSC-008`) | Developer | CTO | Engineering Workspace | `A1` | `ACCEPTED` | `EV-TASK-036-01` (`management/handoffs/HO-TASK-036-02.md`, commit `74ef853`, merged to `main` and tagged `v0.9.4` per `DEC-035`). |
 
 ## 5. Active Outbound Task Contract Queue
-* Milestones M1 (`v0.1.0`) through M9.3 (`v0.9.3`, `TASK-000`–`TASK-035`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.9.3`).
+* Milestones M1 (`v0.1.0`) through M9.4 (`v0.9.4`, `TASK-000`–`TASK-036`) are **COMPLETED, VERIFIED, AND ACCEPTED** on `main` (tagged `v0.9.4`).
 * All 12 UESF skills (`/uesf-discovery`, `/uesf-cto`, `/uesf-architect`, `/uesf-developer`, `/uesf-qa`, `/uesf-devops`, `/uesf-security`, `/uesf-sre`, `/uesf-documentation`, `/uesf-init`, `/uesf-handoff`, `/uesf-status`) are compiled in `dist/` and managed across native agent `skills/` directories (plus flat `~/Documents/Cline/Workflows/uesf-<name>.md` `/` menu workflow triggers in Cline) via `bin/uesf.mjs` and `~/.uesf/install-state.json`.
 * Operational handoffs across sessions and environments exchange paired odd/even Markdown files inside the gitignored flat `<ctrlDir>/handoffs/` spool (`management/handoffs/` in UESF, `.uesf/handoffs/` in downstream projects) per `protocols/HANDOFF_PROTOCOL.md` (`0.4.0`) and `DEC-031`/`DEC-033`.
 * Any future feature proposal or architectural enhancement enters through Track 1 Iterative Discovery (`protocols/FEATURE_DISCOVERY_PROTOCOL.md`, `roles/discovery/SKILL.md`) locked at `A0` until explicit human confirmation.

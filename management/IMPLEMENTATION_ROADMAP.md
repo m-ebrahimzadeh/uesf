@@ -1,7 +1,7 @@
 # Implementation Roadmap
 * **Document ID**: UESF-MGMT-006
 * **Canonical Path**: management/IMPLEMENTATION_ROADMAP.md
-* **Version**: 0.9.3
+* **Version**: 0.9.4
 * **Status**: Verified
 * **Owner**: CTO
 * **Last Updated**: 2026-11-23
@@ -10,7 +10,7 @@
 Define the phased, dependency-ordered engineering roadmap for evolving UESF from foundational specifications to complete universal agent Skills, platform adapters, feature discovery workflows, and project integrations.
 
 ## 2. Scope
-Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-034` (`management/DECISION_LOG.md`).
+Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007` and `DEC-017`–`DEC-035` (`management/DECISION_LOG.md`).
 
 ## 3. Phased Engineering Roadmap
 
@@ -61,6 +61,10 @@ Covers Milestones M1 through M10 of UESF development in alignment with `DEC-007`
 ### Milestone M9.3: Non-Destructive Existing-Repository Onboarding & Downstream Snapshot Reliability (`v0.9.3`) — *COMPLETED & ACCEPTED*
 * **Objective**: Upgrade `bin/uesf.mjs` (`0.9.3`) and `scripts/hooks/pre-commit` for downstream-safe `sync-snapshot`, non-destructive `init-project` (`.uesf/.gitignore`, `core.hooksPath` & existing-hook preservation, missing-ledger skeletons), and multi-branch hook safety; update `workflows/INIT_WORKFLOW.md` (`0.10.0`) and `templates/PROJECT_EXTENSION_TEMPLATE.md` (`0.7.0`) for maturity-adaptive shallow discovery, `A0` re-audit, delta-only extensions, and exact ledger schemas; and remove redundant `initWiringBlock` (`DSC-007`, `DEC-034`).
 * **Status**: `ACCEPTED` (`TASK-035`, commit `9bbfecf`, merged to `main` and tagged `v0.9.3` per `DEC-034`, verified via `EV-TASK-035-01` and `HO-TASK-035-02`).
+
+### Milestone M9.4: WSL / `npm 9.x` `npx` Compatibility & WSL Adapter Hardening (`v0.9.4`) — *COMPLETED & ACCEPTED*
+* **Objective**: Rename `"build"` to `"build-dist"` in `package.json` `scripts` to eliminate `pacote` Git-prepare failures under Ubuntu/WSL `npm 9.x`, extend `bin/uesf.mjs` (`0.9.4`) extension/CLI detection for `.vscode-server*`, `.antigravity-server`, and `~/.gemini/antigravity-cli`, replace silent `0`-target exits in `install`/`check`/`doctor` with explicit warnings/statuses, and enforce the `CLI_PACOTE_PREPARE_TRIGGER` guard in `management/validation/audit.ps1` (`DSC-008`, `DEC-035`).
+* **Status**: `ACCEPTED` (`TASK-036`, commit `74ef853`, merged to `main` and tagged `v0.9.4` per `DEC-035`, verified via `EV-TASK-036-01` and `HO-TASK-036-02`).
 
 ### Milestone M10: Production Release Readiness & `A3` Human Sign-Off (`v1.0.0`) — *FUTURE (`A3` HUMAN-GATED)*
 * **Objective**: Validate UESF across live feature discovery cycles and downstream project extensions, and promote to `v1.0.0` **only upon explicit `A3` Human Stakeholder release authorization** (`policies/AUTONOMY_POLICY.md`).
